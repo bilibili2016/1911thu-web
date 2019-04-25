@@ -1,216 +1,249 @@
 .contentSystem {
-	.banner {
-		width: 100%;
-		height: 560px;
-		text-align: center;
-		z-index: 1;
-		background: url('http://static-image.1911edu.com/contentSys-banner.png') no-repeat;
-		background-position: center;
-		h4 {
-			font-size: 50px;
-			color: #fff;
-			font-weight: bold;
-			padding-top: 130px;
-		}
-		.line {
-			width: 110px;
-			height: 4px;
-			background-color: #fff;
-			margin: 0 auto;
-			margin-top: 30px;
-			margin-bottom: 40px;
-		}
-		.text {
-			font-size: 22px;
-			color: #fff;
-			line-height: 40px;
-		}
-	}
-	.content {
-		position: relative;
-		background: url('http://static-image.1911edu.com/core-bg.png') repeat-y;
-		.top {
-			position: relative;
-			width: 1100px;
-			line-height: 44px;
-			color: #222;
-			box-shadow: 0px 0px 32px 0px rgba(0, 0, 0, 0.08);
-			border-radius: 10px;
-			margin: 0 auto;
-			background-color: #fff;
-			margin-top: -50px;
-			padding: 50px 30px;
-			font-size: 22px;
-			z-index: 20;
-			p {
-				text-indent: 2em;
-			}
-			.color {
-				color: #eb9937;
-			}
-		}
-		h1.title {
-			text-align: center;
-			margin-bottom: 40px;
-			font-size: 36px;
-			padding-top: 50px;
-			font-weight: 500;
-		}
-		.con-one {
-			width: 1100px;
-			margin: 0 auto;
+  .banner {
+    width: 100%;
+    height: 560px;
+    text-align: center;
+    z-index: 1;
+    background: url('https://static-image.1911edu.com/contentSys-banner.png') no-repeat;
+    background-position: center;
 
-			.desc {
-				text-indent: 2em;
-				font-size: 18px;
-				line-height: 36px;
-				margin-bottom: 40px;
-				font-weight: 500;
-			}
-			.items {
-				.oneItem {
-					float: left;
-					width: 353px;
-					height: 730px;
-					box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.06);
-					background-color: #fff;
-					padding: 40px 20px;
-					margin-right: 20px;
-					&:last-child {
-						margin-right: 0;
-					}
-					.itemTitle {
-						font-size: 24px;
-						color: #eb9937;
-						margin-bottom: 30px;
-						font-weight: 500;
-						em {
-							font-size: 60px;
-							font-weight: bold;
-							margin-right: 15px;
-							color: #222222;
-						}
-					}
-					.con {
-						p {
-							font-size: 18px;
-							line-height: 36px;
-							color: #222;
-							text-indent: 2em;
-							.color {
-								color: #eb9937;
-							}
-						}
-					}
-				}
+    h4 {
+      font-size: 50px;
+      color: #fff;
+      font-weight: bold;
+      padding-top: 130px;
+    }
 
-				@media only screen and (max-device-width: 375px) {
-					.oneItem {
-						height: 780px;
-						padding-top: 20px;
-					}
-				}
-				.itemTwo {
-					background: #fff url('http://static-image.1911edu.com/contentSys-icon3.png') no-repeat right bottom;
-				}
-				.itemThree {
-					background: #fff url('http://static-image.1911edu.com/contentSys-icon4.png') no-repeat right bottom;
-				}
-			}
-		}
-		.con-two {
-			margin-top: 50px;
-			background: url('http://static-image.1911edu.com/contentSys-bg2.png') no-repeat;
-			background-size: cover;
-			padding-bottom: 50px;
-			h1.title {
-				color: #fff;
-			}
-			p {
-				width: 1100px;
-				margin: 0 auto;
-				font-size: 18px;
-				color: #fff;
-				line-height: 36px;
-				text-indent: 2em;
-			}
-		}
-		.con-three {
-			padding-bottom: 60px;
-			.text {
-				width: 1100px;
-				margin: 0 auto;
-				.left {
-					float: left;
-					width: 145px;
-					height: 120px;
-				}
-				.right {
-					float: left;
-					width: 910px;
-					margin-left: 45px;
-					p {
-						text-indent: 2em;
-						font-size: 18px;
-						line-height: 36px;
-						color: #222;
-					}
-				}
-			}
-		}
-		.con-four {
-			background: url('http://static-image.1911edu.com/contentSys-bg3.png') no-repeat;
-			background-size: cover;
-			padding: 60px 0;
-			.item {
-				width: 1100px;
-				margin: 0 auto;
-				border-radius: 10px;
-				padding: 0 50px 40px 50px;
-				background: url('http://static-image.1911edu.com/contentSys-bg5.png') no-repeat;
-				background-size: cover;
-				p {
-					font-size: 18px;
-					line-height: 36px;
-					color: #222;
-					text-indent: 2em;
-				}
-			}
-		}
-		.con-five {
-			padding-bottom: 80px;
-			.font {
-				width: 464px;
-				height: 97px;
-				background: url('http://static-image.1911edu.com/contentSys-icon2.png') no-repeat;
-				margin-left: 5%;
-				margin-top: 20px;
-				z-index: 1;
-			}
-			.five-item {
-				position: relative;
-				background: url('http://static-image.1911edu.com/contentSys-bg4.png') no-repeat;
-				background-size: cover;
-				border-radius: 10px;
-				width: 1100px;
-				margin: 0 auto;
-				padding: 50px;
-				margin-top: -5px;
-				z-index: 10;
-				h2 {
-					font-size: 36px;
-					color: #fff;
-					margin-bottom: 40px;
-					text-align: center;
-					font-weight: 500;
-				}
-				p {
-					font-size: 18px;
-					color: #fff;
-					line-height: 36px;
-					text-indent: 2em;
-				}
-			}
-		}
-	}
+    .line {
+      width: 110px;
+      height: 4px;
+      background-color: #fff;
+      margin: 0 auto;
+      margin-top: 30px;
+      margin-bottom: 40px;
+    }
+
+    .text {
+      font-size: 22px;
+      color: #fff;
+      line-height: 40px;
+    }
+  }
+
+  .content {
+    position: relative;
+    background: url('https://static-image.1911edu.com/core-bg.png') repeat-y;
+
+    .top {
+      position: relative;
+      width: 1100px;
+      line-height: 44px;
+      color: #222;
+      box-shadow: 0px 0px 32px 0px rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+      margin: 0 auto;
+      background-color: #fff;
+      margin-top: -50px;
+      padding: 50px 30px;
+      font-size: 22px;
+      z-index: 20;
+
+      p {
+        text-indent: 2em;
+      }
+
+      .color {
+        color: #eb9937;
+      }
+    }
+
+    h1.title {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 36px;
+      padding-top: 50px;
+      font-weight: 500;
+    }
+
+    .con-one {
+      width: 1100px;
+      margin: 0 auto;
+
+      .desc {
+        text-indent: 2em;
+        font-size: 18px;
+        line-height: 36px;
+        margin-bottom: 40px;
+        font-weight: 500;
+      }
+
+      .items {
+        .oneItem {
+          float: left;
+          width: 353px;
+          height: 730px;
+          box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.06);
+          background-color: #fff;
+          padding: 40px 20px;
+          margin-right: 20px;
+
+          &:last-child {
+            margin-right: 0;
+          }
+
+          .itemTitle {
+            font-size: 24px;
+            color: #eb9937;
+            margin-bottom: 30px;
+            font-weight: 500;
+
+            em {
+              font-size: 60px;
+              font-weight: bold;
+              margin-right: 15px;
+              color: #222222;
+            }
+          }
+
+          .con {
+            p {
+              font-size: 18px;
+              line-height: 36px;
+              color: #222;
+              text-indent: 2em;
+
+              .color {
+                color: #eb9937;
+              }
+            }
+          }
+        }
+
+        @media only screen and (max-device-width: 375px) {
+          .oneItem {
+            height: 780px;
+            padding-top: 20px;
+          }
+        }
+
+        .itemTwo {
+          background: #fff url('https://static-image.1911edu.com/contentSys-icon3.png') no-repeat right bottom;
+        }
+
+        .itemThree {
+          background: #fff url('https://static-image.1911edu.com/contentSys-icon4.png') no-repeat right bottom;
+        }
+      }
+    }
+
+    .con-two {
+      margin-top: 50px;
+      background: url('https://static-image.1911edu.com/contentSys-bg2.png') no-repeat;
+      background-size: cover;
+      padding-bottom: 50px;
+
+      h1.title {
+        color: #fff;
+      }
+
+      p {
+        width: 1100px;
+        margin: 0 auto;
+        font-size: 18px;
+        color: #fff;
+        line-height: 36px;
+        text-indent: 2em;
+      }
+    }
+
+    .con-three {
+      padding-bottom: 60px;
+
+      .text {
+        width: 1100px;
+        margin: 0 auto;
+
+        .left {
+          float: left;
+          width: 145px;
+          height: 120px;
+        }
+
+        .right {
+          float: left;
+          width: 910px;
+          margin-left: 45px;
+
+          p {
+            text-indent: 2em;
+            font-size: 18px;
+            line-height: 36px;
+            color: #222;
+          }
+        }
+      }
+    }
+
+    .con-four {
+      background: url('https://static-image.1911edu.com/contentSys-bg3.png') no-repeat;
+      background-size: cover;
+      padding: 60px 0;
+
+      .item {
+        width: 1100px;
+        margin: 0 auto;
+        border-radius: 10px;
+        padding: 0 50px 40px 50px;
+        background: url('https://static-image.1911edu.com/contentSys-bg5.png') no-repeat;
+        background-size: cover;
+
+        p {
+          font-size: 18px;
+          line-height: 36px;
+          color: #222;
+          text-indent: 2em;
+        }
+      }
+    }
+
+    .con-five {
+      padding-bottom: 80px;
+
+      .font {
+        width: 464px;
+        height: 97px;
+        background: url('https://static-image.1911edu.com/contentSys-icon2.png') no-repeat;
+        margin-left: 5%;
+        margin-top: 20px;
+        z-index: 1;
+      }
+
+      .five-item {
+        position: relative;
+        background: url('https://static-image.1911edu.com/contentSys-bg4.png') no-repeat;
+        background-size: cover;
+        border-radius: 10px;
+        width: 1100px;
+        margin: 0 auto;
+        padding: 50px;
+        margin-top: -5px;
+        z-index: 10;
+
+        h2 {
+          font-size: 36px;
+          color: #fff;
+          margin-bottom: 40px;
+          text-align: center;
+          font-weight: 500;
+        }
+
+        p {
+          font-size: 18px;
+          color: #fff;
+          line-height: 36px;
+          text-indent: 2em;
+        }
+      }
+    }
+  }
 }

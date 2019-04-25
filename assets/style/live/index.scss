@@ -1,220 +1,244 @@
 .live {
-  width: 1100px;
-  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #181818;
+  z-index: 99999999;
 
   .liveCon {
     position: relative;
     width: 100%;
-    margin: 20px auto 30px;
 
-    .playInner {
-      width: 1100px;
-      height: 620px;
-      margin: 0 auto;
-      background: url('http://static-image.1911edu.com/live-bg1.png') no-repeat;
-      background-size: cover;
+    .left {
+      position: relative;
 
-      .mediaCon {
+      .playInner {
         width: 100%;
-        height: 620px;
-        background: url('http://static-image.1911edu.com/live-bg1.png') no-repeat;
+        height: 100%;
+        background: url('https://static-image.1911edu.com/live-bg1.png') no-repeat;
         background-size: cover;
+        position: relative;
 
-        .prism-ErrorMessage {
-          display: none !important;
+        .mediaCon {
+          width: 100%;
+          height: 100%;
+          background: url('https://static-image.1911edu.com/live-bg1.png') no-repeat;
+          background-size: cover;
+
+          .prism-ErrorMessage {
+            display: none !important;
+          }
         }
+      }
+
+      .index {
+        z-index: 30;
+      }
+
+      .self {
+        width: 100%;
+        padding: 20px 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        .tbliveDiv {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 580px;
+          height: 430px;
+          z-index: 10
+        }
+
+        .embedDiv {
+          position: absolute;
+          top: 0;
+          left: 0;
+          background-color: #626262;
+          z-index: 10
+        }
+      }
+
+      .time {
+        position: absolute;
+        bottom: 80px;
+        right: 0;
+        background-color: rgba(0, 0, 0, .8);
+        border-radius: 5px;
+        padding: 10px 15px;
+        color: #fff;
+        font-size: 14px;
+        z-index: 40;
       }
     }
 
-    .self {
-      width: 1100px;
-      margin: 0 auto;
-      padding: 20px 0;
-      height: 470px;
+    .right {
+      width: 300px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 31;
+
+      .problemBox {
+        color: #fff;
+        padding: 0 20px;
+
+        h4 {
+          height: 90px;
+          line-height: 90px;
+          font-size: 20px;
+        }
+
+        ul {
+          overflow-y: auto;
+
+          li {
+            font-size: 14px;
+            line-height: 30px;
+          }
+        }
+      }
 
       .liveBtn {
-        float: left;
+        height: 80px;
+        padding: 0 20px;
 
         span {
-          width: 170px;
-          height: 44px;
-          line-height: 44px;
-          text-align: center;
+          margin-top: 20px;
+          width: 120px;
+          height: 40px;
+          line-height: 40px;
+          border-radius: 6px;
+          font-size: 14px;
           color: #fff;
-          font-size: 16px;
-          background: #00b383;
-          margin-top: 10px;
+          text-align: center;
+          background-color: #00B383;
           cursor: pointer;
-          margin-right: 30px;
-        }
-      }
 
-      #tblive {
-        float: right;
-      }
-    }
+          &.begin {
+            background-color: #666;
+            cursor: auto;
+          }
 
-    .pull {
-      float: left;
-      width: 50%;
-      height: 620px;
-    }
-
-    .topBar,
-    .bottomBar {
-      width: 100%;
-      height: 76px;
-      background-color: #000;
-    }
-
-    .topBar {
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    img {
-      width: 100%;
-    }
-
-    .bottomBar {
-      line-height: 76px;
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      padding: 0 30px;
-      box-sizing: border-box;
-      text-align: right;
-      font-size: 16px;
-      color: #fff;
-
-      .time {}
-
-      .btn {
-        width: 150px;
-        height: 40px;
-        text-align: center;
-        line-height: 40px;
-        font-size: 14px;
-        color: #fff;
-        cursor: pointer;
-        border-radius: 6px;
-      }
-
-      .nearBtn {
-        margin-top: 18px;
-        background-color: #773084;
-
-        &:hover {
-          background-color: #5f068d;
-        }
-      }
-
-      .endBtn {
-        margin-top: 18px;
-        background-color: #666;
-
-        &:hover {
-          opacity: .7;
-        }
-      }
-    }
-
-    .pop {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      margin: auto;
-      background-color: #fff;
-      text-align: center;
-      border-radius: 10px;
-    }
-
-    .nearEnd {
-      display: none;
-      width: 414px;
-      height: 156px;
-      padding-top: 50px;
-
-      p {
-        width: 320px;
-        margin: 0 auto;
-        line-height: 36px;
-        font-size: 16px;
-        color: #222;
-      }
-
-      .el-icon-close {
-        position: absolute;
-        right: 20px;
-        top: 20px;
-        cursor: pointer;
-        color: #773084;
-        font-size: 24px;
-        font-weight: bold;
-      }
-    }
-
-    .end {
-      width: 414px;
-      height: 166px;
-      padding-top: 40px;
-
-      p {
-        font-size: 16px;
-        color: #222;
-      }
-
-      .btn {
-        padding: 12px 30px;
-        background-color: #773084;
-        cursor: pointer;
-        font-size: 14px;
-        color: #fff;
-        margin-top: 40px;
-        border-radius: 6px;
-
-        &:hover {
-          background-color: #5f068d;
+          &.end {
+            background-color: #666;
+            cursor: auto;
+          }
         }
       }
     }
   }
+}
+
+.pop {
+  margin: auto;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.nearEnd {
+  width: 414px;
+  height: 156px;
+  padding-top: 50px;
+  z-index: 45;
 
 
+  p {
+    width: 320px;
+    margin: 0 auto;
+    line-height: 36px;
+    font-size: 16px;
+    color: #222;
+  }
 
-  .liveDetail {
-    background: #fff url('http://static-image.1911edu.com/live-bg2.png') no-repeat center top;
-    background-size: 100% 230px;
-    box-shadow: 0px 0px 36px 0px rgba(198, 194, 210, 0.36);
-    border-radius: 10px;
-    margin-bottom: 100px;
-    padding-bottom: 60px;
+  .el-icon-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+    color: #773084;
+    font-size: 24px;
+    font-weight: bold;
+  }
+}
 
-    h1 {
-      font-size: 30px;
-      color: #fff;
-      margin: 60px 0;
-      padding-top: 60px;
-      text-align: center;
+.over {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(187, 184, 184, 0.8);
+  text-align: center;
+  z-index: 45;
+
+  .inner {
+    width: 414px;
+    height: 166px;
+    padding-top: 40px;
+
+    p {
+      font-size: 16px;
+      color: #222;
     }
 
-    .detail-items {
-      .item {
-        background: url('http://static-image.1911edu.com/live-bg3.png') no-repeat;
-        background-size: contain;
-        width: 950px;
-        height: 56px;
-        line-height: 56px;
-        margin: 0 auto;
-        margin-bottom: 6px;
-        padding-left: 30px;
-        box-sizing: border-box;
-        font-size: 16px;
-        color: #fff;
+    .btn {
+      padding: 12px 30px;
+      background-color: #773084;
+      cursor: pointer;
+      font-size: 14px;
+      color: #fff;
+      margin-top: 40px;
+      border-radius: 6px;
+
+      &:hover {
+        background-color: #5f068d;
       }
+    }
+  }
+
+}
+
+.rightBtn {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 40;
+
+  .yellow {
+    width: 60px;
+    height: 70px;
+    text-align: center;
+    background-color: rgba(95, 6, 141, .6);
+    border-radius: 5px;
+    cursor: pointer;
+
+    img {
+      width: 18px;
+      height: 18px;
+      margin-bottom: 12px;
+      margin-top: 14px;
+    }
+
+    p {
+      text-align: center;
+      font-size: 12px;
+      color: #ffdb5f;
+    }
+
+    .white {
+      color: #fff;
     }
   }
 }

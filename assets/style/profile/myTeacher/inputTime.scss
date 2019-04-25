@@ -1,0 +1,66 @@
+.inputTime {
+    h4 {
+        height: 60px;
+        line-height: 60px;
+        border-bottom: 1px solid #E8D6F7;
+        padding-left: 40px;
+        color: #222;
+        font-size: 16px;
+        margin-bottom: 60px;
+        span {
+            margin-right: 5px;
+            cursor: pointer;
+            &.active {
+                color: #773084;
+            }
+            &:hover {
+                color: #773084;
+            }
+        }
+    }
+    .con-item {
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+        margin-bottom: 20px;
+        .left {
+            width: 200px;
+            text-align: right;
+            display: inline-block;
+        }
+        .right {
+            width: 370px;
+            display: inline-block;
+            .el-date-editor--date {
+                width: 360px;
+            }
+            .el-date-editor--time-select {
+                width: 150px;
+            }
+            .separated {
+                padding: 0 13px;
+                color: #AAAAAA;
+            }
+        }
+    }
+    .btns {
+        padding: 60px 0 180px;
+        margin: 0 auto;
+        text-align: center;
+        .btn {
+            width: 160px;
+            height: 42px;
+            line-height: 42px;
+            background-color: #773084;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 21px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 300ms;
+            &:hover {
+                background-color: #5f068d;
+            }
+        }
+    }
+}

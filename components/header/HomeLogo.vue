@@ -1,7 +1,7 @@
 <template>
   <div class="headerLogo fl" @click="handleLink">
-    <img v-if="isIE" src="http://static-image.1911edu.com/1911-logoIE.png" alt="">
-    <img v-else src="http://static-image.1911edu.com/1911-logo.png" alt="">
+    <img v-if="isIE" src="https://static-image.1911edu.com/1911-logoIE.png" alt="">
+    <img v-else src="https://static-image.1911edu.com/1911-logo.png" alt="">
   </div>
 </template>
 

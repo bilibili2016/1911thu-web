@@ -6,7 +6,7 @@
     </div>
     <div class="system" v-else>
       <div class="noData">
-        <img src="http://static-image.1911edu.com/noMsg.png" alt>
+        <img src="https://static-image.1911edu.com/noMsg.png" alt>
         <p>暂无线上课程！</p>
       </div>
     </div>

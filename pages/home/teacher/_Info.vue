@@ -1,49 +1,68 @@
 <template>
-  <div class="teacher home-teacher" v-loading="loading">
-    <div class="tcInfo">
-      <img :src="teacherBg" alt="">
-      <div class="bg-text">
-        <p><img :src="teacherData.head_img" alt=""></p>
-        <div class="desc">
-          <h4>{{teacherData.teacher_name}}</h4>
-          <h5>{{teacherData.graduate}}</h5>
-          <h6>{{teacherData.content}}</h6>
+  <div>
+    <div class="home-teacher" v-loading="loading">
+      <div class="tcInfo">
+        <!-- <img :src="teacherBg" alt=""> -->
+        <div class="bg-text">
+          <div class="left-teacher">
+            <img :src="teacherData.head_img" alt="">
+            <span class="btn" v-if="teacherData.is_meet==1" @click="handleAppoint">预约导师</span>
+            <span class="btn unBtn" v-else>预约导师</span>
+
+          </div>
+          <div class="desc">
+            <h4>{{teacherData.teacher_name}}</h4>
+            <h5>{{teacherData.graduate}}</h5>
+            <h6>{{teacherData.content}}</h6>
+          </div>
         </div>
       </div>
-
-    </div>
-    <div class="courseList">
-      <h3>在教的课程</h3>
-      <div class="list">
-        <v-card v-if="teacherCourse.length" :data="teacherCourse" :config="config"></v-card>
+      <div class="courseList">
+        <div v-if="teacherCourse.length!=0">
+          <h3>在教的课程</h3>
+          <div class="list">
+            <v-card v-if="teacherCourse.length" :data="teacherCourse" :config="config"></v-card>
+          </div>
+        </div>
         <!-- 无数据 -->
-        <v-nodata v-if="teacherCourse.length==0" :pageType="pageType"></v-nodata>
+        <v-nodata v-else :pageType="pageType"></v-nodata>
       </div>
     </div>
+    <v-appointment v-if="showAppointment" @closeForm="closeForm" :teacherInfo="teacherData" @goPay="goPay" :userInfo="userInfo"></v-appointment>
+    <v-pay v-if="showPay" @closePayed="closePayed" :userInfo="userInfo" :teacherInfo="teacherData" :orderId="orderId"></v-pay>
   </div>
 </template>
 
 <script>
-import { teacherInfo } from '~/lib/v1_sdk/index'
-import { mapState, mapActions, mapGetters } from 'vuex'
-import CustomCard from '@/components/card/Card.vue'
-import NoData from '@/components/common/NoData.vue'
+import { teacherInfo, banner } from "~/lib/v1_sdk/index";
+import { mapState, mapActions, mapGetters } from "vuex";
+import { store as persistStore } from "~/lib/core/store";
+import CustomCard from "@/components/card/Card.vue";
+import NoData from "@/components/common/NoData.vue";
+import Pay from "@/pages/home/teacher/components/Pay.vue";
+import Appointment from "@/pages/home/teacher/components/AppointmentTeacher";
 
 export default {
   components: {
-    'v-card': CustomCard,
-    'v-nodata': NoData
+    "v-card": CustomCard,
+    "v-nodata": NoData,
+    "v-appointment": Appointment,
+    "v-pay": Pay
   },
   data() {
     return {
+      showAppointment: false,
+      showPay: false,
+      orderId: "",
+      userInfo: "",
       pageType: {
-        page: 'teacher/_info',
-        text: '暂无在教的课程',
-        imgUrl: 'http://static-image.1911edu.com/noMsg.png'
+        page: "teacher/_info",
+        text: "暂无在教的课程",
+        imgUrl: "https://static-image.1911edu.com/noMsg.png"
       },
       config: {
-        card_type: 'profile',
-        card: 'home'
+        card_type: "profile",
+        card: "home"
       },
       teacherData: {},
       teacherCourse: [],
@@ -51,30 +70,69 @@ export default {
       tidForm: {
         tids: null
       },
-      teacherBg: 'http://static-image.1911edu.com/teacher_bannerBG.png',
+      teacherBg: "https://static-image.1911edu.com/teacher_bannerBG.png",
       loading: false
-    }
+    };
   },
   methods: {
+    goPay(id) {
+      this.showPay = true;
+      this.orderId = id;
+    },
+    closeForm() {
+      this.showAppointment = !this.showAppointment;
+    },
+    // 支付弹框关闭的回调
+    closePayed() {
+      this.showPay = !this.showPay;
+    },
+    reservation(teacher) {
+      if (persistStore.get("token")) {
+        this.getUserInfo();
+        this.teacherInfo = teacher;
+        this.showAppointment = !this.showAppointment;
+      } else {
+        this.$bus.$emit("loginShow", true);
+      }
+    },
+    getUserInfo() {
+      banner.getUserInfo().then(res => {
+        if (res.status === 0) {
+          this.userInfo = res.data.userInfo;
+        }
+      });
+    },
     getTeacherInfo() {
       teacherInfo.getTeacherInfo(this.tidForm).then(response => {
-        this.teacherData = response.data.teacherInfo
-        this.loading = false
-      })
+        this.teacherData = response.data.teacherInfo;
+        this.loading = false;
+      });
     },
     getTeacherCourse() {
       teacherInfo.getTeacherCourse(this.tidForm).then(response => {
-        this.teacherCourse = response.data.curriculumList
-        this.loading = false
-      })
+        this.teacherCourse = response.data.curriculumList;
+        this.loading = false;
+      });
+    },
+    //预约导师
+    handleAppoint() {
+      if (persistStore.get("token")) {
+        this.showAppointment = true;
+        this.getUserInfo();
+      } else {
+        this.$bus.$emit("loginShow", true);
+      }
     }
   },
   mounted() {
-    let tid = window.location.pathname.split('/')[3]
-    this.tidForm.tids = tid
-    this.loading = true
-    this.getTeacherInfo()
-    this.getTeacherCourse()
+    let tid = window.location.pathname.split("/")[3];
+    this.tidForm.tids = tid;
+    this.loading = true;
+    this.getTeacherInfo();
+    this.getTeacherCourse();
   }
-}
+};
 </script>
+<style scoped lang="scss">
+@import "~assets/style/teacher/teacher";
+</style>

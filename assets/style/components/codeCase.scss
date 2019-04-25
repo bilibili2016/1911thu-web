@@ -1,111 +1,129 @@
 .exchange {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	left: 0;
-	top: 0;
-	background-color: rgba(0, 0, 0, 0.7);
-	z-index: 200;
-	.innerWord {
-		width: 600px;
-		height: 425px;
-		position: absolute;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		right: 0;
-		margin: auto;
-		border-radius: 10px;
-		background-color: #fff;
-		.closeEcg {
-			position: absolute;
-			right: 10px;
-			top: 10px;
-			font-size: 30px;
-			color: #773084;
-		}
-		.changeContent {
-			width: 100%;
-			margin-top: 40px;
-			padding: 0 37px;
-			.changeInput {
-				width: 524px;
-				height: 230px;
-				background: url("http://static-image.1911edu.com/code-bg.png") no-repeat;
-				background-size: 100% 100%;
-				padding-top: 30px;
-				.code-icon {
-					width: 56px;
-					height: 56px;
-					margin: 0 auto;
-					img {
-						width: 100%;
-						height: 100%;
-					}
-				}
-				.code-text {
-					font-size: 16px;
-					color: #773084;
-					text-align: center;
-					margin-top: 10px;
-				}
-				.code-input {
-					width: 380px;
-					margin: 0 auto;
-					input {
-						width: 290px;
-						height: 40px;
-						text-indent: 1em;
-						background-color: #edf0f3;
-						vertical-align: middle;
-					}
-					.bindCode {
-						width: 90px;
-						color: #fff;
-						line-height: 40px;
-						text-align: center;
-						background-color: #cccccc;
-						vertical-align: middle;
-						cursor: no-drop;
-						&.input {
-							cursor: pointer;
-							background-color: #773084;
-							&:hover {
-								background-color: #5f068d;
-							}
-						}
-					}
-				}
-				.code-desc {
-					color: #666;
-					font-size: 14px;
-					text-align: center;
-					margin-top: 10px;
-				}
-				p {
-					height: 30px;
-					line-height: 30px;
-					span {
-						font-size: 13px;
-						color: #ff5f5f;
-						padding-left: 94px;
-					}
-				}
-			}
-			.changeTips {
-				padding-left: 17px;
-				padding-top: 10px;
-				margin: 0 auto;
-				h4 {
-					font-size: 14px;
-					line-height: 30px;
-				}
-				p {
-					color: #666;
-					font-size: 14px;
-					line-height: 24px;
-				}
-			}
-		}
-	}
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 200;
+
+  .innerWord {
+    width: 600px;
+    height: 425px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 10px;
+    background-color: #fff;
+
+    .closeEcg {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      font-size: 30px;
+      color: #773084;
+    }
+
+    .changeContent {
+      width: 100%;
+      margin-top: 40px;
+      padding: 0 37px;
+
+      .changeInput {
+        width: 524px;
+        height: 230px;
+        background: url("https://static-image.1911edu.com/code-bg.png") no-repeat;
+        background-size: 100% 100%;
+        padding-top: 30px;
+
+        .code-icon {
+          width: 56px;
+          height: 56px;
+          margin: 0 auto;
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        .code-text {
+          font-size: 16px;
+          color: #773084;
+          text-align: center;
+          margin-top: 10px;
+        }
+
+        .code-input {
+          width: 380px;
+          margin: 0 auto;
+
+          input {
+            width: 290px;
+            height: 40px;
+            text-indent: 1em;
+            background-color: #edf0f3;
+            vertical-align: middle;
+          }
+
+          .bindCode {
+            width: 90px;
+            color: #fff;
+            line-height: 40px;
+            text-align: center;
+            background-color: #cccccc;
+            vertical-align: middle;
+            cursor: no-drop;
+
+            &.input {
+              cursor: pointer;
+              background-color: #773084;
+
+              &:hover {
+                background-color: #5f068d;
+              }
+            }
+          }
+        }
+
+        .code-desc {
+          color: #666;
+          font-size: 14px;
+          text-align: center;
+          margin-top: 10px;
+        }
+
+        p {
+          height: 30px;
+          line-height: 30px;
+
+          span {
+            font-size: 13px;
+            color: #ff5f5f;
+            padding-left: 94px;
+          }
+        }
+      }
+
+      .changeTips {
+        padding-left: 17px;
+        padding-top: 10px;
+        margin: 0 auto;
+
+        h4 {
+          font-size: 14px;
+          line-height: 30px;
+        }
+
+        p {
+          color: #666;
+          font-size: 14px;
+          line-height: 24px;
+        }
+      }
+    }
+  }
 }

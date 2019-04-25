@@ -82,19 +82,19 @@
           <v-myexamine :examineListData="examineListData" :examineLoading="examineLoading" :examinePagemsg="examinePagemsg" @examineListChange="examineListChange"></v-myexamine>
         </el-tab-pane>
         <!-- 我的咨询 -->
-        <!-- <el-tab-pane class="my-course my-examine" name="tab-twelfth">
+        <el-tab-pane class="my-course" name="tab-twelfth">
           <span slot="label" class="tabList">
-            <i class="icon-examine"></i>&nbsp;我的咨询
+            <i class="icon-student"></i>&nbsp;我的咨询
           </span>
-          <v-mystudent :data="teacherData" @getTeacherData="getTeacherData"></v-mystudent>
-        </el-tab-pane> -->
+          <v-mystudent :data="teacherData" :teacherPagemsg="teacherPagemsg" @getTeacherData="getTeacherData"></v-mystudent>
+        </el-tab-pane>
         <!-- 教师入口  -->
-        <!-- <el-tab-pane class="my-course my-examine" name="tab-thirteenth" v-if="userInfo.user_type=='4'">
+        <el-tab-pane class="my-course my-teacher" name="tab-thirteenth" v-if="userInfo.is_teacher=='1'">
           <span slot="label" class="tabList">
-            <i class="icon-examine"></i>&nbsp;教师入口
+            <i class="icon-teacher"></i>&nbsp;教师入口
           </span>
-          <v-myteacher :data="teacherData" @getTeacherData="getTeacherData"></v-myteacher>
-        </el-tab-pane> -->
+          <v-myteacher :data="teacherData" :teacherPagemsg="teacherPagemsg" @getTeacherData="getTeacherData"></v-myteacher>
+        </el-tab-pane>
       </el-tabs>
     </div>
   </div>
@@ -149,11 +149,11 @@ export default {
         type: "ticket",
         showTicketList: false
       },
-      projectImg: "http://static-image.1911edu.com/p4.png", //项目图标
+      projectImg: "https://static-image.1911edu.com/p4.png", //项目图标
       isShowNoCourse: false,
       noMyMsg: false,
       study: false,
-      noMsgImg: "http://static-image.1911edu.com/noMsg.png",
+      noMsgImg: "https://static-image.1911edu.com/noMsg.png",
       tabPosition: "left",
       activeTab: "tab-first",
       bconfig: {
@@ -487,14 +487,20 @@ export default {
         name: ""
       },
       userInfo: {
-        head_img: "http://static-image.1911edu.com/defaultHeadImg.jpg"
+        head_img: "https://static-image.1911edu.com/defaultHeadImg.jpg"
       },
       getHistory: true,
       teacherData: [],
       teacherBespokeData: {
-        type: "",
-        page: "",
-        limit: ""
+        statusType: 1,
+        type: 1,
+        page: 1,
+        limit: 12
+      },
+      teacherPagemsg: {
+        page: 1,
+        pagesize: 12,
+        total: 20
       }
     };
   },
@@ -565,10 +571,17 @@ export default {
             this.collegeList();
             break;
           case "tab-twelfth": //我的咨询
-            this.teacherBespokeListData();
+            this.getTeacherData({
+              statusType: 1,
+              type: 1
+            });
             break;
           case "tab-thirteenth": //教师入口
-            this.teacherBespokeListData();
+            this.getTeacherData({
+              statusType: 1,
+              type: 2
+            });
+            this.$bus.$emit("gotoURL", { name: "list" });
             break;
         }
         let gidForm = {
@@ -959,15 +972,23 @@ export default {
       });
     },
     // 我的咨询和老师入口tab切换
-    getTeacherData (item) {
-      // this.teacherBespokeData
-      // this.teacherBespokeListData()
+    getTeacherData (data) {
+      this.teacherBespokeData.type = data.type;
+      this.teacherBespokeData.statusType = data.statusType;
+      this.teacherBespokeData.page = 1;
+      this.teacherPagemsg.page = 1;
+
+      this.teacherBespokeListData();
     },
     // 获取预约老师列表
     teacherBespokeListData () {
-      profileHome.teacherBespokeList().then(response => {
+      profileHome.teacherBespokeList(this.teacherBespokeData).then(response => {
         if (response.status == 0) {
           this.teacherData = response.data.teacherBespokeList;
+          this.teacherPagemsg.total = response.data.total;
+          // this.teacherBespokeData.type = 1;
+          // this.teacherBespokeData.page = 1;
+          // this.teacherBespokeData.limit = 1;
         } else if (response.status === 100008) {
           this.$router.push("/");
           return false;
@@ -975,6 +996,12 @@ export default {
           message(this, "error", response.msg);
         }
       });
+    },
+    //预约列表翻页
+    changeAppointLIst (val) {
+      this.teacherPagemsg.page = val;
+      this.teacherBespokeData.page = val;
+      this.teacherBespokeListData();
     },
     // 初始化 bus 事件
     initBusEvent () {
@@ -1110,6 +1137,9 @@ export default {
     }
     this.$bus.$on("handleHeadClick", data => {
       this.handleClick(data);
+    });
+    this.$bus.$on("changeAppointLIst", data => {
+      this.changeAppointLIst(data);
     });
 
     this.infoNum = persistStore.get("infoNum");

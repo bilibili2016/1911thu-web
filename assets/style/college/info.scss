@@ -1,357 +1,421 @@
   .con-detail {
-      position: relative;
+    position: relative;
+    width: 1100px;
+    margin: 0 auto;
+    padding-bottom: 110px;
+    color: #222;
+
+    h4.college-title {
+      margin: 70px auto 40px;
+      text-align: center;
+
+      span {
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 36px;
+        font-weight: bold;
+        color: #485ca0;
+      }
+    }
+
+    .con-five {
       width: 1100px;
-      margin: 0 auto;
-      padding-bottom: 110px;
-      color: #222;
-      h4.college-title {
-          margin: 70px auto 40px;
-          text-align: center;
-          span {
-              display: inline-block;
-              vertical-align: middle;
-              text-align: center;
-              font-size: 36px;
-              font-weight: bold;
-              color: #485ca0;
-          }
+      height: 401px;
+      border-radius: 10px;
+      text-align: center;
+
+      .college-title {
+        padding-top: 65px;
+        margin-top: 40px;
       }
-      .con-five {
-          width: 1100px;
-          height: 401px;
-          border-radius: 10px;
-          text-align: center;
-          .college-title {
-              padding-top: 65px;
-              margin-top: 40px;
-          }
-          .text {
-              font-size: 24px;
-              font-weight: 500;
-              color: #6417a6;
-              padding-top: 7px;
-              text-align: center;
-          }
-          .desc {
-              font-size: 18px;
-              color: #222;
-              margin: 40px 0 50px 0;
-              .p-one {
-                  color: #6417a6;
-              }
-          }
-          .price {
-              font-size: 18px;
-              color: #6417a6;
-              text-align: center;
-              span {
-                  margin-right: 105px;
-                  &:first-child {
-                      margin-left: 50px;
-                  }
-              }
-              .p-two {
-                  font-size: 48px;
-              }
-          }
+
+      .text {
+        font-size: 24px;
+        font-weight: 500;
+        color: #6417a6;
+        padding-top: 7px;
+        text-align: center;
       }
-      .btns {
-          margin: auto;
-          width: 100%;
-          height: 90px;
-          line-height: 90px;
-          background: #3c60c7;
-          .btn-con {
-              width: 1100px;
-              margin: 0 auto;
-          }
-          .text {
-              color: #fff;
-              font-weight: 600;
-              // margin-left: 50px;
-              font-size: 24px;
-          }
-          .btn-item {
-              float: right;
-              // margin-right: 35px;
-          }
-          .button {
-              display: inline-block;
-              width: 150px;
-              height: 50px;
-              font-size: 18px;
-              line-height: 50px;
-              text-align: center;
-              border-radius: 25px;
-              background-color: #fff;
-              margin-right: 30px;
-              color: #3c60c7;
-              font-weight: 500;
-              cursor: pointer;
-              vertical-align: sub;
-              &:last-child {
-                  margin-right: 0;
-              }
-              &:hover {
-                  transition: all 300ms;
-                  background-color: #6589f3;
-              }
-          }
-          &.fixedBottom {
-              position: fixed;
-              bottom: 0;
-              left: 0;
-              right: 0;
-              transition: all 300ms;
-              .button {
-                  &:hover {
-                      background-color: #6589f3;
-                      color: #fff;
-                  }
-              }
-              .button.joinStudy {
-                  background-color: #f36c01;
-                  color: #fff;
-                  &:hover {
-                      background-color: #fc9702;
-                  }
-              }
-          }
-          &.bottomHeight {
-              position: absolute;
-              bottom: 1px;
-              background-color: #fff;
-              .text {
-                  color: #3c60c7;
-              }
-              .button {
-                  transition: all 300ms;
-                  background-color: #3446c3;
-                  color: #fff;
-                  &:hover {
-                      // background-color: #458bff;
-                      opacity: 0.7;
-                  }
-              }
-              .button.joinStudy {
-                  background-color: #f36c01;
-                  &:hover {
-                      background-color: #fc9702;
-                  }
-              }
-          }
+
+      .desc {
+        font-size: 18px;
+        color: #222;
+        margin: 40px 0 50px 0;
+
+        .p-one {
+          color: #6417a6;
+        }
       }
+
+      .price {
+        font-size: 18px;
+        color: #6417a6;
+        text-align: center;
+
+        span {
+          margin-right: 105px;
+
+          &:first-child {
+            margin-left: 50px;
+          }
+        }
+
+        .p-two {
+          font-size: 48px;
+        }
+      }
+    }
+
+    .btns {
+      margin: auto;
+      width: 100%;
+      height: 90px;
+      line-height: 90px;
+      background: #3c60c7;
+
+      .btn-con {
+        width: 1100px;
+        margin: 0 auto;
+      }
+
+      .text {
+        color: #fff;
+        font-weight: 600;
+        // margin-left: 50px;
+        font-size: 24px;
+      }
+
+      .btn-item {
+        float: right;
+        // margin-right: 35px;
+      }
+
+      .button {
+        display: inline-block;
+        width: 150px;
+        height: 50px;
+        font-size: 18px;
+        line-height: 50px;
+        text-align: center;
+        border-radius: 25px;
+        background-color: #fff;
+        margin-right: 30px;
+        color: #3c60c7;
+        font-weight: 500;
+        cursor: pointer;
+        vertical-align: sub;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &:hover {
+          transition: all 300ms;
+          background-color: #6589f3;
+        }
+      }
+
+      &.fixedBottom {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        transition: all 300ms;
+
+        .button {
+          &:hover {
+            background-color: #6589f3;
+            color: #fff;
+          }
+        }
+
+        .button.joinStudy {
+          background-color: #f36c01;
+          color: #fff;
+
+          &:hover {
+            background-color: #fc9702;
+          }
+        }
+      }
+
+      &.bottomHeight {
+        position: absolute;
+        bottom: 1px;
+        background-color: #fff;
+
+        .text {
+          color: #3c60c7;
+        }
+
+        .button {
+          transition: all 300ms;
+          background-color: #3446c3;
+          color: #fff;
+
+          &:hover {
+            // background-color: #458bff;
+            opacity: 0.7;
+          }
+        }
+
+        .button.joinStudy {
+          background-color: #f36c01;
+
+          &:hover {
+            background-color: #fc9702;
+          }
+        }
+      }
+    }
   }
-  
+
   //干部
   .cadreCollege {
-      h4.college-title span {
-          color: #f94c00;
+    h4.college-title span {
+      color: #f94c00;
+    }
+
+    .con-five {
+      background: url('https://static-image.1911edu.com/college_cadreInfo.png') no-repeat;
+      background-size: cover;
+
+      .text {
+        color: #315fc2;
       }
-      .con-five {
-          background: url('http://static-image.1911edu.com/college_cadreInfo.png') no-repeat;
-          background-size: cover;
-          .text {
-              color: #315fc2;
-          }
-          .desc {
-              .p-one {
-                  color: #315fc2;
-              }
-          }
-          .price {
-              color: #315fc2;
-          }
+
+      .desc {
+        .p-one {
+          color: #315fc2;
+        }
       }
+
+      .price {
+        color: #315fc2;
+      }
+    }
   }
-  
+
   //商学院
   .commercialCollege {
-      h4.college-title {
-          padding-top: 50px !important;
-          &::before {
-              content: "";
-              display: inline-block;
-              width: 23px;
-              height: 37px;
-              background: url("http://static-image.1911edu.com/college-left.png") no-repeat;
-              margin-right: 30px;
-              margin-bottom: -15px;
-          }
-          &::after {
-              content: "";
-              display: inline-block;
-              width: 39px;
-              height: 64px;
-              background: url("http://static-image.1911edu.com/college-right.png") no-repeat;
-              margin-left: 30px;
-              margin-bottom: -30px;
-          }
+    h4.college-title {
+      padding-top: 50px !important;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        width: 23px;
+        height: 37px;
+        background: url("https://static-image.1911edu.com/college-left.png") no-repeat;
+        margin-right: 30px;
+        margin-bottom: -15px;
       }
-      .con-five {
-          width: 1137px;
-          height: 414px;
-          .college-title {
-              padding-top: 30px;
-              margin-top: 40px;
-          }
-          background: url("http://static-image.1911edu.com/commer-info.png") no-repeat;
-          background-size: contain;
-          // box-shadow: 0px 0px 36px 0px rgba(198,
-          // 194,
-          // 210,
-          // 0.36);
-          .text {
-              padding-top: 17px;
-          }
+
+      &::after {
+        content: "";
+        display: inline-block;
+        width: 39px;
+        height: 64px;
+        background: url("https://static-image.1911edu.com/college-right.png") no-repeat;
+        margin-left: 30px;
+        margin-bottom: -30px;
       }
+    }
+
+    .con-five {
+      width: 1137px;
+      height: 414px;
+
+      .college-title {
+        padding-top: 30px;
+        margin-top: 40px;
+      }
+
+      background: url("https://static-image.1911edu.com/commer-info.png") no-repeat;
+      background-size: contain;
+
+      // box-shadow: 0px 0px 36px 0px rgba(198,
+      // 194,
+      // 210,
+      // 0.36);
+      .text {
+        padding-top: 17px;
+      }
+    }
   }
-  
+
   //新闻
   .newsCollege {
-      h4.college-title span {
-          color: #275cbe;
+    h4.college-title span {
+      color: #275cbe;
+    }
+
+    .con-five {
+      background: url('https://static-image.1911edu.com/college_newsInfo.png') no-repeat;
+      background-size: cover;
+
+      .text {
+        color: #ffa84d;
       }
-      .con-five {
-          background: url('http://static-image.1911edu.com/college_newsInfo.png') no-repeat;
-          background-size: cover;
-          .text {
-              color: #ffa84d;
-          }
-          .desc {
-              .p-one {
-                  color: #ffa84d;
-              }
-          }
-          .price {
-              color: #ffa84d;
-          }
+
+      .desc {
+        .p-one {
+          color: #ffa84d;
+        }
       }
+
+      .price {
+        color: #ffa84d;
+      }
+    }
   }
-  
+
   //教育
   .eduCollege {
-      h4.college-title span {
-          color: #215dcc;
+    h4.college-title span {
+      color: #215dcc;
+    }
+
+    .con-five {
+      background: url('https://static-image.1911edu.com/college_eduInfo.png') no-repeat;
+      background-size: cover;
+
+      .text {
+        color: #fbac59;
       }
-      .con-five {
-          background: url('http://static-image.1911edu.com/college_eduInfo.png') no-repeat;
-          background-size: cover;
-          .text {
-              color: #fbac59;
-          }
-          .desc {
-              .p-one {
-                  color: #fbac59;
-              }
-          }
-          .price {
-              color: #fbac59;
-          }
+
+      .desc {
+        .p-one {
+          color: #fbac59;
+        }
       }
+
+      .price {
+        color: #fbac59;
+      }
+    }
   }
-  
+
   //人工智能
   .smartCollege {
-      h4.college-title span {
-          // width: 180px;
-          color: #fff;
-          padding-right: 27px;
-          padding-top: 3px;
+    h4.college-title span {
+      // width: 180px;
+      color: #fff;
+      padding-right: 27px;
+      padding-top: 3px;
+    }
+
+    .con-five {
+      background: url('https://static-image.1911edu.com/college_smartInfo.png') no-repeat;
+      background-size: cover;
+
+      .text {
+        color: #102693;
+        padding-top: 5px;
       }
-      .con-five {
-          background: url('http://static-image.1911edu.com/college_smartInfo.png') no-repeat;
-          background-size: cover;
-          .text {
-              color: #102693;
-              padding-top: 5px;
-          }
-          .desc {
-              .p-one {
-                  color: #102693;
-              }
-          }
-          .price {
-              color: #102693;
-          }
+
+      .desc {
+        .p-one {
+          color: #102693;
+        }
       }
+
+      .price {
+        color: #102693;
+      }
+    }
   }
-  
+
   //体育
   .sportsCollege {
-      h4.college-title span {
-          color: #fc3e32;
+    h4.college-title span {
+      color: #fc3e32;
+    }
+
+    .con-five {
+      background: url('https://static-image.1911edu.com/college_sportsInfo.png') no-repeat;
+      background-size: cover;
+
+      .text {
+        color: #275cbe;
+        padding-top: 5px;
       }
-      .con-five {
-          background: url('http://static-image.1911edu.com/college_sportsInfo.png') no-repeat;
-          background-size: cover;
-          .text {
-              color: #275cbe;
-              padding-top: 5px;
-          }
-          .desc {
-              .p-one {
-                  color: #275cbe;
-              }
-          }
-          .price {
-              color: #275cbe;
-          }
+
+      .desc {
+        .p-one {
+          color: #275cbe;
+        }
       }
+
+      .price {
+        color: #275cbe;
+      }
+    }
   }
-  
+
   //健康
   .healthCollege {
-      h4.college-title span {
-          color: #0d52a1;
+    h4.college-title span {
+      color: #0d52a1;
+    }
+
+    .con-five {
+      background: url('https://static-image.1911edu.com/college_healthInfo.png') no-repeat;
+      background-size: cover;
+
+      .text {
+        color: #04a749;
       }
-      .con-five {
-          background: url('http://static-image.1911edu.com/college_healthInfo.png') no-repeat;
-          background-size: cover;
-          .text {
-              color: #04a749;
-          }
-          .desc {
-              .p-one {
-                  color: #04a749;
-              }
-          }
-          .price {
-              color: #04a749;
-          }
+
+      .desc {
+        .p-one {
+          color: #04a749;
+        }
       }
+
+      .price {
+        color: #04a749;
+      }
+    }
   }
-  
+
   //国学院
   .chineseCollege {
-      h4.college-title span {
-          color: #ffffff;
+    h4.college-title span {
+      color: #ffffff;
+    }
+
+    .con-five {
+      background: url('https://static-image.1911edu.com/college_chineseInfoA.png') no-repeat;
+      background-size: cover;
+
+      .text {
+        color: #854837;
+        padding-top: 24px;
       }
-      .con-five {
-          background: url('http://static-image.1911edu.com/college_chineseInfoA.png') no-repeat;
-          background-size: cover;
-          .text {
-              color: #854837;
-              padding-top: 24px;
-          }
-          .desc {
-              .p-one {
-                  color: #854837;
-              }
-          }
-          .price {
-              color: #854837;
-          }
+
+      .desc {
+        .p-one {
+          color: #854837;
+        }
       }
+
+      .price {
+        color: #854837;
+      }
+    }
   }
-  
+
   .noCollege {
-      min-height: 500px;
-      text-align: center;
-      img {
-          width: 390px;
-      }
-      p {
-          color: #666;
-      }
+    min-height: 500px;
+    text-align: center;
+
+    img {
+      width: 390px;
+    }
+
+    p {
+      color: #666;
+    }
   }

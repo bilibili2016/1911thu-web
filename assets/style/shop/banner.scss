@@ -1,13 +1,14 @@
 .shopBanner {
-	height: 148px;
-	background: url('http://static-image.1911edu.com/orderBanners.png') no-repeat;
-	background-size: 100% 148px;
-	z-index: 20;
-	div {
-		font-size: 24px;
-		color: #773084;
-		line-height: 110px;
-		width: 1100px;
-		margin: 0 auto;
-	}
+  height: 148px;
+  background: url('https://static-image.1911edu.com/orderBanners.png') no-repeat;
+  background-size: 100% 148px;
+  z-index: 20;
+
+  div {
+    font-size: 24px;
+    color: #773084;
+    line-height: 110px;
+    width: 1100px;
+    margin: 0 auto;
+  }
 }

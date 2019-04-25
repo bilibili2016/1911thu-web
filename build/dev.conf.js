@@ -7,7 +7,7 @@ config.analyze = {
 (config.head.link = [{
     rel: 'icon',
     type: 'image/x-icon',
-    href: 'http://static-image.1911edu.com/favicon.png'
+    href: 'https://static-image.1911edu.com/favicon.png'
   },
   {
     rel: 'stylesheet',
@@ -19,7 +19,7 @@ config.analyze = {
     async: true
   },
   {
-    src: 'http://js.1911edu.com/jquery-1.11.3.min.js',
+    src: 'https://js.1911edu.com/jquery-1.11.3.min.js',
     async: true
   },
   // {
@@ -28,20 +28,20 @@ config.analyze = {
   // },
   {
     //   2019年4月22号上午更新的七牛云2.8.1版本
-    src: 'http://js.1911edu.com/aliplayer-h5-min.js',
+    src: 'https://js.1911edu.com/aliplayer-h5-min.js',
     async: true
   },
   {
-    src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
+    src: 'https://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
     async: true
   },
   {
-    src: 'http://js.1911edu.com/swfobject.js',
+    src: 'https://js.1911edu.com/swfobject.js',
     async: true
   },
   {
     // src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js',
-    src: 'http://js.1911edu.com/socket.io.js',
+    src: 'https://js.1911edu.com/socket.io.js',
     async: true
   }
 ]),

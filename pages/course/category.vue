@@ -60,7 +60,7 @@ export default {
       pageType: {
         page: "category",
         text: "未找到相关内容",
-        imgUrl: "http://static-image.1911edu.com/noMsg.png"
+        imgUrl: "https://static-image.1911edu.com/noMsg.png"
       },
       cidData: [],
       pidData: [],

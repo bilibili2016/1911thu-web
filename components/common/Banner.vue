@@ -79,7 +79,8 @@ export default {
         second: null
       },
       fileForm: {
-        FILESS: []
+        FILESS: [],
+        fileName: ""
       },
       imgs: []
     };
@@ -103,6 +104,7 @@ export default {
       this.fileForm.FILESS = [];
       reader.onloadend = () => {
         this.fileForm.FILESS.push(reader.result);
+        this.fileForm.fileName = imgFiles.name;
         banner.uploadHeadImg(this.fileForm).then(response => {
           this.userInfo.head_img = response.data.full_path;
           message(this, "success", response.msg);

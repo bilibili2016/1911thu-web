@@ -20,42 +20,42 @@
           <h2>面向人群</h2>
           <div class="object">
             <div class="clearfix">
-              <img class="fl" src="http://static-image.1911edu.com/healthCollege_icon5.png" alt="">
+              <img class="fl" src="https://static-image.1911edu.com/healthCollege_icon5.png" alt="">
               <div class="fl">
                 <h5>卫生系统行政单位干部</h5>
                 <p>包括各级卫生局、卫计委、中医药管理局、食品药品监督管理局等行政单位的干部。</p>
               </div>
             </div>
             <div class="clearfix">
-              <img class="fl" src="http://static-image.1911edu.com/healthCollege_icon6.png" alt="">
+              <img class="fl" src="https://static-image.1911edu.com/healthCollege_icon6.png" alt="">
               <div class="fl">
                 <h5>各级各类医疗卫生机构管理人员</h5>
                 <p>包括各级各类公立医院、社会办医院、医疗卫生机构和专业公共卫生机构，以及各级疾控中心、妇幼保健院、血站、红十字会办公室、爱卫办、科研院所等机构的管理人员。</p>
               </div>
             </div>
             <div class="clearfix">
-              <img class="fl" src="http://static-image.1911edu.com/healthCollege_icon7.png" alt="">
+              <img class="fl" src="https://static-image.1911edu.com/healthCollege_icon7.png" alt="">
               <div class="fl">
                 <h5>医药产业管理者</h5>
                 <p>包括医药制造行业、医疗仪器设备及器械制造行业、医药物流配送行业、中医药产业等行业的经营管理人员。</p>
               </div>
             </div>
             <div class="clearfix">
-              <img class="fl" src="http://static-image.1911edu.com/healthCollege_icon8.png" alt="">
+              <img class="fl" src="https://static-image.1911edu.com/healthCollege_icon8.png" alt="">
               <div class="fl">
                 <h5>健康管理服务业管理者</h5>
                 <p>包括健康体检、调理康复、健康咨询、养老产业、养老地产、健康保险行业、保健品行业的经营管理人员。</p>
               </div>
             </div>
             <div class="clearfix">
-              <img class="fl" src="http://static-image.1911edu.com/healthCollege_icon9.png" alt="">
+              <img class="fl" src="https://static-image.1911edu.com/healthCollege_icon9.png" alt="">
               <div class="fl">
                 <h5>新型健康产业管理者</h5>
                 <p>包括移动医疗、健康家居、医疗旅游、有机农业、健身休闲产业、健康餐饮等行业的经营管理人员。</p>
               </div>
             </div>
             <div class="clearfix">
-              <img class="fl" src="http://static-image.1911edu.com/healthCollege_icon10.png" alt="">
+              <img class="fl" src="https://static-image.1911edu.com/healthCollege_icon10.png" alt="">
               <div class="fl">
                 <h5>投资机构负责人</h5>
                 <p>大健康产业各类投融资机构的负责人。</p>
@@ -119,15 +119,15 @@
             <h2>业务产品</h2>
             <div class="production">
               <div class="item">
-                <img src="http://static-image.1911edu.com/production-health.png" alt="">
+                <img src="https://static-image.1911edu.com/production-health.png" alt="">
                 <p>在线大健康学院</p>
               </div>
               <div class="item">
-                <img src="http://static-image.1911edu.com/production-icon1.png" alt="">
+                <img src="https://static-image.1911edu.com/production-icon1.png" alt="">
                 <p>混合式标准项目</p>
               </div>
               <div class="item">
-                <img src="http://static-image.1911edu.com/production-icon2.png" alt="">
+                <img src="https://static-image.1911edu.com/production-icon2.png" alt="">
                 <p>健康管理硕士（MHA）国际学位项目</p>
               </div>
             </div>
@@ -141,18 +141,18 @@
             <h2>师资来源</h2>
             <p class="teacherText">本学院授课师资来自以下及其他相关单位</p>
             <div class="school">
-              <img src="http://static-image.1911edu.com/college_QH.png" alt="">
-              <img src="http://static-image.1911edu.com/college_BD.png" alt="">
-              <img src="http://static-image.1911edu.com/college_ZKY.png" alt="">
-              <img src="http://static-image.1911edu.com/college_JFJYY.png" alt="">
-              <img src="http://static-image.1911edu.com/college_ZGYYXH.png" alt="">
-              <img src="http://static-image.1911edu.com/college_JBZX.png" alt="">
-              <img src="http://static-image.1911edu.com/college_YKY.png" alt="">
-              <img src="http://static-image.1911edu.com/college_WSYJZX.png" alt="">
+              <img src="https://static-image.1911edu.com/college_QH.png" alt="">
+              <img src="https://static-image.1911edu.com/college_BD.png" alt="">
+              <img src="https://static-image.1911edu.com/college_ZKY.png" alt="">
+              <img src="https://static-image.1911edu.com/college_JFJYY.png" alt="">
+              <img src="https://static-image.1911edu.com/college_ZGYYXH.png" alt="">
+              <img src="https://static-image.1911edu.com/college_JBZX.png" alt="">
+              <img src="https://static-image.1911edu.com/college_YKY.png" alt="">
+              <img src="https://static-image.1911edu.com/college_WSYJZX.png" alt="">
             </div>
             <!-- <h2>学习收获</h2>
             <div class="harvest clearfix">
-              <img class="fl" src="http://static-image.1911edu.com/healthCollege_icon13.png" alt="">
+              <img class="fl" src="https://static-image.1911edu.com/healthCollege_icon13.png" alt="">
               <p class="fr">通过参加1911学堂在线大健康学院的学习，可以了解大健康产业及其与养老、医疗器械、中医药等行业相结合的发展趋势，掌握大健康产业知识及前沿的智能可穿戴、万物互联到全民健身的大数据服务，从而完善大健康相关知识结构、提升认知水平，适应环境变化、跟上新时代的发展步伐。</p>
             </div> -->
           </div>
@@ -166,11 +166,11 @@
                 <span class="text">学员参加1911学堂大健康学院在线学院或相关项目学习，考核通过者将获得1911学堂结业证书。</span>
               </div>
               <div class="right fr">
-                <img src="http://static-image.1911edu.com/cadreCollege_icon2.png" alt>
+                <img src="https://static-image.1911edu.com/cadreCollege_icon2.png" alt>
               </div>
             </div>
             <div class="certification">
-              <img src="http://static-image.1911edu.com/healthCollege_certificate.png" alt>
+              <img src="https://static-image.1911edu.com/healthCollege_certificate.png" alt>
             </div>
           </div>
         </div>

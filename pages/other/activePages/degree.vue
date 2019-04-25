@@ -13,21 +13,21 @@
         <div class="right clearfix">
           <div class="box box-one">
             <div class="box-con">
-              <img src="http://static-image.1911edu.com/degree-pic1.png" alt="">
+              <img src="https://static-image.1911edu.com/degree-pic1.png" alt="">
               <p>MBA</p>
               <p>（医疗卫生管理方向）</p>
             </div>
           </div>
           <div class="box box-two">
             <div class="box-con">
-              <img src="http://static-image.1911edu.com/degree-pic2.png" alt="">
+              <img src="https://static-image.1911edu.com/degree-pic2.png" alt="">
               <p>MBA</p>
               <p>（市场营销方向）</p>
             </div>
           </div>
           <div class="box box-three">
             <div class="box-con">
-              <img src="http://static-image.1911edu.com/degree-pic3.png" alt="">
+              <img src="https://static-image.1911edu.com/degree-pic3.png" alt="">
               <p>MBA</p>
               <p>（人力资源管理方向）</p>
             </div>
@@ -35,21 +35,21 @@
           </div>
           <div class="box box-four">
             <div class="box-con">
-              <img src="http://static-image.1911edu.com/degree-pic4.png" alt="">
+              <img src="https://static-image.1911edu.com/degree-pic4.png" alt="">
               <p>MBA</p>
               <p>（项目管理方向）</p>
             </div>
           </div>
           <div class="box box-five">
             <div class="box-con">
-              <img src="http://static-image.1911edu.com/degree-pic5.png" alt="">
+              <img src="https://static-image.1911edu.com/degree-pic5.png" alt="">
               <p>MBA（金融方向）</p>
             </div>
 
           </div>
           <div class="box box-six">
             <div class="box-con">
-              <img src="http://static-image.1911edu.com/degree-pic6.png" alt="">
+              <img src="https://static-image.1911edu.com/degree-pic6.png" alt="">
               <p>MBA（财务方向）</p>
             </div>
 
@@ -63,7 +63,8 @@
 
 <script>
 export default {
-  mounted() {
+  mounted () {
+
     let headerHeight = document.getElementsByClassName('headerBox')[0]
       .offsetHeight
     let footerHeight = document.getElementsByClassName('footerBox')[0]

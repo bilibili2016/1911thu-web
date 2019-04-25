@@ -1,54 +1,70 @@
 <template>
   <!-- 教师入口 -->
-  <el-card class="changeNav">
-    <el-tabs v-model="activeName" @tab-click="handleActive">
-      <!-- 学习中 -->
-      <el-tab-pane label="未开始" name="first" value="1">
-        <v-part :teacherData="data" :config="config"></v-part>
-      </el-tab-pane>
-      <!-- 已完成 -->
-      <el-tab-pane label="已完成" name="second" value="2">
-        <v-part :teacherData="data" :config="config"></v-part>
-      </el-tab-pane>
-      <!-- 已失效 -->
-      <el-tab-pane label="已失效" name="fourth" value="4">
-        <v-part :teacherData="data" :config="config"></v-part>
-      </el-tab-pane>
-    </el-tabs>
+  <el-card class="333">
+    <!-- 列表 -->
+    <v-list v-if="isShowList" :data="data" :teacherPagemsg="teacherPagemsg" @getTeacherData="getTeacherData"></v-list>
+    <!-- 预约时间表 -->
+    <v-tabletime v-if="isShowTimeTable"></v-tabletime>
+    <!-- 录入可预约的时间 -->
+    <v-inputtime v-if="isShowInputTime"></v-inputtime>
+    <!-- 修改时间 -->
+    <v-updatetime v-if="isShowUpdateTime" :timeID="timeID"></v-updatetime>
   </el-card>
 </template>
 
 <script>
-import { store as persistStore } from '~/lib/core/store'
-import NoMsg from '@/pages/profile/components/common/noMsg.vue'
-import Part from '@/pages/profile/components/common/Part.vue'
+import { store as persistStore } from "~/lib/core/store";
+import List from "@/pages/profile/components/myteacher/list.vue";
+import timeTable from "@/pages/profile/components/myteacher/timeTable.vue";
+import inputTime from "@/pages/profile/components/myteacher/inputTime.vue";
+import updateTime from "@/pages/profile/components/myteacher/updateTime.vue";
 
 export default {
-  props: ["data"],
+  props: ["data", "teacherPagemsg"],
   components: {
-    'v-nomsg': NoMsg,
-    'v-part': Part,
+    "v-list": List,
+    "v-tabletime": timeTable,
+    "v-inputtime": inputTime,
+    "v-updatetime": updateTime
   },
-  data () {
+  data() {
     return {
-      activeName: 'first',
-      config: {
-        isTeacher: true,
-      }
-    }
-  },
-  mounted () {
-
+      isShowList: true,
+      isShowTimeTable: false,
+      isShowInputTime: false,
+      isShowUpdateTime: false,
+      timeID: ""
+    };
   },
   methods: {
-    handleActive (item) {
-      console.log(item.$attrs);
-
-      this.getTeacherData()
-    },
-    getTeacherData (data) {
-      this.$emit('getTeacherData', data)
+    getTeacherData(data) {
+      this.$emit("getTeacherData", data);
     }
+  },
+  mounted() {
+    this.$bus.$on("gotoURL", data => {
+      this.isShowList = false;
+      this.isShowTimeTable = false;
+      this.isShowInputTime = false;
+      this.isShowUpdateTime = false;
+      switch (data.name) {
+        case "list":
+          this.isShowList = true;
+          break;
+        case "timeTable":
+          this.isShowTimeTable = true;
+          break;
+        case "inputTime":
+          this.isShowInputTime = true;
+          break;
+        case "updateTime":
+          this.isShowUpdateTime = true;
+          this.timeID = data.id;
+          break;
+        default:
+          break;
+      }
+    });
   }
-}
+};
 </script>

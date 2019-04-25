@@ -37,22 +37,24 @@
       <!-- 支付成功 -->
       <div class="paySuccess" v-show="paySuccess">
         <i @click="close" class="el-icon-close fr"></i>
-        <img src="http://static-image.1911edu.com/success.png" alt>
+        <img src="https://static-image.1911edu.com/success.png" alt>
         <h5>支付成功</h5>
         <div class="goodsTime">
-          <p>尊敬的学员，您预约的{{teacherInfo.teacher_name}}老师咨询服务</p>
-          <p>将于{{startTime}}-{{endTime}}开始进行,</p>
-          <p>请准时通过“名师智库”或者“个人中心-我的咨询”进入直播间。</p>
+          <p>亲爱的{{userInfo.real_name}}，您已预约咨询{{teacherInfo.teacher_name}}导师，预约时间为{{startTime}}-{{endTime}},请等待导师的确认信息。您可以通过“个人中心-我的咨询”查看预约状态，时间确定后，请提前5分钟进入直播间。</p>
+        </div>
+        <div class="focus">
+          <p>关注1911学堂公众号，第一时间获得1911学堂资讯！</p>
+          <img src="https://static-image.1911edu.com/attentionWechat2.jpg" alt="">
+          <p></p>
         </div>
         <div class="goodsBtn">
-          <span @click="close">返回名师智库</span>
-          <!-- <span @click="lookAppointment">查看预约详情</span> -->
+          <span @click="lookAppointment">前往个人中心</span>
         </div>
       </div>
       <!-- 支付失败 -->
       <div class="payError" v-show="payError">
         <i @click="close" class="el-icon-close fr"></i>
-        <img src="http://static-image.1911edu.com/error.png" alt>
+        <img src="https://static-image.1911edu.com/error.png" alt>
         <h5>支付失败</h5>
       </div>
     </div>
@@ -112,6 +114,7 @@ export default {
       this.$emit('closePayed')
     },
     lookAppointment () {
+      this.close()
       this.gidForm.gids = 'tab-twelfth';
       this.setGid(this.gidForm);
       this.$router.push("/profile");

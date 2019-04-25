@@ -1,323 +1,328 @@
 .infoItem {
-	position: absolute;
-	right: 0;
-	bottom: 50px;
+  position: absolute;
+  right: 0;
+  bottom: 50px;
 }
 
 .back-to-ceiling {
-	position: fixed;
-	display: inline-block;
-	text-align: center;
-	cursor: pointer;
-	z-index: 4;
-	&.customStyle {
-		// position: relative;
-		right: 30px;
-		bottom: 405px;
-		width: 50px;
-		height: 50px;
-		border-radius: 4px;
-		// line-height: 45px;
-		background: #e7eaf1;
-		transition: all 300ms;
-		z-index: 99;
-		.backArrow {
-			display: none;
-			position: absolute;
-			top: 0;
-			left: 0;
-			z-index: 20;
-			width: 100%;
-			height: 100%;
-			border-radius: 4px;
-			padding: 10px;
-			color: #fcdb5f;
-			background-color: #773084;
-			span {
-				font-size: 14px;
-				color: #fcdb5f;
-			}
-		}
-		&:hover {
-			.backArrow {
-				display: block;
-			}
-			// background-color: #d2d2d6;
-		}
-	}
+  position: fixed;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  z-index: 4;
 
-	&.customStyleOne {
-		right: 30px;
-		bottom: 344px;
-		width: 50px;
-		height: 50px;
-		border-radius: 4px;
-		line-height: 45px;
-		background-color: #773084;
-		transition: all 300ms;
-		z-index: 99;
+  &.customStyle {
+    // position: relative;
+    right: 30px;
+    bottom: 405px;
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    // line-height: 45px;
+    background: #e7eaf1;
+    transition: all 300ms;
+    z-index: 99;
 
-		span {
-			width: 24px;
-			height: 21px;
-			margin-top: 15.5px;
-			transition: all 300ms;
-			background: url('http://static-image.1911edu.com/home_backtop22.png') no-repeat;
-			background-size: 24px 21px;
-		}
+    .backArrow {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 20;
+      width: 100%;
+      height: 100%;
+      border-radius: 4px;
+      padding: 10px;
+      color: #fcdb5f;
+      background-color: #773084;
 
-		&:hover {
-			background-color: #5f068d;
+      span {
+        font-size: 14px;
+        color: #fcdb5f;
+      }
+    }
 
-			span {
-				background: url('http://static-image.1911edu.com/home_backtop02.png') no-repeat;
-				background-size: 24px 21px;
-			}
+    &:hover {
+      .backArrow {
+        display: block;
+      }
 
-			.showCode {
-				opacity: 1;
-				right: 62px;
-			}
-		}
-	}
+      // background-color: #d2d2d6;
+    }
+  }
 
-	&.customStyleTwo {
-		right: 30px;
-		bottom: 224px;
-		// bottom: 199px;
-		width: 50px;
-		height: 50px;
-		border-radius: 4px;
-		line-height: 45px;
-		background-color: #773084;
-		transition: all 300ms;
-		z-index: 99;
+  &.customStyleOne {
+    right: 30px;
+    bottom: 344px;
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    line-height: 45px;
+    background-color: #773084;
+    transition: all 300ms;
+    z-index: 99;
 
-		span {
-			width: 24px;
-			height: 24px;
-			margin-top: 13px;
-			transition: all 300ms;
-			background: url('http://static-image.1911edu.com/home_backtop11.png') no-repeat;
-			background-size: 24px 24px;
-		}
+    span {
+      width: 24px;
+      height: 21px;
+      margin-top: 15.5px;
+      transition: all 300ms;
+      background: url('https://static-image.1911edu.com/home_backtop22.png') no-repeat;
+      background-size: 24px 21px;
+    }
 
-		&:hover {
-			background-color: #5f068d;
+    &:hover {
+      background-color: #5f068d;
 
-			span {
-				background: url('http://static-image.1911edu.com/home_backtop01.png') no-repeat;
-				background-size: 24px 24px;
-			}
+      span {
+        background: url('https://static-image.1911edu.com/home_backtop02.png') no-repeat;
+        background-size: 24px 21px;
+      }
 
-			.telShow {
-				opacity: 1;
-				right: 62px;
-			}
-		}
-	}
+      .showCode {
+        opacity: 1;
+        right: 62px;
+      }
+    }
+  }
 
-	&.customStyleFour {
-		right: 30px;
-		bottom: 284px;
-		width: 50px;
-		height: 50px;
-		border-radius: 4px;
-		line-height: 45px;
-		background-color: #773084;
-		transition: all 300ms;
-		z-index: 99;
+  &.customStyleTwo {
+    right: 30px;
+    bottom: 224px;
+    // bottom: 199px;
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    line-height: 45px;
+    background-color: #773084;
+    transition: all 300ms;
+    z-index: 99;
 
-		span {
-			width: 24px;
-			height: 24px;
-			margin-top: 13px;
-			transition: all 300ms;
-			background: url('~assets/images/service.png') no-repeat;
-			background-size: 24px 24px;
-		}
+    span {
+      width: 24px;
+      height: 24px;
+      margin-top: 13px;
+      transition: all 300ms;
+      background: url('https://static-image.1911edu.com/home_backtop11.png') no-repeat;
+      background-size: 24px 24px;
+    }
 
-		&:hover {
-			background-color: #5f068d;
+    &:hover {
+      background-color: #5f068d;
 
-			span {
-				background: url('~assets/images/servicey.png') no-repeat;
-				background-size: 24px 24px;
-			}
+      span {
+        background: url('https://static-image.1911edu.com/home_backtop01.png') no-repeat;
+        background-size: 24px 24px;
+      }
 
-			.telShow {
-				opacity: 1;
-				right: 62px;
-			}
-		}
-	}
+      .telShow {
+        opacity: 1;
+        right: 62px;
+      }
+    }
+  }
 
-	&.customStyleThree {
-		right: 30px;
-		bottom: 80px;
-		width: 150px;
-		height: 117px;
-		border-radius: 4px;
-		line-height: 45px;
-		// background: rgba(252, 210, 63, 1);
-		transition: all 300ms;
-		z-index: 99;
+  &.customStyleFour {
+    right: 30px;
+    bottom: 284px;
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    line-height: 45px;
+    background-color: #773084;
+    transition: all 300ms;
+    z-index: 99;
 
-		&:hover {
-			.line-centerd {
-				color: #fcd23f;
-				background: url('http://static-image.1911edu.com/home_backtop44.png') no-repeat 16px 17px;
-				background-size: 18px 18px;
-			}
-		}
+    span {
+      width: 24px;
+      height: 24px;
+      margin-top: 13px;
+      transition: all 300ms;
+      background: url('~assets/images/service.png') no-repeat;
+      background-size: 24px 24px;
+    }
 
-		.line-wrap img {
-			width: 100%;
-		}
-	}
+    &:hover {
+      background-color: #5f068d;
 
-	.showCode {
-		opacity: 0;
-		width: 170px;
-		height: 212px;
-		background-color: #fff;
-		border-radius: 4px;
-		position: absolute;
-		top: 0;
-		right: -1000px;
-		z-index: 5;
-		box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
-		transition: opacity 300ms;
-		text-align: center;
+      span {
+        background: url('~assets/images/servicey.png') no-repeat;
+        background-size: 24px 24px;
+      }
 
-		img {
-			display: inline-block;
-			margin: 20px 0 0;
-			width: 120px;
-			height: 120px;
-		}
+      .telShow {
+        opacity: 1;
+        right: 62px;
+      }
+    }
+  }
 
-		h4 {
-			line-height: 20px;
-			font-size: 14px;
-			color: #050223;
-		}
+  &.customStyleThree {
+    right: 30px;
+    bottom: 80px;
+    width: 150px;
+    height: 117px;
+    border-radius: 4px;
+    line-height: 45px;
+    // background: rgba(252, 210, 63, 1);
+    transition: all 300ms;
+    z-index: 99;
 
-		p {
-			font-size: 12px;
-			line-height: 20px;
-			color: #888888;
-		}
-	}
+    &:hover {
+      .line-centerd {
+        color: #fcd23f;
+        background: url('https://static-image.1911edu.com/home_backtop44.png') no-repeat 16px 17px;
+        background-size: 18px 18px;
+      }
+    }
 
-	.telShow {
-		opacity: 0;
-		position: absolute;
-		top: 0;
-		right: -1000px;
-		height: 54px;
-		width: 205px;
-		line-height: 54px;
-		font-size: 14px;
-		border-radius: 4px;
-		color: #222;
-		text-align: center;
-		background-color: #fff;
-		box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
-		transition: opacity 300ms;
-	}
+    .line-wrap img {
+      width: 100%;
+    }
+  }
+
+  .showCode {
+    opacity: 0;
+    width: 170px;
+    height: 212px;
+    background-color: #fff;
+    border-radius: 4px;
+    position: absolute;
+    top: 0;
+    right: -1000px;
+    z-index: 5;
+    box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
+    transition: opacity 300ms;
+    text-align: center;
+
+    img {
+      display: inline-block;
+      margin: 20px 0 0;
+      width: 120px;
+      height: 120px;
+    }
+
+    h4 {
+      line-height: 20px;
+      font-size: 14px;
+      color: #050223;
+    }
+
+    p {
+      font-size: 12px;
+      line-height: 20px;
+      color: #888888;
+    }
+  }
+
+  .telShow {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    right: -1000px;
+    height: 54px;
+    width: 205px;
+    line-height: 54px;
+    font-size: 14px;
+    border-radius: 4px;
+    color: #222;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
+    transition: opacity 300ms;
+  }
 }
 
 .fade-enter-active,
 .fade-leave-active {
-	transition: opacity 300ms;
+  transition: opacity 300ms;
 }
 
 .fade-enter,
 .fade-leave-to {
-	opacity: 0;
+  opacity: 0;
 }
 
 .back-to-ceiling .Icon {
-	fill: #9aaabf;
-	background: none;
+  fill: #9aaabf;
+  background: none;
 }
 
 .ceilSrc {
-	width: 24px;
-	height: 24px;
-	margin: 13px;
+  width: 24px;
+  height: 24px;
+  margin: 13px;
 }
 
 .wxSrc {
-	width: 23px;
-	height: 19px;
-	margin: 16px 13px 13px 13px;
+  width: 23px;
+  height: 19px;
+  margin: 16px 13px 13px 13px;
 }
 
 .topSrc {
-	display: inline-block;
-	width: 20px;
-	height: 13px;
-	margin: 20px 15px 15px 15px;
+  display: inline-block;
+  width: 20px;
+  height: 13px;
+  margin: 20px 15px 15px 15px;
 }
 
 .line-wrap {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .line-centerd {
-	line-height: 50px;
-	color: #773084;
-	background: url('http://static-image.1911edu.com/home_backtop04.png') no-repeat 16px 17px;
-	background-size: 18px 18px;
-	transition: all 300ms;
+  line-height: 50px;
+  color: #773084;
+  background: url('https://static-image.1911edu.com/home_backtop04.png') no-repeat 16px 17px;
+  background-size: 18px 18px;
+  transition: all 300ms;
 
-	span {
-		padding-left: 35px;
-	}
+  span {
+    padding-left: 35px;
+  }
 }
 
 .line-center img {
-	width: 18px;
-	height: 18px;
-	padding: 0px;
-	margin: 0px 0px 0px 15px;
-	vertical-align: middle;
+  width: 18px;
+  height: 18px;
+  padding: 0px;
+  margin: 0px 0px 0px 15px;
+  vertical-align: middle;
 }
 
 .chatDialog {
-	.el-dialog {
-		height: 620px;
-		border-radius: 5px;
-		width: 960px;
-		margin-bottom: 0;
-	}
+  .el-dialog {
+    height: 620px;
+    border-radius: 5px;
+    width: 960px;
+    margin-bottom: 0;
+  }
 
-	.el-dialog__header {
-		height: 0;
-		padding: 0;
+  .el-dialog__header {
+    height: 0;
+    padding: 0;
 
-		.el-dialog__headerbtn {
-			top: -5px;
-			right: -32px;
+    .el-dialog__headerbtn {
+      top: -5px;
+      right: -32px;
 
-			.el-dialog__close {
-				color: #fff;
-				font-size: 30px;
-			}
-		}
-	}
+      .el-dialog__close {
+        color: #fff;
+        font-size: 30px;
+      }
+    }
+  }
 
-	.el-dialog__body {
-		padding: 0;
+  .el-dialog__body {
+    padding: 0;
 
-		iframe {
-			border: none;
+    iframe {
+      border: none;
 
-			.close___1JK_r {
-				margin-right: 60px;
-			}
-		}
-	}
+      .close___1JK_r {
+        margin-right: 60px;
+      }
+    }
+  }
 }

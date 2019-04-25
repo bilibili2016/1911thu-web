@@ -63,11 +63,11 @@ export default {
     "v-offlinedesc": OfflineDesc,
     "v-pay": Pay
   },
-  data() {
+  data () {
     return {
       showPayment: false,
       customerBanner:
-        "http://static-image.1911edu.com/customer-detail-banner.png",
+        "https://static-image.1911edu.com/customer-detail-banner.png",
       projectDetailLoad: true,
       inlineLoad: true,
       evaluateDataLoad: true,
@@ -111,14 +111,14 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setProductsNum", "setKid", "setNid", "setTid"]),
-    payment() {
+    payment () {
       this.showPayment = true;
     },
-    closePay() {
+    closePay () {
       this.showPayment = false;
     },
     // 获取项目详情
-    getProjectInfo() {
+    getProjectInfo () {
       projectdetail.getProjectInfo(this.project).then(res => {
         if (res.status == 0) {
           this.projectDetail = res.data.curriculumProjectDetail;
@@ -136,7 +136,7 @@ export default {
       });
     },
     // 获取项目评论
-    getEvaluateList() {
+    getEvaluateList () {
       this.evaluateForm.ids = matchSplits("kid");
       projectdetail.getEvaluateList(this.evaluateForm).then(res => {
         if (res.status == 0) {
@@ -148,7 +148,7 @@ export default {
       });
     },
     //评论分页
-    handleCurrentChange(val) {
+    handleCurrentChange (val) {
       this.pagemsg.page = val;
       this.evaluateForm.pages = val;
       this.evaluateForm.limits = 3;
@@ -162,7 +162,7 @@ export default {
       });
     }
   },
-  mounted() {
+  mounted () {
     this.project.projectId = matchSplits("kid");
     this.project.types = matchSplits("type");
     this.getProjectInfo();
@@ -175,10 +175,10 @@ export default {
       this.getProjectInfo();
     });
   },
-  updated() {
+  updated () {
     setTitle("项目详情-1911学堂");
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     next(vm => {
       vm.$bus.$emit("headerFooterShow");
     });

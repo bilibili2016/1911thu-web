@@ -30,7 +30,7 @@
 
       <div class="alertPop" v-show="isShowAlert">
         <i class="el-icon-close" @click="closeAlertPop"></i>
-        <img src="http://static-image.1911edu.com/alert.png" alt="">
+        <img src="https://static-image.1911edu.com/alert.png" alt="">
         <p>{{alertText}}</p>
         <el-button @click="closeAlertPop">知道了</el-button>
       </div>
@@ -42,7 +42,7 @@ import { matchSplits, setTitle, message } from "@/lib/util/helper";
 
 export default {
   props: ["vipPopShow", "vipInfo"],
-  data() {
+  data () {
     return {
       alertShow: false,
       isShowAlert: false,
@@ -56,15 +56,15 @@ export default {
   },
   methods: {
     //关闭购买弹窗
-    handlePopClick() {
+    handlePopClick () {
       this.$emit("changeVipShow", false);
     },
     //关闭超限弹窗
-    closeAlertPop() {
+    closeAlertPop () {
       this.isShowAlert = false;
     },
     //减
-    delNumber() {
+    delNumber () {
       if (this.vipData.number <= 1) {
         this.vipData.number = 1;
       } else {
@@ -72,7 +72,7 @@ export default {
       }
     },
     //加
-    addNumber() {
+    addNumber () {
       this.vipData.number++;
       if (this.vipData.number >= 999) {
         this.isShowAlert = true;
@@ -81,11 +81,11 @@ export default {
       }
     },
     // 购买人数输入框获取焦点记录当前数字
-    handleFocus() {
+    handleFocus () {
       this.lastNum = this.vipData.number;
     },
     // 购买人数输入框失去焦点
-    changeNumber() {
+    changeNumber () {
       let reg = /^[0-9]*$/;
       if (!reg.test(this.vipData.number)) {
         this.isShowAlert = true;
@@ -107,23 +107,23 @@ export default {
       }
     },
     //下一步
-    handleConfirm() {
+    handleConfirm () {
       this.$router.push(
         "/shop/affirmorder?id=" +
-          this.vipInfo.id +
-          "&type=2&pn=" +
-          this.vipData.number
+        this.vipInfo.id +
+        "&type=2&pn=" +
+        this.vipData.number
       );
     },
-    init() {
+    init () {
       this.vipData.id = matchSplits("id");
     }
   },
-  mounted() {
+  mounted () {
     this.init();
   },
   watch: {
-    $route(v, oldv) {
+    $route (v, oldv) {
       this.init();
     }
   }

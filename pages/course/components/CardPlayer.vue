@@ -37,7 +37,7 @@ export default {
     ...mapState("auth", ["closePay"]),
     ...mapGetters("auth", ["isAuthenticated"])
   },
-  data() {
+  data () {
     return {
       isTrySee: false,
       isTrySeeTime: 0,
@@ -50,8 +50,8 @@ export default {
         curriculumType: 1,
         seek: 0
       },
-      playImg: "http://static-image.1911edu.com/playImg.gif",
-      pauseImg: "http://static-image.1911edu.com/video.png",
+      playImg: "https://static-image.1911edu.com/playImg.gif",
+      pauseImg: "https://static-image.1911edu.com/video.png",
       playerPreviousForm: {
         curriculumId: "",
         catalogId: ""
@@ -98,8 +98,6 @@ export default {
       },
       players: "",
       player: "",
-      ceshiUrl: "http://ceshi.1911edu.com",
-      localUrl: "http://localhost:8080",
       seconds: 500000,
       nextCatalogId: "", //下一小节的播放id
       link: "",
@@ -122,20 +120,20 @@ export default {
   },
   methods: {
     ...mapMutations("auth", ["setClosePay"]),
-    gobuy() {
+    gobuy () {
       this.$bus.$emit("openPay", this.pay);
       this.player.pause();
       // this.$emit("gobuy");
     },
-    closeTip() {
+    closeTip () {
       this.isTrySee = false;
     },
     // 切换播放gif
-    changePlayImg(img, id) {
+    changePlayImg (img, id) {
       this.$emit("changePlayImg", img, id);
     },
     // 课程-获取默认 的课程id 以及小节id
-    getdefaultCurriculumCatalog() {
+    getdefaultCurriculumCatalog () {
       this.getdefaultForm.curriculumid = matchSplits("kid");
       coursedetail
         .getdefaultCurriculumCatalog(this.getdefaultForm)
@@ -166,7 +164,7 @@ export default {
         });
     },
     // 根据 课程id以及小节id 获取url
-    getdefaultPlayerUrl() {
+    getdefaultPlayerUrl () {
       // 判断socket 连接
       let that = this;
       // 新建socket 传地址
@@ -179,7 +177,7 @@ export default {
         that.socket.emit("userGroup", "ordinaryUser");
       });
       // 支付推送来消息时
-      this.socket.on("new_msg", function(msg) {
+      this.socket.on("new_msg", function (msg) {
         //支付成功
         if (msg.pay_status == "0") {
           that.$bus.$emit("payResult", true);
@@ -191,7 +189,7 @@ export default {
         }
       });
       // 断线重连
-      this.socket.on("reconnect", function(msg) {});
+      this.socket.on("reconnect", function (msg) { });
       // this.player = new Aliplayer(this.aliPlayer)
       players.getPlayerInfos(this.playerForm).then(res => {
         if (res.status === 0) {
@@ -249,19 +247,19 @@ export default {
       });
     },
     // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
-    playerLoad() {
+    playerLoad () {
       if (document.getElementsByClassName("prism-hide")[0]) {
         document.getElementsByClassName("prism-hide")[0].className =
           "prism-loading";
       }
     },
     // 重新获取播放参数、播放视频
-    rePlay() {
+    rePlay () {
       this.showError = false;
       this.getdefaultPlayerUrl();
     },
     // 视频准备好之后执行
-    readyPlay() {
+    readyPlay () {
       //防止页面发生跳转视频继续播放的情况
       if (this.beforeRoute != this.$route.path) {
         return false;
@@ -289,7 +287,7 @@ export default {
       this.keyboard();
     },
     // 播放开始--启动计时器
-    playerPlay() {
+    playerPlay () {
       this.playVideo = false;
       clearInterval(this.playLoading);
       let that = this;
@@ -335,7 +333,7 @@ export default {
       this.changePlayImg(this.playImg, this.playerForm.catalogId);
     },
     // 播放暂停暂停事件--停止icon跳动，socket停止记录播放时长
-    playerPause() {
+    playerPause () {
       let that = this;
       this.playVideo = true;
       this.player.pause();
@@ -344,7 +342,7 @@ export default {
       this.socket.emit("watchRecordingTime_disconnect");
     },
     // 视频播放完成之后--未购买：弹出快捷支付框，已购买：播放下一小节
-    playerEnded() {
+    playerEnded () {
       this.playVideo = true;
       this.changePlayImg(this.pauseImg, this.playerForm.catalogId);
       // 播放结束过滤 --避免播放结束后的指数次回调
@@ -364,12 +362,12 @@ export default {
       }
     },
     // 播放器报错
-    playerError(error) {
+    playerError (error) {
       this.showError = true;
       this.errorMsg = error.paramData.display_msg;
     },
     // 试看的课程方法
-    preview(freeTime, currentTime) {
+    preview (freeTime, currentTime) {
       /**
        * 1、试看时长_freeTime
        * 2、当前播放时长_currentTime
@@ -383,7 +381,7 @@ export default {
       }
     },
     // 切换上一小节按钮
-    previousVideo() {
+    previousVideo () {
       if (this.playerPreviousForm.curriculumId !== "") {
         this.playerForm.curriculumId = this.playerPreviousForm.curriculumId;
         this.playerForm.catalogId = this.playerPreviousForm.catalogId;
@@ -394,7 +392,7 @@ export default {
       }
     },
     // 切换下一小节按钮
-    nextVideo() {
+    nextVideo () {
       if (this.playerNextForm.curriculumId !== "") {
         this.playerForm.curriculumId = this.playerNextForm.curriculumId;
         this.playerForm.catalogId = this.playerNextForm.catalogId;
@@ -405,7 +403,7 @@ export default {
       }
     },
     //播放器播放之后 单机击播放器 进行播放或暂停
-    playMedia(item) {
+    playMedia (item) {
       clearTimeout(this.clickTime);
       this.clickTime = setTimeout(() => {
         // 如果点击的当前这个标签是 mediaPlayer 才执行
@@ -453,7 +451,7 @@ export default {
       }, 300);
     },
     // 双击视频 全屏
-    dblclick(item) {
+    dblclick (item) {
       clearTimeout(this.clickTime);
       // 检测播放器是否存在
       if (this.player && item.path[1].id == "mediaPlayer") {
@@ -474,7 +472,7 @@ export default {
       }
     },
     //  播放器进入全屏事件
-    fullScreenTrue() {
+    fullScreenTrue () {
       document.getElementsByClassName(
         "prism-big-play-btn"
       )[0].style.visibility = "visible";
@@ -482,7 +480,7 @@ export default {
       this.fullScreen = true;
     },
     //  播放器退出全屏事件
-    exitFullScreen() {
+    exitFullScreen () {
       document.getElementsByClassName(
         "prism-big-play-btn"
       )[0].style.visibility = "hidden";
@@ -490,9 +488,9 @@ export default {
       exitScreen();
     },
     // 增加空格，上下左右键盘操作视频
-    keyboard() {
+    keyboard () {
       let man = this;
-      window.onkeydown = function(e) {
+      window.onkeydown = function (e) {
         // 空格 播放暂停
         if (e.keyCode == 32 && man.player.fullscreenService.getIsFullScreen()) {
           if (man.player) {
@@ -518,29 +516,29 @@ export default {
       };
     },
     // 快退
-    speedRetreat() {
+    speedRetreat () {
       this.player.seek(this.player.getCurrentTime() * 1 - 5);
     },
     // 快进
-    speedAdvance() {
+    speedAdvance () {
       if (this.player.getDuration() - this.player.getCurrentTime() > 5) {
         this.player.seek(this.player.getCurrentTime() * 1 + 5);
       }
     },
     // 音量增加
-    volumeUp() {
+    volumeUp () {
       let volum = this.player.getVolume();
       volum = volum > 0.9 ? 1 : volum + 0.1;
       this.player.setVolume(volum);
     },
     // 音量减小
-    volumeDown() {
+    volumeDown () {
       let volum = this.player.getVolume();
       volum = volum < 0.1 ? 0 : volum - 0.1;
       this.player.setVolume(volum);
     },
     // 关闭支付
-    closePayed() {
+    closePayed () {
       this.index = 0;
       this.player.seek(0);
       this.aliPlayer.autoplay = false;
@@ -549,7 +547,7 @@ export default {
       this.setClosePay({ closePay: false });
     },
     // 改 原播放按钮
-    action() {
+    action () {
       if (!this.player) return;
       if (
         this.player.getStatus() == "pause" ||
@@ -566,7 +564,7 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     this.$bus.$on("updateCourse", data => {
       this.playerForm = data;
       this.aliPlayer.autoplay = data.autoplay;
@@ -584,14 +582,14 @@ export default {
     }
   },
   watch: {
-    closePay(val) {
+    closePay (val) {
       if (val) {
         this.closePayed();
       }
     }
   },
 
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     next(vm => {
       if (vm.player) {
         vm.player.pause();
@@ -599,7 +597,7 @@ export default {
       }
     });
   },
-  beforeRouteLeave(to, from, next) {
+  beforeRouteLeave (to, from, next) {
     if (this.player) {
       this.player.pause();
       clearInterval(that.interval);

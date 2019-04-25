@@ -11,7 +11,7 @@
       <div class="con-one ">
         <div class="clearfix">
           <div class="left">
-            <img src="http://static-image.1911edu.com/teacher-icon1.png" alt="" class="oneImg">
+            <img src="https://static-image.1911edu.com/teacher-icon1.png" alt="" class="oneImg">
           </div>
           <div class="right">
             <p>
@@ -29,15 +29,15 @@
         <h4>1911学堂名师智库遴选专家名师有三条标准</h4>
         <div class="standard clearfix">
           <span class="item one">
-            <img src="http://static-image.1911edu.com/teacher-icon3.png" alt="">
+            <img src="https://static-image.1911edu.com/teacher-icon3.png" alt="">
             研究内容权威前沿
           </span>
           <span class="item two">
-            <img src="http://static-image.1911edu.com/teacher-icon4.png" alt="">
+            <img src="https://static-image.1911edu.com/teacher-icon4.png" alt="">
             授课方式通俗易懂
           </span>
           <span class="item three">
-            <img src="http://static-image.1911edu.com/teacher-icon5.png" alt="">
+            <img src="https://static-image.1911edu.com/teacher-icon5.png" alt="">
             理论知识结合实践
           </span>
         </div>
@@ -46,7 +46,7 @@
         <p>
           除此之外，1911学堂与清华大学相关部门及专家教授成立横向课题，为每个在线学院建立专家组，共同开展学术课题与课程研发及认证合作。在线学院专家组由专家组组长及30余位相关领域专家共同组成，相关单位可以预约专家定制个性化学习方案。学院专家组对在线学院的课程体系、授课师资、培养目标、技术平台、学习模式、测评体系、考试系统等进行充分论证与整体评估，并出具课程认证与鉴定意见。
         </p>
-        <img src="http://static-image.1911edu.com/teacher-icon2.png" alt="">
+        <img src="https://static-image.1911edu.com/teacher-icon2.png" alt="">
       </div>
     </div>
   </div>

@@ -13,7 +13,7 @@
     position: fixed;
     left: 50%;
     top: 50%;
-    margin-top: -340px;
+    margin-top: -302px;
     margin-left: -335px;
     background-color: #fff;
     border-radius: 10px;
@@ -35,6 +35,7 @@
       line-height: 24px;
       text-align: center;
       padding: 10px 0;
+      margin-bottom: 20px;
     }
 
     i.el-icon-close {
@@ -47,26 +48,19 @@
       z-index: 3;
     }
 
-    h4 {
-      text-align: center;
-      line-height: 46px;
-      color: #FF5F5F;
-      font-size: 14px;
-    }
-
     .con-item {
       width: 550px;
       height: 35px;
       line-height: 35px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
 
       .fl {
-        width: 120px;
+        width: 130px;
         text-align: right;
       }
 
       .fr {
-        width: 430px;
+        width: 400px;
 
         .tel {
           width: 320px;
@@ -99,105 +93,20 @@
           }
         }
 
-        &.selectFr {
-          width: 320px;
-          position: relative;
-          margin-right: 110px;
+        .el-input {
+          height: 35px;
+          line-height: 35px;
 
-          .el-input {
-            width: 320px;
-            height: 40px;
-            line-height: 40px;
-            cursor: pointer;
-
-            .el-input__inner {
-              padding-right: 40px;
-            }
+          .el-input__inner {
+            height: 35px;
+            line-height: 35px;
           }
+        }
 
-          .pull-down-text {
-            position: absolute;
-            top: 41px;
-            left: 0;
-            width: 320px;
-            max-height: 163px;
-            overflow-x: hidden;
-            overflow-y: scroll;
-            border: 1px solid #ddd;
-            margin-top: 1px;
-            color: #222;
-            transition: all 400ms ease;
-            background-color: #fff;
-            z-index: 20;
-
-            .search {
-              position: relative;
-              background-color: #ededed;
-
-              input {
-                width: 100%;
-                height: 40px;
-                line-height: 40px;
-                font-size: 14px;
-                border: none !important;
-                background-color: #ededed;
-                padding-left: 10px;
-              }
-
-              .el-icon-search {
-                position: absolute;
-                top: 12px;
-                right: 12px;
-              }
-            }
-
-            ul {
-              width: 100%;
-              cursor: pointer;
-              border-top: 1px solid #ddd;
-
-              li {
-                width: 100%;
-                height: 40px;
-                font-size: 14px;
-                padding-left: 10px;
-                line-height: 40px;
-                border-bottom: 1px solid #ddd;
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                cursor: pointer;
-
-                &:hover {
-                  background-color: #ededed;
-                }
-              }
-            }
-
-            p {
-              width: 100%;
-              height: 40px;
-              line-height: 40px;
-              padding-left: 10px;
-              font-size: 14px;
-              color: #222;
-              text-align: left;
-            }
-          }
-
-          .pull-down {
-            position: absolute;
-            top: 1px;
-            right: 1px;
-            width: 38px;
-            height: 38px;
-            border-left: 1px solid #dddddd;
-            background-color: #ededed;
-
-            .el-icon-caret-bottom {
-              margin: 12px;
-            }
-          }
+        .el-select {
+          height: 35px;
+          line-height: 35px;
+          width: 400px;
         }
       }
     }
@@ -233,6 +142,12 @@
         font-size: 14px;
         font-weight: 500;
         cursor: pointer;
+      }
+
+      span.cost {
+        color: #FF5F5F;
+        font-size: 14px;
+        float: right;
       }
     }
 

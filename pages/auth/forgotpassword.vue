@@ -3,7 +3,7 @@
   <div class="start forgot">
     <div class="lrFrame">
       <div class="logo" @click="goHome">
-        <img src="http://static-image.1911edu.com/1911-logo-bigA.png" alt="">
+        <img src="https://static-image.1911edu.com/1911-logo-bigA.png" alt="">
       </div>
       <div class="pwd">
         <span>忘记密码</span>

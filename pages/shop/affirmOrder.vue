@@ -28,7 +28,7 @@
     <div class="alertMask" v-show="isShowAlert">
       <div class="alertPop">
         <i class="el-icon-close" @click="handlePopClick"></i>
-        <img src="http://static-image.1911edu.com/alert.png" alt="">
+        <img src="https://static-image.1911edu.com/alert.png" alt="">
         <p>{{alertText}}</p>
         <el-button @click="handleConfirmClick">知道了</el-button>
       </div>
@@ -67,7 +67,7 @@ export default {
     "v-nodata": NoData,
     "v-backshopcart": backShopCart
   },
-  data() {
+  data () {
     return {
       isShowAlert: false,
       alertText: "",
@@ -106,7 +106,7 @@ export default {
       pageType: {
         page: "affirmOrder",
         text: `您没有正在进行的订单,5s后将会跳转到首页！`,
-        imgUrl: "http://static-image.1911edu.com/noMsg.png"
+        imgUrl: "https://static-image.1911edu.com/noMsg.png"
       },
       showReportBug: false,
       problem: {
@@ -138,7 +138,7 @@ export default {
   },
   watch: {
     // 保留例子
-    "ticketForm.province"(val, oldval) {
+    "ticketForm.province" (val, oldval) {
       if (!this.province && this.province.length == 0) {
         this.getRegionList();
       }
@@ -147,11 +147,11 @@ export default {
   },
 
   methods: {
-    handlePopClick() {
+    handlePopClick () {
       this.isShowAlert = false;
     },
     //返回到上一页
-    handleConfirmClick() {
+    handleConfirmClick () {
       if (this.customId != -1) {
         if (this.orderType == 2) {
           this.$router.go(-1);
@@ -166,10 +166,10 @@ export default {
       }
     },
     // 报告问题
-    handleReport() {
+    handleReport () {
       this.showReportBug = true;
     },
-    closeReport() {
+    closeReport () {
       this.showReportBug = false;
       this.problem.content = "";
     },
@@ -195,11 +195,11 @@ export default {
     //   })
     // },
     // 返回购物车
-    handleLinkShopCart() {
+    handleLinkShopCart () {
       this.$router.push("/shop/shoppingcart");
     },
     // 点击提交订单
-    handleSubmitOrder(price) {
+    handleSubmitOrder (price) {
       affirmOrder.commitOrder().then(res => {
         if (res.status === 0) {
           this.$router.push("/shop/wepay?order=" + res.data.id + "&type=1");
@@ -213,7 +213,7 @@ export default {
       });
     },
     // 项目 提交订单->到支付页面
-    handleGetCode() {
+    handleGetCode () {
       this.payForm.ids = this.customId;
       this.payForm.type = 2;
       if (window.location.search.indexOf("pn") >= 0) {
@@ -224,7 +224,7 @@ export default {
       });
     },
     // vip提交订单
-    handleVipConfirm() {
+    handleVipConfirm () {
       this.vipForm.vipId = this.customId;
       this.vipForm.number = matchSplits("pn");
 
@@ -233,7 +233,7 @@ export default {
       });
     },
     //获取商 品信息 列表
-    handleGoodsList() {
+    handleGoodsList () {
       this.loadGoods = true;
       affirmOrder.goodsList(this.addArray).then(res => {
         if (res.status === 0) {
@@ -254,7 +254,7 @@ export default {
             }
             this.pageType.text = `您没有正在进行的订单,${
               this.noMsg.backSeconds
-            }s后将会跳转到首页！`;
+              }s后将会跳转到首页！`;
             this.noMsg.backSeconds--;
           }, 1000);
           this.isNoMsg = true;
@@ -262,7 +262,7 @@ export default {
       });
     },
     // 项目确认订单
-    handleCustomProject(val) {
+    handleCustomProject (val) {
       this.affirmOrder.type = "customOrder";
       this.loadGoods = true;
       this.curriculumForm.curriculumProjectId = val;
@@ -281,7 +281,7 @@ export default {
       });
     },
     //vip确认订单
-    handleVip(val) {
+    handleVip (val) {
       this.affirmOrder.type = "vip";
       this.vipForm.vipID = val;
       this.loadGoods = true;
@@ -299,7 +299,7 @@ export default {
       });
     },
     // 提交订单
-    handleSubmit(price) {
+    handleSubmit (price) {
       if (price > 10000000) {
         this.isShowAlert = true;
         this.alertText =
@@ -321,11 +321,11 @@ export default {
       }
     }
   },
-  beforeRouteLeave(to, from, next) {
+  beforeRouteLeave (to, from, next) {
     clearInterval(this.timer);
     next();
   },
-  mounted() {
+  mounted () {
     this.customId = matchSplits("id");
     if (this.customId == -1) {
       this.handleGoodsList();
@@ -340,7 +340,7 @@ export default {
       }
     }
   },
-  updated() {
+  updated () {
     setTitle("确认订单-1911学堂");
   }
 };

@@ -1,640 +1,747 @@
 .projectPlayer {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: auto;
+  color: #c0bacc;
+  background-color: #202026;
+  overflow: hidden;
+
+  .mediaL {
+    // width: 940px;
+    width: 78%;
+    height: 100%;
+    transition: all 300ms;
+    overflow: hidden;
+
+    .playTop,
+    .playBottom {
+      width: 100%;
+      height: 50px;
+      line-height: 50px;
+      background-color: #202026;
+    }
+
+    .playTop {
+      font-size: 18px;
+      overflow: hidden;
+
+      span {
+        cursor: pointer;
+
+        i {
+          margin: 0 10px 0 20px;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .playBottom {
+      font-size: 16px;
+
+      span.fl,
+      span.fr {
+        margin-left: 30px;
+        cursor: pointer;
+      }
+
+      span.usePhone,
+      span.problem {
+        padding-left: 30px;
+      }
+
+      span.fr {
+        i {
+          margin-right: 3px;
+          font-size: 20px;
+        }
+
+        &:hover {
+          transition: all 300ms;
+          color: #5f068d;
+        }
+      }
+
+      span.collection {
+        // margin-right: 30px;
+        padding-left: 0 !important;
+        cursor: pointer;
+      }
+
+      span.elt {
+        margin-right: 30px;
+        margin-left: 0;
+        transition: all 300ms;
+
+        &:hover {
+          color: #5f068d;
+        }
+      }
+
+      .projectCollect {
+        display: inline-block;
+        height: 50px;
+        line-height: 50px;
+
+        .collectSpan {
+          height: 50px;
+          line-height: 50px;
+          cursor: pointer;
+          transition: all 300ms;
+          vertical-align: top;
+          font-size: 16px;
+          color: #c0bacc;
+
+          &:hover {
+            color: #5f068d;
+          }
+        }
+      }
+
+      .share {
+        margin-right: 15px;
+        position: relative;
+
+        .shareIcons {
+          display: none;
+          width: 165px;
+          height: 31px;
+          position: absolute;
+          top: -30px;
+          right: 0;
+
+          img {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin-right: 15px;
+
+            &:last-child {
+              margin: 0;
+            }
+          }
+        }
+
+        &:hover .shareIcons {
+          display: block;
+        }
+      }
+
+      .usePhone {
+        position: relative;
+        background: url('~assets/images/usePhone1.png') no-repeat 10px 15px;
+        background-size: 14px 20px;
+
+        &:hover {
+          transition: background 300ms;
+          transition: color 300ms;
+          background: url('~assets/images/usePhone2.png') no-repeat 10px 15px;
+          background-size: 14px 20px;
+          color: #5f068d;
+
+          .ewCode {
+            width: 150px;
+            height: 150px;
+            transition: opacity 300ms; // display: block;
+            opacity: 1;
+            z-index: 1;
+          }
+        }
+
+        .ewCode {
+          opacity: 0;
+          width: 0;
+          height: 0;
+          border-radius: 10px;
+          padding: 20px;
+          background-color: #fff;
+          position: absolute;
+          top: -159px;
+          left: -21px; // display: none;
+          z-index: -1;
+
+          img {
+            width: 110px;
+            height: 110px;
+          }
+
+          i {
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            transform: rotate(45deg);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            margin-left: -10px;
+          }
+        }
+      }
+
+      .problem {
+        background: url('~assets/images/problem1.png') no-repeat 2px 17px;
+        background-size: 22px 18px;
+
+        &:hover {
+          transition: background 300ms;
+          transition: color 300ms;
+          background: url('~assets/images/problem2.png') no-repeat 2px 17px;
+          background-size: 22px 18px;
+          color: #5f068d;
+        }
+      }
+    }
+
+    .playInner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background-color: #000;
+
+      .isTrySee {
+        height: 24px;
+        line-height: 24px;
+        text-align: center;
+        border-radius: 12px;
+        font-size: 13px;
+        color: #fff;
+        background-color: #333333;
+        position: absolute;
+        left: 10px;
+        bottom: 62px;
+        padding: 0 25px 0 15px;
+
+        span {
+          color: #ff7c33;
+
+          &.gobuy {
+            cursor: pointer;
+          }
+        }
+
+        i.el-icon-error {
+          position: absolute;
+          right: 9px;
+          top: 5px;
+          cursor: pointer;
+        }
+      }
+
+      .playVideo {
+        background: url('https://static-image.1911edu.com/bigplay.png') no-repeat;
+        background-size: contain;
+        width: 64px;
+        height: 64px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -32px;
+        margin-top: -32px;
+        z-index: 1000;
+      }
+
+      .prism-big-play-btn {
+        visibility: hidden;
+        left: 50% !important;
+        top: 50%;
+        margin-left: -32px;
+        margin-top: -32px;
+      }
+
+      .prism-player {
+        .prism-volume-control {
+          left: auto !important;
+          right: 125px;
+        }
+
+        .prism-fullscreen-btn {
+          margin-top: 15px !important;
+          width: 24px;
+          height: 24px;
+        }
+
+        .prism-thumbnail {
+          border: none;
+        }
+
+        .prism-play-btn {
+          width: 28px;
+          height: 28px;
+        }
+
+        // 隐藏阿里自带报错信息
+        .prism-ErrorMessage {
+          display: none !important;
+        }
+      }
+
+      .player-olympic-player-next {
+        width: 24px;
+        height: 28px;
+      }
+
+      .prism-volume {
+        margin-top: 14px !important;
+        margin-right: 12px !important;
+      }
+
+      .prism-player .prism-volume .volume-icon {
+        width: 27px;
+        height: 26px;
+        background-repeat: no-repeat;
+      }
+
+      .prism-player .prism-volume .volume-icon .short-horizontal {
+        width: 2px;
+        height: 7px;
+      }
+
+      .prism-player .prism-volume .volume-icon .long-horizontal {
+        width: 2px;
+        height: 13px;
+      }
+
+      .prism-player .prism-volume .volume-icon.mute .short-horizontal {
+        height: 13px;
+        top: 7px;
+      }
+
+      .prism-player .prism-volume .volume-icon.mute .long-horizontal {
+        top: 7px;
+        height: 13px;
+      }
+
+      .prism-player .prism-setting-btn {
+        width: 20px;
+        height: 22px;
+        margin-top: 15px !important;
+        margin-right: 16px !important;
+      }
+
+      .prism-time-display {
+        margin-top: 4px !important;
+        margin-left: 20px !important;
+      }
+
+      .prism-player .prism-cc-btn {
+        display: none;
+        height: 24px;
+        width: 20px;
+        margin-top: 14px !important;
+        margin-right: 22px !important;
+      }
+
+      // 隐藏设置中的字母和音轨功能
+      .prism-player .prism-setting-list .prism-setting-cc,
+      .prism-player .prism-setting-list .prism-setting-audio {
+        display: none;
+      }
+
+      // 隐藏字幕功能
+      .prism-player .prism-cc-btn {
+        display: none;
+        height: 24px;
+        width: 20px;
+        margin-top: 14px !important;
+        margin-right: 22px !important;
+      }
+
+      .error .errorMsg {
+        width: 56%;
+        margin-left: -28%;
+      }
+    }
+  }
+
+  .mediaR {
+    position: relative; // width: 340px;
+    width: 22%;
+    height: 100%;
+    background-color: #202026;
+    transition: all 300ms;
+    overflow: hidden;
+
+    /*改写滚动条*/
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 4px;
+      border-radius: 8px;
+      background-color: #231c69;
+    }
+
+    /*定义滚动条轨道 内阴影+圆角*/
+    ::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      background: #231c69;
+    }
+
+    /*定义滑块 内阴影+圆角*/
+    ::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: #773084;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      border-radius: 5px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: #5f068d;
+    }
+
+    .inner {
+      height: 100%; // border-left: 2px solid #151141;
+      padding: 0;
+      margin-top: 50px;
+      overflow-y: auto;
+    }
+
+    .title {
+      height: 56px;
+      min-height: 36px;
+      line-height: 28px;
+      font-size: 18px;
+      margin: 20px 16px 0;
+      border-bottom: 1px solid #383840;
+    }
+
+    .teacher {
+      padding: 20px 0px 20px 20px; // border-bottom: 2px solid #151141;
+      background-color: #18181f;
+      cursor: pointer;
+
+      .playername {
+        width: 170px;
+
+        div {
+          font-size: 14px;
+          color: #c0bacc; // margin-top: 10px;
+          line-height: 30px;
+        }
+      }
+
+      img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        margin-right: 15px; // margin-top: 10px;
+      }
+
+      p {
+        width: 120px;
+        height: 30px;
+        line-height: 35px;
+        font-size: 14px;
+
+        &:nth-child(2) {
+          line-height: 42px;
+          font-size: 18px;
+        }
+      }
+
+      .shopcart {
+        img {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+
+    .courseList {
+      // height: 75.5%;
+      // overflow-x: auto;
+      // padding-top: 20px;
+      overflow: auto;
+
+      h4 {
+        line-height: 40px;
+        font-size: 16px;
+        padding: 0 16px;
+      }
+
+      .chapter {
+        margin-top: 10px;
+        overflow: hidden;
+      }
+
+      .knobble {
+        position: relative;
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 16px;
+        cursor: pointer;
+        overflow: hidden;
+        transition: background 300ms;
+
+        &:hover {
+          background: #18181f;
+        }
+
+        &.cli {
+          background: #18181f;
+        }
+
+        span.playIcon {
+          width: 24px;
+          height: 24px;
+          line-height: 28px;
+          margin-top: 8px;
+          border-radius: 50%;
+          background-color: #732eaf;
+
+          i {
+            font-size: 20px;
+            border-radius: 50%;
+            margin-left: 2px;
+            background-color: #732eaf;
+            color: #fff;
+          }
+        }
+
+        span.playImg {
+          width: 24px;
+          height: 40px;
+          line-height: 40px;
+          text-align: center;
+
+          img {
+            width: 18px;
+            height: 18px;
+            margin-top: 11px;
+          }
+        }
+
+        span.barName {
+          margin: 0 0 0 10px;
+          width: 82%;
+          height: 40px;
+          font-size: 14px;
+          color: #a0a0a5;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .barNameHover {
+          display: none; // width: 100%;
+          // height: 46px;
+          line-height: 20px;
+          position: absolute;
+          left: 48px;
+          bottom: 46px;
+          background-color: #fff;
+          padding-left: 10px;
+          color: #000;
+        }
+
+        &:hover {
+          .barNameHover {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .fold {
+      width: 28px;
+      height: 60px;
+      line-height: 60px;
+      text-align: center; // background: #e9daf5;
+      background: rgba(143, 74, 203, 0.2);
+      position: absolute;
+      left: -28px;
+      top: 330px;
+      font-size: 30px;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      color: #773084;
+      cursor: pointer;
+
+      &:hover {
+        background: #5f068d; // background: rgba(233, 208, 255, 0.7);
+        color: #fff;
+        transition: background 300ms;
+        transition: color 300ms;
+      }
+    }
+  }
+
+  .evaluate {
     width: 100%;
     height: 100%;
     position: fixed;
-    top: 0;
-    bottom: 0;
     left: 0;
-    right: 0;
-    height: auto;
-    color: #c0bacc;
-    background-color: #202026;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.7);
     overflow: hidden;
-    .mediaL {
-        // width: 940px;
-        width: 78%;
-        height: 100%;
-        transition: all 300ms;
-        overflow: hidden;
-        .playTop,
-        .playBottom {
-            width: 100%;
-            height: 50px;
-            line-height: 50px;
-            background-color: #202026;
+    z-index: 1001;
+
+    .note {
+      position: absolute;
+      top: 100px;
+      left: 50%;
+      margin-left: -180px;
+      width: 340px;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 0 25px;
+
+      h4 {
+        line-height: 62px;
+        color: #222;
+        font-size: 16px;
+
+        i {
+          font-size: 30px;
+          margin-top: 15px;
+          color: #773084;
         }
-        .playTop {
-            font-size: 18px;
-            overflow: hidden;
-            span {
-                cursor: pointer;
-                i {
-                    margin: 0 10px 0 20px;
-                    cursor: pointer;
-                }
-            }
+      }
+
+      h5 {
+        height: 32px;
+        font-size: 14px;
+        color: #222;
+      }
+
+      h6 {
+        height: 32px;
+        font-size: 14px;
+        color: #222;
+
+        .el-rate {
+          display: inline-block;
+          vertical-align: middle;
         }
-        .playBottom {
-            font-size: 16px;
-            span.fl,
-            span.fr {
-                margin-left: 30px;
-                cursor: pointer;
-            }
-            span.usePhone,
-            span.problem {
-                padding-left: 30px;
-            }
-            span.fr {
-                i {
-                    margin-right: 3px;
-                    font-size: 20px;
-                }
-                &:hover {
-                    transition: all 300ms;
-                    color: #5f068d;
-                }
-            }
-            span.collection {
-                // margin-right: 30px;
-                padding-left: 0 !important;
-                cursor: pointer;
-            }
-            span.elt {
-                margin-right: 30px;
-                margin-left: 0;
-                transition: all 300ms;
-                &:hover {
-                    color: #5f068d;
-                }
-            }
-            .projectCollect {
-                display: inline-block;
-                height: 50px;
-                line-height: 50px;
-                .collectSpan {
-                    height: 50px;
-                    line-height: 50px;
-                    cursor: pointer;
-                    transition: all 300ms;
-                    vertical-align: top;
-                    font-size: 16px;
-                    color: #c0bacc;
-                    &:hover {
-                        color: #5f068d;
-                    }
-                }
-            }
-            .share {
-                margin-right: 15px;
-                position: relative;
-                .shareIcons {
-                    display: none;
-                    width: 165px;
-                    height: 31px;
-                    position: absolute;
-                    top: -30px;
-                    right: 0;
-                    img {
-                        display: inline-block;
-                        width: 30px;
-                        height: 30px;
-                        margin-right: 15px;
-                        &:last-child {
-                            margin: 0;
-                        }
-                    }
-                }
-                &:hover .shareIcons {
-                    display: block;
-                }
-            }
-            .usePhone {
-                position: relative;
-                background: url('~assets/images/usePhone1.png') no-repeat 10px 15px;
-                background-size: 14px 20px;
-                &:hover {
-                    transition: background 300ms;
-                    transition: color 300ms;
-                    background: url('~assets/images/usePhone2.png') no-repeat 10px 15px;
-                    background-size: 14px 20px;
-                    color: #5f068d;
-                    .ewCode {
-                        width: 150px;
-                        height: 150px;
-                        transition: opacity 300ms; // display: block;
-                        opacity: 1;
-                        z-index: 1;
-                    }
-                }
-                .ewCode {
-                    opacity: 0;
-                    width: 0;
-                    height: 0;
-                    border-radius: 10px;
-                    padding: 20px;
-                    background-color: #fff;
-                    position: absolute;
-                    top: -159px;
-                    left: -21px; // display: none;
-                    z-index: -1;
-                    img {
-                        width: 110px;
-                        height: 110px;
-                    }
-                    i {
-                        width: 20px;
-                        height: 20px;
-                        background-color: #fff;
-                        transform: rotate(45deg);
-                        position: absolute;
-                        bottom: -10px;
-                        left: 50%;
-                        margin-left: -10px;
-                    }
-                }
-            }
-            .problem {
-                background: url('~assets/images/problem1.png') no-repeat 2px 17px;
-                background-size: 22px 18px;
-                &:hover {
-                    transition: background 300ms;
-                    transition: color 300ms;
-                    background: url('~assets/images/problem2.png') no-repeat 2px 17px;
-                    background-size: 22px 18px;
-                    color: #5f068d;
-                }
-            }
+      }
+
+      .btnList {
+        .el-radio {
+          width: 74px;
+          height: 26px;
+          line-height: 26px;
+          padding: 0;
+          font-weight: 400;
+          border-radius: 4px;
+          margin: 0 7px 10px 0;
+          transition: all 300ms;
+
+          &:hover {
+            color: #5f068d;
+            border: 1px solid #5f068d;
+          }
+
+          &.is-bordered.is-checked {
+            border-color: #5f068d;
+          }
+
+          .el-radio__input.is-checked+.el-radio__label {
+            color: #5f068d;
+          }
+
+          .el-radio__input {
+            display: none;
+          }
         }
-        .playInner {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            background-color: #000;
-            .isTrySee {
-                height: 24px;
-                line-height: 24px;
-                text-align: center;
-                border-radius: 12px;
-                font-size: 13px;
-                color: #fff;
-                background-color: #333333;
-                position: absolute;
-                left: 10px;
-                bottom: 62px;
-                padding: 0 25px 0 15px;
-                span {
-                    color: #ff7c33;
-                    &.gobuy {
-                        cursor: pointer;
-                    }
-                }
-                i.el-icon-error {
-                    position: absolute;
-                    right: 9px;
-                    top: 5px;
-                    cursor: pointer;
-                }
-            }
-            .playVideo {
-                background: url('http://static-image.1911edu.com/bigplay.png') no-repeat;
-                background-size: contain;
-                width: 64px;
-                height: 64px;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                margin-left: -32px;
-                margin-top: -32px;
-                z-index: 1000;
-            }
-            .prism-big-play-btn {
-                visibility: hidden;
-                left: 50% !important;
-                top: 50%;
-                margin-left: -32px;
-                margin-top: -32px;
-            }
-            .prism-player {
-                .prism-volume-control {
-                    left: auto !important;
-                    right: 125px;
-                }
-                .prism-fullscreen-btn {
-                    margin-top: 15px !important;
-                    width: 24px;
-                    height: 24px;
-                }
-                .prism-thumbnail {
-                    border: none;
-                }
-                .prism-play-btn {
-                    width: 28px;
-                    height: 28px;
-                }
-                // 隐藏阿里自带报错信息
-                .prism-ErrorMessage {
-                    display: none !important;
-                }
-            }
-            .player-olympic-player-next {
-                width: 24px;
-                height: 28px;
-            }
-            .prism-volume {
-                margin-top: 14px !important;
-                margin-right: 12px !important;
-            }
-            .prism-player .prism-volume .volume-icon {
-                width: 27px;
-                height: 26px;
-                background-repeat: no-repeat;
-            }
-            .prism-player .prism-volume .volume-icon .short-horizontal {
-                width: 2px;
-                height: 7px;
-            }
-            .prism-player .prism-volume .volume-icon .long-horizontal {
-                width: 2px;
-                height: 13px;
-            }
-            .prism-player .prism-volume .volume-icon.mute .short-horizontal {
-                height: 13px;
-                top: 7px;
-            }
-            .prism-player .prism-volume .volume-icon.mute .long-horizontal {
-                top: 7px;
-                height: 13px;
-            }
-            .prism-player .prism-setting-btn {
-                width: 20px;
-                height: 22px;
-                margin-top: 15px !important;
-                margin-right: 16px !important;
-            }
-            .prism-time-display {
-                margin-top: 4px !important;
-                margin-left: 20px !important;
-            }
-            .prism-player .prism-cc-btn {
-                display: none;
-                height: 24px;
-                width: 20px;
-                margin-top: 14px !important;
-                margin-right: 22px !important;
-            }
-            // 隐藏设置中的字母和音轨功能
-            .prism-player .prism-setting-list .prism-setting-cc,
-            .prism-player .prism-setting-list .prism-setting-audio {
-                display: none;
-            }
-            // 隐藏字幕功能
-            .prism-player .prism-cc-btn {
-                display: none;
-                height: 24px;
-                width: 20px;
-                margin-top: 14px !important;
-                margin-right: 22px !important;
-            }
-            .error .errorMsg {
-                width: 56%;
-                margin-left: -28%;
-            }
+      }
+
+      .el-textarea {
+        margin-top: 10px;
+
+        .el-textarea__inner {
+          border: 1px solid #bbbbbb;
+          border-radius: 4px;
         }
+      }
+
+      .commitBug {
+        margin: 30px 0;
+        text-align: center;
+
+        .el-button.el-button--default.is-round {
+          width: 160px;
+          height: 40px;
+          background: #773084;
+          color: #fff;
+          border: none;
+          transition: background 300ms;
+
+          &:hover {
+            background: #5f068d;
+          }
+        }
+      }
     }
-    .mediaR {
-        position: relative; // width: 340px;
-        width: 22%;
-        height: 100%;
-        background-color: #202026;
-        transition: all 300ms;
-        overflow: hidden;
-        /*改写滚动条*/
-         ::-webkit-scrollbar {
-            width: 10px;
-            height: 4px;
-            border-radius: 8px;
-            background-color: #231c69;
-        }
-        /*定义滚动条轨道 内阴影+圆角*/
-         ::-webkit-scrollbar-track {
-            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
-            background: #231c69;
-        }
-        /*定义滑块 内阴影+圆角*/
-         ::-webkit-scrollbar-thumb {
-            border-radius: 5px;
-            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-            background-color: #773084;
-        }
-         ::-webkit-scrollbar-thumb:hover {
-            border-radius: 5px;
-            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-            background-color: #5f068d;
-        }
-        .inner {
-            height: 100%; // border-left: 2px solid #151141;
-            padding: 0;
-            margin-top: 50px;
-            overflow-y: auto;
-        }
-        .title {
-            height: 56px;
-            min-height: 36px;
-            line-height: 28px;
-            font-size: 18px;
-            margin: 20px 16px 0;
-            border-bottom: 1px solid #383840;
-        }
-        .teacher {
-            padding: 20px 0px 20px 20px; // border-bottom: 2px solid #151141;
-            background-color: #18181f;
-            cursor: pointer;
-            .playername {
-                width: 170px;
-                div {
-                    font-size: 14px;
-                    color: #c0bacc; // margin-top: 10px;
-                    line-height: 30px;
-                }
-            }
-            img {
-                width: 70px;
-                height: 70px;
-                border-radius: 50%;
-                margin-right: 15px; // margin-top: 10px;
-            }
-            p {
-                width: 120px;
-                height: 30px;
-                line-height: 35px;
-                font-size: 14px;
-                &:nth-child(2) {
-                    line-height: 42px;
-                    font-size: 18px;
-                }
-            }
-            .shopcart {
-                img {
-                    width: 40px;
-                    height: 40px;
-                }
-            }
-        }
-        .courseList {
-            // height: 75.5%;
-            // overflow-x: auto;
-            // padding-top: 20px;
-            overflow: auto;
-            h4 {
-                line-height: 40px;
-                font-size: 16px;
-                padding: 0 16px;
-            }
-            .chapter {
-                margin-top: 10px;
-                overflow: hidden;
-            }
-            .knobble {
-                position: relative;
-                width: 100%;
-                height: 40px;
-                line-height: 40px;
-                padding: 0 16px;
-                cursor: pointer;
-                overflow: hidden;
-                transition: background 300ms;
-                &:hover {
-                    background: #18181f;
-                }
-                &.cli {
-                    background: #18181f;
-                }
-                span.playIcon {
-                    width: 24px;
-                    height: 24px;
-                    line-height: 28px;
-                    margin-top: 8px;
-                    border-radius: 50%;
-                    background-color: #732eaf;
-                    i {
-                        font-size: 20px;
-                        border-radius: 50%;
-                        margin-left: 2px;
-                        background-color: #732eaf;
-                        color: #fff;
-                    }
-                }
-                span.playImg {
-                    width: 24px;
-                    height: 40px;
-                    line-height: 40px;
-                    text-align: center;
-                    img {
-                        width: 18px;
-                        height: 18px;
-                        margin-top: 11px;
-                    }
-                }
-                span.barName {
-                    margin: 0 0 0 10px;
-                    width: 82%;
-                    height: 40px;
-                    font-size: 14px;
-                    color: #a0a0a5;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                }
-                .barNameHover {
-                    display: none; // width: 100%;
-                    // height: 46px;
-                    line-height: 20px;
-                    position: absolute;
-                    left: 48px;
-                    bottom: 46px;
-                    background-color: #fff;
-                    padding-left: 10px;
-                    color: #000;
-                }
-                &:hover {
-                    .barNameHover {
-                        display: block;
-                    }
-                }
-            }
-        }
-        .fold {
-            width: 28px;
-            height: 60px;
-            line-height: 60px;
-            text-align: center; // background: #e9daf5;
-            background: rgba(143, 74, 203, 0.2);
-            position: absolute;
-            left: -28px;
-            top: 330px;
-            font-size: 30px;
-            border-top-left-radius: 5px;
-            border-bottom-left-radius: 5px;
-            color: #773084;
-            cursor: pointer;
-            &:hover {
-                background: #5f068d; // background: rgba(233, 208, 255, 0.7);
-                color: #fff;
-                transition: background 300ms;
-                transition: color 300ms;
-            }
-        }
-    }
-    .evaluate {
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        left: 0;
-        top: 0;
-        background-color: rgba(0, 0, 0, 0.7);
-        overflow: hidden;
-        z-index: 1001;
-        .note {
-            position: absolute;
-            top: 100px;
-            left: 50%;
-            margin-left: -180px;
-            width: 340px;
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 0 25px;
-            h4 {
-                line-height: 62px;
-                color: #222;
-                font-size: 16px;
-                i {
-                    font-size: 30px;
-                    margin-top: 15px;
-                    color: #773084;
-                }
-            }
-            h5 {
-                height: 32px;
-                font-size: 14px;
-                color: #222;
-            }
-            h6 {
-                height: 32px;
-                font-size: 14px;
-                color: #222;
-                .el-rate {
-                    display: inline-block;
-                    vertical-align: middle;
-                }
-            }
-            .btnList {
-                .el-radio {
-                    width: 74px;
-                    height: 26px;
-                    line-height: 26px;
-                    padding: 0;
-                    font-weight: 400;
-                    border-radius: 4px;
-                    margin: 0 7px 10px 0;
-                    transition: all 300ms;
-                    &:hover {
-                        color: #5f068d;
-                        border: 1px solid #5f068d;
-                    }
-                    &.is-bordered.is-checked {
-                        border-color: #5f068d;
-                    }
-                    .el-radio__input.is-checked+.el-radio__label {
-                        color: #5f068d;
-                    }
-                    .el-radio__input {
-                        display: none;
-                    }
-                }
-            }
-            .el-textarea {
-                margin-top: 10px;
-                .el-textarea__inner {
-                    border: 1px solid #bbbbbb;
-                    border-radius: 4px;
-                }
-            }
-            .commitBug {
-                margin: 30px 0;
-                text-align: center;
-                .el-button.el-button--default.is-round {
-                    width: 160px;
-                    height: 40px;
-                    background: #773084;
-                    color: #fff;
-                    border: none;
-                    transition: background 300ms;
-                    &:hover {
-                        background: #5f068d;
-                    }
-                }
-            }
-        }
-    }
-    .bag {
-        color: #732eaf;
-        cursor: pointer;
-    }
-    video::-internal-media-controls-download-button {
-        display: none;
-    }
-    video::-webkit-media-controls-enclosure {
-        overflow: hidden;
-    }
-    video::-webkit-media-controls-panel {
-        width: calc(100% + 30px);
-    }
+  }
+
+  .bag {
+    color: #732eaf;
+    cursor: pointer;
+  }
+
+  video::-internal-media-controls-download-button {
+    display: none;
+  }
+
+  video::-webkit-media-controls-enclosure {
+    overflow: hidden;
+  }
+
+  video::-webkit-media-controls-panel {
+    width: calc(100% + 30px);
+  }
 }
 
 .displays {
-    display: none;
+  display: none;
 }
 
 .playerBox {
-    .shareIcond {
-        opacity: 0;
-        display: none;
-        margin-top: -104px;
-        width: 121px;
-        height: 56px;
-        border-radius: 4px;
-        position: absolute;
-        transition: all 300ms;
-        top: 55px;
-        right: 0px;
-        z-index: 99999;
-        i {
-            display: inline-block;
-            width: 55.4px;
-            line-height: 36px;
-            text-align: center;
-            color: #222;
-            font-size: 12px;
-            margin: 0;
-            &:hover {
-                color: #5f068d;
-            }
-        }
-        img {
-            width: 100px;
-            height: 100px;
-            margin: 15px 0 0 2.7px;
-            display: block;
-            cursor: pointer;
-        }
+  .shareIcond {
+    opacity: 0;
+    display: none;
+    margin-top: -104px;
+    width: 121px;
+    height: 56px;
+    border-radius: 4px;
+    position: absolute;
+    transition: all 300ms;
+    top: 55px;
+    right: 0px;
+    z-index: 99999;
+
+    i {
+      display: inline-block;
+      width: 55.4px;
+      line-height: 36px;
+      text-align: center;
+      color: #222;
+      font-size: 12px;
+      margin: 0;
+
+      &:hover {
+        color: #5f068d;
+      }
     }
+
+    img {
+      width: 100px;
+      height: 100px;
+      margin: 15px 0 0 2.7px;
+      display: block;
+      cursor: pointer;
+    }
+  }
 }
 
 .share {
-    &:hover .shareIcond {
-        opacity: 1;
-        display: inline-block;
-    }
+  &:hover .shareIcond {
+    opacity: 1;
+    display: inline-block;
+  }
 }

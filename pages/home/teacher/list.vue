@@ -1,7 +1,8 @@
 <template>
   <div class="news-list teacherList" v-loading="loading">
     <div class="banner-con">
-      <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
+      <v-carousel  :config="configCarousel" :teacherBanner="bannerList"></v-carousel>
+      <!-- <v-banner :bannerImg="bannerImg" :config="configs"></v-banner> -->
     </div>
     <!-- <div class="teacherLead clearfix">
       <p>为了给党政机关、事业单位及企业组织提供量身定制的个性化及顾问咨询学习模式，1911学堂建立了名师智库为相关单位推荐顾问导师，真正做到学习需求与专家内容的智能匹配。</p>
@@ -9,14 +10,14 @@
       <p>贵单位可根据自己的需求从学堂海量的名师智库中筛选导师，把需求提交给学堂，学堂将根据需求进行智能匹配，推荐最合适的专家教授及行业精英到单位真实的场景中授课、咨询。学员可以与学堂导师进行面对面交流、领略大师风采，在自己熟悉的学习环境中更加有效的掌握学习内容，切实提升问题解决能力和实际应用能力，从而提高学习效能，以实现贵单位“请进来、沉下去”的培训效果。</p>
     </div>-->
     <!-- 分类 -->
-    <v-category :categoryData="categoryData" :childList="childList" :unitData="unitData" :sortData="sortData" @processData="processData" @selectCid="selectCid" @selectPid="selectPid" @selectUid="selectUid" @selectKid="selectKid" @selectTips="selectTips" @changeCid="changeCid"></v-category>
+    <v-category :categoryData="categoryData" :childList="childList" :unitData="unitData" :sortData="sortData" :tagsList="tagsList" @processData="processData" @selectTags="selectTags" @selectCid="selectCid" @selectPid="selectPid" @selectUid="selectUid" @selectKid="selectKid" @selectTips="selectTips" @changeCid="changeCid"></v-category>
     <div class="te-con clearfix" id="container">
       <div class="con">
         <div class="left" id="leftCon">
           <div v-if="famousList.length">
             <div class="teacherList">
               <div @click="getNewInfoList"></div>
-              <v-card :famousList="famousList" :config="config" @reservation="reservation"></v-card>
+              <v-card :famousList="famousList"></v-card>
             </div>
             <div class="pagination" v-if="pagemsg.total>12">
               <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
@@ -31,10 +32,8 @@
       </div>
     </div>
     <div class="joinTeacher" @click="joinTeacher" v-show="isShowBtn" style="cursor:pointer">
-      <img src="http://static-image.1911edu.com/toDoTeacher-gif.gif" alt>
+      <img src="https://static-image.1911edu.com/toDoTeacher-gif.gif" alt>
     </div>
-    <v-appointment v-if="showAppointment" @closeForm="closeForm" :teacherInfo="teacherInfo" @goPay="goPay" :userInfo="userInfo"></v-appointment>
-    <v-pay v-if="showPay" @closePayed="closePayed" :userInfo="userInfo" :teacherInfo="teacherInfo" :orderId="orderId"></v-pay>
   </div>
 </template>
 
@@ -44,8 +43,7 @@ import CustomCard from "@/pages/home/teacher/components/Card.vue";
 import { list, banner } from "~/lib/v1_sdk/index";
 import Category from "@/pages/home/teacher/components/teacherCategory";
 import NoData from "@/components/common/NoData.vue";
-import Appointment from "@/pages/home/teacher/components/AppointmentTeacher";
-import Pay from "@/pages/home/teacher/components/Pay.vue";
+import Carousel from "@/components/common/Carousel.vue";
 
 import { setTitle, matchSplits } from "@/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
@@ -56,17 +54,20 @@ export default {
     "v-banner": CustomBanner,
     "v-category": Category,
     "v-nodata": NoData,
-    "v-appointment": Appointment,
-    "v-pay": Pay
+    "v-carousel": Carousel,
   },
   data() {
     return {
+      windowWidth:'',
+      bannerList:[],
+       configCarousel: {
+        carousel: "teacher"
+      },
       introduce: "",
       initIntro:
-        '<p class="indent" style="text-indent:2em">1911学堂名师智库目前集结了200余位学术造诣深厚、教学经验丰富、具有国际视野的专家学者；未来，将建立由数千名全球知名专家教授、世界500强企业高管、业界翘楚行业精英以及政策智囊共同组成的高端专家导师库，为各单位组织及学员带来权威、前沿、高端的学习体验。</p>' +
-        '<p class="indent" style="text-indent:2em">1911学堂名师智库的导师均具有三个特点：研究内容权威前沿，授课方式通俗易懂，理论知识结合实践。</p>' +
-        '<p class="indent" style="text-indent:2em">1911学堂名师智库可以为各党政机关、事业单位及企业组织提供量身定制的个性化学习方案，为相关单位推荐最合适的顾问导师，真正做到学习需求与专家内容的智能匹配。</p>' +
-        '<p class="indent" style="text-indent:2em">贵单位可根据自己的实际需求从1911学堂海量的名师智库中筛选导师，把需求提交给1911学堂，1911学堂将根据需求进行智能匹配，推荐最合适的专家教授及业界翘楚到单位真实的场景中授课、咨询。学员可以与1911学堂导师进行面对面交流、领略大师风采，在自己熟悉的学习环境中更加有效的掌握学习内容，切实提升问题解决能力和实际应用能力，从而提高学习效能，以实现 “请进来、沉下去”的培训效果。</p>',
+        '<p class="indent" style="text-indent:2em">1911学堂名师智库目前集结了数百位学术造诣深厚、教学经验丰富、具有国际视野的专家学者，以及学习成绩优质、各方面全面发展的高校学生，为中小学生、大学生及各界职场人士提供终身教育及导师咨询服务</p>' +
+        '<p class="indent" style="text-indent:2em">1911学堂未来将建立由数千名全球知名专家教授、世界500强企业高管、业界翘楚行业精英、政策智囊以及优秀高校学子共同组成的高端专家导师库，为各单位组织及学员带来权威、前沿、高端的学习体验和咨询服务。</p>' +
+        '<p class="indent" style="text-indent:2em">各单位组织及学员可以可根据自己的实际需求，从1911学堂海量的名师智库中筛选并预约相应的导师，邀请导师到真实的场景中授课，或者预约导师一对一咨询学业困惑或职业发展问题。</p>',
       fixedTop: 0,
       isFixed: false,
       sortData: [],
@@ -77,15 +78,12 @@ export default {
       pageType: {
         page: "teacherList",
         text: "暂无数据",
-        imgUrl: "http://static-image.1911edu.com/noMsg.png"
+        imgUrl: "https://static-image.1911edu.com/noMsg.png"
       },
-      bannerImg: "http://static-image.1911edu.com/famousTeacher.png",
+      bannerImg: "https://static-image.1911edu.com/famousTeacher.png",
       load: true,
       configs: {
         banner_type: "famousList"
-      },
-      config: {
-        card_type: "famousList"
       },
       famousList: [],
       teacherForm: {
@@ -94,7 +92,8 @@ export default {
         cid: 0,
         pid: 0,
         uid: 0,
-        kid: ""
+        kid: "",
+        identity: []
       },
       pagemsg: {
         page: 1,
@@ -116,34 +115,10 @@ export default {
         short_name: "全部",
         teacherKindList: []
       },
-      showAppointment: false,
-      teacherInfo: "",
-      showPay: false,
-      userInfo: "",
-      orderId: ""
+      tagsList: []
     };
   },
   methods: {
-    goPay(id) {
-      this.showPay = true;
-      this.orderId = id;
-    },
-    // 支付弹框关闭的回调
-    closePayed() {
-      this.showPay = !this.showPay;
-    },
-    reservation(teacher) {
-      if (persistStore.get("token")) {
-        this.getUserInfo();
-        this.teacherInfo = teacher;
-        this.showAppointment = !this.showAppointment;
-      } else {
-        this.$bus.$emit("loginShow", true);
-      }
-    },
-    closeForm() {
-      this.showAppointment = !this.showAppointment;
-    },
     // 加入1911教师
     joinTeacher() {
       this.$router.push("/home/teacher/beTeacher");
@@ -182,11 +157,17 @@ export default {
               document.getElementById("rightCon").clientHeight + "px";
           }
         });
+        window.addEventListener("scroll", this.addClass);
       });
     },
     //导师招募
     beTeacher() {
       this.$router.push("/home/teacher/beTeacher");
+    },
+    // 选择身份  tag
+    selectTags(arr) {
+      this.teacherForm.identity = arr;
+      this.initTeacherList();
     },
     //选择一级分类
     selectCid(data, index) {
@@ -242,6 +223,27 @@ export default {
           this.unitData.unshift({
             company_name: "全部",
             id: 0
+          });
+        }
+      });
+    },
+    // 教师标签列表(名称智库筛选)
+    getTeacherTagsList() {
+      list.teacherTagsList().then(res => {
+        if (res.status == 0) {
+          this.tagsList = res.data.teacherTagsList;
+          this.bannerList = res.data.teacherBannerList
+            //设置banner溢出居中显示
+          this.$nextTick(() => {
+            if (document.getElementsByClassName("teacherElCarouselItem")) {
+              let imgArr = document.getElementsByClassName("teacherElCarouselItem");
+              if (this.windowWidth <= 1920) {
+                let marginLeft = (1920 - this.windowWidth) / 2;
+                for (var i = 0; i < imgArr.length; i++) {
+                  imgArr[i].style.marginLeft = -marginLeft + "px";
+                }
+              }
+            }
           });
         }
       });
@@ -317,13 +319,6 @@ export default {
       this.childList = this.categoryData[this.categoryIndex].childList;
       this.sortData = this.categoryData[this.categoryIndex].teacherKindList;
     },
-    getUserInfo() {
-      banner.getUserInfo().then(res => {
-        if (res.status === 0) {
-          this.userInfo = res.data.userInfo;
-        }
-      });
-    },
     addClass() {
       if (
         document.getElementById("rightCon") &&
@@ -342,9 +337,12 @@ export default {
     this.getHeaderList();
     // this.initTeacherList();
     this.teacherCompanyList();
+    this.getTeacherTagsList();
     this.introduce = this.initIntro;
-    window.addEventListener("scroll", this.addClass);
+
     this.fixedTop = this.$refs["rightCon"].getBoundingClientRect().top;
+    this.windowWidth = document.documentElement.clientWidth;
+
   }
 };
 </script>

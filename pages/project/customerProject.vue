@@ -236,10 +236,10 @@ export default {
   components: {
     "v-mask": Mask
   },
-  data() {
+  data () {
     return {
       showPop: false,
-      imgUlr: "http://static-image.1911edu.com/customer-arrow.png",
+      imgUlr: "https://static-image.1911edu.com/customer-arrow.png",
       showDesc: false,
       isClick: false,
       searchInput: "",
@@ -296,20 +296,20 @@ export default {
     };
   },
   computed: {
-    nameLength() {
+    nameLength () {
       return 30 - this.projectForm.name.length;
     },
-    descLength(desc) {
+    descLength (desc) {
       return 500 - this.projectForm.desc.length;
     },
     //计算线下课程总价钱
-    offlineTotalPrice() {
+    offlineTotalPrice () {
       this.projectForm.offlineTotalPrice =
         this.projectForm.offlinePrice * this.projectForm.trainDay;
       return this.projectForm.offlineTotalPrice;
     },
     //计算线上课程总价钱
-    onlineTotalPrice() {
+    onlineTotalPrice () {
       let price = 0;
       this.checkedCourseData.forEach((item, index) => {
         price += item.present_price * this.projectForm.trainNum;
@@ -318,7 +318,7 @@ export default {
       return this.projectForm.onlineTotalPrice;
     },
     //计算自定制项目总价钱
-    totalPrice() {
+    totalPrice () {
       if (this.projectForm.styleRadio !== "1") {
         //线上+线下
         this.projectForm.totalPrice =
@@ -338,7 +338,7 @@ export default {
       return this.projectForm.totalPrice;
     },
     //计算自定制项目的优惠价钱
-    discountPrice() {
+    discountPrice () {
       this.projectForm.discountPrice =
         this.projectForm.totalPrice * (1 - this.discount).toFixed(2);
       return this.projectForm.discountPrice;
@@ -346,7 +346,7 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setGid"]),
-    proving() {
+    proving () {
       this.projectForm.trainNum = this.projectForm.trainNum.replace(
         /[^\.\d]/g,
         ""
@@ -354,7 +354,7 @@ export default {
       this.projectForm.trainNum = this.projectForm.trainNum.replace(".", "");
     },
     //定制项目模式信息
-    customerInfo() {
+    customerInfo () {
       customerProject.customerInfo().then(response => {
         if (response.status == 0) {
           let result = response.data;
@@ -377,7 +377,7 @@ export default {
       });
     },
     //搜索
-    handleSearchChange(val) {
+    handleSearchChange (val) {
       var len = this.reuseData.length;
       var arr = [];
       var reg = new RegExp(val);
@@ -397,17 +397,17 @@ export default {
         this.searchCourseData.push(item);
       });
     },
-    handleCancle() {
+    handleCancle () {
       this.showPop = false;
       this.isClick = false;
       message(this, "info", "已取消");
     },
-    handleConfirm() {
+    handleConfirm () {
       this.showPop = false;
       this.save(2);
     },
     //保存
-    saveProject(type) {
+    saveProject (type) {
       if (this.isClick) {
         return false;
       }
@@ -466,7 +466,7 @@ export default {
         this.save(type);
       }
     },
-    save(type) {
+    save (type) {
       customerProject.createProject(this.projectForm).then(response => {
         this.isClick = false;
         if (response.status == 0) {
@@ -516,7 +516,7 @@ export default {
       });
     },
     //学院/课程分类
-    CategoryList() {
+    CategoryList () {
       home.vipGoodsList().then(response => {
         if (response.status == 0) {
           this.CategoryListData = response.data.vipGoodsList;
@@ -524,7 +524,7 @@ export default {
       });
     },
     //添加已选课程
-    addChooseCourse() {
+    addChooseCourse () {
       this.chooseCourseData.forEach((item, index) => {
         this.checkedCourseData.push(item);
       });
@@ -542,12 +542,12 @@ export default {
       this.courseComputed();
     },
     //删除已选课程
-    deleteChooseCourse(index) {
+    deleteChooseCourse (index) {
       this.checkedCourseData.splice(index, 1);
       this.computedPrice();
     },
     //课程结算
-    courseComputed() {
+    courseComputed () {
       this.checkedCourseData.forEach((n, index) => {
         if (n.is_free == "2") {
           n.present_price = 0;
@@ -556,11 +556,11 @@ export default {
         this.projectForm.onlinePrice += Number(n.present_price);
       });
     },
-    handleFocus() {
+    handleFocus () {
       this.isShowSearchSelect = true;
     },
     //培训人数-下拉
-    handleNumSelect() {
+    handleNumSelect () {
       this.isShowNumSelect = !this.isShowNumSelect;
       this.isShowDaySelect = false;
       this.isShowCollegeSelect = false;
@@ -568,7 +568,7 @@ export default {
       this.isShowSearchSelect = false;
     },
     //线下培训天数-下拉
-    handleDaySelect() {
+    handleDaySelect () {
       this.isShowDaySelect = !this.isShowDaySelect;
       this.isShowNumSelect = false;
       this.isShowCollegeSelect = false;
@@ -576,7 +576,7 @@ export default {
       this.isShowSearchSelect = false;
     },
     //学院分类-下拉
-    handleCollegeSelect() {
+    handleCollegeSelect () {
       this.isShowCollegeSelect = !this.isShowCollegeSelect;
       this.isShowNumSelect = false;
       this.isShowDaySelect = false;
@@ -584,7 +584,7 @@ export default {
       this.isShowSearchSelect = false;
     },
     //课程分类-下拉
-    handleCourseSelect() {
+    handleCourseSelect () {
       this.isShowCourseSelect = !this.isShowCourseSelect;
       this.isShowNumSelect = false;
       this.isShowDaySelect = false;
@@ -592,7 +592,7 @@ export default {
       this.isShowSearchSelect = false;
     },
     //按课程搜索-下拉
-    handleSearchSelect() {
+    handleSearchSelect () {
       this.isShowSearchSelect = !this.isShowSearchSelect;
       this.isShowNumSelect = false;
       this.isShowDaySelect = false;
@@ -608,17 +608,17 @@ export default {
       });
     },
     //选择培训人数
-    chooseNum(val) {
+    chooseNum (val) {
       this.projectForm.trainNum = val;
       this.isShowNumSelect = false;
     },
     //选择线下培训天数
-    chooseDay(val) {
+    chooseDay (val) {
       this.projectForm.trainDay = val;
       this.isShowDaySelect = false;
     },
     //选择学院分类
-    chooseCollege(val) {
+    chooseCollege (val) {
       this.searchCourseData = []; //切换清空
       this.projectForm.trainCollege = val.title;
       this.searchCourseForm.first_ID = val.id;
@@ -627,7 +627,7 @@ export default {
       this.isShowCollegeSelect = false;
     },
     //选择课程分类
-    chooseCourse(val) {
+    chooseCourse (val) {
       this.chooseCourseData = [];
       this.projectForm.trainSearch = "";
       this.projectForm.trainCourse = val.title;
@@ -636,7 +636,7 @@ export default {
       this.searchCourse();
     },
     //课程搜索
-    searchCourse() {
+    searchCourse () {
       customerProject.searchCourse(this.searchCourseForm).then(response => {
         this.searchCourseData = response.data.curriculumList;
         this.reuseData = response.data.curriculumList;
@@ -646,7 +646,7 @@ export default {
       });
     },
     //选择按课程搜索
-    chooseSearch(item) {
+    chooseSearch (item) {
       let arrIndex;
       this.chooseCourseData.forEach((n, index) => {
         if (n.id == item.id) {
@@ -664,11 +664,11 @@ export default {
       }
     },
     //选择按课程搜索，阻止点击li时，label触发两次
-    chooseSearchInput(e) {
+    chooseSearchInput (e) {
       e.stopPropagation();
     },
     //获取编辑状态信息
-    getCustomerProjectInfo() {
+    getCustomerProjectInfo () {
       customerProject
         .getCustomerProjectInfo(this.projectForm)
         .then(response => {
@@ -687,10 +687,10 @@ export default {
           }
         });
     },
-    handledesc() {
+    handledesc () {
       this.showDesc = !this.showDesc;
     },
-    documentHandler(e) {
+    documentHandler (e) {
       this.isShowNumSelect = false;
       this.isShowDaySelect = false;
       this.isShowCollegeSelect = false;
@@ -698,13 +698,13 @@ export default {
       this.isShowSearchSelect = false;
       this.showDesc = false;
     },
-    computedPrice() {
+    computedPrice () {
       //初始化
       this.projectForm.onlineTime = 0;
       this.projectForm.onlinePrice = 0;
       this.courseComputed();
     },
-    computedNum() {
+    computedNum () {
       let num = this.projectForm.trainNum;
       if (this.projectForm.objRadio == "1") {
         //党政
@@ -734,7 +734,7 @@ export default {
         }
       }
     },
-    init() {
+    init () {
       this.customerInfo();
       this.computedPrice();
       this.CategoryList();
@@ -742,11 +742,11 @@ export default {
       this.projectForm.type = matchSplits("edit");
     }
   },
-  mounted() {
+  mounted () {
     this.init();
   },
   watch: {
-    chooseCourseData(val) {
+    chooseCourseData (val) {
       this.projectForm.trainSearch = "";
       if (val.length == 1) {
         val.forEach((n, index) => {
@@ -763,14 +763,14 @@ export default {
       }
     },
     //培训对象 --线下课程费用
-    "projectForm.objRadio"(val) {
+    "projectForm.objRadio" (val) {
       this.computedNum();
     },
-    "projectForm.trainNum"(val) {
+    "projectForm.trainNum" (val) {
       this.computedNum();
     }
   },
-  updated() {
+  updated () {
     setTitle("自定制项目-1911学堂");
   }
 };

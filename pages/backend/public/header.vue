@@ -3,7 +3,7 @@
     <div class="main">
       <div class="header-fl clearfix" :class="{big:isBig}">
         <div class="headerLogo fl">
-          <img src="http://static-image.1911edu.com/1911-logo.png" alt>
+          <img src="https://static-image.1911edu.com/1911-logo.png" alt>
         </div>
         <div class="headerPage clearfix">
           <div class="nav" v-for="(item,index) in navList" :key="index" @click="handleClick()" @mouseenter="isShowSub">
@@ -127,8 +127,8 @@ export default {
       ],
       downloadAppURL: "",
       downloadAppURL_test:
-        "http://ceshiapi.1911edu.com/Api/v1_1/AppH5/appDownload",
-      downloadAppURL_pro: "http://api.1911edu.com/Api/v1_1/AppH5/appDownload"
+        "https://ceshiapi.1911edu.com/Api/v1_1/AppH5/appDownload",
+      downloadAppURL_pro: "https://api.1911edu.com/Api/v1_1/AppH5/appDownload"
     };
   },
   methods: {

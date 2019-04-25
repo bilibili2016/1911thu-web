@@ -8,8 +8,8 @@
           <el-card shadow="never" body-style="padding: 0;" class="itemBox learn">
             <!-- 项目的封面上区别项目的自定义项目的小标签 -->
             <div class="projectImg">
-              <img v-if="card.type==1" src="http://static-image.1911edu.com/p4.png" class="project-img">
-              <img v-if="card.type==2" src="http://static-image.1911edu.com/p5.png" class="project-img">
+              <img v-if="card.type==1" src="https://static-image.1911edu.com/p4.png" class="project-img">
+              <img v-if="card.type==2" src="https://static-image.1911edu.com/p5.png" class="project-img">
             </div>
             <!-- 封面上的遮罩 -->
             <div class="mask-style">
@@ -86,7 +86,7 @@
           <el-card shadow="never " body-style="padding: 0; " class="itemBox collect">
             <div @click="openDetail(card) ">
               <div class="projectImg">
-                <img src="http://static-image.1911edu.com/p4.png" alt="" class="project-img">
+                <img src="https://static-image.1911edu.com/p4.png" alt="" class="project-img">
               </div>
               <div class="mask-style ">
                 <img :src="jinImg " alt=" " class="jin-style ">
@@ -119,11 +119,11 @@ import { open } from '@/lib/util/helper'
 
 export default {
   props: ['config', 'data'],
-  data() {
+  data () {
     return {
-      readyImg: 'http://static-image.1911edu.com/ready.png',
-      overTimeImg: 'http://static-image.1911edu.com/overtime.png',
-      jinImg: 'http://static-image.1911edu.com/jin.png',
+      readyImg: 'https://static-image.1911edu.com/ready.png',
+      overTimeImg: 'https://static-image.1911edu.com/overtime.png',
+      jinImg: 'https://static-image.1911edu.com/jin.png',
       kidForm: {
         kids: ''
       },
@@ -138,7 +138,7 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid']),
-    openDetail(item) {
+    openDetail (item) {
       this.$router.push({
         path: '/project/projectdetail',
         query: {
@@ -147,7 +147,7 @@ export default {
         }
       })
     },
-    goToPlay(item) {
+    goToPlay (item) {
       this.openDetail(item)
       // let projectLink = {
       //   base: '/project/projectPlayer',
@@ -156,12 +156,12 @@ export default {
       // open(projectLink)
     },
     // 已过期商品直接加入购物车
-    goShoppingCart(item) {
+    goShoppingCart (item) {
       this.kidForm.kids = item.id
       this.goodsNmber()
     },
     // 判断购物车数量
-    goodsNmber() {
+    goodsNmber () {
       if (persistStore.get('productsNum') < 70) {
         this.addShopCarts()
       } else {
@@ -173,7 +173,7 @@ export default {
         })
       }
     },
-    addShopCarts() {
+    addShopCarts () {
       this.curriculumcartids.cartid = this.kid
       home.addShopCart(this.curriculumcartids).then(response => {
         this.$router.push('/shop/shoppingcart')
@@ -189,5 +189,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~assets/style/profile/card.scss';
+@import "~assets/style/profile/card.scss";
 </style>

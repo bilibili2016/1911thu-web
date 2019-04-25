@@ -37,17 +37,17 @@ export default {
   components: {
     "v-nodata": noData
   },
-  data() {
+  data () {
     return {
       pageType: {
         page: "searchCer",
         text: "对不起，没有查到相关信息！",
-        imgUrl: "http://static-image.1911edu.com/noSearch.png"
+        imgUrl: "https://static-image.1911edu.com/noSearch.png"
       }
     };
   },
   methods: {
-    goSearch() {
+    goSearch () {
       this.$emit("goSearch");
     }
   }

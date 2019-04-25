@@ -1,13 +1,13 @@
 <template>
   <div class="system">
-    <img src="http://static-image.1911edu.com/noCollegeB.png" alt="">
+    <img src="https://static-image.1911edu.com/noCollegeB.png" alt="">
   </div>
 </template>
 
 <script>
 import { setTitle } from "~/lib/util/helper";
 export default {
-  mounted() {
+  mounted () {
     setTitle("学位项目-1911学堂");
   }
 };

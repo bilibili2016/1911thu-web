@@ -70,11 +70,11 @@
             <span class="text">学员参加1911学堂商学院在线学院或相关项目学习，考核通过者将获得1911学堂结业证书。</span>
           </div>
           <div class="four-right">
-            <img src="http://static-image.1911edu.com/college-pic13.png" alt>
+            <img src="https://static-image.1911edu.com/college-pic13.png" alt>
           </div>
         </div>
         <div class="four-certification">
-          <img src="http://static-image.1911edu.com/commer-pic4.png" alt>
+          <img src="https://static-image.1911edu.com/commer-pic4.png" alt>
         </div>
       </div>
     </div>
@@ -82,19 +82,19 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       productList: [
         {
-          src: "http://static-image.1911edu.com/production-commer.png",
+          src: "https://static-image.1911edu.com/production-commer.png",
           text: "在线商学院"
         },
         {
-          src: "http://static-image.1911edu.com/production-icon1.png",
+          src: "https://static-image.1911edu.com/production-icon1.png",
           text: "混合式标准项目"
         },
         {
-          src: "http://static-image.1911edu.com/production-icon2.png",
+          src: "https://static-image.1911edu.com/production-icon2.png",
           text: "工商管理硕士(MBA)"
         }
       ],
@@ -107,12 +107,12 @@ export default {
         "提升企业领导的人文素养"
       ],
       collegeList: [
-        "http://static-image.1911edu.com/college_QH.png",
-        "http://static-image.1911edu.com/college_BD.png",
-        "http://static-image.1911edu.com/college_ZZF.png",
-        "http://static-image.1911edu.com/college_RSYJY.png",
-        "http://static-image.1911edu.com/college_ZKY.png",
-        "http://static-image.1911edu.com/college_GJFGW.png"
+        "https://static-image.1911edu.com/college_QH.png",
+        "https://static-image.1911edu.com/college_BD.png",
+        "https://static-image.1911edu.com/college_ZZF.png",
+        "https://static-image.1911edu.com/college_RSYJY.png",
+        "https://static-image.1911edu.com/college_ZKY.png",
+        "https://static-image.1911edu.com/college_GJFGW.png"
       ]
     };
   }

@@ -1,638 +1,736 @@
 .customerProject {
-	background-color: #f7f9fb;
-	font-size: 16px;
-	color: #222;
-	font-family: Arial, '\5FAE\8F6F\96C5\9ED1';
-	.banner-cus {
-		width: 100%;
-		height: 300px;
-		position: relative;
-		background: url('http://static-image.1911edu.com/customerb-anner.png') no-repeat;
-		background-size: 1920px 300px;
-		background-position: center center;
-		.con {
-			width: 1100px;
-			height: 200px;
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			margin: auto;
-			color: #fff;
-			.con-text {
-				width: 825px;
-				padding: 40px;
-			}
-			.text-one {
-				font-size: 20px;
-				margin-bottom: 20px;
-				font-weight: 500;
-			}
-			.text-two {
-				font-size: 16px;
-				line-height: 28px;
-				margin-bottom: 10px;
-			}
-			.text-three {
-				width: 296px;
-				padding: 8px 15px;
-				background-color: #fff;
-				font-size: 16px;
-				border-radius: 20px;
-				color: #4a4dfa;
-			}
-		}
-	}
-	.process {
-		width: 1115px;
-		height: 291px;
-		margin: 0 auto;
-		margin-top: -45px;
-		text-align: center;
-		background: url('http://static-image.1911edu.com/customer-bg.png') no-repeat;
-		background-size: 1115px 291px;
-		background-position: center center;
-		.pro-title {
-			padding-top: 120px;
-			font-size: 24px;
-			color: #4449fc;
-			text-align: center;
-			margin-bottom: 30px;
-		}
-		.pro-step {
-			width: 880px;
-			margin: 0 auto;
-			margin-bottom: 20px;
-			span {
-				float: left;
-			}
-			.step {
-				width: 162px;
-				height: 35px;
-				text-align: center;
-				line-height: 35px;
-				color: #fff;
-				font-size: 14px;
-				background-color: #4a4dfa;
-			}
-			.step4 {
-				width: 235px;
-			}
-			.arrow {
-				margin: 0px 10px;
-				img {
-					width: 30px;
-					height: 16px;
-					margin-top: 9px;
-				}
-			}
-		}
-		.pro-text {
-			font-size: 14px;
-			line-height: 20px;
-			color: #222;
-			width: 730px;
-			margin: 0 auto;
-		}
-	}
-	.title {
-		color: #773084;
-		font-size: 20px;
-		width: 1020px;
-		margin: 0 auto;
-		padding-top: 30px;
-	}
-	.content {
-		width: 1020px;
-		margin: 0 auto;
-		margin-top: 40px;
-		.con-item {
-			height: auto;
-			margin-bottom: 20px;
-			.fl {
-				width: 112px;
-				text-align: right;
-				line-height: 40px;
-			}
-			.fr {
-				width: 908px;
-			}
-		}
-		.fr.selectFr {
-			position: relative;
-			.el-input {
-				width: 240px;
-				height: 40px;
-				line-height: 40px;
-				cursor: pointer;
-				.el-input__inner {
-					padding-right: 40px;
-				}
-			}
-			.pull-down-text {
-				position: absolute;
-				top: 41px;
-				left: 0;
-				width: 240px;
-				max-height: 120px;
-				overflow-x: hidden;
-				overflow-y: scroll;
-				border: 1px solid #ddd;
-				margin-top: 1px;
-				color: #222;
-				transition: all 400ms ease;
-				background-color: #fff;
-				z-index: 20;
-				.search {
-					position: relative;
-					background-color: #ededed;
-					input {
-						width: 100%;
-						height: 40px;
-						line-height: 40px;
-						font-size: 14px;
-						border: none !important;
-						background-color: #ededed;
-						padding-left: 10px;
-					}
-					.el-icon-search {
-						position: absolute;
-						top: 12px;
-						right: 12px;
-					}
-				}
-				ul {
-					width: 100%;
-					cursor: pointer;
-					border-top: 1px solid #ddd;
-					li {
-						width: 100%;
-						height: 40px;
-						font-size: 14px;
-						padding-left: 10px;
-						line-height: 40px;
-						border-bottom: 1px solid #ddd;
-						overflow: hidden;
-						white-space: nowrap;
-						text-overflow: ellipsis;
-						cursor: pointer;
-						&:hover {
-							background-color: #ededed;
-						}
-					}
-				}
-				p {
-					width: 100%;
-					height: 40px;
-					line-height: 40px;
-					padding-left: 10px;
-					font-size: 14px;
-					color: #222;
-					text-align: left;
-				}
-			}
-			.pull-down {
-				position: absolute;
-				top: 1px;
-				left: 201px;
-				width: 38px;
-				height: 38px;
-				border-left: 1px solid #dddddd;
-				background-color: #ededed;
-				.el-icon-caret-bottom {
-					margin: 12px;
-				}
-			}
-		}
-		.name {
-			.fl {
-				line-height: 40px;
-			}
-			.fr {
-				position: relative;
-				// .el-input {
-				//   width: 240px;
-				// }
-				.input-inner {
-					position: absolute;
-					right: 15px;
-					top: 13px;
-					font-size: 14px;
-					color: #aaaaaa;
-				}
-			}
-		}
-		.desc {
-			position: relative;
-			.fr {
-				.el-textarea {
-					.el-textarea__inner {
-						padding-bottom: 30px;
-						font-family: Arial, '\5FAE\8F6F\96C5\9ED1';
-					}
-				}
-			}
-			.input-inner {
-				position: absolute;
-				right: 15px;
-				bottom: 10px;
-				font-size: 14px;
-				color: #aaaaaa;
-			}
-		}
-		.obj {
-			height: 40px;
-			line-height: 40px;
-		}
-		.num {
-			.divClick {
-				width: 240px;
-			}
-		}
-		.day {
-			.divClick {
-				display: inline-block;
-				margin-right: 30px;
-			}
-			.price {
-				color: #cd1f1f;
-			}
-			.priceAsk {
-				color: #aaa;
-				font-size: 20px;
-				cursor: pointer;
-				vertical-align: middle;
-				&:hover {
-					.descript-text {
-						display: block;
-						right: 174px;
-						top: -50px;
-					}
-				}
-			}
-		}
-		.descript-text {
-			display: none;
-			// width: 440px;
-			color: #222;
-			position: absolute;
-			right: 410px;
-			top: -35px;
-			background-color: #fff;
-			padding: 15px 20px;
-			border-radius: 10px;
-			margin-bottom: 30px;
-			-webkit-box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
-			box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
-			z-index: 100;
-			font-size: 14px;
-			line-height: 26px;
-			// max-height: 200px;
-			// overflow-x: hidden;
-			// overflow-y: auto;
-		}
-		.style {
-			position: relative;
-			height: 40px;
-			line-height: 40px;
-			.el-icon-question {
-				&:hover {
-					color: #773084;
-				}
-			}
-			.el-icon-question.styleAsk {
-				font-size: 20px;
-				margin-left: 10px;
-				cursor: pointer;
-				color: #aaa;
-				vertical-align: middle;
-				&:hover {
-					color: #773084;
-					.descript-text {
-						display: block;
-						right: 633px;
-						top: -7px;
-					}
-				}
-			}
-		}
+  background-color: #f7f9fb;
+  font-size: 16px;
+  color: #222;
+  font-family: Arial, '\5FAE\8F6F\96C5\9ED1';
 
-		.con-detail {
-			width: 100%;
-			background-color: #fff;
-			padding: 30px 45px 40px 30px;
-			.deatil-item {
-				margin-bottom: 30px;
-				.detail-title {
-					font-size: 16px;
-					color: #773084;
-					margin-bottom: 20px;
-				}
-				.itemCon {
-					margin-bottom: 20px;
-					width: 100%;
-					height: 40px;
-				}
-				.item {
-					width: 430px;
-					float: left;
-					margin-right: 85px;
-					&:last-child {
-						margin-right: 0;
-					}
-					.fl {
-						width: 110px;
-						line-height: 40px;
-					}
-					.fr {
-						width: 320px;
-						.el-input {
-							width: 100%;
-						}
-						.pull-down-text {
-							width: 320px;
-						}
-					}
-					.fr.selectFr {
-						.pull-down {
-							left: 281px !important;
-						}
-					}
-					.text {
-						float: left;
-					}
-					.liChecked {
-						width: 100%;
-						margin-right: 10px;
-						margin-bottom: -2px;
-						position: relative;
-						.item-checkbox {
-							display: none;
-						}
-						.item-checkbox-label {
-							display: inline-block;
-							height: 40px;
-							width: 100%;
-							overflow: hidden;
-							white-space: nowrap;
-							text-overflow: ellipsis;
-							padding-right: 30px;
-						}
-						.item-checkbox-label:after {
-							position: absolute;
-							top: 11px;
-							right: 10px;
-							content: '';
-							text-align: right;
-							display: inline-block;
-							vertical-align: middle;
-							width: 18px;
-							height: 18px;
-							border: 1px solid #773084;
-							border-radius: 4px;
-							margin-bottom: 5px;
-							margin-left: 270px;
-						}
-						.item-checkbox:checked + .item-checkbox-label:after {
-							background-image: url('~assets/images/icon-checked.png');
-							background-size: 100%;
-							border: none;
-						}
-					}
-					.add {
-						float: left;
-						width: 100px;
-						height: 40px;
-						line-height: 40px;
-						text-align: center;
-						color: #888;
-						font-size: 14px;
-						cursor: no-drop;
-						background: #eee;
-						&.active {
-							cursor: pointer;
-							background-color: #773084;
-							color: #fff;
-							&:hover {
-								background-color: #5f068d;
-							}
-						}
-					}
-				}
-				.deTable {
-					width: 100%;
-					background-color: #f7f9fb;
-					border: 1px solid #dfe1e3;
-					.deItem {
-						width: 100%;
-						height: 50px;
-						line-height: 50px;
-						padding: 0 30px 0 20px;
-						border-bottom: 1px solid #dfe1e3;
-						&:last-child {
-							border-bottom: none;
-						}
-						.courseTitle {
-							width: 40%;
-							float: left;
-							overflow: hidden;
-							text-overflow: ellipsis;
-							white-space: nowrap;
-						}
-						.time {
-							width: 15%;
-							float: left;
-							text-align: center;
-						}
-						.price {
-							width: 30%;
-							float: left;
-							text-align: center;
-						}
-						.operater {
-							width: 30%;
-							float: left;
-							text-align: right;
-							color: #cd1f1f;
-							span {
-								cursor: pointer;
-							}
-						}
-					}
-					.courseItem {
-						.courseTitle {
-							width: 40%;
-							float: left;
-						}
-						.time {
-							width: 15%;
-							height: 50px;
-							float: left;
-							text-align: center;
-						}
-						.price {
-							width: 15%;
-							float: left;
-							text-align: center;
-						}
-						.num {
-							width: 10%;
-							float: left;
-							text-align: center;
-						}
-						.total {
-							width: 20%;
-							float: left;
-							text-align: right;
-						}
-					}
-					.discount {
-						color: #cd1f1f;
-						font-size: 14px;
-						text-align: right;
-						margin: 15px 0;
-						margin-right: 30px;
-					}
-					.totalPrice {
-						color: #cd1f1f;
-						font-size: 20px;
-						text-align: right;
-						margin: 10px 30px 15px 0;
-					}
-					.discount-left {
-						margin-right: 10px;
-					}
-					.totalPrice-left {
-						margin-right: 20px;
-					}
-				}
-				.courseSearch {
-					.pull-down-text {
-						max-height: 440px;
-					}
-				}
-			}
-		}
-		.btns {
-			width: 320px;
-			margin: 0 auto;
-			margin-top: 40px;
-			padding-bottom: 60px;
-			.btn {
-				width: 130px;
-				height: 40px;
-				line-height: 40px;
-				text-align: center;
-				border-radius: 20px;
-				border: 1px solid #773084;
-				margin-right: 60px;
-				color: #fff;
-				cursor: pointer;
-				background-color: #773084;
-				&:last-child {
-					margin-right: 0;
-				}
-				&.save {
-					&:hover {
-						background-color: #5f068d;
-					}
-				}
-				&.buy {
-					color: #773084;
-					background-color: #fff;
-					&:hover {
-						background-color: #5f068d;
-						color: #fff;
-					}
-				}
-			}
-		}
-	}
-	.el-input {
-		.el-input__inner {
-		}
-	}
-	.el-radio {
-		.el-radio__inner {
-			width: 18px;
-			height: 18px;
-			border-color: #572281;
-		}
-		.el-radio__input.is-checked .el-radio__inner {
-			background-color: #fff;
-		}
-		.el-radio__inner::after {
-			width: 10px;
-			height: 10px;
-			background-color: #572281;
-		}
-		.el-radio__input.is-checked + .el-radio__label {
-			color: #344;
-		}
-	}
+  .banner-cus {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    background: url('https://static-image.1911edu.com/customerb-anner.png') no-repeat;
+    background-size: 1920px 300px;
+    background-position: center center;
+
+    .con {
+      width: 1100px;
+      height: 200px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      color: #fff;
+
+      .con-text {
+        width: 825px;
+        padding: 40px;
+      }
+
+      .text-one {
+        font-size: 20px;
+        margin-bottom: 20px;
+        font-weight: 500;
+      }
+
+      .text-two {
+        font-size: 16px;
+        line-height: 28px;
+        margin-bottom: 10px;
+      }
+
+      .text-three {
+        width: 296px;
+        padding: 8px 15px;
+        background-color: #fff;
+        font-size: 16px;
+        border-radius: 20px;
+        color: #4a4dfa;
+      }
+    }
+  }
+
+  .process {
+    width: 1115px;
+    height: 291px;
+    margin: 0 auto;
+    margin-top: -45px;
+    text-align: center;
+    background: url('https://static-image.1911edu.com/customer-bg.png') no-repeat;
+    background-size: 1115px 291px;
+    background-position: center center;
+
+    .pro-title {
+      padding-top: 120px;
+      font-size: 24px;
+      color: #4449fc;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .pro-step {
+      width: 880px;
+      margin: 0 auto;
+      margin-bottom: 20px;
+
+      span {
+        float: left;
+      }
+
+      .step {
+        width: 162px;
+        height: 35px;
+        text-align: center;
+        line-height: 35px;
+        color: #fff;
+        font-size: 14px;
+        background-color: #4a4dfa;
+      }
+
+      .step4 {
+        width: 235px;
+      }
+
+      .arrow {
+        margin: 0px 10px;
+
+        img {
+          width: 30px;
+          height: 16px;
+          margin-top: 9px;
+        }
+      }
+    }
+
+    .pro-text {
+      font-size: 14px;
+      line-height: 20px;
+      color: #222;
+      width: 730px;
+      margin: 0 auto;
+    }
+  }
+
+  .title {
+    color: #773084;
+    font-size: 20px;
+    width: 1020px;
+    margin: 0 auto;
+    padding-top: 30px;
+  }
+
+  .content {
+    width: 1020px;
+    margin: 0 auto;
+    margin-top: 40px;
+
+    .con-item {
+      height: auto;
+      margin-bottom: 20px;
+
+      .fl {
+        width: 112px;
+        text-align: right;
+        line-height: 40px;
+      }
+
+      .fr {
+        width: 908px;
+      }
+    }
+
+    .fr.selectFr {
+      position: relative;
+
+      .el-input {
+        width: 240px;
+        height: 40px;
+        line-height: 40px;
+        cursor: pointer;
+
+        .el-input__inner {
+          padding-right: 40px;
+        }
+      }
+
+      .pull-down-text {
+        position: absolute;
+        top: 41px;
+        left: 0;
+        width: 240px;
+        max-height: 120px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        border: 1px solid #ddd;
+        margin-top: 1px;
+        color: #222;
+        transition: all 400ms ease;
+        background-color: #fff;
+        z-index: 20;
+
+        .search {
+          position: relative;
+          background-color: #ededed;
+
+          input {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            font-size: 14px;
+            border: none !important;
+            background-color: #ededed;
+            padding-left: 10px;
+          }
+
+          .el-icon-search {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+          }
+        }
+
+        ul {
+          width: 100%;
+          cursor: pointer;
+          border-top: 1px solid #ddd;
+
+          li {
+            width: 100%;
+            height: 40px;
+            font-size: 14px;
+            padding-left: 10px;
+            line-height: 40px;
+            border-bottom: 1px solid #ddd;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            cursor: pointer;
+
+            &:hover {
+              background-color: #ededed;
+            }
+          }
+        }
+
+        p {
+          width: 100%;
+          height: 40px;
+          line-height: 40px;
+          padding-left: 10px;
+          font-size: 14px;
+          color: #222;
+          text-align: left;
+        }
+      }
+
+      .pull-down {
+        position: absolute;
+        top: 1px;
+        left: 201px;
+        width: 38px;
+        height: 38px;
+        border-left: 1px solid #dddddd;
+        background-color: #ededed;
+
+        .el-icon-caret-bottom {
+          margin: 12px;
+        }
+      }
+    }
+
+    .name {
+      .fl {
+        line-height: 40px;
+      }
+
+      .fr {
+        position: relative;
+
+        // .el-input {
+        //   width: 240px;
+        // }
+        .input-inner {
+          position: absolute;
+          right: 15px;
+          top: 13px;
+          font-size: 14px;
+          color: #aaaaaa;
+        }
+      }
+    }
+
+    .desc {
+      position: relative;
+
+      .fr {
+        .el-textarea {
+          .el-textarea__inner {
+            padding-bottom: 30px;
+            font-family: Arial, '\5FAE\8F6F\96C5\9ED1';
+          }
+        }
+      }
+
+      .input-inner {
+        position: absolute;
+        right: 15px;
+        bottom: 10px;
+        font-size: 14px;
+        color: #aaaaaa;
+      }
+    }
+
+    .obj {
+      height: 40px;
+      line-height: 40px;
+    }
+
+    .num {
+      .divClick {
+        width: 240px;
+      }
+    }
+
+    .day {
+      .divClick {
+        display: inline-block;
+        margin-right: 30px;
+      }
+
+      .price {
+        color: #cd1f1f;
+      }
+
+      .priceAsk {
+        color: #aaa;
+        font-size: 20px;
+        cursor: pointer;
+        vertical-align: middle;
+
+        &:hover {
+          .descript-text {
+            display: block;
+            right: 174px;
+            top: -50px;
+          }
+        }
+      }
+    }
+
+    .descript-text {
+      display: none;
+      // width: 440px;
+      color: #222;
+      position: absolute;
+      right: 410px;
+      top: -35px;
+      background-color: #fff;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      -webkit-box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+      box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+      z-index: 100;
+      font-size: 14px;
+      line-height: 26px;
+      // max-height: 200px;
+      // overflow-x: hidden;
+      // overflow-y: auto;
+    }
+
+    .style {
+      position: relative;
+      height: 40px;
+      line-height: 40px;
+
+      .el-icon-question {
+        &:hover {
+          color: #773084;
+        }
+      }
+
+      .el-icon-question.styleAsk {
+        font-size: 20px;
+        margin-left: 10px;
+        cursor: pointer;
+        color: #aaa;
+        vertical-align: middle;
+
+        &:hover {
+          color: #773084;
+
+          .descript-text {
+            display: block;
+            right: 633px;
+            top: -7px;
+          }
+        }
+      }
+    }
+
+    .con-detail {
+      width: 100%;
+      background-color: #fff;
+      padding: 30px 45px 40px 30px;
+
+      .deatil-item {
+        margin-bottom: 30px;
+
+        .detail-title {
+          font-size: 16px;
+          color: #773084;
+          margin-bottom: 20px;
+        }
+
+        .itemCon {
+          margin-bottom: 20px;
+          width: 100%;
+          height: 40px;
+        }
+
+        .item {
+          width: 430px;
+          float: left;
+          margin-right: 85px;
+
+          &:last-child {
+            margin-right: 0;
+          }
+
+          .fl {
+            width: 110px;
+            line-height: 40px;
+          }
+
+          .fr {
+            width: 320px;
+
+            .el-input {
+              width: 100%;
+            }
+
+            .pull-down-text {
+              width: 320px;
+            }
+          }
+
+          .fr.selectFr {
+            .pull-down {
+              left: 281px !important;
+            }
+          }
+
+          .text {
+            float: left;
+          }
+
+          .liChecked {
+            width: 100%;
+            margin-right: 10px;
+            margin-bottom: -2px;
+            position: relative;
+
+            .item-checkbox {
+              display: none;
+            }
+
+            .item-checkbox-label {
+              display: inline-block;
+              height: 40px;
+              width: 100%;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              padding-right: 30px;
+            }
+
+            .item-checkbox-label:after {
+              position: absolute;
+              top: 11px;
+              right: 10px;
+              content: '';
+              text-align: right;
+              display: inline-block;
+              vertical-align: middle;
+              width: 18px;
+              height: 18px;
+              border: 1px solid #773084;
+              border-radius: 4px;
+              margin-bottom: 5px;
+              margin-left: 270px;
+            }
+
+            .item-checkbox:checked+.item-checkbox-label:after {
+              background-image: url('~assets/images/icon-checked.png');
+              background-size: 100%;
+              border: none;
+            }
+          }
+
+          .add {
+            float: left;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            cursor: no-drop;
+            background: #eee;
+
+            &.active {
+              cursor: pointer;
+              background-color: #773084;
+              color: #fff;
+
+              &:hover {
+                background-color: #5f068d;
+              }
+            }
+          }
+        }
+
+        .deTable {
+          width: 100%;
+          background-color: #f7f9fb;
+          border: 1px solid #dfe1e3;
+
+          .deItem {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            padding: 0 30px 0 20px;
+            border-bottom: 1px solid #dfe1e3;
+
+            &:last-child {
+              border-bottom: none;
+            }
+
+            .courseTitle {
+              width: 40%;
+              float: left;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+
+            .time {
+              width: 15%;
+              float: left;
+              text-align: center;
+            }
+
+            .price {
+              width: 30%;
+              float: left;
+              text-align: center;
+            }
+
+            .operater {
+              width: 30%;
+              float: left;
+              text-align: right;
+              color: #cd1f1f;
+
+              span {
+                cursor: pointer;
+              }
+            }
+          }
+
+          .courseItem {
+            .courseTitle {
+              width: 40%;
+              float: left;
+            }
+
+            .time {
+              width: 15%;
+              height: 50px;
+              float: left;
+              text-align: center;
+            }
+
+            .price {
+              width: 15%;
+              float: left;
+              text-align: center;
+            }
+
+            .num {
+              width: 10%;
+              float: left;
+              text-align: center;
+            }
+
+            .total {
+              width: 20%;
+              float: left;
+              text-align: right;
+            }
+          }
+
+          .discount {
+            color: #cd1f1f;
+            font-size: 14px;
+            text-align: right;
+            margin: 15px 0;
+            margin-right: 30px;
+          }
+
+          .totalPrice {
+            color: #cd1f1f;
+            font-size: 20px;
+            text-align: right;
+            margin: 10px 30px 15px 0;
+          }
+
+          .discount-left {
+            margin-right: 10px;
+          }
+
+          .totalPrice-left {
+            margin-right: 20px;
+          }
+        }
+
+        .courseSearch {
+          .pull-down-text {
+            max-height: 440px;
+          }
+        }
+      }
+    }
+
+    .btns {
+      width: 320px;
+      margin: 0 auto;
+      margin-top: 40px;
+      padding-bottom: 60px;
+
+      .btn {
+        width: 130px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        border-radius: 20px;
+        border: 1px solid #773084;
+        margin-right: 60px;
+        color: #fff;
+        cursor: pointer;
+        background-color: #773084;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &.save {
+          &:hover {
+            background-color: #5f068d;
+          }
+        }
+
+        &.buy {
+          color: #773084;
+          background-color: #fff;
+
+          &:hover {
+            background-color: #5f068d;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  .el-input {
+    .el-input__inner {}
+  }
+
+  .el-radio {
+    .el-radio__inner {
+      width: 18px;
+      height: 18px;
+      border-color: #572281;
+    }
+
+    .el-radio__input.is-checked .el-radio__inner {
+      background-color: #fff;
+    }
+
+    .el-radio__inner::after {
+      width: 10px;
+      height: 10px;
+      background-color: #572281;
+    }
+
+    .el-radio__input.is-checked+.el-radio__label {
+      color: #344;
+    }
+  }
 }
 
 .customer-mask {
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background-color: rgba(0, 0, 0, 0.4);
-	width: 100%;
-	height: 100%;
-	z-index: 9999;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
 
-	.customer-pop {
-		position: absolute;
-		left: 0;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		margin: auto;
-		width: 420px;
-		height: 265px;
-		background-color: #fff;
-		border-radius: 4px;
-		border: 1px solid #ebeef5;
-		box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-		text-align: center;
+  .customer-pop {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 420px;
+    height: 265px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #ebeef5;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    text-align: center;
 
-		.pop-title {
-			padding: 30px 15px 10px 15px;
-			color: #303133;
-			// text-align: center;
-		}
+    .pop-title {
+      padding: 30px 15px 10px 15px;
+      color: #303133;
+      // text-align: center;
+    }
 
-		.con {
-			padding: 10px 27px;
-			color: #606266;
-			font-size: 14px;
-			text-align: left;
-			line-height: 24px;
-		}
+    .con {
+      padding: 10px 27px;
+      color: #606266;
+      font-size: 14px;
+      text-align: left;
+      line-height: 24px;
+    }
 
-		.btn {
-			margin-top: 20px;
+    .btn {
+      margin-top: 20px;
 
-			span {
-				width: 150px;
-				height: 40px;
-				line-height: 40px;
-				text-align: center;
-				background-color: #ddd;
-				border-radius: 6px;
-				font-size: 12px;
-				color: #606266;
-				cursor: pointer;
-			}
+      span {
+        width: 150px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        background-color: #ddd;
+        border-radius: 6px;
+        font-size: 12px;
+        color: #606266;
+        cursor: pointer;
+      }
 
-			.confirm {
-				background-color: #773084;
-				margin-left: 40px;
-				color: #fff;
-			}
-		}
-	}
+      .confirm {
+        background-color: #773084;
+        margin-left: 40px;
+        color: #fff;
+      }
+    }
+  }
 }
