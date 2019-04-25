@@ -5,12 +5,9 @@
       <div class="college" v-if="tagsList.length>0">
         <h4 class="title">请先选择您的身份：</h4>
         <ul class="ulList identity">
-          <el-checkbox-group v-model="identity" @change="selectTags">
-            <el-checkbox-button v-for="(item,index) in tagsList" :label="item.id" :key="index">{{item.tag_name}}</el-checkbox-button>
-          </el-checkbox-group>
-          <!-- <li v-for="(item,index) in tagsList" :index="index" :key="index" :class="{btnBg: identity == item.id ? true : false }">
-            <el-button @click="selectTags(item,index)">{{item.tag_name}}</el-button>
-          </li> -->
+          <li v-for="(item,index) in tagsList" :index="index" :key="index" :class="{btnBg: identity == item.id ? true : false }">
+            <el-button @click="selectTags(item)">{{item.tag_name}}</el-button>
+          </li>
         </ul>
       </div>
       <div class="college" v-if="categoryData.length>0">
@@ -69,12 +66,13 @@ export default {
       kid: 0,
       cp: "",
       categoryList: [],
-      identity: []
+      identity: ""
     };
   },
   methods: {
-    selectTags () {
-      this.$emit("selectTags", this.identity);
+    selectTags (item) {
+      this.identity = item.id
+      this.$emit("selectTags", item.id);
     },
     // 大类 单个
     selectCid (item, index) {

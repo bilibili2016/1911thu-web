@@ -27,6 +27,33 @@
 
     &.identity {
       padding-top: 14px;
+
+      li {
+        margin-right: 30px;
+
+        border-radius: 16px;
+        border: none;
+        background-color: #EDEDED;
+        text-align: center;
+
+        .el-button {
+          min-width: 150px;
+          height: 32px;
+          line-height: 32px;
+          font-size: 16px;
+          color: #666;
+          font-weight: 400;
+          padding: 0 15px;
+        }
+
+        &.btnBg {
+          background-color: #772F84;
+
+          .el-button {
+            color: #fff;
+          }
+        }
+      }
     }
 
     li {
@@ -66,9 +93,9 @@
         }
       }
 
-      &:first-child {
-        border-radius: 4px;
-      }
+      //   &:first-child {
+      //     border-radius: 4px;
+      //   }
     }
   }
 

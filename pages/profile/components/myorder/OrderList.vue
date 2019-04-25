@@ -65,10 +65,12 @@
             <!-- 已完成订单剩余时间 -->
             <p class="payReady" v-if="courseList.pay_status == '6'&&courseList.expire_day>=1">剩余{{courseList.expire_day}}天</p>
             <p class="payReady" v-if="(courseList.pay_status == '2'  || courseList.pay_status == '6')&&courseList.expire_day<1">已过期</p>
-            <p class="payClose" v-if="courseList.pay_status == '3' || courseList.pay_status == '4'">已关闭</p>
+            <p class="payClose" v-if="courseList.pay_status == '3'">已关闭</p>
+            <p class="payClose" v-if="courseList.pay_status == '4'">已退款</p>
+            <p class="payClose" v-if="courseList.pay_status == '7'">退款中</p>
             <p>
               <span class="pay" v-if="courseList.pay_status == '1'" @click="goPay(courseList.id,courseList)">立即支付</span>
-              <span class="buy" v-if="courseList.pay_status == '3' || courseList.pay_status == '4'" @click="goShopping(courseList)">立即购买</span>
+              <span class="buy" v-if="courseList.pay_status == '3'" @click="goShopping(courseList)">立即购买</span>
             </p>
           </div>
         </div>
