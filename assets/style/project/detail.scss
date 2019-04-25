@@ -38,12 +38,12 @@
   }
 
   .detail {
-    position: fixed;
-    top: 0;
-    left: 0;
-    // position: absolute;
-    // bottom: 0;
+    // position: fixed;
+    // top: 0;
     // left: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     height: 100px;
     width: 100%;
     background: #fff;
