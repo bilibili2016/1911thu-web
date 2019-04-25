@@ -68,7 +68,7 @@ import { matchSplits, setTitle, message } from "@/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
 
 export default {
-  data () {
+  data() {
     return {
       objLength: "",
       isShow: true,
@@ -112,35 +112,37 @@ export default {
   },
   methods: {
     // 改变屏幕宽度重置播放器大小
-    resize () {
+    resize() {
       if (document.body.clientHeight) {
         this.$nextTick(() => {
-          const h = document.body.clientHeight
-          const w = document.body.clientWidth
-          this.width = document.body.clientWidth
-          this.$refs.left.style.width = w - 300 + 'px'
-          this.$refs.left.style.height = h + 'px'
-          this.$refs.right.style.height = h + 'px'
-          this.$refs.ul.style.height = h - 80 - 90 + 'px'
+          const h = document.body.clientHeight;
+          const w = document.body.clientWidth;
+          this.width = document.body.clientWidth;
+          if (this.$refs.left) {
+            this.$refs.left.style.width = w - 300 + "px";
+            this.$refs.left.style.height = h + "px";
+            this.$refs.right.style.height = h + "px";
+            this.$refs.ul.style.height = h - 80 - 90 + "px";
+          }
         });
       }
     },
-    handleClick () {
+    handleClick() {
       this.isShow = !this.isShow;
     },
-    teacherBespokeInfo () {
+    teacherBespokeInfo() {
       live.teacherBespokeInfo(this.teacherLiveInfo).then(response => {
         if (response.status == 0) {
           this.url = response.data;
         } else {
-          this.begin = false
-          this.end = false
+          this.begin = false;
+          this.end = false;
           message(this, "error", response.msg);
         }
       });
     },
     //开始直播
-    start_play () {
+    start_play() {
       if (swfobject) {
         swfobject.getObjectById("tblive").Start(this.url.pushUrl);
         //   创建拉流播放器
@@ -151,7 +153,7 @@ export default {
       }
     },
     //结束直播
-    stop_play () {
+    stop_play() {
       swfobject.getObjectById("tblive").Stop();
       if (this.pullPlay) {
         this.pullPlay.pause();
@@ -160,7 +162,7 @@ export default {
         this.$refs.playInner.appendChild(this.node);
       }
     },
-    newPlayer () {
+    newPlayer() {
       // 创建播放器并传入参数
       swfobject.embedSWF(
         "//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf",
@@ -186,7 +188,7 @@ export default {
       }
     },
 
-    creatPlayer (url) {
+    creatPlayer(url) {
       this.pullaliPlayer.source = url.pullUrl;
       // 不存在 直接创建播放器
       this.pullPlay = new Aliplayer(this.pullaliPlayer);
@@ -198,50 +200,50 @@ export default {
         "none";
     },
     // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
-    playerLoad () {
+    playerLoad() {
       if (document.getElementsByClassName("prism-hide")[0]) {
         document.getElementsByClassName("prism-hide")[0].className =
           "prism-loading";
       }
     },
     // 视频准备好之后执行
-    readyPlay () {
+    readyPlay() {
       console.log("ready");
     },
     // 播放开始--启动计时器
-    playerPlay () {
+    playerPlay() {
       console.log("playerPlay");
     },
-    playerEnded () {
+    playerEnded() {
       console.log("playerEnded");
     },
-    playerError (error) {
+    playerError(error) {
       console.log(error);
     }
   },
-  mounted () {
-    if (!persistStore.get('token')) {
-      this.$router.push('/')
-      this.$bus.$emit('loginShow', true)
-      return false
+  mounted() {
+    if (!persistStore.get("token")) {
+      this.$router.push("/");
+      this.$bus.$emit("loginShow", true);
+      return false;
     }
     this.node = this.$refs.mediaPlayer;
     this.teacherLiveInfo.appointId = matchSplits("id");
     this.teacherLiveInfo.type = matchSplits("type");
-    this.resize()
-    window.addEventListener('resize', this.resize)
+    this.resize();
+    window.addEventListener("resize", this.resize);
 
     // window.open('http://www.adobe.com/go/getflashplayer_cn')
     this.teacherBespokeInfo();
     //   创建推流播放器
     this.newPlayer();
   },
-  beforeRouteEnter (to, from, next) {
+  beforeRouteEnter(to, from, next) {
     next(vm => {
       vm.$bus.$emit("headerFooterHide");
     });
   },
-  beforeRouteLeave (to, from, next) {
+  beforeRouteLeave(to, from, next) {
     this.$bus.$emit("headerFooterShow");
     next();
   }

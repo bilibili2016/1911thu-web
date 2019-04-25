@@ -66,12 +66,12 @@ export default {
       timeData: "",
       pagemsg: {
         page: 1,
-        pagesize: 6,
+        pagesize: 9,
         total: 0
       },
       timeListForm: {
         page: 1,
-        limit: 6
+        limit: 9
       },
       statusText: "",
       countDownSecond: "",
@@ -113,7 +113,7 @@ export default {
     //翻页
     timeListChange(val) {
       this.timeListForm.page = val;
-      this.timeListForm.limit = 6;
+      this.timeListForm.limit = 9;
       this.bespokeTimeList();
     },
     //预约时间列表
