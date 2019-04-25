@@ -128,7 +128,7 @@
                 <div class="con-item desc clearfix">
                   <div class="fl">其他信息：</div>
                   <div class="fr">
-                    <el-input type="textarea" v-model.trim="teacherForm.otherInfo" :rows="3" maxlength="500" placeholder="请输入您的其他信息，方便我们更多的了解您，还可以提高审核通过率哦！" autosize></el-input>
+                    <el-input type="textarea" v-model.trim="teacherForm.otherInfo" :rows="3" maxlength="200" placeholder="请输入您的其他信息，方便我们更多的了解您，还可以提高审核通过率哦！" autosize></el-input>
                     <span class="input-inner">还可以输入{{descLength}}字</span>
                   </div>
                 </div>
@@ -178,16 +178,12 @@
                       <span class="uploadImgs"><img :src="teacherForm.studentCard" alt=""></span>
                       <span class="deleteImg" @click="deleteImg">删除</span>
                     </p>
-                    <!-- <el-upload class="avatar-uploader" action="https://ceshiapi.1911edu.com/Publics/Upload/uploadFile" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
-                      <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                      <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                    </el-upload> -->
                   </div>
                 </div>
                 <div class="con-item desc clearfix">
                   <div class="fl">其他信息：</div>
                   <div class="fr">
-                    <el-input type="textarea" v-model.trim="teacherForm.otherInfo" :rows="3" maxlength="500" placeholder="请输入您的其他信息，方便我们更多的了解您，还可以提高审核通过率哦！" autosize></el-input>
+                    <el-input type="textarea" v-model.trim="teacherForm.otherInfo" :rows="3" maxlength="200" placeholder="请输入您的其他信息，方便我们更多的了解您，还可以提高审核通过率哦！" autosize></el-input>
                     <span class="input-inner">还可以输入{{descLength}}字</span>
                   </div>
                 </div>
@@ -222,9 +218,8 @@ import { Trim, message, matchSplits, setTitle } from "~/lib/util/helper";
 import { auth, list } from "~/lib/v1_sdk/index";
 
 export default {
-  data () {
+  data() {
     return {
-      imageUrl: "",
       isShowPop: false,
       codeInterval: null,
       uploadFileName: "",
@@ -265,7 +260,8 @@ export default {
         studentCard: "" //学生证
       },
       fileForm: {
-        FILESS: []
+        FILESS: [],
+        fileName: ""
       },
       imgForm: {
         FILESS: [],
@@ -286,7 +282,7 @@ export default {
     };
   },
   watch: {
-    "teacherForm.identity" (newValue, oldValue) {
+    "teacherForm.identity"(newValue, oldValue) {
       for (let key in this.teacherForm) {
         if (
           key == "name" ||
@@ -306,51 +302,35 @@ export default {
     }
   },
   computed: {
-    descLength (desc) {
-      return 500 - this.teacherForm.otherInfo.length;
+    descLength(desc) {
+      return 200 - this.teacherForm.otherInfo.length;
     }
   },
   methods: {
-    handleAvatarSuccess (res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
-    },
-    beforeAvatarUpload (file) {
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
-      }
-      if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 2MB!");
-      }
-      return isJPG && isLt2M;
-    },
-
-    handleSelectChange (val) {
+    handleSelectChange(val) {
       this.teacherForm.school = val;
     },
     //课程形式-线上课程-分类点击
-    handleFormClick () {
+    handleFormClick() {
       this.isShowForm = !this.isShowForm;
     },
-    documentHandler (e) {
+    documentHandler(e) {
       this.isShowForm = false;
     },
     //课程形式-线上课程-分类 下拉选项点击
-    chooseOnline (val) {
+    chooseOnline(val) {
       this.teacherForm.courseOnline = val.name;
       this.teacherForm.courseOnlineID = parseInt(val.id);
       this.isShowForm = false;
     },
-    onlineChange (val) {
+    onlineChange(val) {
       if (val) {
         this.isOnlineChecked = true;
       } else {
         this.isOnlineChecked = false;
       }
     },
-    offlineChange (val) {
+    offlineChange(val) {
       if (val) {
         this.isOfflineChecked = true;
       } else {
@@ -358,9 +338,9 @@ export default {
       }
     },
     //多选框
-    handleserviceChange (val) { },
+    handleserviceChange(val) {},
     //获取验证码
-    getCode () {
+    getCode() {
       const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/;
 
       if (Trim(this.teacherForm.tel) === "") {
@@ -375,7 +355,7 @@ export default {
         this.codeClick = false;
         if (this.bindTelData.seconds === 30) {
           this.bindTelData.types = 6;
-          this.bindTelData.phones = this.teacherForm.tel;
+          this.bindTelData.phones = Trim(this.teacherForm.tel);
 
           auth.smsCodes(this.bindTelData).then(response => {
             let types = response.status === 0 ? "success" : "error";
@@ -398,17 +378,17 @@ export default {
       }
     },
     //删除上传的文件
-    deleteFile () {
+    deleteFile() {
       this.isShowFile = true;
       this.uploadFileName = "";
     },
     //删除上传图片
-    deleteImg () {
+    deleteImg() {
       this.isShowImg = true;
       this.uploadImgName = "";
     },
     //处理文件上传
-    handleFileChange (event) {
+    handleFileChange(event) {
       var reader = new FileReader();
       let imgFiles = event.target.files[0];
       this.uploadFileName = imgFiles.name;
@@ -419,6 +399,7 @@ export default {
       this.fileForm.FILESS = [];
       reader.onloadend = () => {
         this.fileForm.FILESS.push(reader.result);
+        this.fileForm.fileName = imgFiles.name;
         list.uploadResume(this.fileForm).then(res => {
           if (res.status == 0) {
             this.teacherForm.resume = res.data.full_path;
@@ -431,7 +412,7 @@ export default {
       };
     },
     //处理图片上传
-    add_img (event) {
+    add_img(event) {
       // var that = this
       var reader = new FileReader();
       let imgFiles = event.target.files[0];
@@ -440,7 +421,6 @@ export default {
       formdata.append("image", imgFiles);
       formdata.image = imgFiles;
       reader.readAsDataURL(imgFiles);
-      console.log(imgFiles);
       this.imgForm.FILESS = [];
       reader.onloadend = () => {
         // console.log(reader.result);
@@ -457,18 +437,8 @@ export default {
         });
       };
     },
-    add_img22 (event) {
-      // var that = this
-      var reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = function (e) {
-        // 图片base64化
-        var newUrl = this.result;
-        preview.style.backgroundImage = "url(" + newUrl + ")";
-      };
-    },
     //选项信息
-    getRecruitSelect () {
+    getRecruitSelect() {
       list.getRecruitSelect().then(res => {
         //不需要验证是否登录
         if (res.status === 0) {
@@ -482,7 +452,8 @@ export default {
       });
     },
     // 提交
-    handleSubmit () {
+    handleSubmit() {
+      this.teacherForm.tel = Trim(this.teacherForm.tel);
       list.submitBeTeacher(this.teacherForm).then(res => {
         this.isClick = false;
         //不需要验证是否登录
@@ -496,7 +467,7 @@ export default {
       });
     },
     //表单验证
-    validate () {
+    validate() {
       if (this.isClick) {
         return false;
       }
@@ -530,11 +501,11 @@ export default {
       }
       this.handleSubmit();
     },
-    returnList () {
+    returnList() {
       this.$router.push("/home/teacher/list");
     }
   },
-  mounted () {
+  mounted() {
     setTitle("导师招募-1911学堂");
     this.getRecruitSelect();
     // this.teacherForm.tel = persistStore.get("phone");
