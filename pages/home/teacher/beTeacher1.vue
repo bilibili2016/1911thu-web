@@ -203,7 +203,7 @@
         </div>
         <div class="alert">提交成功！</div>
         <div class="desc">
-          <p v-if="teacherForm.identity==1">您是第{{submitted.applyTotal}}位提交申请的导师，已有{{submitted.successTotal}}位导师审批通过。</p>
+          <p v-if="teacherForm.identity==1">您是第{{submitted.applyTotal}}位提交申请的教师，已有{{submitted.successTotal}}位教师审批通过。</p>
           <p v-if="teacherForm.identity==2">您是第{{submitted.applyTotal}}位提交申请的学生，已有{{submitted.successTotal}}位学生审批通过。</p>
           <p>感谢您对1911学堂导师招募的关注，我们会在48小时内与您取得联系！</p>
           <span class="btn" @click="returnList">返回名师智库</span>
