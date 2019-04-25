@@ -10,7 +10,7 @@
             <div ref="tbliveDiv" class="tbliveDiv">
               <div class="tblive" id="tblive" ref="tblive"></div>
             </div>
-            <embed class="embedDiv" src="/images/zhansi.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="580" height="430" style="background-color:#626262">
+            <embed ref="embedDiv" class="embedDiv" src="/images/zhansi.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="580" height="430" style="background-color:#626262">
           </div>
           <!-- <div class="topBar"></div>
         <img src="https://static-image.1911edu.com/live-bg1.png" alt="">
@@ -59,6 +59,7 @@ import { matchSplits, setTitle, message } from "@/lib/util/helper";
 export default {
   data() {
     return {
+      objLength:"",
       isShow: true,
       isOver: false,
       nearEnd: false,
@@ -148,6 +149,13 @@ export default {
           allowScriptAccess: "always"
         }
       );
+      this.objLength = document.getElementById("tblive").children.length
+      if(this.objLength==0){
+        this.$refs.embedDiv.style.zIndex=10
+      }else{
+        this.$refs.embedDiv.style.zIndex=1
+
+      }
     },
 
     creatPlayer(url) {
