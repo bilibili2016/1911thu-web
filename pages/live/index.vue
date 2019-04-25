@@ -37,22 +37,18 @@
           </div>
         </div>
         <!-- 即将结束 -->
-        <div class="pop nearEnd" v-if="nearEnd">
+        <div class="nearEnd pop" v-if="nearEnd">
           <i class="el-icon-close" @click="closeNearend"></i>
           <p>尊敬的学员您好，本次的咨询时间即将结束，请您合理分配时间！</p>
         </div>
         <!-- 已结束 -->
-        <div class="pop over" v-if="isOver">
-          <p>本次一对一视频直播咨询服务已结束。</p>
-          <span class="btn" @click="goProfile">返回个人中心</span>
+        <div class="over" v-if="isOver">
+          <div class="inner pop">
+            <p>本次一对一视频直播咨询服务已结束。</p>
+            <span class="btn" @click="goProfile">返回个人中心</span>
+          </div>
         </div>
       </div>
-      <!-- <div class="liveDetail">
-        <h1>咨询问题大纲</h1>
-        <div class="detail-items">
-          <p class="item" v-for="(item,index) in question" :key="index">{{item}}</p>
-        </div>
-      </div> -->
     </div>
     <div class="rightBtn">
       <div class="yellow" @click="handleClick">
@@ -149,7 +145,7 @@ export default {
       }
     },
     closeNearend () {
-      this.nearend = false
+      this.nearEnd = false
     },
     goProfile () {
       if (this.teacherLiveInfo.type == '1') {
@@ -168,31 +164,36 @@ export default {
         if (response.status == 0) {
           this.url = response.data;
           this.time = response.data.teacherBespokeInfo;
-          //   开始前5分钟进来的
-          if ((parseInt(this.time.start_time) - this.time.service_time) / 60 > 0 && (parseInt(this.time.start_time) - this.time.service_time) / 60 < 5) {
-            this.variable = parseInt(this.time.start_time) - this.time.service_time
-            if (this.timer) {
-              clearInterval(this.timer)
-            }
-            this.countdown(1)
-          } else {
-            this.begin = true;
-            this.end = true;
-          }
-          //   直播已经开始
-          if ((parseInt(this.time.start_time) < this.time.service_time) && (parseInt(this.time.end_time) > this.time.service_time)) {
-            this.variable = parseInt(this.time.end_time) - this.time.service_time
-            if (this.timer) {
-              clearInterval(this.timer)
-            }
-            this.countdown(2)
-          }
+          this.justTime()
         } else {
           this.begin = false;
           this.end = false;
           message(this, "error", response.msg);
         }
       });
+    },
+    justTime () {
+      //  开始前5分钟进来的
+      if ((parseInt(this.time.start_time) - this.time.service_time) / 60 > 0 && (parseInt(this.time.start_time) - this.time.service_time) / 60 < 5) {
+        this.variable = parseInt(this.time.start_time) - this.time.service_time
+        if (this.timer) {
+          clearInterval(this.timer)
+        }
+        this.countdown(1)
+      } else {
+        this.begin = true;
+        this.end = true;
+      }
+      //   直播已经开始
+      if ((parseInt(this.time.start_time) < this.time.service_time) && (parseInt(this.time.end_time) > this.time.service_time)) {
+        this.variable = parseInt(this.time.end_time) - this.time.service_time
+        if (this.timer) {
+          clearInterval(this.timer)
+        }
+        this.countdown(2)
+        // this.begin = true;
+        // this.end = true;
+      }
     },
     countdown (num) {
       this.timer = setInterval(() => {
@@ -204,18 +205,19 @@ export default {
           if (this.variable == 300 && this.showTime == 2) {
             this.nearEnd = true
           }
-
         } else {
           if (this.timer) {
             clearInterval(this.timer)
           }
-          this.showTime = 3
-          this.teacherBespokeInfo()
+          //   等待直播结束
+          if (this.showTime == 1) {
+            this.teacherBespokeInfo()
+          }
           //   直播结束
           if (this.showTime == 2) {
             this.stop_play()
-            this.isOver = true
           }
+          this.showTime = 3
         }
       }, 1000);
     },
@@ -232,8 +234,9 @@ export default {
     },
     //结束直播
     stop_play () {
-      console.log('stop_play');
-
+      this.begin = false;
+      this.end = false;
+      this.isOver = true
       swfobject.getObjectById("tblive").Stop();
       if (this.pullPlay) {
         this.pullPlay.pause();

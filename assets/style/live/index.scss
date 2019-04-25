@@ -200,23 +200,23 @@
     }
 
     .pop {
+      margin: auto;
+      background-color: #fff;
+      text-align: center;
+      border-radius: 10px;
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
       left: 0;
-      margin: auto;
-      background-color: #fff;
-      text-align: center;
-      border-radius: 10px;
-      z-index: 40;
     }
 
     .nearEnd {
-      display: none;
       width: 414px;
       height: 156px;
       padding-top: 50px;
+      z-index: 45;
+
 
       p {
         width: 320px;
@@ -238,28 +238,40 @@
     }
 
     .over {
-      width: 414px;
-      height: 166px;
-      padding-top: 40px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-color: rgba(187, 184, 184, 0.8);
+      text-align: center;
+      z-index: 45;
 
-      p {
-        font-size: 16px;
-        color: #222;
-      }
+      .inner {
+        width: 414px;
+        height: 166px;
+        padding-top: 40px;
 
-      .btn {
-        padding: 12px 30px;
-        background-color: #773084;
-        cursor: pointer;
-        font-size: 14px;
-        color: #fff;
-        margin-top: 40px;
-        border-radius: 6px;
+        p {
+          font-size: 16px;
+          color: #222;
+        }
 
-        &:hover {
-          background-color: #5f068d;
+        .btn {
+          padding: 12px 30px;
+          background-color: #773084;
+          cursor: pointer;
+          font-size: 14px;
+          color: #fff;
+          margin-top: 40px;
+          border-radius: 6px;
+
+          &:hover {
+            background-color: #5f068d;
+          }
         }
       }
+
     }
   }
 
