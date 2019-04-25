@@ -1,19 +1,22 @@
 <template>
-  <div class="live">
-    <div class="liveCon">
-      <div>
-        <div class="playInner" ref="playInner">
-          <div id="mediaPlayer" ref="mediaPlayer" class="mediaCon"></div>
-        </div>
-        <div class="self">
-          <div class="liveBtn">
-            <span @click="start_play">开始直播</span>
-            <span @click="stop_play">结束直播</span>
-            <embed src="/images/zhansi.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="1003" height="115">
+  <div>
+    <div class="live">
+      <div class="liveCon">
+        <div>
+          <div class="playInner" ref="playInner">
+            <div id="mediaPlayer" ref="mediaPlayer" class="mediaCon"></div>
           </div>
-          <div class="tblive" id="tblive"></div>
-        </div>
-        <!-- <div class="topBar"></div>
+          <div class="self">
+            <div class="liveBtn">
+              <span @click="start_play">开始直播</span>
+              <span @click="stop_play">结束直播</span>
+            </div>
+            <div ref="tbliveDiv" class="tbliveDiv" v-show="isShow">
+              <div class="tblive" id="tblive" ref="tblive"></div>
+            </div>
+            <embed v-show="isShow" class="embedDiv" src="/images/zhansi.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="580" height="430" style="background-color:#626262">
+          </div>
+          <!-- <div class="topBar"></div>
         <img src="https://static-image.1911edu.com/live-bg1.png" alt="">
         <div class="bottomBar clearfix">
           <span class="time fl">直播倒计时：20分15秒</span>
@@ -21,22 +24,30 @@
           <span class="btn endBtn fr">结束直播</span>
         </div> -->
 
+        </div>
+        <!-- 即将结束 -->
+        <div class="pop nearEnd" v-if="nearEnd">
+          <i class="el-icon-close"></i>
+          <p>尊敬的学员您好，本次的咨询时间即将结束，请您合理分配时间！</p>
+        </div>
+        <!-- 已结束 -->
+        <div class="pop end" v-if="isOver">
+          <p>本次一对一视频直播咨询服务已结束。</p>
+          <span class="btn">返回个人中心</span>
+        </div>
       </div>
-      <!-- 即将结束 -->
-      <div class="pop nearEnd" v-if="nearEnd">
-        <i class="el-icon-close"></i>
-        <p>尊敬的学员您好，本次的咨询时间即将结束，请您合理分配时间！</p>
-      </div>
-      <!-- 已结束 -->
-      <div class="pop end" v-if="isOver">
-        <p>本次一对一视频直播咨询服务已结束。</p>
-        <span class="btn">返回个人中心</span>
+      <div class="liveDetail">
+        <h1>咨询问题大纲</h1>
+        <div class="detail-items">
+          <p class="item" v-for="(item,index) in question" :key="index">{{item}}</p>
+        </div>
       </div>
     </div>
-    <div class="liveDetail">
-      <h1>咨询问题大纲</h1>
-      <div class="detail-items">
-        <p class="item" v-for="(item,index) in question" :key="index">{{item}}</p>
+    <div class="rightBtn">
+      <div class="white" @click="handleClick">
+        <img v-if="isShow" src="https://static-image.1911edu.com/live-white.png" alt="">
+        <img v-else src="https://static-image.1911edu.com/live-yellow.png" alt="">
+        <p :class="{yellow:!isShow}">我的图像</p>
       </div>
     </div>
   </div>
@@ -46,8 +57,9 @@ import { live } from "~/lib/v1_sdk/index";
 import { matchSplits, setTitle, message } from "@/lib/util/helper";
 
 export default {
-  data () {
+  data() {
     return {
+      isShow: true,
       isOver: false,
       nearEnd: false,
       question: [
@@ -81,46 +93,64 @@ export default {
         useH5Prism: true,
         useFlashPrism: true
       },
-      node: ''
+      node: ""
     };
   },
   methods: {
-    teacherBespokeInfo () {
+    handleClick() {
+      this.isShow = !this.isShow;
+    },
+    teacherBespokeInfo() {
       live.teacherBespokeInfo(this.teacherLiveInfo).then(response => {
         if (response.status == 0) {
-          this.url = response.data
+          this.url = response.data;
         } else {
           message(this, "error", response.msg);
         }
       });
     },
     //开始直播
-    start_play () {
+    start_play() {
       if (swfobject) {
-        swfobject.getObjectById('tblive').Start(this.url.pushUrl);
+        swfobject.getObjectById("tblive").Start(this.url.pushUrl);
         //   创建拉流播放器
-        this.creatPlayer(this.url)
+        this.creatPlayer(this.url);
       } else {
         // 调用之前还没创建的话就再创建一下
-        this.newPlayer()
+        this.newPlayer();
       }
     },
     //结束直播
-    stop_play () {
+    stop_play() {
       swfobject.getObjectById("tblive").Stop();
       if (this.pullPlay) {
         this.pullPlay.pause();
         this.pullPlay.dispose();
-        this.$refs.mediaPlayer.innerHTML = ""
+        this.$refs.mediaPlayer.innerHTML = "";
         this.$refs.playInner.appendChild(this.node);
       }
     },
-    newPlayer () {
+    newPlayer() {
       // 创建播放器并传入参数
-      swfobject.embedSWF("//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf", "tblive", 580, 430, "9.0", "//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf?", {}, { quality: "high", allowFullScreen: "true", wmode: "transparent", menu: "true", allowScriptAccess: "always" });
+      swfobject.embedSWF(
+        "//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf",
+        "tblive",
+        580,
+        430,
+        "9.0",
+        "//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf?",
+        {},
+        {
+          quality: "high",
+          allowFullScreen: "true",
+          wmode: "transparent",
+          menu: "true",
+          allowScriptAccess: "always"
+        }
+      );
     },
 
-    creatPlayer (url) {
+    creatPlayer(url) {
       this.pullaliPlayer.source = url.pullUrl;
       // 不存在 直接创建播放器
       this.pullPlay = new Aliplayer(this.pullaliPlayer);
@@ -132,37 +162,36 @@ export default {
         "none";
     },
     // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
-    playerLoad () {
+    playerLoad() {
       if (document.getElementsByClassName("prism-hide")[0]) {
         document.getElementsByClassName("prism-hide")[0].className =
           "prism-loading";
       }
     },
     // 视频准备好之后执行
-    readyPlay () {
+    readyPlay() {
       console.log("ready");
     },
     // 播放开始--启动计时器
-    playerPlay () {
+    playerPlay() {
       console.log("playerPlay");
     },
-    playerEnded () {
+    playerEnded() {
       console.log("playerEnded");
     },
-    playerError (error) {
+    playerError(error) {
       console.log(error);
-    },
+    }
   },
-  mounted () {
-    this.node = this.$refs.mediaPlayer
-    this.teacherLiveInfo.appointId = matchSplits('id')
-    this.teacherLiveInfo.type = matchSplits('type')
+  mounted() {
+    this.node = this.$refs.mediaPlayer;
+    this.teacherLiveInfo.appointId = matchSplits("id");
+    this.teacherLiveInfo.type = matchSplits("type");
 
     // window.open('http://www.adobe.com/go/getflashplayer_cn')
-    this.teacherBespokeInfo()
+    this.teacherBespokeInfo();
     //   创建推流播放器
-    this.newPlayer()
-
+    this.newPlayer();
   }
 };
 </script>
