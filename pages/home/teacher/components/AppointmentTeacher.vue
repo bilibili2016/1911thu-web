@@ -76,7 +76,7 @@ import { message, Trim } from "~/lib/util/helper";
 import { teacherInfo } from "~/lib/v1_sdk/index";
 export default {
   props: ["teacherInfo", "userInfo"],
-  data () {
+  data() {
     return {
       teacherForm: {
         teacherId: "", //导师ID
@@ -92,15 +92,15 @@ export default {
         hasName: false
       },
       problems: [],
-      timeList: [],
+      timeList: []
     };
   },
   methods: {
-    closeForm () {
+    closeForm() {
       this.$emit("closeForm");
     },
     // 提交数据
-    validate () {
+    validate() {
       //   const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/;
       try {
         if (Trim(this.teacherForm.tel) === "") throw "请填写手机号码";
@@ -120,7 +120,7 @@ export default {
       this.appointmentTeacher();
     },
     // 提交预约导师
-    appointmentTeacher () {
+    appointmentTeacher() {
       teacherInfo.teacherBespoke(this.teacherForm).then(response => {
         //不需要验证是否登录
         if (response.status === 0) {
@@ -131,37 +131,37 @@ export default {
         }
       });
     },
-    update () {
+    update() {
       this.teacherForm.name = this.userInfo.real_name;
       this.teacherForm.tel = this.userInfo.user_name;
       if (this.teacherForm.name) {
         this.teacherForm.hasName = true;
       }
     },
-    teacherBespokeInfo () {
+    teacherBespokeInfo() {
       teacherInfo.teacherBespokeInfo(this.teacherForm).then(response => {
         //不需要验证是否登录
         if (response.status === 0) {
-          this.timeList = response.data.timeList
+          this.timeList = response.data.timeList;
         } else {
           message(this, "error", response.msg);
         }
       });
     },
-    serviceAgreement () {
-      console.log(123123123123);
+    serviceAgreement() {
+      // console.log(123123123123);
     }
   },
   watch: {
-    userInfo () {
+    userInfo() {
       this.update();
     }
   },
-  mounted () {
+  mounted() {
     this.teacherForm.teacherName = this.teacherInfo.teacher_name;
     this.teacherForm.teacherId = this.teacherInfo.id;
     this.update();
-    this.teacherBespokeInfo()
+    this.teacherBespokeInfo();
   }
 };
 </script>

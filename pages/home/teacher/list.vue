@@ -1,7 +1,7 @@
 <template>
   <div class="news-list teacherList" v-loading="loading">
     <div class="banner-con">
-      <v-carousel  :config="configCarousel" :teacherBanner="bannerList"></v-carousel>
+      <v-carousel :config="configCarousel" :teacherBanner="bannerList"></v-carousel>
       <!-- <v-banner :bannerImg="bannerImg" :config="configs"></v-banner> -->
     </div>
     <!-- <div class="teacherLead clearfix">
@@ -54,13 +54,13 @@ export default {
     "v-banner": CustomBanner,
     "v-category": Category,
     "v-nodata": NoData,
-    "v-carousel": Carousel,
+    "v-carousel": Carousel
   },
   data() {
     return {
-      windowWidth:'',
-      bannerList:[],
-       configCarousel: {
+      windowWidth: "",
+      bannerList: [],
+      configCarousel: {
         carousel: "teacher"
       },
       introduce: "",
@@ -135,8 +135,8 @@ export default {
       this.teacherForm.limits = this.pagemsg.pagesize;
       this.pagemsg.page = val;
       this.getNewInfoList();
-      let height = document.getElementById("famousTeacher").offsetHeight;
-      document.body.scrollTop = document.documentElement.scrollTop = height;
+      // let height = document.getElementById("famousTeacher").offsetHeight;
+      document.body.scrollTop = document.documentElement.scrollTop = 420;
     },
     //获取导师数据
     getNewInfoList() {
@@ -232,11 +232,13 @@ export default {
       list.teacherTagsList().then(res => {
         if (res.status == 0) {
           this.tagsList = res.data.teacherTagsList;
-          this.bannerList = res.data.teacherBannerList
-            //设置banner溢出居中显示
+          this.bannerList = res.data.teacherBannerList;
+          //设置banner溢出居中显示
           this.$nextTick(() => {
             if (document.getElementsByClassName("teacherElCarouselItem")) {
-              let imgArr = document.getElementsByClassName("teacherElCarouselItem");
+              let imgArr = document.getElementsByClassName(
+                "teacherElCarouselItem"
+              );
               if (this.windowWidth <= 1920) {
                 let marginLeft = (1920 - this.windowWidth) / 2;
                 for (var i = 0; i < imgArr.length; i++) {
@@ -342,7 +344,6 @@ export default {
 
     this.fixedTop = this.$refs["rightCon"].getBoundingClientRect().top;
     this.windowWidth = document.documentElement.clientWidth;
-
   }
 };
 </script>

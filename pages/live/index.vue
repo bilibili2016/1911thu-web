@@ -25,34 +25,26 @@
         <div class="problemBox">
           <h4>咨询问题大纲</h4>
           <ul ref="ul">
-            <li v-for="(item,index) in question" :key="index">{{item}}</li>
+            <!-- <li v-for="(item,index) in question" :key="index">{{item}}</li> -->
+            <li>{{time.remark}}</li>
           </ul>
         </div>
-        <div class="right" ref="right">
-          <div class="problemBox">
-            <h4>咨询问题大纲</h4>
-            <ul ref="ul">
-              <!-- <li v-for="(item,index) in question" :key="index">{{item}}</li> -->
-              <li>{{time.remark}}</li>
-            </ul>
-          </div>
-          <div class="liveBtn clearfix">
-            <span v-if="begin" class="fl" @click="start_play">开始直播</span>
-            <span v-else class="fl begin">开始直播</span>
-            <span v-if="end" class="fr" @click="stop_play">结束直播</span>
-            <span v-else class="fr end">结束直播</span>
-          </div>
+        <div class="liveBtn clearfix">
+          <span v-if="begin" class="fl" @click="start_play">开始直播</span>
+          <span v-else class="fl begin">开始直播</span>
+          <span v-if="end" class="fr" @click="stop_play">结束直播</span>
+          <span v-else class="fr end">结束直播</span>
         </div>
-        <!-- 即将结束 -->
-        <div class="pop nearEnd" v-if="nearEnd">
-          <i class="el-icon-close" @click="closeNearend"></i>
-          <p>尊敬的学员您好，本次的咨询时间即将结束，请您合理分配时间！</p>
-        </div>
-        <!-- 已结束 -->
-        <div class="pop over" v-if="isOver">
-          <p>本次一对一视频直播咨询服务已结束。</p>
-          <span class="btn" @click="goProfile">返回个人中心</span>
-        </div>
+      </div>
+      <!-- 即将结束 -->
+      <div class="pop nearEnd" v-if="nearEnd">
+        <i class="el-icon-close" @click="closeNearend"></i>
+        <p>尊敬的学员您好，本次的咨询时间即将结束，请您合理分配时间！</p>
+      </div>
+      <!-- 已结束 -->
+      <div class="pop over" v-if="isOver">
+        <p>本次一对一视频直播咨询服务已结束。</p>
+        <span class="btn" @click="goProfile">返回个人中心</span>
       </div>
     </div>
     <!-- 即将结束 -->
@@ -83,7 +75,7 @@ import { matchSplits, setTitle, message } from "@/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
 
 export default {
-  data () {
+  data() {
     return {
       objLength: "",
       isShow: true,
@@ -143,13 +135,13 @@ export default {
         gids: "tab-twelfth"
       },
       loadTime: "",
-      time: ''
+      time: ""
     };
   },
   methods: {
     ...mapActions("auth", ["setGid"]),
     // 改变屏幕宽度重置播放器大小
-    resize () {
+    resize() {
       if (document.body.clientHeight) {
         this.$nextTick(() => {
           const h = document.body.clientHeight;
@@ -164,12 +156,12 @@ export default {
         });
       }
     },
-    closeNearend () {
+    closeNearend() {
       this.nearEnd = false;
     },
     // 跳转个人中心
-    goProfile () {
-      if (this.teacherLiveInfo.type == '1') {
+    goProfile() {
+      if (this.teacherLiveInfo.type == "1") {
         this.gidForm.gids = "tab-twelfth";
       } else {
         this.gidForm.gids = "tab-thirteenth";
@@ -177,11 +169,11 @@ export default {
       this.setGid(this.gidForm);
       this.$router.push("/profile");
     },
-    handleClick () {
+    handleClick() {
       this.isShow = !this.isShow;
     },
     // 获取数据  播放地址  详情
-    teacherBespokeInfo () {
+    teacherBespokeInfo() {
       live.teacherBespokeInfo(this.teacherLiveInfo).then(response => {
         if (response.status == 0) {
           this.url = response.data;
@@ -196,7 +188,7 @@ export default {
       });
     },
     // 判断当前时间：开始前预备时间——或——直播已经开始
-    justTime () {
+    justTime() {
       //  开始前5分钟进来的
       if (
         (parseInt(this.time.start_time) - this.time.service_time) / 60 > 0 &&
@@ -224,7 +216,7 @@ export default {
       }
     },
     // 进入页面后 触发的倒计时
-    countdown (num) {
+    countdown(num) {
       this.timer = setInterval(() => {
         if (this.variable > 0) {
           this.showTime = num;
@@ -254,7 +246,7 @@ export default {
       }, 1000);
     },
     //开始直播
-    start_play () {
+    start_play() {
       if (swfobject) {
         swfobject.getObjectById("tblive").Start(this.url.pushUrl);
         //   创建拉流播放器
@@ -265,7 +257,7 @@ export default {
       }
     },
     //结束直播
-    stop_play () {
+    stop_play() {
       swfobject.getObjectById("tblive").Stop();
       if (this.pullPlay) {
         this.pullPlay.pause();
@@ -275,7 +267,7 @@ export default {
       }
     },
     // 创建播放器并传入参数
-    newPlayer () {
+    newPlayer() {
       swfobject.embedSWF(
         "//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf",
         "tblive",
@@ -302,7 +294,7 @@ export default {
       //   document.getElementsByTagName("object")[0].style.background = "#626262"
     },
     // 刚进入页面的时候加载完flash播放器 轮询检测播放器是否创建成功
-    load () {
+    load() {
       this.loadtime = setInterval(() => {
         if (document.getElementById("tblive")) {
           this.objLength = document.getElementById("tblive").children.length;
@@ -317,7 +309,7 @@ export default {
         }
       }, 1000);
     },
-    creatPlayer (url) {
+    creatPlayer(url) {
       this.pullaliPlayer.source = url.pullUrl;
       // 不存在 直接创建播放器
       this.pullPlay = new Aliplayer(this.pullaliPlayer);
@@ -329,28 +321,28 @@ export default {
         "none";
     },
     // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
-    playerLoad () {
+    playerLoad() {
       if (document.getElementsByClassName("prism-hide")[0]) {
         document.getElementsByClassName("prism-hide")[0].className =
           "prism-loading";
       }
     },
     // 视频准备好之后执行
-    readyPlay () {
+    readyPlay() {
       //   console.log("ready");
     },
     // 播放开始--启动计时器
-    playerPlay () {
+    playerPlay() {
       //   console.log("playerPlay");
     },
-    playerEnded () {
+    playerEnded() {
       //   console.log("playerEnded");
     },
-    playerError (error) {
+    playerError(error) {
       //   console.log(error, 'error');
     }
   },
-  mounted () {
+  mounted() {
     if (!persistStore.get("token")) {
       this.$router.push("/");
       this.$bus.$emit("loginShow", true);
@@ -372,16 +364,16 @@ export default {
     this.load();
   },
   //  销毁之前展示头部 底部
-  destroyed () {
+  destroyed() {
     this.$bus.$emit("headerFooterShow");
   },
   //   进入页面的的时候
-  beforeRouteEnter (to, from, next) {
+  beforeRouteEnter(to, from, next) {
     next(vm => {
       vm.$bus.$emit("headerFooterHide");
     });
   },
-  beforeRouteLeave (to, from, next) {
+  beforeRouteLeave(to, from, next) {
     // this.$bus.$emit("headerFooterShow");
     next();
   }
