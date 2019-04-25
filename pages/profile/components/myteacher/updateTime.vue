@@ -76,7 +76,7 @@
 </template>
 <script>
 import { myTeacher } from "~/lib/v1_sdk/index";
-import { message, IEPopup } from "~/lib/util/helper";
+import { message, IEPopup, Trim } from "~/lib/util/helper";
 
 export default {
   props: ["timeID"],
@@ -127,18 +127,19 @@ export default {
     },
     validate() {
       try {
-        if (this.updateTimeForm.timeType == 1) {
+        if (this.updateTimeForm.timeType == "1") {
           if (this.updateTimeForm.nextTime == "") throw "请选择期待修改时间";
         }
-        if (this.updateTimeForm.timeType == 2) {
+        if (this.updateTimeForm.timeType == "2") {
           if (this.updateTimeForm.appointmentDate == "")
             throw "请选择自定义日期";
           if (this.updateTimeForm.appointmentTime == "")
             throw "请选择自定义时间";
         }
-        if (this.updateTimeForm.describe == "") throw "请描述修改原因";
+        if (Trim(this.updateTimeForm.describe) == "") throw "请描述修改原因";
       } catch (error) {
         message(this, "error", error);
+        return false;
       }
       this.submit();
     },
