@@ -226,7 +226,7 @@ export default {
     },
     //开始直播
     start_play () {
-      document.getElementsByTagName("object")[0].setAttribute('data', '//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf');
+
       if (swfobject) {
         swfobject.getObjectById("tblive").Start(this.url.pushUrl);
         //   创建拉流播放器
