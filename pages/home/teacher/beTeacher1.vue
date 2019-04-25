@@ -6,10 +6,11 @@
         <h4>诚聘导师</h4>
         <div class="wordBox">
           <div class="word">
-            <p>1911学堂，作为混合式终身教育提供者，为中小学生、大学生及职场人士提供终身教育及导师咨询服务，现诚挚邀请您成为我们的“特聘导师”。</p>
-            <p>成为1911 1911学堂坚信“知识即服务”，学堂定位为知识加工者和传播者，致力于将您的知识进行科学加工及高效传播，把您的知识转变成丰厚的物质回报和精神回报。</p>
+            <p>1911学堂，作为混合式终身教育提供者，为中小学生、大学生及职场人士提供终身教育及导师咨询服务。</p>
+            <p>共享经济正在从有形向无形的方向发展，对于知识、技能等的分享会形成一种新的经济形态，为了延续知识传播与分享的方式，为用户提供良好的用户体验，更好地保障学习者的学习效果，1911学堂研发了预约咨询或授课服务模式。诚挚地邀请您成为1911学堂 “特聘导师”，针对学员学习需求提供付费咨询服务或授课，咨询方式包括线上语音（或视频或文字）、线下约见等，咨询内容大致为所授课程相关知识，行业领域发展趋势，学员行业发展建议等内容。</p>
+            <p>1911学堂坚信“知识即服务”，学堂定位为知识加工者和传播者，致力于将您的知识进行科学加工及高效传播，把您的知识转变成丰厚的物质回报和精神回报。</p>
             <p>1911学堂现面向清华北大等高校诚聘优秀教师及学生，前100名教师及前200名学生申请通过者,将得到数额不菲的注册金奖励！在后续咨询及授课服务中还将获得持续的、丰厚的回报！</p>
-            <p>期待您成为1911学堂“特聘导师”！</p>
+            <p>期待您成为1911学堂“特聘导师”！共同促进广大学生及职场人士的终身成长！</p>
           </div>
         </div>
       </div>
@@ -218,7 +219,7 @@ import { Trim, message, matchSplits, setTitle } from "~/lib/util/helper";
 import { auth, list } from "~/lib/v1_sdk/index";
 
 export default {
-  data() {
+  data () {
     return {
       isShowPop: false,
       codeInterval: null,
@@ -282,7 +283,7 @@ export default {
     };
   },
   watch: {
-    "teacherForm.identity"(newValue, oldValue) {
+    "teacherForm.identity" (newValue, oldValue) {
       for (let key in this.teacherForm) {
         if (
           key == "name" ||
@@ -302,35 +303,35 @@ export default {
     }
   },
   computed: {
-    descLength(desc) {
+    descLength (desc) {
       return 200 - this.teacherForm.otherInfo.length;
     }
   },
   methods: {
-    handleSelectChange(val) {
+    handleSelectChange (val) {
       this.teacherForm.school = val;
     },
     //课程形式-线上课程-分类点击
-    handleFormClick() {
+    handleFormClick () {
       this.isShowForm = !this.isShowForm;
     },
-    documentHandler(e) {
+    documentHandler (e) {
       this.isShowForm = false;
     },
     //课程形式-线上课程-分类 下拉选项点击
-    chooseOnline(val) {
+    chooseOnline (val) {
       this.teacherForm.courseOnline = val.name;
       this.teacherForm.courseOnlineID = parseInt(val.id);
       this.isShowForm = false;
     },
-    onlineChange(val) {
+    onlineChange (val) {
       if (val) {
         this.isOnlineChecked = true;
       } else {
         this.isOnlineChecked = false;
       }
     },
-    offlineChange(val) {
+    offlineChange (val) {
       if (val) {
         this.isOfflineChecked = true;
       } else {
@@ -338,9 +339,9 @@ export default {
       }
     },
     //多选框
-    handleserviceChange(val) {},
+    handleserviceChange (val) { },
     //获取验证码
-    getCode() {
+    getCode () {
       const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/;
 
       if (Trim(this.teacherForm.tel) === "") {
@@ -378,17 +379,17 @@ export default {
       }
     },
     //删除上传的文件
-    deleteFile() {
+    deleteFile () {
       this.isShowFile = true;
       this.uploadFileName = "";
     },
     //删除上传图片
-    deleteImg() {
+    deleteImg () {
       this.isShowImg = true;
       this.uploadImgName = "";
     },
     //处理文件上传
-    handleFileChange(event) {
+    handleFileChange (event) {
       var reader = new FileReader();
       let imgFiles = event.target.files[0];
       this.uploadFileName = imgFiles.name;
@@ -412,7 +413,7 @@ export default {
       };
     },
     //处理图片上传
-    add_img(event) {
+    add_img (event) {
       // var that = this
       var reader = new FileReader();
       let imgFiles = event.target.files[0];
@@ -438,7 +439,7 @@ export default {
       };
     },
     //选项信息
-    getRecruitSelect() {
+    getRecruitSelect () {
       list.getRecruitSelect().then(res => {
         //不需要验证是否登录
         if (res.status === 0) {
@@ -452,7 +453,7 @@ export default {
       });
     },
     // 提交
-    handleSubmit() {
+    handleSubmit () {
       this.teacherForm.tel = Trim(this.teacherForm.tel);
       list.submitBeTeacher(this.teacherForm).then(res => {
         this.isClick = false;
@@ -467,7 +468,7 @@ export default {
       });
     },
     //表单验证
-    validate() {
+    validate () {
       if (this.isClick) {
         return false;
       }
@@ -501,11 +502,11 @@ export default {
       }
       this.handleSubmit();
     },
-    returnList() {
+    returnList () {
       this.$router.push("/home/teacher/list");
     }
   },
-  mounted() {
+  mounted () {
     setTitle("导师招募-1911学堂");
     this.getRecruitSelect();
     // this.teacherForm.tel = persistStore.get("phone");

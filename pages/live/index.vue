@@ -168,11 +168,6 @@ export default {
         if (response.status == 0) {
           this.url = response.data;
           this.time = response.data.teacherBespokeInfo;
-          //   直播结束
-          if (this.time.service_time > parseInt(this.time.end_time)) {
-            this.stop_play()
-            this.isOver = true
-          }
           //   开始前5分钟进来的
           if ((parseInt(this.time.start_time) - this.time.service_time) / 60 > 0 && (parseInt(this.time.start_time) - this.time.service_time) / 60 < 5) {
             this.variable = parseInt(this.time.start_time) - this.time.service_time
@@ -206,15 +201,21 @@ export default {
           this.variable--
           this.min = parseInt(this.variable / 60)
           this.second = this.variable % 60
-          if (this.variable == 300) {
+          if (this.variable == 300 && this.showTime == 2) {
             this.nearEnd = true
           }
+
         } else {
           if (this.timer) {
             clearInterval(this.timer)
           }
           this.showTime = 3
           this.teacherBespokeInfo()
+          //   直播结束
+          if (this.showTime == 2) {
+            this.stop_play()
+            this.isOver = true
+          }
         }
       }, 1000);
     },
@@ -299,7 +300,8 @@ export default {
       console.log("playerEnded");
     },
     playerError (error) {
-      console.log(error);
+      console.log(error, 'error');
+
     }
   },
   mounted () {
