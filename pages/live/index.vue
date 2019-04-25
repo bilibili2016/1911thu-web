@@ -12,7 +12,8 @@
             </div>
             <embed ref="embedDiv" class="embedDiv" src="/images/zhansi.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="580" height="430" style="background-color:#626262">
           </div>
-          <div class="time" v-if="showTime">直播倒计时：{{min}}分{{second}}秒</div>
+          <div class="time" v-if="showTime==1">{{min}}分{{second}}秒后开始直播</div>
+          <div class="time" v-if="showTime==2">直播倒计时：{{min}}分{{second}}秒</div>
           <!-- <div class="topBar"></div>
         <img src="https://static-image.1911edu.com/live-bg1.png" alt="">
         <div class="bottomBar clearfix">
@@ -36,34 +37,31 @@
           </div>
         </div>
         <!-- 即将结束 -->
-        <div class="pop nearEnd" v-if="nearEnd">
-          <i class="el-icon-close"></i>
+        <div class="nearEnd pop" v-if="nearEnd">
+          <i class="el-icon-close" @click="closeNearend"></i>
           <p>尊敬的学员您好，本次的咨询时间即将结束，请您合理分配时间！</p>
         </div>
         <!-- 已结束 -->
-        <div class="pop over" v-if="isOver">
-          <p>本次一对一视频直播咨询服务已结束。</p>
-          <span class="btn">返回个人中心</span>
+        <div class="over" v-if="isOver">
+          <div class="inner pop">
+            <p>本次一对一视频直播咨询服务已结束。</p>
+            <span class="btn" @click="goProfile">返回个人中心</span>
+          </div>
         </div>
       </div>
-      <!-- <div class="liveDetail">
-        <h1>咨询问题大纲</h1>
-        <div class="detail-items">
-          <p class="item" v-for="(item,index) in question" :key="index">{{item}}</p>
-        </div>
-      </div> -->
     </div>
     <div class="rightBtn">
-      <div class="white" @click="handleClick">
-        <img v-if="isShow" src="https://static-image.1911edu.com/live-white.png" alt="">
+      <div class="yellow" @click="handleClick">
+        <img v-if="!isShow" src="https://static-image.1911edu.com/live-white.png" alt="">
         <img v-else src="https://static-image.1911edu.com/live-yellow.png" alt="">
-        <p :class="{yellow:!isShow}">我的图像</p>
+        <p :class="{white:!isShow}">我的视频</p>
       </div>
     </div>
   </div>
 </template>
 <script>
 import { live } from "~/lib/v1_sdk/index";
+import { mapActions } from "vuex";
 import { matchSplits, setTitle, message } from "@/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
 
@@ -78,9 +76,19 @@ export default {
       end: false,
       question: [
         "1、远程班学习效果能保证吗？",
-        "2、请问学完课程，将会获得什么？",
-        "3、请问报名缴费后多久可以上课？",
-        "4、报名缴费后可以退款吗？"
+        "2、远程班学习效果能保证吗？远程班学习效果能保证吗？",
+        "3、远程班学习效果能保证吗？",
+        "4、远程班学习效果能保证吗？远程班学习效果能保证吗？",
+        "5、远程班学习效果能保证吗？",
+        "6、远程班学习效果能保证吗？远程班学习效果能保证吗？",
+        "7、远程班学习效果能保证吗？",
+        "8、远程班学习效果能保证吗？远程班学习效果能保证吗？",
+        "9、远程班学习效果能保证吗？",
+        "10、远程班学习效果能保证吗？远程班学习效果能保证吗？",
+        "11、远程班学习效果能保证吗？",
+        "12、远程班学习效果能保证吗？远程班学习效果能保证吗？",
+        "13、远程班学习效果能保证吗？",
+        "14、远程班学习效果能保证吗？远程班学习效果能保证吗？",
       ],
       teacherLiveInfo: {
         appointId: "",
@@ -112,10 +120,14 @@ export default {
       variable: 0,
       min: 10000,
       second: 10000,
-      showTime: false
+      showTime: 3,
+      gidForm: {
+        gids: 'tab-twelfth'
+      }
     };
   },
   methods: {
+    ...mapActions("auth", ["setGid"]),
     // 改变屏幕宽度重置播放器大小
     resize () {
       if (document.body.clientHeight) {
@@ -132,6 +144,18 @@ export default {
         });
       }
     },
+    closeNearend () {
+      this.nearEnd = false
+    },
+    goProfile () {
+      if (this.teacherLiveInfo.type == '1') {
+        this.gidForm.gids = "tab-twelfth";
+      } else {
+        this.gidForm.gids = "tab-thirteenth";
+      }
+      this.setGid(this.gidForm);
+      this.$router.push("/profile");
+    },
     handleClick () {
       this.isShow = !this.isShow;
     },
@@ -140,17 +164,7 @@ export default {
         if (response.status == 0) {
           this.url = response.data;
           this.time = response.data.teacherBespokeInfo;
-          if ((parseInt(this.time.start_time) - this.time.service_time) / 60 > 0 && (parseInt(this.time.start_time) - this.time.service_time) / 60 < 5) {
-            this.variable = parseInt(this.time.start_time) - this.time.service_time
-            if (this.timer) {
-              clearInterval(this.timer)
-            }
-            this.countdown()
-          } else {
-            this.begin = true;
-            this.end = true;
-          }
-
+          this.justTime()
         } else {
           this.begin = false;
           this.end = false;
@@ -158,19 +172,52 @@ export default {
         }
       });
     },
-    countdown () {
+    justTime () {
+      //  开始前5分钟进来的
+      if ((parseInt(this.time.start_time) - this.time.service_time) / 60 > 0 && (parseInt(this.time.start_time) - this.time.service_time) / 60 < 5) {
+        this.variable = parseInt(this.time.start_time) - this.time.service_time
+        if (this.timer) {
+          clearInterval(this.timer)
+        }
+        this.countdown(1)
+      } else {
+        this.begin = true;
+        this.end = true;
+      }
+      //   直播已经开始
+      if ((parseInt(this.time.start_time) < this.time.service_time) && (parseInt(this.time.end_time) > this.time.service_time)) {
+        this.variable = parseInt(this.time.end_time) - this.time.service_time
+        if (this.timer) {
+          clearInterval(this.timer)
+        }
+        this.countdown(2)
+        // this.begin = true;
+        // this.end = true;
+      }
+    },
+    countdown (num) {
       this.timer = setInterval(() => {
         if (this.variable > 0) {
-          this.showTime = true
+          this.showTime = num
           this.variable--
           this.min = parseInt(this.variable / 60)
           this.second = this.variable % 60
+          if (this.variable == 300 && this.showTime == 2) {
+            this.nearEnd = true
+          }
         } else {
           if (this.timer) {
             clearInterval(this.timer)
           }
-          this.showTime = false
-          this.teacherBespokeInfo()
+          //   等待直播结束
+          if (this.showTime == 1) {
+            this.teacherBespokeInfo()
+          }
+          //   直播结束
+          if (this.showTime == 2) {
+            this.stop_play()
+          }
+          this.showTime = 3
         }
       }, 1000);
     },
@@ -187,6 +234,9 @@ export default {
     },
     //结束直播
     stop_play () {
+      this.begin = false;
+      this.end = false;
+      this.isOver = true
       swfobject.getObjectById("tblive").Stop();
       if (this.pullPlay) {
         this.pullPlay.pause();
@@ -195,6 +245,8 @@ export default {
         this.$refs.playInner.appendChild(this.node);
       }
     },
+    // liveroom
+
     newPlayer () {
       // 创建播放器并传入参数
       swfobject.embedSWF(
@@ -251,7 +303,8 @@ export default {
       console.log("playerEnded");
     },
     playerError (error) {
-      console.log(error);
+      console.log(error, 'error');
+
     }
   },
   mounted () {

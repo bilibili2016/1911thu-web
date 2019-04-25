@@ -200,22 +200,23 @@
     }
 
     .pop {
+      margin: auto;
+      background-color: #fff;
+      text-align: center;
+      border-radius: 10px;
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
       left: 0;
-      margin: auto;
-      background-color: #fff;
-      text-align: center;
-      border-radius: 10px;
     }
 
     .nearEnd {
-      display: none;
       width: 414px;
       height: 156px;
       padding-top: 50px;
+      z-index: 45;
+
 
       p {
         width: 320px;
@@ -237,28 +238,40 @@
     }
 
     .over {
-      width: 414px;
-      height: 166px;
-      padding-top: 40px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-color: rgba(187, 184, 184, 0.8);
+      text-align: center;
+      z-index: 45;
 
-      p {
-        font-size: 16px;
-        color: #222;
-      }
+      .inner {
+        width: 414px;
+        height: 166px;
+        padding-top: 40px;
 
-      .btn {
-        padding: 12px 30px;
-        background-color: #773084;
-        cursor: pointer;
-        font-size: 14px;
-        color: #fff;
-        margin-top: 40px;
-        border-radius: 6px;
+        p {
+          font-size: 16px;
+          color: #222;
+        }
 
-        &:hover {
-          background-color: #5f068d;
+        .btn {
+          padding: 12px 30px;
+          background-color: #773084;
+          cursor: pointer;
+          font-size: 14px;
+          color: #fff;
+          margin-top: 40px;
+          border-radius: 6px;
+
+          &:hover {
+            background-color: #5f068d;
+          }
         }
       }
+
     }
   }
 
@@ -298,13 +311,16 @@
 
 .rightBtn {
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 10px;
+  top: 10px;
+  z-index: 40;
 
-  .white {
+  .yellow {
     width: 60px;
     height: 70px;
     text-align: center;
+    background-color: rgba(95, 6, 141, .6);
+    border-radius: 5px;
     cursor: pointer;
 
     img {
@@ -317,11 +333,11 @@
     p {
       text-align: center;
       font-size: 12px;
-      color: #fff;
+      color: #ffdb5f;
     }
 
-    .yellow {
-      color: #FFDB5F
+    .white {
+      color: #fff;
     }
   }
 }
