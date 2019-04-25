@@ -41,7 +41,7 @@
     <!-- 即将结束 -->
     <div class="nearEnd pop" v-if="nearEnd">
       <i class="el-icon-close" @click="closeNearend"></i>
-      <p>尊敬的学员您好，本次的咨询时间即将结束，请您合理分配时间！</p>
+      <p>尊敬的{{this.teacherLiveInfo.type=='1'?"学院":"导师"}}您好，本次的咨询时间即将结束，请您合理分配时间！</p>
     </div>
     <!-- 已结束 -->
     <div class="over" v-if="isOver">
