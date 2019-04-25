@@ -160,10 +160,10 @@ export default {
           link: "tab-tenth",
           text: "申请证书"
         },
-        // {
-        //   link: "tab-twelfth",
-        //   text: "我的咨询"
-        // },
+        {
+          link: "tab-twelfth",
+          text: "我的咨询"
+        },
         // {
         //   link: "tab-thirteenth",
         //   text: "教师入口"
