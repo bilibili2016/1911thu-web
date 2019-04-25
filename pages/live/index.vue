@@ -1,40 +1,38 @@
 <template>
-  <div>
-    <div class="live">
-      <div class="liveCon" ref="playerBox">
-        <div class="left" ref="left">
-          <div :class="[isShow?'playInner':'playInner index']" ref="playInner">
-            <div id="mediaPlayer" ref="mediaPlayer" class="mediaCon"></div>
+  <div class="live">
+    <div class="liveCon" ref="playerBox">
+      <div class="left" ref="left">
+        <div :class="[isShow?'playInner':'playInner index']" ref="playInner">
+          <div id="mediaPlayer" ref="mediaPlayer" class="mediaCon"></div>
+        </div>
+        <div :class="[isShow?'index self':'self']">
+          <div ref="tbliveDiv" class="tbliveDiv">
+            <div class="tblive" id="tblive" ref="tblive"></div>
           </div>
-          <div :class="[isShow?'index self':'self']">
-            <div ref="tbliveDiv" class="tbliveDiv">
-              <div class="tblive" id="tblive" ref="tblive"></div>
-            </div>
-            <embed ref="embedDiv" class="embedDiv" src="/images/zhansi.swf" quality="high" pluginspage="https://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="580" height="430" style="background-color:#626262">
-          </div>
-          <div class="time" v-if="showTime==1">{{min}}分{{second}}秒后开始直播</div>
-          <div class="time" v-if="showTime==2">直播倒计时：{{min}}分{{second}}秒</div>
-          <!-- <div class="topBar"></div>
+          <embed v-show="showEmbedDiv" ref="embedDiv" class="embedDiv" src="/images/zhansi.swf" quality="high" pluginspage="https://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="580" height="430" style="background-color:#626262">
+        </div>
+        <div class="time" v-if="showTime==1">{{min}}分{{second}}秒后开始直播</div>
+        <div class="time" v-if="showTime==2">直播倒计时：{{min}}分{{second}}秒</div>
+        <!-- <div class="topBar"></div>
         <img src="https://static-image.1911edu.com/live-bg1.png" alt="">
         <div class="bottomBar clearfix">
           <span class="time fl">直播倒计时：20分15秒</span>
           <span class="btn nearBtn fr">结束直播</span>
           <span class="btn endBtn fr">结束直播</span>
         </div> -->
+      </div>
+      <div class="right" ref="right">
+        <div class="problemBox">
+          <h4>咨询问题大纲</h4>
+          <ul ref="ul">
+            <li v-for="(item,index) in question" :key="index">{{item}}</li>
+          </ul>
         </div>
-        <div class="right" ref="right">
-          <div class="problemBox">
-            <h4>咨询问题大纲</h4>
-            <ul ref="ul">
-              <li v-for="(item,index) in question" :key="index">{{item}}</li>
-            </ul>
-          </div>
-          <div class="liveBtn clearfix">
-            <span v-if="begin" class="fl" @click="start_play">开始直播</span>
-            <span v-else class="fl begin">开始直播</span>
-            <span v-if="end" class="fr" @click="stop_play">结束直播</span>
-            <span v-else class="fr end">结束直播</span>
-          </div>
+        <div class="liveBtn clearfix">
+          <span v-if="begin" class="fl" @click="start_play">开始直播</span>
+          <span v-else class="fl begin">开始直播</span>
+          <span v-if="end" class="fr" @click="stop_play">结束直播</span>
+          <span v-else class="fr end">结束直播</span>
         </div>
       </div>
     </div>
@@ -121,6 +119,7 @@ export default {
       min: 10000,
       second: 10000,
       showTime: 3,
+      showEmbedDiv: true,
       gidForm: {
         gids: "tab-twelfth"
       },
@@ -280,7 +279,7 @@ export default {
       //     this.$refs.embedDiv.style.zIndex = 1;
       //   }
       //   推流播放器样式改写
-      //   document.getElementsByTagName("object")[0].setAttribute('data', '');
+      //   document.getElementsByTagName("object")[0].style.background = "#626262"
     },
     // 刚进入页面的时候加载完flash播放器 轮询检测播放器是否创建成功
     load () {
@@ -288,7 +287,11 @@ export default {
         if (document.getElementById("tblive")) {
           this.objLength = document.getElementById("tblive").children.length;
           if (this.objLength > 0) {
-            this.$refs.embedDiv.style.zIndex = 1;
+            if (!!window.ActiveXObject || "ActiveXObject" in window) {
+              this.showEmbedDiv = false;
+            } else {
+              this.$refs.embedDiv.style.zIndex = 1;
+            }
             clearInterval(this.loadtime);
           }
         }
