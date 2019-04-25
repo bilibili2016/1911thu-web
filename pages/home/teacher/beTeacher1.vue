@@ -58,7 +58,7 @@
                   <div class="fl"><i class="red">*</i>职称：</div>
                   <div class="fr">
                     <el-radio-group v-model="teacherForm.dutyName">
-                      <el-radio v-for="(item,index) in graduateList" :key="index" :label="item.id">{{item.name}}</el-radio>
+                      <el-radio v-for="(item,index) in graduateList" :key="index" :label="item.name">{{item.name}}</el-radio>
                     </el-radio-group>
                   </div>
                 </div>
@@ -218,7 +218,7 @@ import { Trim, message, matchSplits, setTitle } from "~/lib/util/helper";
 import { auth, list } from "~/lib/v1_sdk/index";
 
 export default {
-  data() {
+  data () {
     return {
       isShowPop: false,
       codeInterval: null,
@@ -280,7 +280,7 @@ export default {
     };
   },
   watch: {
-    "teacherForm.identity"(newValue, oldValue) {
+    "teacherForm.identity" (newValue, oldValue) {
       for (let key in this.teacherForm) {
         if (
           key == "name" ||
@@ -300,35 +300,35 @@ export default {
     }
   },
   computed: {
-    descLength(desc) {
+    descLength (desc) {
       return 500 - this.teacherForm.otherInfo.length;
     }
   },
   methods: {
-    handleSelectChange(val) {
+    handleSelectChange (val) {
       this.teacherForm.school = val;
     },
     //课程形式-线上课程-分类点击
-    handleFormClick() {
+    handleFormClick () {
       this.isShowForm = !this.isShowForm;
     },
-    documentHandler(e) {
+    documentHandler (e) {
       this.isShowForm = false;
     },
     //课程形式-线上课程-分类 下拉选项点击
-    chooseOnline(val) {
+    chooseOnline (val) {
       this.teacherForm.courseOnline = val.name;
       this.teacherForm.courseOnlineID = parseInt(val.id);
       this.isShowForm = false;
     },
-    onlineChange(val) {
+    onlineChange (val) {
       if (val) {
         this.isOnlineChecked = true;
       } else {
         this.isOnlineChecked = false;
       }
     },
-    offlineChange(val) {
+    offlineChange (val) {
       if (val) {
         this.isOfflineChecked = true;
       } else {
@@ -336,9 +336,9 @@ export default {
       }
     },
     //多选框
-    handleserviceChange(val) {},
+    handleserviceChange (val) { },
     //获取验证码
-    getCode() {
+    getCode () {
       const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/;
 
       if (Trim(this.teacherForm.tel) === "") {
@@ -376,17 +376,17 @@ export default {
       }
     },
     //删除上传的文件
-    deleteFile() {
+    deleteFile () {
       this.isShowFile = true;
       this.uploadFileName = "";
     },
     //删除上传图片
-    deleteImg() {
+    deleteImg () {
       this.isShowImg = true;
       this.uploadImgName = "";
     },
     //处理文件上传
-    handleFileChange(event) {
+    handleFileChange (event) {
       var reader = new FileReader();
       let imgFiles = event.target.files[0];
       this.uploadFileName = imgFiles.name;
@@ -409,7 +409,7 @@ export default {
       };
     },
     //处理图片上传
-    add_img(event) {
+    add_img (event) {
       // var that = this
       var reader = new FileReader();
       let imgFiles = event.target.files[0];
@@ -433,7 +433,7 @@ export default {
       };
     },
     //选项信息
-    getRecruitSelect() {
+    getRecruitSelect () {
       list.getRecruitSelect().then(res => {
         //不需要验证是否登录
         if (res.status === 0) {
@@ -447,7 +447,7 @@ export default {
       });
     },
     // 提交
-    handleSubmit() {
+    handleSubmit () {
       list.submitBeTeacher(this.teacherForm).then(res => {
         this.isClick = false;
         //不需要验证是否登录
@@ -461,8 +461,7 @@ export default {
       });
     },
     //表单验证
-    validate() {
-      console.log(this.teacherForm);
+    validate () {
       if (this.isClick) {
         return false;
       }
@@ -496,11 +495,11 @@ export default {
       }
       this.handleSubmit();
     },
-    returnList() {
+    returnList () {
       this.$router.push("/home/teacher/list");
     }
   },
-  mounted() {
+  mounted () {
     setTitle("导师招募-1911学堂");
     this.getRecruitSelect();
     // this.teacherForm.tel = persistStore.get("phone");
