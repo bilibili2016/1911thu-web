@@ -21,7 +21,7 @@
           <div class="fr">
             <span v-if="teacher.result_status == 2" class="wait">等待预约确认</span>
             <span v-if="teacher.result_status == 3">
-              <span v-if="(Number(teacher.start_time)-teacher.service_time)/60>5" class="soon" @click="goLive(teacher)">等待开始</span>
+              <span v-if="(Number(teacher.start_time)-teacher.service_time)/60>5" class="soon">等待开始</span>
               <span v-else>
                 <span v-if="Number(teacher.end_time)-teacher.service_time>0" class="begin" @click="goLive(teacher)">进入直播</span>
                 <span v-else class="end">已结束</span>
@@ -49,7 +49,7 @@
           <div class="fr">
             <span v-if="teacher.result_status == 2" class="wait">等待预约确认</span>
             <span v-if="teacher.result_status == 3">
-              <span v-if="(Number(teacher.start_time)-teacher.service_time)/60>5" class="soon" @click="goLive(teacher)">等待开始</span>
+              <span v-if="(Number(teacher.start_time)-teacher.service_time)/60>5" class="soon">等待开始</span>
               <span v-else>
                 <span v-if="Number(teacher.end_time)-teacher.service_time>0" class="begin" @click="goLive(teacher)">进入直播</span>
                 <span v-else class="end">已结束</span>

@@ -26,7 +26,8 @@
           <div class="problemBox">
             <h4>咨询问题大纲</h4>
             <ul ref="ul">
-              <li v-for="(item,index) in question" :key="index">{{item}}</li>
+              <!-- <li v-for="(item,index) in question" :key="index">{{item}}</li> -->
+              <li>{{time.remark}}</li>
             </ul>
           </div>
           <div class="liveBtn clearfix">
@@ -127,7 +128,8 @@ export default {
       showTime: 3,
       gidForm: {
         gids: 'tab-twelfth'
-      }
+      },
+      time: ''
     };
   },
   methods: {
