@@ -70,7 +70,7 @@ export default {
     return {
       objLength: "",
       isShow: true,
-      isOver: false,
+      isOver: true,
       nearEnd: false,
       begin: false,
       end: false,
