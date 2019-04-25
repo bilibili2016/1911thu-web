@@ -178,6 +178,10 @@
                       <span class="uploadImgs"><img :src="teacherForm.studentCard" alt=""></span>
                       <span class="deleteImg" @click="deleteImg">删除</span>
                     </p>
+                    <!-- <el-upload class="avatar-uploader" action="https://ceshiapi.1911edu.com/Publics/Upload/uploadFile" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                      <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                      <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                    </el-upload> -->
                   </div>
                 </div>
                 <div class="con-item desc clearfix">
@@ -220,6 +224,7 @@ import { auth, list } from "~/lib/v1_sdk/index";
 export default {
   data () {
     return {
+      imageUrl: "",
       isShowPop: false,
       codeInterval: null,
       uploadFileName: "",
@@ -263,7 +268,8 @@ export default {
         FILESS: []
       },
       imgForm: {
-        FILESS: []
+        FILESS: [],
+        fileName: ""
       },
       bindTelData: {
         phones: "",
@@ -305,6 +311,22 @@ export default {
     }
   },
   methods: {
+    handleAvatarSuccess (res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload (file) {
+      const isJPG = file.type === "image/jpeg";
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error("上传头像图片只能是 JPG 格式!");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 2MB!");
+      }
+      return isJPG && isLt2M;
+    },
+
     handleSelectChange (val) {
       this.teacherForm.school = val;
     },
@@ -418,9 +440,12 @@ export default {
       formdata.append("image", imgFiles);
       formdata.image = imgFiles;
       reader.readAsDataURL(imgFiles);
+      console.log(imgFiles);
       this.imgForm.FILESS = [];
       reader.onloadend = () => {
+        // console.log(reader.result);
         this.imgForm.FILESS.push(reader.result);
+        this.imgForm.fileName = imgFiles.name;
         list.leafletsUpload(this.imgForm).then(res => {
           if (res.status == 0) {
             this.teacherForm.studentCard = res.data.full_path;
@@ -430,6 +455,16 @@ export default {
             message(this, "error", res.msg);
           }
         });
+      };
+    },
+    add_img22 (event) {
+      // var that = this
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function (e) {
+        // 图片base64化
+        var newUrl = this.result;
+        preview.style.backgroundImage = "url(" + newUrl + ")";
       };
     },
     //选项信息
