@@ -148,6 +148,7 @@ export default {
     closeNearend () {
       this.nearEnd = false
     },
+    // 跳转个人中心
     goProfile () {
       if (this.teacherLiveInfo.type == '1') {
         this.gidForm.gids = "tab-twelfth";
@@ -160,6 +161,7 @@ export default {
     handleClick () {
       this.isShow = !this.isShow;
     },
+    // 获取数据  播放地址  详情
     teacherBespokeInfo () {
       live.teacherBespokeInfo(this.teacherLiveInfo).then(response => {
         if (response.status == 0) {
@@ -174,6 +176,7 @@ export default {
         this.$bus.$emit("headerFooterHide");
       });
     },
+    // 判断当前时间：开始前预备时间——或——直播已经开始
     justTime () {
       //  开始前5分钟进来的
       if ((parseInt(this.time.start_time) - this.time.service_time) / 60 > 0 && (parseInt(this.time.start_time) - this.time.service_time) / 60 < 5) {
@@ -197,6 +200,7 @@ export default {
         // this.end = true;
       }
     },
+    // 进入页面后 触发的倒计时
     countdown (num) {
       this.timer = setInterval(() => {
         if (this.variable > 0) {
@@ -247,10 +251,8 @@ export default {
         this.$refs.playInner.appendChild(this.node);
       }
     },
-    // liveroom
-
+    // 创建播放器并传入参数
     newPlayer () {
-      // 创建播放器并传入参数
       swfobject.embedSWF(
         "//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf",
         "tblive",
@@ -276,6 +278,7 @@ export default {
       //   推流播放器样式改写
       //   document.getElementsByTagName("object")[0].setAttribute('data', '');
     },
+    // 刚进入页面的时候加载完flash播放器 轮询检测播放器是否创建成功
     load () {
       this.loadtime = setInterval(() => {
         this.objLength = document.getElementById("tblive").children.length;
@@ -305,17 +308,17 @@ export default {
     },
     // 视频准备好之后执行
     readyPlay () {
-      console.log("ready");
+      //   console.log("ready");
     },
     // 播放开始--启动计时器
     playerPlay () {
-      console.log("playerPlay");
+      //   console.log("playerPlay");
     },
     playerEnded () {
-      console.log("playerEnded");
+      //   console.log("playerEnded");
     },
     playerError (error) {
-      console.log(error, 'error');
+      //   console.log(error, 'error');
     }
   },
   mounted () {
@@ -349,7 +352,7 @@ export default {
   //     });
   //   },
   beforeRouteLeave (to, from, next) {
-    // this.$bus.$emit("headerFooterShow");
+    this.$bus.$emit("headerFooterShow");
     next();
   }
 };
