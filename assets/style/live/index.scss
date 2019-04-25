@@ -209,6 +209,7 @@
       background-color: #fff;
       text-align: center;
       border-radius: 10px;
+      z-index: 40;
     }
 
     .nearEnd {
@@ -298,13 +299,16 @@
 
 .rightBtn {
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 10px;
+  top: 10px;
+  z-index: 40;
 
-  .white {
+  .yellow {
     width: 60px;
     height: 70px;
     text-align: center;
+    background-color: rgba(95, 6, 141, .6);
+    border-radius: 5px;
     cursor: pointer;
 
     img {
@@ -317,11 +321,11 @@
     p {
       text-align: center;
       font-size: 12px;
-      color: #fff;
+      color: #ffdb5f;
     }
 
-    .yellow {
-      color: #FFDB5F
+    .white {
+      color: #fff;
     }
   }
 }
