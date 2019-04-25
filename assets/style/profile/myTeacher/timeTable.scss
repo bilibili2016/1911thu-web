@@ -85,6 +85,12 @@
                     .update {
                         color: #3C60C7;
                     }
+                    .enterLive {
+                        cursor: pointer;
+                        &:hover {
+                            color: #773084;
+                        }
+                    }
                 }
                 .unconfirmed {
                     color: #FF5F59;

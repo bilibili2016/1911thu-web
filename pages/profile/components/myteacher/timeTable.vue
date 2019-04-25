@@ -40,7 +40,7 @@
                 </div>
                 <div v-else>
                   <span v-if="serviceTime > item.end_time">已结束</span>
-                  <span v-else>进入直播</span>
+                  <span v-else class="enterLive" @click="handleEnterLive(item)">进入直播</span>
                 </div>
               </div>
             </td>
@@ -58,7 +58,7 @@ import { myTeacher } from "~/lib/v1_sdk/index";
 import { message, timestampToTime } from "~/lib/util/helper";
 
 export default {
-  data () {
+  data() {
     return {
       serviceTime: "",
       isLoading: true,
@@ -75,11 +75,11 @@ export default {
       },
       statusText: "",
       countDownSecond: "",
-      CDTimer: null,
+      CDTimer: null
     };
   },
   methods: {
-    timeout (item) {
+    timeout(item) {
       let timeDiff = item.start_time - this.serviceTime;
       let minuteDiff = timeDiff / 60;
       // console.log(minuteDiff, "minuteDiff");
@@ -94,25 +94,30 @@ export default {
         } else {
           this.countDownSecond = this.countDownSecond - 1;
         }
+        // console.log(this.countDownSecond);
       }, 1000);
       return this.statusText;
     },
     //页面跳转
-    handleGoTo (url, item) {
+    handleGoTo(url, item) {
       let obj = { name: url };
       if (url == "updateTime") {
         obj.id = item.id;
       }
       this.$bus.$emit("gotoURL", obj);
     },
+    //进入直播
+    handleEnterLive(item) {
+      this.$router.push(`/live?id=${item.id}&type=2`);
+    },
     //翻页
-    timeListChange (val) {
+    timeListChange(val) {
       this.timeListForm.page = val;
       this.timeListForm.limit = 6;
       this.bespokeTimeList();
     },
     //预约时间列表
-    bespokeTimeList () {
+    bespokeTimeList() {
       myTeacher.bespokeTimeList(this.timeListForm).then(res => {
         if (res.status == 0) {
           clearInterval(this.CDTimer);
@@ -124,7 +129,7 @@ export default {
       });
     },
     //接受邀请
-    acceptInvite (item) {
+    acceptInvite(item) {
       myTeacher.acceptInvitation({ id: item.id }).then(res => {
         if (res.status == 0) {
           message(this, "success", res.msg);
@@ -135,7 +140,7 @@ export default {
       });
     }
   },
-  mounted () {
+  mounted() {
     clearInterval(this.CDTimer);
     this.bespokeTimeList();
   }

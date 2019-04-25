@@ -76,7 +76,7 @@
 </template>
 <script>
 import { myTeacher } from "~/lib/v1_sdk/index";
-import { message } from "~/lib/util/helper";
+import { message, IEPopup } from "~/lib/util/helper";
 
 export default {
   props: ["timeID"],
@@ -123,6 +123,7 @@ export default {
     handleGoTo(url) {
       let obj = { name: url };
       this.$bus.$emit("gotoURL", obj);
+      IEPopup("pane-tab-thirteenth", "relative", 1);
     },
     validate() {
       try {
@@ -151,6 +152,7 @@ export default {
       myTeacher.doModifyBespokeTime(this.updateTimeForm).then(res => {
         if (res.status == 0) {
           this.isShowPop = true;
+          IEPopup("pane-tab-thirteenth", "-ms-page", 0);
           //提交成功弹窗所需时间
           this.appointTimeList.forEach(item => {
             if (item.id == this.updateTimeForm.nextTime) {
