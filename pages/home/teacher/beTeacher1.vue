@@ -355,7 +355,7 @@ export default {
         this.codeClick = false;
         if (this.bindTelData.seconds === 30) {
           this.bindTelData.types = 6;
-          this.bindTelData.phones = this.teacherForm.tel;
+          this.bindTelData.phones = Trim(this.teacherForm.tel);
 
           auth.smsCodes(this.bindTelData).then(response => {
             let types = response.status === 0 ? "success" : "error";
@@ -453,6 +453,7 @@ export default {
     },
     // 提交
     handleSubmit() {
+      this.teacherForm.tel = Trim(this.teacherForm.tel);
       list.submitBeTeacher(this.teacherForm).then(res => {
         this.isClick = false;
         //不需要验证是否登录
