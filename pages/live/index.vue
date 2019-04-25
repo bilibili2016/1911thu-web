@@ -198,6 +198,7 @@ export default {
         if (this.timer) {
           clearInterval(this.timer);
         }
+        console.log('即将开始')
         this.countdown(1);
       } else {
         this.begin = true;
@@ -212,12 +213,14 @@ export default {
         if (this.timer) {
           clearInterval(this.timer);
         }
+         console.log('直播开始')
         this.countdown(2);
       }
     },
     // 进入页面后 触发的倒计时
     countdown(num) {
       this.timer = setInterval(() => {
+        console.log(this.variable,'variable')
         if (this.variable > 0) {
           this.showTime = num;
           this.variable--;
