@@ -66,7 +66,7 @@ import { matchSplits, setTitle, message } from "@/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
 
 export default {
-  data () {
+  data() {
     return {
       objLength: "",
       isShow: true,
@@ -88,7 +88,7 @@ export default {
         "11、远程班学习效果能保证吗？",
         "12、远程班学习效果能保证吗？远程班学习效果能保证吗？",
         "13、远程班学习效果能保证吗？",
-        "14、远程班学习效果能保证吗？远程班学习效果能保证吗？",
+        "14、远程班学习效果能保证吗？远程班学习效果能保证吗？"
       ],
       teacherLiveInfo: {
         appointId: "",
@@ -116,21 +116,21 @@ export default {
         useFlashPrism: true
       },
       node: "",
-      timer: '',
+      timer: "",
       variable: 0,
       min: 10000,
       second: 10000,
       showTime: 3,
       gidForm: {
-        gids: 'tab-twelfth'
+        gids: "tab-twelfth"
       },
-      loadTime: "",
+      loadTime: ""
     };
   },
   methods: {
     ...mapActions("auth", ["setGid"]),
     // 改变屏幕宽度重置播放器大小
-    resize () {
+    resize() {
       if (document.body.clientHeight) {
         this.$nextTick(() => {
           const h = document.body.clientHeight;
@@ -145,11 +145,11 @@ export default {
         });
       }
     },
-    closeNearend () {
-      this.nearEnd = false
+    closeNearend() {
+      this.nearEnd = false;
     },
-    goProfile () {
-      if (this.teacherLiveInfo.type == '1') {
+    goProfile() {
+      if (this.teacherLiveInfo.type == "1") {
         this.gidForm.gids = "tab-twelfth";
       } else {
         this.gidForm.gids = "tab-thirteenth";
@@ -157,77 +157,83 @@ export default {
       this.setGid(this.gidForm);
       this.$router.push("/profile");
     },
-    handleClick () {
+    handleClick() {
       this.isShow = !this.isShow;
     },
-    teacherBespokeInfo () {
+    teacherBespokeInfo() {
       live.teacherBespokeInfo(this.teacherLiveInfo).then(response => {
         if (response.status == 0) {
           this.url = response.data;
           this.time = response.data.teacherBespokeInfo;
-          this.justTime()
+          this.justTime();
         } else {
           this.begin = false;
           this.end = false;
           message(this, "error", response.msg);
         }
-        this.$bus.$emit("headerFooterHide");
+        // this.$bus.$emit("headerFooterHide");
       });
     },
-    justTime () {
+    justTime() {
       //  开始前5分钟进来的
-      if ((parseInt(this.time.start_time) - this.time.service_time) / 60 > 0 && (parseInt(this.time.start_time) - this.time.service_time) / 60 < 5) {
-        this.variable = parseInt(this.time.start_time) - this.time.service_time
+      if (
+        (parseInt(this.time.start_time) - this.time.service_time) / 60 > 0 &&
+        (parseInt(this.time.start_time) - this.time.service_time) / 60 < 5
+      ) {
+        this.variable = parseInt(this.time.start_time) - this.time.service_time;
         if (this.timer) {
-          clearInterval(this.timer)
+          clearInterval(this.timer);
         }
-        this.countdown(1)
+        this.countdown(1);
       } else {
         this.begin = true;
         this.end = true;
       }
       //   直播已经开始
-      if ((parseInt(this.time.start_time) < this.time.service_time) && (parseInt(this.time.end_time) > this.time.service_time)) {
-        this.variable = parseInt(this.time.end_time) - this.time.service_time
+      if (
+        parseInt(this.time.start_time) < this.time.service_time &&
+        parseInt(this.time.end_time) > this.time.service_time
+      ) {
+        this.variable = parseInt(this.time.end_time) - this.time.service_time;
         if (this.timer) {
-          clearInterval(this.timer)
+          clearInterval(this.timer);
         }
-        this.countdown(2)
+        this.countdown(2);
         // this.begin = true;
         // this.end = true;
       }
     },
-    countdown (num) {
+    countdown(num) {
       this.timer = setInterval(() => {
         if (this.variable > 0) {
-          this.showTime = num
-          this.variable--
-          this.min = parseInt(this.variable / 60)
-          this.second = this.variable % 60
+          this.showTime = num;
+          this.variable--;
+          this.min = parseInt(this.variable / 60);
+          this.second = this.variable % 60;
           if (this.variable == 300 && this.showTime == 2) {
-            this.nearEnd = true
+            this.nearEnd = true;
           }
         } else {
           if (this.timer) {
-            clearInterval(this.timer)
+            clearInterval(this.timer);
           }
           //   等待直播结束
           if (this.showTime == 1) {
-            this.teacherBespokeInfo()
+            this.teacherBespokeInfo();
           }
           //   直播结束
           if (this.showTime == 2) {
-            this.stop_play()
+            this.stop_play();
             this.begin = false;
             this.end = false;
-            this.isOver = true
+            this.isOver = true;
           }
-          this.showTime = 3
+          this.showTime = 3;
         }
       }, 1000);
     },
     //开始直播
-    start_play () {
+    start_play() {
       if (swfobject) {
         swfobject.getObjectById("tblive").Start(this.url.pushUrl);
         //   创建拉流播放器
@@ -238,7 +244,7 @@ export default {
       }
     },
     //结束直播
-    stop_play () {
+    stop_play() {
       swfobject.getObjectById("tblive").Stop();
       if (this.pullPlay) {
         this.pullPlay.pause();
@@ -249,7 +255,7 @@ export default {
     },
     // liveroom
 
-    newPlayer () {
+    newPlayer() {
       // 创建播放器并传入参数
       swfobject.embedSWF(
         "//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf",
@@ -276,16 +282,18 @@ export default {
       //   推流播放器样式改写
       //   document.getElementsByTagName("object")[0].setAttribute('data', '');
     },
-    load () {
+    load() {
       this.loadtime = setInterval(() => {
-        this.objLength = document.getElementById("tblive").children.length;
-        if (this.objLength > 0) {
-          this.$refs.embedDiv.style.zIndex = 1;
-          clearInterval(this.loadtime)
+        if (document.getElementById("tblive")) {
+          this.objLength = document.getElementById("tblive").children.length;
+          if (this.objLength > 0) {
+            this.$refs.embedDiv.style.zIndex = 1;
+            clearInterval(this.loadtime);
+          }
         }
       }, 1000);
     },
-    creatPlayer (url) {
+    creatPlayer(url) {
       this.pullaliPlayer.source = url.pullUrl;
       // 不存在 直接创建播放器
       this.pullPlay = new Aliplayer(this.pullaliPlayer);
@@ -297,35 +305,35 @@ export default {
         "none";
     },
     // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
-    playerLoad () {
+    playerLoad() {
       if (document.getElementsByClassName("prism-hide")[0]) {
         document.getElementsByClassName("prism-hide")[0].className =
           "prism-loading";
       }
     },
     // 视频准备好之后执行
-    readyPlay () {
+    readyPlay() {
       console.log("ready");
     },
     // 播放开始--启动计时器
-    playerPlay () {
+    playerPlay() {
       console.log("playerPlay");
     },
-    playerEnded () {
+    playerEnded() {
       console.log("playerEnded");
     },
-    playerError (error) {
-      console.log(error, 'error');
+    playerError(error) {
+      console.log(error, "error");
     }
   },
-  mounted () {
+  mounted() {
     if (!persistStore.get("token")) {
       this.$router.push("/");
       this.$bus.$emit("loginShow", true);
       this.$bus.$emit("headerFooterShow");
       return false;
     } else {
-      this.$bus.$emit("headerFooterHide");
+      // this.$bus.$emit("headerFooterHide");
     }
     this.node = this.$refs.mediaPlayer;
     this.teacherLiveInfo.appointId = matchSplits("id");
@@ -335,20 +343,21 @@ export default {
 
     this.teacherBespokeInfo();
     if (this.loadtime) {
-      clearInterval(this.loadtime)
+      clearInterval(this.loadtime);
     }
     //   创建推流播放器
     this.newPlayer();
-    this.load()
-
-
+    this.load();
   },
-  //   beforeRouteEnter (to, from, next) {
-  //     next(vm => {
-  //       vm.$bus.$emit("headerFooterHide");
-  //     });
-  //   },
-  beforeRouteLeave (to, from, next) {
+  destroyed() {
+    this.$bus.$emit("headerFooterShow");
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.$bus.$emit("headerFooterHide");
+    });
+  },
+  beforeRouteLeave(to, from, next) {
     // this.$bus.$emit("headerFooterShow");
     next();
   }

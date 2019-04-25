@@ -581,7 +581,7 @@ export default {
               statusType: 1,
               type: 2
             });
-              this.$bus.$emit("gotoURL", { name: "list" });
+            this.$bus.$emit("gotoURL", { name: "list" });
             break;
         }
         let gidForm = {
@@ -975,8 +975,8 @@ export default {
     getTeacherData(data) {
       this.teacherBespokeData.type = data.type;
       this.teacherBespokeData.statusType = data.statusType;
-       this.teacherBespokeData.page=1
-      this.teacherPagemsg.page=1
+      this.teacherBespokeData.page = 1;
+      this.teacherPagemsg.page = 1;
 
       this.teacherBespokeListData();
     },
@@ -998,10 +998,10 @@ export default {
       });
     },
     //预约列表翻页
-    changeAppointLIst(val){
-      this.teacherPagemsg.page=val
-      this.teacherBespokeData.page=val
-      this.teacherBespokeListData()
+    changeAppointLIst(val) {
+      this.teacherPagemsg.page = val;
+      this.teacherBespokeData.page = val;
+      this.teacherBespokeListData();
     },
     // 初始化 bus 事件
     initBusEvent() {
@@ -1138,9 +1138,9 @@ export default {
     this.$bus.$on("handleHeadClick", data => {
       this.handleClick(data);
     });
-    this.$bus.$on('changeAppointLIst',data=>{
-      this.changeAppointLIst(data)
-    })
+    this.$bus.$on("changeAppointLIst", data => {
+      this.changeAppointLIst(data);
+    });
 
     this.infoNum = persistStore.get("infoNum");
     this.$bus.$on("profileInfoNum", data => {
