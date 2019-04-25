@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import { timestampToTime, message } from "@/lib/util/helper";
+import { timestampToTime, message, IEPopup } from "@/lib/util/helper";
 import { myTeacher } from "~/lib/v1_sdk/index";
 import NoMsg from "@/pages/profile/components/common/noMsg.vue";
 import Info from "@/pages/profile/components/common/appointInfo.vue";
@@ -89,10 +89,12 @@ export default {
   methods: {
     closeDetailPop() {
       this.isShowDetail = false;
+      IEPopup("pane-tab-twelfth", "relative", 1);
     },
     handleDetail(item) {
-      myTeacher.BespokeDetail({ id: item.id }).then(res => {
+      myTeacher.BespokeDetail({ id: item.id,type:this.type }).then(res => {
         if (res.status == 0) {
+          IEPopup("pane-tab-twelfth", "-ms-page", 0);
           this.isShowDetail = true;
           this.appointInfo = res.data.teacherBespokeDetail;
           // this.handleGoTo("timeTable");
@@ -105,11 +107,7 @@ export default {
       this.$router.push("/home/teacher/list");
     },
     goLive(teacher) {
-      if (this.config.isTeacher) {
-        this.type = 2;
-      } else {
-        this.tyoe = 1;
-      }
+
       this.$router.push(`/live?id=${teacher.id}&type=${this.type}`);
       //   this.$router.push('/live/studentLive')
     },
@@ -118,10 +116,13 @@ export default {
     }
   },
   mounted() {
+
     if (this.config.isTeacher) {
       this.noMsg.text = "您暂时没有已预约的直播咨询。";
+      this.type = 2;
     } else {
       this.noMsg.text = "你暂时没有已预约的直播咨询，快去名师智库预约导师吧。";
+        this.type = 1;
     }
   }
 };

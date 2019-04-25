@@ -59,7 +59,7 @@ import { matchSplits, setTitle, message } from "@/lib/util/helper";
 export default {
   data() {
     return {
-      objLength:"",
+      objLength: "",
       isShow: true,
       isOver: false,
       nearEnd: false,
@@ -149,12 +149,11 @@ export default {
           allowScriptAccess: "always"
         }
       );
-      this.objLength = document.getElementById("tblive").children.length
-      if(this.objLength==0){
-        this.$refs.embedDiv.style.zIndex=10
-      }else{
-        this.$refs.embedDiv.style.zIndex=1
-
+      this.objLength = document.getElementById("tblive").children.length;
+      if (this.objLength == 0) {
+        this.$refs.embedDiv.style.zIndex = 10;
+      } else {
+        this.$refs.embedDiv.style.zIndex = 1;
       }
     },
 
