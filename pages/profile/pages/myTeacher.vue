@@ -1,8 +1,8 @@
 <template>
   <!-- 教师入口 -->
-  <el-card class="">
+  <el-card class="333">
     <!-- 列表 -->
-    <v-list v-if="isShowList" :data="data" @getTeacherData="getTeacherData"></v-list>
+    <v-list v-if="isShowList" :data="data" :teacherPagemsg="teacherPagemsg" @getTeacherData="getTeacherData"></v-list>
     <!-- 预约时间表 -->
     <v-tabletime v-if="isShowTimeTable"></v-tabletime>
     <!-- 录入可预约的时间 -->
@@ -20,14 +20,14 @@ import inputTime from "@/pages/profile/components/myteacher/inputTime.vue";
 import updateTime from "@/pages/profile/components/myteacher/updateTime.vue";
 
 export default {
-  props: ["data"],
+  props: ["data", "teacherPagemsg"],
   components: {
     "v-list": List,
     "v-tabletime": timeTable,
     "v-inputtime": inputTime,
     "v-updatetime": updateTime
   },
-  data () {
+  data() {
     return {
       isShowList: true,
       isShowTimeTable: false,
@@ -37,11 +37,12 @@ export default {
     };
   },
   methods: {
-    getTeacherData (data) {
+    getTeacherData(data) {
       this.$emit("getTeacherData", data);
     }
   },
-  mounted () {
+  mounted() {
+    console.log(this.teacherPagemsg, "ppp");
     this.$bus.$on("gotoURL", data => {
       this.isShowList = false;
       this.isShowTimeTable = false;
