@@ -216,6 +216,9 @@ export default {
           //   直播结束
           if (this.showTime == 2) {
             this.stop_play()
+            this.begin = false;
+            this.end = false;
+            this.isOver = true
           }
           this.showTime = 3
         }
@@ -234,9 +237,6 @@ export default {
     },
     //结束直播
     stop_play () {
-      this.begin = false;
-      this.end = false;
-      this.isOver = true
       swfobject.getObjectById("tblive").Stop();
       if (this.pullPlay) {
         this.pullPlay.pause();
