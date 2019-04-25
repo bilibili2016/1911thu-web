@@ -10,7 +10,7 @@
             <div ref="tbliveDiv" class="tbliveDiv">
               <div class="tblive" id="tblive" ref="tblive"></div>
             </div>
-            <embed ref="embedDiv" class="embedDiv" src="/images/zhansi.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="580" height="430" style="background-color:#626262">
+            <embed ref="embedDiv" class="embedDiv" src="/images/zhansi.swf" quality="high" pluginspage="https://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="580" height="430" style="background-color:#626262">
           </div>
           <div class="time" v-if="showTime==1">{{min}}分{{second}}秒后开始直播</div>
           <div class="time" v-if="showTime==2">直播倒计时：{{min}}分{{second}}秒</div>
@@ -41,7 +41,7 @@
     <!-- 即将结束 -->
     <div class="nearEnd pop" v-if="nearEnd">
       <i class="el-icon-close" @click="closeNearend"></i>
-      <p>尊敬的{{this.teacherLiveInfo.type=='1'?"学院":"导师"}}您好，本次的咨询时间即将结束，请您合理分配时间！</p>
+      <p>尊敬的{{this.teacherLiveInfo.type=='1'?"学员":"导师"}}您好，本次的咨询时间即将结束，请您合理分配时间！</p>
     </div>
     <!-- 已结束 -->
     <div class="over" v-if="isOver">
@@ -226,6 +226,7 @@ export default {
     },
     //开始直播
     start_play () {
+      document.getElementsByTagName("object")[0].setAttribute('data', '//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf');
       if (swfobject) {
         swfobject.getObjectById("tblive").Start(this.url.pushUrl);
         //   创建拉流播放器
@@ -271,8 +272,9 @@ export default {
       } else {
         this.$refs.embedDiv.style.zIndex = 1;
       }
+      //   推流播放器样式改写
+      //   document.getElementsByTagName("object")[0].setAttribute('data', '');
     },
-
     creatPlayer (url) {
       this.pullaliPlayer.source = url.pullUrl;
       // 不存在 直接创建播放器
@@ -304,7 +306,6 @@ export default {
     },
     playerError (error) {
       console.log(error, 'error');
-
     }
   },
   mounted () {
