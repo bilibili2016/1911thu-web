@@ -15,10 +15,10 @@
     <div class="con-item">
       <div class="left">请选择可以预约的时间段：</div>
       <div class="right">
-        <el-time-select placeholder="起始时间" v-model="appointTimeForm.startTime" :picker-options="{start: '08:00',step: '01:00',end: '22:00'}" @change="handleChange">
+        <el-time-select placeholder="起始时间" v-model="appointTimeForm.startTime" :picker-options="{start: '08:00',step: '01:00',end: '21:00'}" @change="handleChange">
         </el-time-select>
         <span class="separated">----</span>
-        <el-time-select placeholder="结束时间" v-model="appointTimeForm.endTime" :picker-options="{start: '08:00',step: '01:00',end: '22:00',minTime: appointTimeForm.startTime}">
+        <el-time-select placeholder="结束时间" v-model="appointTimeForm.endTime" :picker-options="{start: computedTime,step: '01:00',end: '22:00',}">
         </el-time-select>
       </div>
     </div>
@@ -48,12 +48,16 @@ export default {
         date: "",
         startTime: "",
         endTime: ""
-      }
+      },
+      computedTime: ""
     };
   },
+
   methods: {
     handleChange() {
       this.appointTimeForm.endTime = "";
+      let time = parseInt(this.appointTimeForm.startTime.split(":")[0]) + 1;
+      this.computedTime = time < 10 ? `0${time}:00` : `${time}:00`;
     },
     handleGoTo(url) {
       let obj = { name: url };

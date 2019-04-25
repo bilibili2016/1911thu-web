@@ -1,7 +1,8 @@
 <template>
   <div class="cardList">
     <div class="process">
-      <img src="https://static-image.1911edu.com/appoint-process.png" alt="">
+      <img class="student_pro" v-if="!config.isTeacher" src="https://static-image.1911edu.com/student-process.png" alt="">
+      <img v-else src="https://static-image.1911edu.com/appoint-process.png" alt="">
     </div>
     <ul v-if="teacherData.length!=0">
       <li v-if="!config.isTeacher" v-for="(teacher,index) in teacherData " :key="index">
@@ -84,7 +85,7 @@ export default {
     "v-nomsg": NoMsg,
     "v-appointinfo": Info
   },
-  data () {
+  data() {
     return {
       isShowDetail: false,
       appointInfo: "",
@@ -97,11 +98,11 @@ export default {
     };
   },
   methods: {
-    closeDetailPop () {
+    closeDetailPop() {
       this.isShowDetail = false;
       IEPopup("pane-tab-twelfth", "relative", 1);
     },
-    handleDetail (item) {
+    handleDetail(item) {
       myTeacher.BespokeDetail({ id: item.id, type: this.type }).then(res => {
         if (res.status == 0) {
           IEPopup("pane-tab-twelfth", "-ms-page", 0);
@@ -113,20 +114,18 @@ export default {
         }
       });
     },
-    handleTeacher () {
+    handleTeacher() {
       this.$router.push("/home/teacher/list");
     },
-    goLive (teacher) {
-
+    goLive(teacher) {
       this.$router.push(`/live?id=${teacher.id}&type=${this.type}`);
       //   this.$router.push('/live/studentLive')
     },
-    changeTime (time) {
+    changeTime(time) {
       return timestampToTime(time);
     }
   },
-  mounted () {
-
+  mounted() {
     if (this.config.isTeacher) {
       this.noMsg.text = "您暂时没有已预约的直播咨询。";
       this.type = 2;

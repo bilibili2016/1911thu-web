@@ -57,10 +57,9 @@ export default {
     return {
       introduce: "",
       initIntro:
-        '<p class="indent" style="text-indent:2em">1911学堂名师智库目前集结了200余位学术造诣深厚、教学经验丰富、具有国际视野的专家学者；未来，将建立由数千名全球知名专家教授、世界500强企业高管、业界翘楚行业精英以及政策智囊共同组成的高端专家导师库，为各单位组织及学员带来权威、前沿、高端的学习体验。</p>' +
-        '<p class="indent" style="text-indent:2em">1911学堂名师智库的导师均具有三个特点：研究内容权威前沿，授课方式通俗易懂，理论知识结合实践。</p>' +
-        '<p class="indent" style="text-indent:2em">1911学堂名师智库可以为各党政机关、事业单位及企业组织提供量身定制的个性化学习方案，为相关单位推荐最合适的顾问导师，真正做到学习需求与专家内容的智能匹配。</p>' +
-        '<p class="indent" style="text-indent:2em">贵单位可根据自己的实际需求从1911学堂海量的名师智库中筛选导师，把需求提交给1911学堂，1911学堂将根据需求进行智能匹配，推荐最合适的专家教授及业界翘楚到单位真实的场景中授课、咨询。学员可以与1911学堂导师进行面对面交流、领略大师风采，在自己熟悉的学习环境中更加有效的掌握学习内容，切实提升问题解决能力和实际应用能力，从而提高学习效能，以实现 “请进来、沉下去”的培训效果。</p>',
+        '<p class="indent" style="text-indent:2em">1911学堂名师智库目前集结了数百位学术造诣深厚、教学经验丰富、具有国际视野的专家学者，以及学习成绩优质、各方面全面发展的高校学生，为中小学生、大学生及各界职场人士提供终身教育及导师咨询服务</p>' +
+        '<p class="indent" style="text-indent:2em">1911学堂未来将建立由数千名全球知名专家教授、世界500强企业高管、业界翘楚行业精英、政策智囊以及优秀高校学子共同组成的高端专家导师库，为各单位组织及学员带来权威、前沿、高端的学习体验和咨询服务。</p>' +
+        '<p class="indent" style="text-indent:2em">各单位组织及学员可以可根据自己的实际需求，从1911学堂海量的名师智库中筛选并预约相应的导师，邀请导师到真实的场景中授课，或者预约导师一对一咨询学业困惑或职业发展问题。</p>',
       fixedTop: 0,
       isFixed: false,
       sortData: [],
@@ -114,7 +113,7 @@ export default {
   methods: {
     // 加入1911教师
     joinTeacher() {
-      this.$router.push("/home/teacher/beTeacher1");
+      this.$router.push("/home/teacher/beTeacher");
     },
     initTeacherList() {
       this.teacherForm.pages = 1;

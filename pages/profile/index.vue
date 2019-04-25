@@ -572,6 +572,7 @@ export default {
             });
             break;
           case "tab-thirteenth": //教师入口
+          this.$bus.$emit('gotoURL',{name:'list'})
             this.getTeacherData({
               statusType: 1,
               type: 2

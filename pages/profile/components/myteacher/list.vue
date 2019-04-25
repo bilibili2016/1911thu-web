@@ -15,7 +15,10 @@
         <v-part :teacherData="data" :config="config"></v-part>
       </el-tab-pane>
     </el-tabs>
-    <div class="viewTimeTable" @click="viewTimeTable">查看预约时间表 > </div>
+    <div class="btns-con">
+      <div class="btns-Time" @click="handleGoTo('inputTime')"> <img :src="rightIcon" alt=""> <span class="right">录入可预约时间</span></div>
+      <div class="viewTimeTable" @click="handleGoTo('timeTable')">查看预约时间表 > </div>
+    </div>
   </el-card>
 </template>
 
@@ -34,6 +37,7 @@ export default {
   },
   data() {
     return {
+      rightIcon: "https://static-image.1911edu.com/myTeacher-icon1.png",
       activeName: "first",
       showUpdateTime: false,
       config: {
@@ -53,9 +57,8 @@ export default {
     getTeacherData(data) {
       this.$emit("getTeacherData", data);
     },
-    //查看预约时间表
-    viewTimeTable() {
-      let obj = { name: "timeTable" };
+    handleGoTo(url) {
+      let obj = { name: url };
       this.$bus.$emit("gotoURL", obj);
     }
   }
