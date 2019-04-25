@@ -12,7 +12,7 @@
             </div>
             <embed ref="embedDiv" class="embedDiv" src="/images/zhansi.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="580" height="430" style="background-color:#626262">
           </div>
-          <div class="time">直播倒计时：20分15秒</div>
+          <div class="time" v-if="showTime">直播倒计时：{{min}}分{{second}}秒</div>
           <!-- <div class="topBar"></div>
         <img src="https://static-image.1911edu.com/live-bg1.png" alt="">
         <div class="bottomBar clearfix">
@@ -68,14 +68,14 @@ import { matchSplits, setTitle, message } from "@/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
 
 export default {
-  data() {
+  data () {
     return {
       objLength: "",
       isShow: true,
       isOver: false,
       nearEnd: false,
-      begin: true,
-      end: true,
+      begin: false,
+      end: false,
       question: [
         "1、远程班学习效果能保证吗？",
         "2、请问学完课程，将会获得什么？",
@@ -107,12 +107,17 @@ export default {
         useH5Prism: true,
         useFlashPrism: true
       },
-      node: ""
+      node: "",
+      timer: '',
+      variable: 0,
+      min: 10000,
+      second: 10000,
+      showTime: false
     };
   },
   methods: {
     // 改变屏幕宽度重置播放器大小
-    resize() {
+    resize () {
       if (document.body.clientHeight) {
         this.$nextTick(() => {
           const h = document.body.clientHeight;
@@ -127,13 +132,25 @@ export default {
         });
       }
     },
-    handleClick() {
+    handleClick () {
       this.isShow = !this.isShow;
     },
-    teacherBespokeInfo() {
+    teacherBespokeInfo () {
       live.teacherBespokeInfo(this.teacherLiveInfo).then(response => {
         if (response.status == 0) {
           this.url = response.data;
+          this.time = response.data.teacherBespokeInfo;
+          if ((parseInt(this.time.start_time) - this.time.service_time) / 60 > 0 && (parseInt(this.time.start_time) - this.time.service_time) / 60 < 5) {
+            this.variable = parseInt(this.time.start_time) - this.time.service_time
+            if (this.timer) {
+              clearInterval(this.timer)
+            }
+            this.countdown()
+          } else {
+            this.begin = true;
+            this.end = true;
+          }
+
         } else {
           this.begin = false;
           this.end = false;
@@ -141,8 +158,24 @@ export default {
         }
       });
     },
+    countdown () {
+      this.timer = setInterval(() => {
+        if (this.variable > 0) {
+          this.showTime = true
+          this.variable--
+          this.min = parseInt(this.variable / 60)
+          this.second = this.variable % 60
+        } else {
+          if (this.timer) {
+            clearInterval(this.timer)
+          }
+          this.showTime = false
+          this.teacherBespokeInfo()
+        }
+      }, 1000);
+    },
     //开始直播
-    start_play() {
+    start_play () {
       if (swfobject) {
         swfobject.getObjectById("tblive").Start(this.url.pushUrl);
         //   创建拉流播放器
@@ -153,7 +186,7 @@ export default {
       }
     },
     //结束直播
-    stop_play() {
+    stop_play () {
       swfobject.getObjectById("tblive").Stop();
       if (this.pullPlay) {
         this.pullPlay.pause();
@@ -162,7 +195,7 @@ export default {
         this.$refs.playInner.appendChild(this.node);
       }
     },
-    newPlayer() {
+    newPlayer () {
       // 创建播放器并传入参数
       swfobject.embedSWF(
         "//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf",
@@ -188,7 +221,7 @@ export default {
       }
     },
 
-    creatPlayer(url) {
+    creatPlayer (url) {
       this.pullaliPlayer.source = url.pullUrl;
       // 不存在 直接创建播放器
       this.pullPlay = new Aliplayer(this.pullaliPlayer);
@@ -200,28 +233,28 @@ export default {
         "none";
     },
     // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
-    playerLoad() {
+    playerLoad () {
       if (document.getElementsByClassName("prism-hide")[0]) {
         document.getElementsByClassName("prism-hide")[0].className =
           "prism-loading";
       }
     },
     // 视频准备好之后执行
-    readyPlay() {
+    readyPlay () {
       console.log("ready");
     },
     // 播放开始--启动计时器
-    playerPlay() {
+    playerPlay () {
       console.log("playerPlay");
     },
-    playerEnded() {
+    playerEnded () {
       console.log("playerEnded");
     },
-    playerError(error) {
+    playerError (error) {
       console.log(error);
     }
   },
-  mounted() {
+  mounted () {
     if (!persistStore.get("token")) {
       this.$router.push("/");
       this.$bus.$emit("loginShow", true);
@@ -238,12 +271,12 @@ export default {
     //   创建推流播放器
     this.newPlayer();
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     next(vm => {
       vm.$bus.$emit("headerFooterHide");
     });
   },
-  beforeRouteLeave(to, from, next) {
+  beforeRouteLeave (to, from, next) {
     this.$bus.$emit("headerFooterShow");
     next();
   }
