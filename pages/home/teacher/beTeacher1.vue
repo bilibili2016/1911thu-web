@@ -128,7 +128,7 @@
                 <div class="con-item desc clearfix">
                   <div class="fl">其他信息：</div>
                   <div class="fr">
-                    <el-input type="textarea" v-model.trim="teacherForm.otherInfo" :rows="3" maxlength="500" placeholder="请输入您的其他信息，方便我们更多的了解您，还可以提高审核通过率哦！" autosize></el-input>
+                    <el-input type="textarea" v-model.trim="teacherForm.otherInfo" :rows="3" maxlength="200" placeholder="请输入您的其他信息，方便我们更多的了解您，还可以提高审核通过率哦！" autosize></el-input>
                     <span class="input-inner">还可以输入{{descLength}}字</span>
                   </div>
                 </div>
@@ -183,7 +183,7 @@
                 <div class="con-item desc clearfix">
                   <div class="fl">其他信息：</div>
                   <div class="fr">
-                    <el-input type="textarea" v-model.trim="teacherForm.otherInfo" :rows="3" maxlength="500" placeholder="请输入您的其他信息，方便我们更多的了解您，还可以提高审核通过率哦！" autosize></el-input>
+                    <el-input type="textarea" v-model.trim="teacherForm.otherInfo" :rows="3" maxlength="200" placeholder="请输入您的其他信息，方便我们更多的了解您，还可以提高审核通过率哦！" autosize></el-input>
                     <span class="input-inner">还可以输入{{descLength}}字</span>
                   </div>
                 </div>
@@ -303,7 +303,7 @@ export default {
   },
   computed: {
     descLength(desc) {
-      return 500 - this.teacherForm.otherInfo.length;
+      return 200 - this.teacherForm.otherInfo.length;
     }
   },
   methods: {
