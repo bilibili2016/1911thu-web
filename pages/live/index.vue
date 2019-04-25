@@ -28,11 +28,30 @@
             <li v-for="(item,index) in question" :key="index">{{item}}</li>
           </ul>
         </div>
-        <div class="liveBtn clearfix">
-          <span v-if="begin" class="fl" @click="start_play">开始直播</span>
-          <span v-else class="fl begin">开始直播</span>
-          <span v-if="end" class="fr" @click="stop_play">结束直播</span>
-          <span v-else class="fr end">结束直播</span>
+        <div class="right" ref="right">
+          <div class="problemBox">
+            <h4>咨询问题大纲</h4>
+            <ul ref="ul">
+              <!-- <li v-for="(item,index) in question" :key="index">{{item}}</li> -->
+              <li>{{time.remark}}</li>
+            </ul>
+          </div>
+          <div class="liveBtn clearfix">
+            <span v-if="begin" class="fl" @click="start_play">开始直播</span>
+            <span v-else class="fl begin">开始直播</span>
+            <span v-if="end" class="fr" @click="stop_play">结束直播</span>
+            <span v-else class="fr end">结束直播</span>
+          </div>
+        </div>
+        <!-- 即将结束 -->
+        <div class="pop nearEnd" v-if="nearEnd">
+          <i class="el-icon-close" @click="closeNearend"></i>
+          <p>尊敬的学员您好，本次的咨询时间即将结束，请您合理分配时间！</p>
+        </div>
+        <!-- 已结束 -->
+        <div class="pop over" v-if="isOver">
+          <p>本次一对一视频直播咨询服务已结束。</p>
+          <span class="btn" @click="goProfile">返回个人中心</span>
         </div>
       </div>
     </div>
@@ -123,7 +142,8 @@ export default {
       gidForm: {
         gids: "tab-twelfth"
       },
-      loadTime: ""
+      loadTime: "",
+      time: ''
     };
   },
   methods: {
