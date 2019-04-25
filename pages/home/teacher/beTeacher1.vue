@@ -48,7 +48,7 @@
                 <div class="fl"><i class="red">*</i>您的身份：</div>
                 <div class="fr">
                   <el-radio-group v-model="teacherForm.identity">
-                    <el-radio label="1">导师</el-radio>
+                    <el-radio label="1">教师</el-radio>
                     <el-radio label="2">学生</el-radio>
                   </el-radio-group>
                 </div>

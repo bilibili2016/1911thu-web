@@ -80,7 +80,7 @@ export default {
       },
       fileForm: {
         FILESS: [],
-        fileName:""
+        fileName: ""
       },
       imgs: []
     };
