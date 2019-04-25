@@ -1,7 +1,8 @@
 <template>
   <div class="news-list teacherList" v-loading="loading">
     <div class="banner-con">
-      <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
+      <v-carousel  :config="configCarousel" :teacherBanner="bannerList"></v-carousel>
+      <!-- <v-banner :bannerImg="bannerImg" :config="configs"></v-banner> -->
     </div>
     <!-- <div class="teacherLead clearfix">
       <p>为了给党政机关、事业单位及企业组织提供量身定制的个性化及顾问咨询学习模式，1911学堂建立了名师智库为相关单位推荐顾问导师，真正做到学习需求与专家内容的智能匹配。</p>
@@ -42,6 +43,7 @@ import CustomCard from "@/pages/home/teacher/components/Card.vue";
 import { list, banner } from "~/lib/v1_sdk/index";
 import Category from "@/pages/home/teacher/components/teacherCategory";
 import NoData from "@/components/common/NoData.vue";
+import Carousel from "@/components/common/Carousel.vue";
 
 import { setTitle, matchSplits } from "@/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
@@ -51,10 +53,16 @@ export default {
     "v-card": CustomCard,
     "v-banner": CustomBanner,
     "v-category": Category,
-    "v-nodata": NoData
+    "v-nodata": NoData,
+    "v-carousel": Carousel,
   },
   data() {
     return {
+      windowWidth:'',
+      bannerList:[],
+       configCarousel: {
+        carousel: "teacher"
+      },
       introduce: "",
       initIntro:
         '<p class="indent" style="text-indent:2em">1911学堂名师智库目前集结了数百位学术造诣深厚、教学经验丰富、具有国际视野的专家学者，以及学习成绩优质、各方面全面发展的高校学生，为中小学生、大学生及各界职场人士提供终身教育及导师咨询服务</p>' +
@@ -224,6 +232,19 @@ export default {
       list.teacherTagsList().then(res => {
         if (res.status == 0) {
           this.tagsList = res.data.teacherTagsList;
+          this.bannerList = res.data.teacherBannerList
+            //设置banner溢出居中显示
+          this.$nextTick(() => {
+            if (document.getElementsByClassName("teacherElCarouselItem")) {
+              let imgArr = document.getElementsByClassName("teacherElCarouselItem");
+              if (this.windowWidth <= 1920) {
+                let marginLeft = (1920 - this.windowWidth) / 2;
+                for (var i = 0; i < imgArr.length; i++) {
+                  imgArr[i].style.marginLeft = -marginLeft + "px";
+                }
+              }
+            }
+          });
         }
       });
     },
@@ -320,6 +341,8 @@ export default {
     this.introduce = this.initIntro;
 
     this.fixedTop = this.$refs["rightCon"].getBoundingClientRect().top;
+    this.windowWidth = document.documentElement.clientWidth;
+
   }
 };
 </script>
