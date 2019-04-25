@@ -8,26 +8,27 @@
       </h4>
       <div class="inner">
         <div class="item">
-          <div class="left">学生姓名：</div>
-          <div class="right">张三</div>
+          <div class="left">{{config.isTeacher?'老师姓名：':'学生姓名：'}}</div>
+          <div class="right">{{detail.real_name}}</div>
         </div>
         <div class="item">
           <div class="left">咨询开始时间：</div>
-          <div class="right">2019-04-24 11:30</div>
+          <div class="right">{{detail.start_time}}</div>
         </div>
         <div class="item">
           <div class="left">咨询时长：</div>
-          <div class="right">30min</div>
+          <div class="right">{{detail.use_time}}min</div>
         </div>
         <div class="item">
           <div class="left">咨询费：</div>
-          <div class="right">￥200.00</div>
+          <div class="right">￥{{detail.price}}</div>
         </div>
         <div class="item">
           <div class="left">咨询的问题：</div>
           <div class="right last">
-            <p>1、课程总费用是多少？课程总费用是多少？课程总费用是多少？</p>
-            <p>2、课程总费用是多少？课程总费用是多少？课程总费用是多少？ 课程总费用是多少？</p>
+            <p>{{detail.remark}}</p>
+            <!-- <p>1、课程总费用是多少？课程总费用是多少？课程总费用是多少？</p> -->
+            <!-- <p>2、课程总费用是多少？课程总费用是多少？课程总费用是多少？ 课程总费用是多少？</p> -->
           </div>
         </div>
       </div>
@@ -38,13 +39,13 @@
 
 <script>
 export default {
-  props: ['data'],
+  props: ["detail", "config"],
   methods: {
-    close () {
-
+    close() {
+      this.$emit("closeDetailPop");
     }
-  },
-}
+  }
+};
 </script>
 
 <style scoped lang="scss">

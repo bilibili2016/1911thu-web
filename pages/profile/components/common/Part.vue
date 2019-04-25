@@ -5,7 +5,7 @@
     </div>
     <ul v-if="teacherData.length!=0">
       <li v-if="!config.isTeacher" v-for="(teacher,index) in teacherData " :key="index">
-        <div class="headImg">
+        <div class="headImg" @click="handleDetail(teacher)">
           <img :src="teacher.picture" alt="">
         </div>
         <div class="info clearfix">
@@ -28,7 +28,7 @@
         </div>
       </li>
       <li v-if="config.isTeacher" v-for="(teacher,index) in teacherData " :key="index">
-        <div class="headImg">
+        <div class="headImg" @click="handleDetail(teacher)">
           <img :src="teacher.picture" alt="">
         </div>
         <div class="info clearfix">
@@ -58,20 +58,26 @@
         <h4 v-else>你暂时没有已预约的直播咨询，快去<span class="link" @click="handleTeacher">名师智库</span>预约导师吧。</h4>
       </div>
     </div>
+    <v-appointinfo v-if="isShowDetail" :detail="appointInfo" :config="config" @closeDetailPop="closeDetailPop"></v-appointinfo>
   </div>
 </template>
 
 <script>
-import { timestampToTime } from "@/lib/util/helper";
+import { timestampToTime, message } from "@/lib/util/helper";
+import { myTeacher } from "~/lib/v1_sdk/index";
 import NoMsg from "@/pages/profile/components/common/noMsg.vue";
+import Info from "@/pages/profile/components/common/appointInfo.vue";
 
 export default {
   props: ["teacherData", "config"],
   components: {
-    "v-nomsg": NoMsg
+    "v-nomsg": NoMsg,
+    "v-appointinfo": Info
   },
-  data () {
+  data() {
     return {
+      isShowDetail: false,
+      appointInfo: "",
       noMsg: {
         type: "myTeacher",
         text: "您暂未加入任何学院，快去加入吧！"
@@ -81,10 +87,24 @@ export default {
     };
   },
   methods: {
-    handleTeacher () {
+    closeDetailPop() {
+      this.isShowDetail = false;
+    },
+    handleDetail(item) {
+      myTeacher.BespokeDetail({ id: item.id }).then(res => {
+        if (res.status == 0) {
+          this.isShowDetail = true;
+          this.appointInfo = res.data.teacherBespokeDetail;
+          // this.handleGoTo("timeTable");
+        } else {
+          message(this, "error", res.msg);
+        }
+      });
+    },
+    handleTeacher() {
       this.$router.push("/home/teacher/list");
     },
-    goLive (teacher) {
+    goLive(teacher) {
       if (this.config.isTeacher) {
         this.type = 2;
       } else {
@@ -93,11 +113,11 @@ export default {
       this.$router.push(`/live?id=${teacher.id}&type=${this.type}`);
       //   this.$router.push('/live/studentLive')
     },
-    changeTime (time) {
+    changeTime(time) {
       return timestampToTime(time);
     }
   },
-  mounted () {
+  mounted() {
     if (this.config.isTeacher) {
       this.noMsg.text = "您暂时没有已预约的直播咨询。";
     } else {

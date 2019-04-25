@@ -57,7 +57,7 @@ import { live } from "~/lib/v1_sdk/index";
 import { matchSplits, setTitle, message } from "@/lib/util/helper";
 
 export default {
-  data () {
+  data() {
     return {
       isShow: true,
       isOver: false,
@@ -97,10 +97,10 @@ export default {
     };
   },
   methods: {
-    handleClick () {
+    handleClick() {
       this.isShow = !this.isShow;
     },
-    teacherBespokeInfo () {
+    teacherBespokeInfo() {
       live.teacherBespokeInfo(this.teacherLiveInfo).then(response => {
         if (response.status == 0) {
           this.url = response.data;
@@ -110,7 +110,7 @@ export default {
       });
     },
     //开始直播
-    start_play () {
+    start_play() {
       if (swfobject) {
         swfobject.getObjectById("tblive").Start(this.url.pushUrl);
         //   创建拉流播放器
@@ -121,7 +121,7 @@ export default {
       }
     },
     //结束直播
-    stop_play () {
+    stop_play() {
       swfobject.getObjectById("tblive").Stop();
       if (this.pullPlay) {
         this.pullPlay.pause();
@@ -130,7 +130,7 @@ export default {
         this.$refs.playInner.appendChild(this.node);
       }
     },
-    newPlayer () {
+    newPlayer() {
       // 创建播放器并传入参数
       swfobject.embedSWF(
         "//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf",
@@ -150,7 +150,7 @@ export default {
       );
     },
 
-    creatPlayer (url) {
+    creatPlayer(url) {
       this.pullaliPlayer.source = url.pullUrl;
       // 不存在 直接创建播放器
       this.pullPlay = new Aliplayer(this.pullaliPlayer);
@@ -162,28 +162,28 @@ export default {
         "none";
     },
     // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
-    playerLoad () {
+    playerLoad() {
       if (document.getElementsByClassName("prism-hide")[0]) {
         document.getElementsByClassName("prism-hide")[0].className =
           "prism-loading";
       }
     },
     // 视频准备好之后执行
-    readyPlay () {
+    readyPlay() {
       console.log("ready");
     },
     // 播放开始--启动计时器
-    playerPlay () {
+    playerPlay() {
       console.log("playerPlay");
     },
-    playerEnded () {
+    playerEnded() {
       console.log("playerEnded");
     },
-    playerError (error) {
+    playerError(error) {
       console.log(error);
     }
   },
-  mounted () {
+  mounted() {
     this.node = this.$refs.mediaPlayer;
     this.teacherLiveInfo.appointId = matchSplits("id");
     this.teacherLiveInfo.type = matchSplits("type");
