@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="live">
-      <div class="liveCon">
-        <div>
+      <div class="liveCon" ref="playerBox">
+        <div class="left" ref="left">
           <div :class="[isShow?'playInner':'playInner index']" ref="playInner">
             <div id="mediaPlayer" ref="mediaPlayer" class="mediaCon"></div>
           </div>
@@ -19,11 +19,18 @@
           <span class="btn nearBtn fr">结束直播</span>
           <span class="btn endBtn fr">结束直播</span>
         </div> -->
-
         </div>
-        <div class="liveBtn">
-          <span @click="start_play">开始直播</span>
-          <span @click="stop_play">结束直播</span>
+        <div class="right" ref="right">
+          <div class="problemBox">
+            <h4>咨询问题大纲</h4>
+            <ul ref="ul">
+              <li v-for="(item,index) in question" :key="index">{{item}}</li>
+            </ul>
+          </div>
+          <div class="liveBtn clearfix">
+            <span class="fl" @click="start_play">开始直播</span>
+            <span class="fr" @click="stop_play">结束直播</span>
+          </div>
         </div>
         <!-- 即将结束 -->
         <div class="pop nearEnd" v-if="nearEnd">
@@ -43,13 +50,13 @@
         </div>
       </div>
     </div>
-    <div class="rightBtn">
+    <!-- <div class="rightBtn">
       <div class="white" @click="handleClick">
         <img v-if="isShow" src="https://static-image.1911edu.com/live-white.png" alt="">
         <img v-else src="https://static-image.1911edu.com/live-yellow.png" alt="">
         <p :class="{yellow:!isShow}">我的图像</p>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -57,7 +64,7 @@ import { live } from "~/lib/v1_sdk/index";
 import { matchSplits, setTitle, message } from "@/lib/util/helper";
 
 export default {
-  data() {
+  data () {
     return {
       isShow: true,
       isOver: false,
@@ -97,10 +104,21 @@ export default {
     };
   },
   methods: {
-    handleClick() {
+    // 改变屏幕宽度重置播放器大小
+    resize () {
+      if (document.body.clientHeight) {
+        this.$nextTick(() => {
+          const h = document.body.clientHeight
+          this.$refs.left.style.height = h + 'px'
+          this.$refs.right.style.height = h + 'px'
+          this.$refs.ul.style.height = h - 80 - 90 + 'px'
+        });
+      }
+    },
+    handleClick () {
       this.isShow = !this.isShow;
     },
-    teacherBespokeInfo() {
+    teacherBespokeInfo () {
       live.teacherBespokeInfo(this.teacherLiveInfo).then(response => {
         if (response.status == 0) {
           this.url = response.data;
@@ -110,7 +128,7 @@ export default {
       });
     },
     //开始直播
-    start_play() {
+    start_play () {
       if (swfobject) {
         swfobject.getObjectById("tblive").Start(this.url.pushUrl);
         //   创建拉流播放器
@@ -121,7 +139,7 @@ export default {
       }
     },
     //结束直播
-    stop_play() {
+    stop_play () {
       swfobject.getObjectById("tblive").Stop();
       if (this.pullPlay) {
         this.pullPlay.pause();
@@ -130,7 +148,7 @@ export default {
         this.$refs.playInner.appendChild(this.node);
       }
     },
-    newPlayer() {
+    newPlayer () {
       // 创建播放器并传入参数
       swfobject.embedSWF(
         "//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf",
@@ -150,7 +168,7 @@ export default {
       );
     },
 
-    creatPlayer(url) {
+    creatPlayer (url) {
       this.pullaliPlayer.source = url.pullUrl;
       // 不存在 直接创建播放器
       this.pullPlay = new Aliplayer(this.pullaliPlayer);
@@ -162,36 +180,47 @@ export default {
         "none";
     },
     // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
-    playerLoad() {
+    playerLoad () {
       if (document.getElementsByClassName("prism-hide")[0]) {
         document.getElementsByClassName("prism-hide")[0].className =
           "prism-loading";
       }
     },
     // 视频准备好之后执行
-    readyPlay() {
+    readyPlay () {
       console.log("ready");
     },
     // 播放开始--启动计时器
-    playerPlay() {
+    playerPlay () {
       console.log("playerPlay");
     },
-    playerEnded() {
+    playerEnded () {
       console.log("playerEnded");
     },
-    playerError(error) {
+    playerError (error) {
       console.log(error);
     }
   },
-  mounted() {
+  mounted () {
     this.node = this.$refs.mediaPlayer;
     this.teacherLiveInfo.appointId = matchSplits("id");
     this.teacherLiveInfo.type = matchSplits("type");
+    this.resize()
+    window.addEventListener('resize', this.resize)
 
     // window.open('http://www.adobe.com/go/getflashplayer_cn')
     this.teacherBespokeInfo();
     //   创建推流播放器
     this.newPlayer();
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.$bus.$emit("headerFooterHide");
+    });
+  },
+  beforeRouteLeave (to, from, next) {
+    this.$bus.$emit("headerFooterShow");
+    next();
   }
 };
 </script>

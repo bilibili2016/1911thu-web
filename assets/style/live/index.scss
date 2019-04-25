@@ -1,11 +1,74 @@
 .live {
-  width: 1100px;
-  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: skyblue;
+  //   background-color: #181818;
 
   .liveCon {
     position: relative;
     width: 100%;
-    margin: 20px auto 30px;
+
+    .left {
+      height: 100%;
+      display: none;
+    }
+
+    .right {
+      width: 300px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      background-color: red;
+
+      .problemBox {
+        color: #fff;
+        padding: 0 20px;
+
+        h4 {
+          height: 90px;
+          line-height: 90px;
+          font-size: 20px;
+        }
+
+        ul {
+          overflow-y: auto;
+
+          li {
+            font-size: 14px;
+            line-height: 30px;
+          }
+        }
+      }
+
+      .liveBtn {
+        height: 80px;
+        padding: 0 20px;
+
+        span {
+          margin-top: 20px;
+          width: 120px;
+          height: 40px;
+          line-height: 40px;
+          border-radius: 6px;
+          font-size: 14px;
+          color: #fff;
+          text-align: center;
+          background-color: #00B383;
+          cursor: pointer;
+
+          &:first-child {
+            background-color: #666;
+          }
+        }
+      }
+
+
+    }
 
     .index {
       z-index: 30;
@@ -61,23 +124,6 @@
         // position: absolute !important;
         // top: 0;
         // right: 0;
-      }
-    }
-
-    .liveBtn {
-      float: left;
-
-      span {
-        width: 170px;
-        height: 44px;
-        line-height: 44px;
-        text-align: center;
-        color: #fff;
-        font-size: 16px;
-        background: #00b383;
-        margin-top: 10px;
-        cursor: pointer;
-        margin-right: 30px;
       }
     }
 
@@ -210,38 +256,38 @@
     }
   }
 
-  .liveDetail {
-    background: #fff url('https://static-image.1911edu.com/live-bg2.png') no-repeat center top;
-    background-size: 100% 230px;
-    box-shadow: 0px 0px 36px 0px rgba(198, 194, 210, 0.36);
-    border-radius: 10px;
-    margin-bottom: 100px;
-    padding-bottom: 60px;
+  //   .liveDetail {
+  //     background: #fff url('https://static-image.1911edu.com/live-bg2.png') no-repeat center top;
+  //     background-size: 100% 230px;
+  //     box-shadow: 0px 0px 36px 0px rgba(198, 194, 210, 0.36);
+  //     border-radius: 10px;
+  //     margin-bottom: 100px;
+  //     padding-bottom: 60px;
 
-    h1 {
-      font-size: 30px;
-      color: #fff;
-      margin: 60px 0;
-      padding-top: 60px;
-      text-align: center;
-    }
+  //     h1 {
+  //       font-size: 30px;
+  //       color: #fff;
+  //       margin: 60px 0;
+  //       padding-top: 60px;
+  //       text-align: center;
+  //     }
 
-    .detail-items {
-      .item {
-        background: url('https://static-image.1911edu.com/live-bg3.png') no-repeat;
-        background-size: contain;
-        width: 950px;
-        height: 56px;
-        line-height: 56px;
-        margin: 0 auto;
-        margin-bottom: 6px;
-        padding-left: 30px;
-        box-sizing: border-box;
-        font-size: 16px;
-        color: #fff;
-      }
-    }
-  }
+  //     .detail-items {
+  //       .item {
+  //         background: url('https://static-image.1911edu.com/live-bg3.png') no-repeat;
+  //         background-size: contain;
+  //         width: 950px;
+  //         height: 56px;
+  //         line-height: 56px;
+  //         margin: 0 auto;
+  //         margin-bottom: 6px;
+  //         padding-left: 30px;
+  //         box-sizing: border-box;
+  //         font-size: 16px;
+  //         color: #fff;
+  //       }
+  //     }
+  //   }
 }
 
 .rightBtn {
