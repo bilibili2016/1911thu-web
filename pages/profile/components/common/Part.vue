@@ -20,8 +20,13 @@
           <div class="fl">￥{{teacher.price}}</div>
           <div class="fr">
             <span v-if="teacher.result_status == 2" class="begin">等待预约确认</span>
-            <span v-if="teacher.result_status == 3&&(teacher.start_time-teacher.service_time)/60>30" class="soon" @click="goLive(teacher)">等待开始</span>
-            <span v-if="(teacher.result_status == 3&&(teacher.start_time-teacher.service_time)/60<30)||(teacher.result_status == 3&&(teacher.end_time-teacher.service_time)/60<=50)" class="soon" @click="goLive(teacher)">进入直播</span>
+            <span v-if="teacher.result_status == 3">
+              <span v-if="(Number(teacher.start_time)-teacher.service_time)/60>5" class="soon" @click="goLive(teacher)">等待开始</span>
+              <span v-else>
+                <span v-if="Number(teacher.end_time)-teacher.service_time>0" class="soon" @click="goLive(teacher)">进入直播</span>
+                <span v-else class="soon">已结束</span>
+              </span>
+            </span>
             <span v-if="teacher.result_status == 4" class="begin">已失效</span>
             <span v-if="teacher.result_status == 6" class="begin">调整待确认</span>
           </div>
@@ -43,8 +48,13 @@
           <div class="fl">￥{{teacher.price}}</div>
           <div class="fr">
             <span v-if="teacher.result_status == 2" class="begin">等待预约确认</span>
-            <span v-if="teacher.result_status == 3&&(teacher.start_time-teacher.service_time)/60>30" class="soon" @click="goLive(teacher)">等待开始</span>
-            <span v-if="(teacher.result_status == 3&&(teacher.start_time-teacher.service_time)/60<5)||(teacher.result_status == 3&&(teacher.end_time-teacher.service_time)/60<=50)" class="soon" @click="goLive(teacher)">进入直播</span>
+            <span v-if="teacher.result_status == 3">
+              <span v-if="(Number(teacher.start_time)-teacher.service_time)/60>5" class="soon" @click="goLive(teacher)">等待开始</span>
+              <span v-else>
+                <span v-if="Number(teacher.end_time)-teacher.service_time>0" class="soon" @click="goLive(teacher)">进入直播</span>
+                <span v-else class="soon">已结束</span>
+              </span>
+            </span>
             <span v-if="teacher.result_status == 4" class="begin">已失效</span>
             <span v-if="teacher.result_status == 6" class="begin">调整待确认</span>
           </div>
