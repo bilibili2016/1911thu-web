@@ -23,7 +23,7 @@
             <div class="fr">
               <span v-if="teacher.result_status == 2" class="wait">等待预约确认</span>
               <span v-if="teacher.result_status == 3">
-                <span v-if="(Number(teacher.start_time)-teacher.service_time)/60>5" class="soon" @click="goLive(teacher)">等待开始</span>
+                <span v-if="(Number(teacher.start_time)-teacher.service_time)/60>5" class="soon">等待开始</span>
                 <span v-else>
                   <span v-if="Number(teacher.end_time)-teacher.service_time>0" class="begin" @click="goLive(teacher)">进入直播</span>
                   <span v-else class="end">已结束</span>
@@ -51,7 +51,7 @@
             <div class="fr">
               <span v-if="teacher.result_status == 2" class="wait">等待预约确认</span>
               <span v-if="teacher.result_status == 3">
-                <span v-if="(Number(teacher.start_time)-teacher.service_time)/60>5" class="soon" @click="goLive(teacher)">等待开始</span>
+                <span v-if="(Number(teacher.start_time)-teacher.service_time)/60>5" class="soon">等待开始</span>
                 <span v-else>
                   <span v-if="Number(teacher.end_time)-teacher.service_time>0" class="begin" @click="goLive(teacher)">进入直播</span>
                   <span v-else class="end">已结束</span>
@@ -88,7 +88,7 @@ export default {
     "v-nomsg": NoMsg,
     "v-appointinfo": Info
   },
-  data() {
+  data () {
     return {
       isShowDetail: false,
       appointInfo: "",
@@ -102,11 +102,11 @@ export default {
   },
   methods: {
 
-    closeDetailPop() {
+    closeDetailPop () {
       this.isShowDetail = false;
       IEPopup("pane-tab-twelfth", "relative", 1);
     },
-    handleDetail(item) {
+    handleDetail (item) {
       myTeacher.BespokeDetail({ id: item.id, type: this.type }).then(res => {
         if (res.status == 0) {
           IEPopup("pane-tab-twelfth", "-ms-page", 0);
@@ -118,18 +118,18 @@ export default {
         }
       });
     },
-    handleTeacher() {
+    handleTeacher () {
       this.$router.push("/home/teacher/list");
     },
-    goLive(teacher) {
+    goLive (teacher) {
       this.$router.push(`/live?id=${teacher.id}&type=${this.type}`);
       //   this.$router.push('/live/studentLive')
     },
-    changeTime(time) {
+    changeTime (time) {
       return timestampToTime(time);
     }
   },
-  mounted() {
+  mounted () {
     if (this.config.isTeacher) {
       this.noMsg.text = "您暂时没有已预约的直播咨询。";
       this.type = 2;
