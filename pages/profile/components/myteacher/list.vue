@@ -74,9 +74,7 @@ export default {
       this.$bus.$emit("gotoURL", obj);
     }
   },
-  mounted() {
-    console.log(this.teacherPagemsg, "list");
-  }
+  mounted() {}
 };
 </script>
 <style lang="scss" scoped>

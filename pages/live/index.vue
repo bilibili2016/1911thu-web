@@ -88,7 +88,7 @@ export default {
         "11、远程班学习效果能保证吗？",
         "12、远程班学习效果能保证吗？远程班学习效果能保证吗？",
         "13、远程班学习效果能保证吗？",
-        "14、远程班学习效果能保证吗？远程班学习效果能保证吗？",
+        "14、远程班学习效果能保证吗？远程班学习效果能保证吗？"
       ],
       teacherLiveInfo: {
         appointId: "",
@@ -116,15 +116,15 @@ export default {
         useFlashPrism: true
       },
       node: "",
-      timer: '',
+      timer: "",
       variable: 0,
       min: 10000,
       second: 10000,
       showTime: 3,
       gidForm: {
-        gids: 'tab-twelfth'
+        gids: "tab-twelfth"
       },
-      loadTime: "",
+      loadTime: ""
     };
   },
   methods: {
@@ -146,7 +146,7 @@ export default {
       }
     },
     closeNearend () {
-      this.nearEnd = false
+      this.nearEnd = false;
     },
     // 跳转个人中心
     goProfile () {
@@ -167,66 +167,70 @@ export default {
         if (response.status == 0) {
           this.url = response.data;
           this.time = response.data.teacherBespokeInfo;
-          this.justTime()
+          this.justTime();
         } else {
           this.begin = false;
           this.end = false;
           message(this, "error", response.msg);
         }
-        this.$bus.$emit("headerFooterHide");
+        // this.$bus.$emit("headerFooterHide");
       });
     },
     // 判断当前时间：开始前预备时间——或——直播已经开始
     justTime () {
       //  开始前5分钟进来的
-      if ((parseInt(this.time.start_time) - this.time.service_time) / 60 > 0 && (parseInt(this.time.start_time) - this.time.service_time) / 60 < 5) {
-        this.variable = parseInt(this.time.start_time) - this.time.service_time
+      if (
+        (parseInt(this.time.start_time) - this.time.service_time) / 60 > 0 &&
+        (parseInt(this.time.start_time) - this.time.service_time) / 60 < 5
+      ) {
+        this.variable = parseInt(this.time.start_time) - this.time.service_time;
         if (this.timer) {
-          clearInterval(this.timer)
+          clearInterval(this.timer);
         }
-        this.countdown(1)
+        this.countdown(1);
       } else {
         this.begin = true;
         this.end = true;
       }
       //   直播已经开始
-      if ((parseInt(this.time.start_time) < this.time.service_time) && (parseInt(this.time.end_time) > this.time.service_time)) {
-        this.variable = parseInt(this.time.end_time) - this.time.service_time
+      if (
+        parseInt(this.time.start_time) < this.time.service_time &&
+        parseInt(this.time.end_time) > this.time.service_time
+      ) {
+        this.variable = parseInt(this.time.end_time) - this.time.service_time;
         if (this.timer) {
-          clearInterval(this.timer)
+          clearInterval(this.timer);
         }
-        this.countdown(2)
-        // this.begin = true;
-        // this.end = true;
+        this.countdown(2);
       }
     },
     // 进入页面后 触发的倒计时
     countdown (num) {
       this.timer = setInterval(() => {
         if (this.variable > 0) {
-          this.showTime = num
-          this.variable--
-          this.min = parseInt(this.variable / 60)
-          this.second = this.variable % 60
+          this.showTime = num;
+          this.variable--;
+          this.min = parseInt(this.variable / 60);
+          this.second = this.variable % 60;
           if (this.variable == 300 && this.showTime == 2) {
-            this.nearEnd = true
+            this.nearEnd = true;
           }
         } else {
           if (this.timer) {
-            clearInterval(this.timer)
+            clearInterval(this.timer);
           }
           //   等待直播结束
           if (this.showTime == 1) {
-            this.teacherBespokeInfo()
+            this.teacherBespokeInfo();
           }
           //   直播结束
           if (this.showTime == 2) {
-            this.stop_play()
+            this.stop_play();
             this.begin = false;
             this.end = false;
-            this.isOver = true
+            this.isOver = true;
           }
-          this.showTime = 3
+          this.showTime = 3;
         }
       }, 1000);
     },
@@ -281,10 +285,12 @@ export default {
     // 刚进入页面的时候加载完flash播放器 轮询检测播放器是否创建成功
     load () {
       this.loadtime = setInterval(() => {
-        this.objLength = document.getElementById("tblive").children.length;
-        if (this.objLength > 0) {
-          this.$refs.embedDiv.style.zIndex = 1;
-          clearInterval(this.loadtime)
+        if (document.getElementById("tblive")) {
+          this.objLength = document.getElementById("tblive").children.length;
+          if (this.objLength > 0) {
+            this.$refs.embedDiv.style.zIndex = 1;
+            clearInterval(this.loadtime);
+          }
         }
       }, 1000);
     },
@@ -327,8 +333,6 @@ export default {
       this.$bus.$emit("loginShow", true);
       this.$bus.$emit("headerFooterShow");
       return false;
-    } else {
-      this.$bus.$emit("headerFooterHide");
     }
     this.node = this.$refs.mediaPlayer;
     this.teacherLiveInfo.appointId = matchSplits("id");
@@ -338,21 +342,24 @@ export default {
 
     this.teacherBespokeInfo();
     if (this.loadtime) {
-      clearInterval(this.loadtime)
+      clearInterval(this.loadtime);
     }
     //   创建推流播放器
     this.newPlayer();
-    this.load()
-
-
+    this.load();
   },
-  //   beforeRouteEnter (to, from, next) {
-  //     next(vm => {
-  //       vm.$bus.$emit("headerFooterHide");
-  //     });
-  //   },
-  beforeRouteLeave (to, from, next) {
+  //  销毁之前展示头部 底部
+  destroyed () {
     this.$bus.$emit("headerFooterShow");
+  },
+  //   进入页面的的时候
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.$bus.$emit("headerFooterHide");
+    });
+  },
+  beforeRouteLeave (to, from, next) {
+    // this.$bus.$emit("headerFooterShow");
     next();
   }
 };

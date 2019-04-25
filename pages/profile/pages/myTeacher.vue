@@ -42,7 +42,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.teacherPagemsg, "ppp");
     this.$bus.$on("gotoURL", data => {
       this.isShowList = false;
       this.isShowTimeTable = false;
