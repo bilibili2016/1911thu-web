@@ -337,41 +337,13 @@ export default {
           if (this.objLength > 0) {
             if (!!window.ActiveXObject || "ActiveXObject" in window) {
               this.showEmbedDiv = false;
-              //   this.demo()
-              console.log(this.demo(), 1);
             } else {
-              //   this.demo()
-              console.log(this.demo(), 2);
-
               this.$refs.embedDiv.style.zIndex = 1;
             }
             clearInterval(this.loadtime);
           }
         }
       }, 1000);
-    },
-    demo() {
-      var flag = false;
-      if (window.ActiveXObject) {
-        try {
-          var swf = new ActiveXObject("ShockwaveFlash.ShockwaveFlash");
-          if (swf) {
-            flag = true;
-          }
-        } catch (e) {}
-      } else {
-        try {
-          var swf = navigator.plugins["Shockwave Flash"];
-          if (swf) {
-            flag = true;
-          }
-        } catch (e) {}
-      }
-      if (flag) {
-        return true;
-      } else {
-        return false;
-      }
     },
     creatPlayer(url) {
       this.pullaliPlayer.source = url.pullUrl;
@@ -430,7 +402,7 @@ export default {
     }
     //   创建推流播放器
     this.newPlayer();
-    this.load();
+    // this.load();
   },
   //  销毁之前展示头部 底部
   destroyed() {
