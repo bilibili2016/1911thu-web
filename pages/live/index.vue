@@ -26,7 +26,7 @@
           <h4>咨询问题大纲</h4>
           <ul ref="ul">
             <!-- <li v-for="(item,index) in question" :key="index">{{item}}</li> -->
-            <li>{{time.remark}}</li>
+            <!-- <li>{{time.remark}}</li> -->
           </ul>
         </div>
         <div class="liveBtn clearfix">
@@ -142,8 +142,12 @@ export default {
     ...mapActions("auth", ["setGid"]),
     // 改变屏幕宽度重置播放器大小
     resize () {
+      console.log(2);
+
       if (document.body.clientHeight) {
         this.$nextTick(() => {
+          console.log(3);
+
           const h = document.body.clientHeight;
           const w = document.body.clientWidth;
           this.width = document.body.clientWidth;
@@ -174,33 +178,51 @@ export default {
     },
     // 获取数据  播放地址  详情
     teacherBespokeInfo () {
+      console.log(4);
+
       live.teacherBespokeInfo(this.teacherLiveInfo).then(response => {
+        console.log("4--");
+
         if (response.status == 0) {
+          console.log(5);
+
           this.url = response.data;
           this.time = response.data.teacherBespokeInfo;
           this.justTime();
         } else {
+          console.log(454545);
+
           this.begin = false;
           this.end = false;
           message(this, "error", response.msg);
         }
+        console.log('5--');
+
         // this.$bus.$emit("headerFooterHide");
       });
     },
     // 判断当前时间：开始前预备时间——或——直播已经开始
     justTime () {
+      console.log(6);
+
       //  开始前5分钟进来的
       if (
         (parseInt(this.time.start_time) - this.time.service_time) / 60 > 0 &&
         (parseInt(this.time.start_time) - this.time.service_time) / 60 < 5
       ) {
+        console.log(7);
+
         this.variable = parseInt(this.time.start_time) - this.time.service_time;
         if (this.timer) {
+          console.log(8);
+
           clearInterval(this.timer);
         }
         console.log('即将开始')
         this.countdown(1);
       } else {
+        console.log(9);
+
         this.begin = true;
         this.end = true;
       }
@@ -209,6 +231,8 @@ export default {
         parseInt(this.time.start_time) < this.time.service_time &&
         parseInt(this.time.end_time) > this.time.service_time
       ) {
+        console.log(101);
+
         this.variable = parseInt(this.time.end_time) - this.time.service_time;
         if (this.timer) {
           clearInterval(this.timer);
@@ -219,11 +243,15 @@ export default {
     },
     // 进入页面后 触发的倒计时
     countdown (num) {
+      console.log(10000000);
+
       this.timer = setInterval(() => {
         console.log(this.variable,'variable')
         if (this.variable > 0) {
           this.showTime = num;
           this.variable--;
+          console.log(this.variable, 'this.variable');
+
           this.min = parseInt(this.variable / 60);
           this.second = this.variable % 60;
           if (this.variable == 300 && this.showTime == 2) {
@@ -383,6 +411,8 @@ export default {
       this.$bus.$emit("headerFooterShow");
       return false;
     }
+    console.log(1);
+
     this.node = this.$refs.mediaPlayer;
     this.teacherLiveInfo.appointId = matchSplits("id");
     this.teacherLiveInfo.type = matchSplits("type");
