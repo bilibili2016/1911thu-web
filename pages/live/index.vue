@@ -219,7 +219,7 @@ export default {
           clearInterval(this.timer);
         }
         console.log("即将开始");
-        this.countdown(1);
+        // this.countdown(1);
       } else {
         console.log(9);
 
@@ -238,7 +238,7 @@ export default {
           clearInterval(this.timer);
         }
         console.log("直播开始");
-        this.countdown(2);
+        // this.countdown(2);
       }
     },
     // 进入页面后 触发的倒计时
