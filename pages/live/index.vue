@@ -181,6 +181,8 @@ export default {
       console.log(4);
 
       live.teacherBespokeInfo(this.teacherLiveInfo).then(response => {
+        console.log("4--");
+
         if (response.status == 0) {
           console.log(5);
 
@@ -188,10 +190,14 @@ export default {
           this.time = response.data.teacherBespokeInfo;
           this.justTime();
         } else {
+          console.log(454545);
+
           this.begin = false;
           this.end = false;
           message(this, "error", response.msg);
         }
+        console.log('5--');
+
         // this.$bus.$emit("headerFooterHide");
       });
     },
