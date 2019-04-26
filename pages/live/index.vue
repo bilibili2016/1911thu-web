@@ -198,7 +198,6 @@ export default {
         if (this.timer) {
           clearInterval(this.timer);
         }
-        console.log('即将开始')
         this.countdown(1);
       } else {
         this.begin = true;
@@ -213,14 +212,12 @@ export default {
         if (this.timer) {
           clearInterval(this.timer);
         }
-         console.log('直播开始')
         this.countdown(2);
       }
     },
     // 进入页面后 触发的倒计时
     countdown (num) {
       this.timer = setInterval(() => {
-        console.log(this.variable,'variable')
         if (this.variable > 0) {
           this.showTime = num;
           this.variable--;
@@ -304,44 +301,13 @@ export default {
           if (this.objLength > 0) {
             if (!!window.ActiveXObject || "ActiveXObject" in window) {
               this.showEmbedDiv = false;
-              //   this.demo()
-              console.log(this.demo(), 1);
-
             } else {
-              //   this.demo()
-              console.log(this.demo(), 2);
-
               this.$refs.embedDiv.style.zIndex = 1;
             }
             clearInterval(this.loadtime);
           }
         }
       }, 1000);
-    },
-    demo () {
-      var flag = false;
-      if (window.ActiveXObject) {
-        try {
-          var swf = new ActiveXObject("ShockwaveFlash.ShockwaveFlash");
-          if (swf) {
-            flag = true;
-          }
-        } catch (e) {
-        }
-      } else {
-        try {
-          var swf = navigator.plugins['Shockwave Flash'];
-          if (swf) {
-            flag = true;
-          }
-        } catch (e) {
-        }
-      }
-      if (flag) {
-        return true
-      } else {
-        return false
-      }
     },
     creatPlayer (url) {
       this.pullaliPlayer.source = url.pullUrl;
