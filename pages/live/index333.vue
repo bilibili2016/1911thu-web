@@ -390,10 +390,10 @@ export default {
     this.node = this.$refs.mediaPlayer;
     this.teacherLiveInfo.appointId = matchSplits("id");
     this.teacherLiveInfo.type = matchSplits("type");
-    // this.resize();
-    // window.addEventListener("resize", this.resize);
+    this.resize();
+    window.addEventListener("resize", this.resize);
 
-    // this.teacherBespokeInfo();
+    this.teacherBespokeInfo();
     if (this.loadtime) {
       clearInterval(this.loadtime);
     }
@@ -401,7 +401,7 @@ export default {
       clearInterval(this.timer);
     }
     //   创建推流播放器
-    // this.newPlayer();
+    this.newPlayer();
     // this.load();
   },
   //  销毁之前展示头部 底部
