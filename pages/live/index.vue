@@ -359,6 +359,9 @@ export default {
     if (this.loadtime) {
       clearInterval(this.loadtime);
     }
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
     //   创建推流播放器
     this.newPlayer();
     this.load();
