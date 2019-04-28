@@ -48,6 +48,14 @@
       z-index: 3;
     }
 
+    .el-form-item {
+      margin-bottom: 16px;
+    }
+
+    .el-form-item__error {
+      padding-top: 2px;
+    }
+
     .con-item {
       width: 550px;
       height: 35px;
@@ -126,6 +134,7 @@
     .agreement {
       font-size: 12px;
       line-height: 24px;
+      margin: 10px 0;
 
       i {
         color: #822788;
@@ -134,7 +143,7 @@
         cursor: pointer;
       }
 
-      span.cost {
+      .cost {
         color: #FF5F5F;
         font-size: 14px;
         float: right;
