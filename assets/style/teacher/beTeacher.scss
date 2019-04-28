@@ -136,6 +136,62 @@
           width: 810px;
           position: relative;
           color: #222;
+
+          .el-input {
+            .el-input__inner {}
+          }
+
+          .el-radio {
+            .el-radio__inner {
+              width: 18px;
+              height: 18px;
+              border-color: #572281;
+            }
+
+            .el-radio__input.is-checked .el-radio__inner {
+              background-color: #fff;
+            }
+
+            .el-radio__inner::after {
+              width: 10px;
+              height: 10px;
+              background-color: #572281;
+            }
+
+            .el-radio__input.is-checked+.el-radio__label {
+              color: #344;
+            }
+          }
+
+          .el-checkbox {
+            font-weight: normal;
+          }
+
+          .el-checkbox:last-child {
+            margin-right: 0;
+          }
+
+          .el-checkbox__input {
+            .el-checkbox__inner {
+              width: 18px;
+              height: 18px;
+              border: 1px solid #6417a6;
+              border-radius: 4px;
+            }
+          }
+
+          .el-checkbox__inner::after {
+            left: 6px;
+            top: 3px;
+          }
+
+          .el-checkbox__label {
+            font-size: 16px;
+          }
+
+          .el-radio-group {
+            margin-top: 10px;
+          }
         }
       }
 
@@ -719,6 +775,12 @@
           }
         }
       }
+
+      .imgAlert {
+        color: red;
+        margin-left: 120px;
+        line-height: 100px;
+      }
     }
 
     .course {
@@ -769,61 +831,6 @@
     }
   }
 
-  .el-input {
-    .el-input__inner {}
-  }
-
-  .el-radio {
-    .el-radio__inner {
-      width: 18px;
-      height: 18px;
-      border-color: #572281;
-    }
-
-    .el-radio__input.is-checked .el-radio__inner {
-      background-color: #fff;
-    }
-
-    .el-radio__inner::after {
-      width: 10px;
-      height: 10px;
-      background-color: #572281;
-    }
-
-    .el-radio__input.is-checked+.el-radio__label {
-      color: #344;
-    }
-  }
-
-  .el-checkbox {
-    font-weight: normal;
-  }
-
-  .el-checkbox:last-child {
-    margin-right: 0;
-  }
-
-  .el-checkbox__input {
-    .el-checkbox__inner {
-      width: 18px;
-      height: 18px;
-      border: 1px solid #6417a6;
-      border-radius: 4px;
-    }
-  }
-
-  .el-checkbox__inner::after {
-    left: 6px;
-    top: 3px;
-  }
-
-  .el-checkbox__label {
-    font-size: 16px;
-  }
-
-  .el-radio-group {
-    margin-top: 10px;
-  }
 }
 
 input::-webkit-input-placeholder,
