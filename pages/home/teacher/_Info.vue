@@ -17,6 +17,26 @@
           </div>
         </div>
       </div>
+      <div class="middle">
+        <h3>您可在线预约导师咨询问题，也可以学习其课程或邀请导师授课！</h3>
+        <div class="middle-con clearfix">
+          <div class="left">
+            <div class="title">擅长的话题</div>
+            <ul class="topic">
+              <li v-for="(item,index) in topicList" :key="index">{{item}}</li>
+            </ul>
+            <span class="btn apponit">预约咨询</span>
+          </div>
+          <div class="right">
+            <div class="title">讲授的课程</div>
+             <ul class="course">
+              <li v-for="(item,index) in topicList" :key="index">{{item}}</li>
+            </ul>
+            <span class="btn invite">邀请导师授课</span>
+
+          </div>
+        </div>
+      </div>
       <div class="courseList">
         <div v-if="teacherCourse.length!=0">
           <h3>在教的课程</h3>
@@ -71,7 +91,14 @@ export default {
         tids: null
       },
       teacherBg: "https://static-image.1911edu.com/teacher_bannerBG.png",
-      loading: false
+      loading: false,
+      topicList:[
+        '创业公司如何利用社群低成本营销创业公司如何利用社群低成本营销销',
+        '创业公司如何利用社群低成本营销',
+        '创业公司如何利用社群低成本营销',
+        '创业公司如何利用社群低成本营销',
+        '创业公司如何利用社群低成本营销'
+      ]
     };
   },
   methods: {
