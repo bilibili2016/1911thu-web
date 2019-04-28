@@ -13,7 +13,7 @@
     position: fixed;
     left: 50%;
     top: 50%;
-    margin-top: -302px;
+    margin-top: -338px;
     margin-left: -335px;
     background-color: #fff;
     border-radius: 10px;
@@ -35,7 +35,7 @@
       line-height: 24px;
       text-align: center;
       padding: 10px 0;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     i.el-icon-close {
@@ -53,17 +53,21 @@
 
       .el-form-item__label {
         width: 150px;
+        height: 35px;
+        line-height: 35px;
         color: #222;
       }
 
       .el-form-item__content {
         margin-left: 150px;
+        line-height: 35px;
       }
     }
 
     .el-form-item.descItem {
       .el-form-item__label {
         width: 220px;
+        line-height: 26px;
       }
 
       .el-form-item__content {

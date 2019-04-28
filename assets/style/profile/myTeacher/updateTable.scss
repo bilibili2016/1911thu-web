@@ -126,6 +126,23 @@
       width: 680px;
       margin-right: 40px;
     }
+
+    ul {
+      width: 680px;
+      float: right;
+      margin-right: 40px;
+      min-height: 40px;
+      background-color: #f5f7fa;
+      color: #333;
+      border: 1px solid #dcdfe6;
+      padding-top: 5px;
+
+      li {
+        line-height: 30px;
+        margin-bottom: 15px;
+        padding: 0 15px;
+      }
+    }
   }
 
   .btns {

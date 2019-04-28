@@ -48,7 +48,9 @@
       </div>
       <div class="textarea clearfix">
         <p class="fl">咨询问题概述：</p>
-        <el-input type="textarea" disabled autosize v-model.trim="updateTimeForm.problems" :rows="3"></el-input>
+        <ul>
+          <li v-for="(item,index) in questionList" :key="index">{{index+1+'、'}}{{item.title}}</li>
+        </ul>
       </div>
       <div class="textarea clearfix">
         <p class="fl">修改原因描述：</p>
@@ -80,12 +82,12 @@ import { message, IEPopup, Trim } from "~/lib/util/helper";
 
 export default {
   props: ["timeID"],
-  data() {
+  data () {
     return {
       successTime: "",
       isShowPop: false,
       pickerOptions: {
-        disabledDate(time) {
+        disabledDate (time) {
           return time.getTime() <= Date.now();
         }
       },
@@ -103,11 +105,30 @@ export default {
         timeType: "1", //期待修改时间的方式
         customTime: "" //自定义时间 字符串
       },
-      appointTimeList: []
+      appointTimeList: [],
+      questionList: [
+        {
+          id: '1',
+          title: '我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间'
+        },
+        {
+          id: '2',
+          title: '我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间'
+        },
+        {
+          id: '3',
+          title: '欢迎您使用预约咨询服务3'
+        },
+        {
+          id: '4',
+          title: '我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间'
+        },
+
+      ]
     };
   },
   watch: {
-    "updateTimeForm.timeType"(val) {
+    "updateTimeForm.timeType" (val) {
       if (val == 1) {
         this.updateTimeForm.appointmentDate = "";
         this.updateTimeForm.appointmentTime = "";
@@ -117,15 +138,15 @@ export default {
     }
   },
   methods: {
-    handleselectChange(val) {
+    handleselectChange (val) {
       this.updateTimeForm.nextTime = val;
     },
-    handleGoTo(url) {
+    handleGoTo (url) {
       let obj = { name: url };
       this.$bus.$emit("gotoURL", obj);
       IEPopup("pane-tab-thirteenth", "relative", 1);
     },
-    validate() {
+    validate () {
       try {
         if (this.updateTimeForm.timeType == "1") {
           if (this.updateTimeForm.nextTime == "") throw "请选择期待修改时间";
@@ -143,7 +164,7 @@ export default {
       }
       this.submit();
     },
-    submit() {
+    submit () {
       this.updateTimeForm.customTime =
         this.updateTimeForm.appointmentDate +
         " " +
@@ -165,10 +186,10 @@ export default {
         }
       });
     },
-    changeTime() {
+    changeTime () {
       this.selectTime = !this.selectTime;
     },
-    getData() {
+    getData () {
       myTeacher.modifyBespokeTime({ id: this.timeID }).then(res => {
         if (res.status == 0) {
           let data = res.data.bespokeDetail;
@@ -176,11 +197,12 @@ export default {
           this.updateTimeForm.startTime = data.start_time;
           this.updateTimeForm.problems = data.remark;
           this.appointTimeList = res.data.otherTimeList;
+          this.questionList = res.data.bespokeDetail.questionList;
         }
       });
     }
   },
-  mounted() {
+  mounted () {
     this.getData();
   }
 };

@@ -18,7 +18,7 @@
         <div class="con-outer">
           <div class="personal">
             <div class="tip">请留下您宝贵的个人信息，期待与您早日合作！</div>
-            <h5>您的信息只用于1991学堂，不会用于其他用途</h5>
+            <h5>您的个人信息只用于1911学堂导师招募信息审核，不会用于其他用途，任何与个人隐私相关的信息，1911学堂会为您保密。</h5>
             <div class="content">
               <div class="con-item name clearfix">
                 <div class="fl">
@@ -120,23 +120,23 @@
                   </div>
                 </div> -->
                 <div class="con-item uploadFile clearfix">
-                    <div class="fl"><i class="red">*</i>请上传您的照片：</div>
-                    <div :class="['fr',{'height':isShowImg}]">
-                      <div class="load" v-show="isShowImg">
-                        <div class="upload">
-                          <input type="file" id="uploadImg" @change="teacherImgUpload" accept="image/png, image/gif, image/jpeg">
-                        </div>
-                        <div class="uploadMask">
-                          <i class="el-icon-plus"></i>
-                        </div>
-                        <span class="imgAlert">图片不能超过10M</span>
+                  <div class="fl"><i class="red">*</i>请上传您的照片：</div>
+                  <div :class="['fr',{'height':isShowImg}]">
+                    <div class="load" v-show="isShowImg">
+                      <div class="upload">
+                        <input type="file" id="uploadImg" @change="teacherImgUpload" accept="image/png, image/gif, image/jpeg">
                       </div>
-                      <p class="uploadP" v-show="!isShowImg">
-                        <span class="uploadImgs"><img :src="teacherForm.photo" alt=""></span>
-                        <span class="deleteImg" @click="deleteImg">删除</span>
-                      </p>
-
+                      <div class="uploadMask">
+                        <i class="el-icon-plus"></i>
+                      </div>
+                      <span class="imgAlert">图片不能超过10M</span>
                     </div>
+                    <p class="uploadP" v-show="!isShowImg">
+                      <span class="uploadImgs"><img :src="teacherForm.photo" alt=""></span>
+                      <span class="deleteImg" @click="deleteImg">删除</span>
+                    </p>
+
+                  </div>
                 </div>
                 <div class="con-item desc clearfix">
                   <div class="fl">自我介绍：</div>
@@ -189,7 +189,7 @@
                       <div class="uploadMask">
                         <i class="el-icon-plus"></i>
                       </div>
-                        <span class="imgAlert">图片不能超过1M</span>
+                      <span class="imgAlert">图片不能超过1M</span>
                     </div>
                     <p class="uploadP" v-show="!isShowCardImg">
                       <span class="uploadImgs"><img :src="teacherForm.studentCard" alt=""></span>
@@ -198,23 +198,23 @@
                   </div>
                 </div>
                 <div class="con-item uploadFile clearfix">
-                    <div class="fl"><i class="red">*</i>请上传您的照片：</div>
-                    <div :class="['fr',{'height':isShowImg}]">
-                      <div class="load" v-show="isShowImg">
-                        <div class="upload">
-                          <input type="file" id="uploadImg" @change="teacherImgUpload" accept="image/png, image/gif, image/jpeg">
-                        </div>
-                        <div class="uploadMask">
-                          <i class="el-icon-plus"></i>
-                        </div>
-                        <span class="imgAlert">图片不能超过10M</span>
+                  <div class="fl"><i class="red">*</i>请上传您的照片：</div>
+                  <div :class="['fr',{'height':isShowImg}]">
+                    <div class="load" v-show="isShowImg">
+                      <div class="upload">
+                        <input type="file" id="uploadImg" @change="teacherImgUpload" accept="image/png, image/gif, image/jpeg">
                       </div>
-                      <p class="uploadP" v-show="!isShowImg">
-                        <span class="uploadImgs"><img :src="teacherForm.photo" alt=""></span>
-                        <span class="deleteImg" @click="deleteImg">删除</span>
-                      </p>
-
+                      <div class="uploadMask">
+                        <i class="el-icon-plus"></i>
+                      </div>
+                      <span class="imgAlert">图片不能超过10M</span>
                     </div>
+                    <p class="uploadP" v-show="!isShowImg">
+                      <span class="uploadImgs"><img :src="teacherForm.photo" alt=""></span>
+                      <span class="deleteImg" @click="deleteImg">删除</span>
+                    </p>
+
+                  </div>
                 </div>
                 <div class="con-item desc clearfix">
                   <div class="fl">自我介绍：</div>
@@ -256,15 +256,15 @@ import { auth, list } from "~/lib/v1_sdk/index";
 export default {
   data () {
     return {
-      isShowOther:false,
+      isShowOther: false,
       isShowPop: false,
       codeInterval: null,
       uploadFileName: "",
-      teacherImgName:"",
+      teacherImgName: "",
       codeClick: true,
       isShowFile: true,
       isShowImg: true,//展示照片
-      isShowCardImg:true,//展示学生证
+      isShowCardImg: true,//展示学生证
       isClick: false,
       isOnlineChecked: false,
       isOfflineChecked: false,
@@ -306,7 +306,7 @@ export default {
           id: '6'
         }
       ],
-      direction:[],
+      direction: [],
       teacherForm: {
         name: "", //姓名
         tel: "", //手机号
@@ -315,7 +315,7 @@ export default {
         identity: "1", //身份
         dutyName: "", //职称
         email: "", //常用邮箱
-        directionArr:[],//擅长领域
+        directionArr: [],//擅长领域
         otherArea: '', //其他擅长领域
         service: [], //合作形式
         consult: "", //是否提供咨询服务
@@ -378,9 +378,9 @@ export default {
   },
   methods: {
     changeDirection (val) {
-      if(val.indexOf('6')>0){
+      if (val.indexOf('6') > 0) {
         this.isShowOther = true
-      }else{
+      } else {
         this.isShowOther = false
 
       }
@@ -461,7 +461,7 @@ export default {
     //   this.isShowFile = true;
     //   this.uploadFileName = "";
     // },
-     //处理文件上传
+    //处理文件上传
     // handleFileChange (event) {
     //   var reader = new FileReader();
     //   let imgFiles = event.target.files[0];
@@ -490,11 +490,11 @@ export default {
       this.isShowImg = true;
     },
     //删除上传照片
-    deleteCardImg(){
+    deleteCardImg () {
       this.isShowImg = true;
     },
     //处理图片上传
-    handleImgUpload (event,param,show) {
+    handleImgUpload (event, param, show) {
       // var that = this
       var reader = new FileReader();
       let imgFiles = event.target.files[0];
@@ -510,7 +510,7 @@ export default {
           if (res.status == 0) {
             this.teacherForm[param] = res.data.full_path;
             // this.isShowImg = !this.isShowImg;
-            this[show]= !this[show];
+            this[show] = !this[show];
             event.target.value = "";
           } else {
             message(this, "error", res.msg);
@@ -519,12 +519,12 @@ export default {
       };
     },
     //照片上传
-    teacherImgUpload(event){
-      this.handleImgUpload(event,'photo','isShowImg')
+    teacherImgUpload (event) {
+      this.handleImgUpload(event, 'photo', 'isShowImg')
     },
     //学生证上传
-    cardUpload(){
-      this.handleImgUpload(event,'studentCard','isShowCardImg')
+    cardUpload () {
+      this.handleImgUpload(event, 'studentCard', 'isShowCardImg')
     },
     //选项信息
     getRecruitSelect () {

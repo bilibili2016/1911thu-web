@@ -5,7 +5,7 @@
       <i class="el-icon-close" @click="closeForm"></i>
       <p class="tips">亲爱的学员，欢迎您使用预约咨询服务，请选择您方便接收回复的时间段，<br>
         我们将会在此时间段通过视频直播的方式为您提供一对一的咨询服务！</p>
-      <el-form :model="teacherForm" :rules="rules" ref="teacherForm"  class="teacherForm">
+      <el-form :model="teacherForm" :rules="rules" ref="teacherForm" class="teacherForm">
         <el-form-item label="您的联系方式：" prop="tel">
           <el-input v-model="teacherForm.tel" :disabled="teacherForm.hasTel"></el-input>
         </el-form-item>
@@ -23,7 +23,12 @@
             <el-option v-for="item in timeList" :key="item.id" :label="item.start_time" :value="item.id"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item class="descItem" label="请简单描述您想要咨询的问题" prop="remark">
+        <el-form-item class="selectTime" label="请选择咨询问题：" prop="problems">
+          <el-select v-model="teacherForm.problems" multiple collapse-tags placeholder="请选择咨询问题">
+            <el-option v-for="item in questionList" :key="item.id" :label="item.title" :value="item.title"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item class="descItem" label="请输入您的想要咨询的其他问题" prop="remark">
           <el-input type="textarea" placeholder="请输入您想要咨询的问题，预约成功，导师将一对一解答。" v-model="teacherForm.remark"></el-input>
         </el-form-item>
         <el-form-item class="agreement" label="" prop="checked">
@@ -99,12 +104,12 @@ export default {
         startTime: "",
         courseTimeName: "50分钟", //授课时长
         remark: "", //其他需求
-        problems: "",
+        problems: [],
         checked: [],
         hasTel: true,
         hasName: false
       },
-      problems: [],
+      questionList: [],
       timeList: [],
       rules: {
         name: [
@@ -124,15 +129,22 @@ export default {
         startTime: [
           { required: true, message: '请选择开始时间', trigger: 'change' }
         ],
-        remark: [
+        problems: [
           {
             required: true,
             message: "请选择您的想要咨询的问题",
             trigger: "blur"
           }
         ],
-        checked:[
-           { type: 'array',  required: true, message: '请先阅读并同意《服务协议》', trigger: 'change' }
+        remark: [
+          {
+            required: true,
+            message: "请输入您的想要咨询的其他问题",
+            trigger: "blur"
+          }
+        ],
+        checked: [
+          { type: 'array', required: true, message: '请先阅读并同意《服务协议》', trigger: 'change' }
         ]
       },
     };
@@ -145,15 +157,15 @@ export default {
     appointmentTeacher (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-         teacherInfo.teacherBespoke(this.teacherForm).then(response => {
-              //不需要验证是否登录
-              if (response.status === 0) {
-                this.closeForm();
-                this.$emit("goPay", response.data.id);
-              } else {
-                message(this, "error", response.msg);
-              }
-            });
+          teacherInfo.teacherBespoke(this.teacherForm).then(response => {
+            //不需要验证是否登录
+            if (response.status === 0) {
+              this.closeForm();
+              this.$emit("goPay", response.data.id);
+            } else {
+              message(this, "error", response.msg);
+            }
+          });
         }
       });
     },
@@ -169,12 +181,13 @@ export default {
         //不需要验证是否登录
         if (response.status === 0) {
           this.timeList = response.data.timeList;
+          this.questionList = response.data.questionList;
         } else {
           message(this, "error", response.msg);
         }
       });
     },
-    handleselectChange(val){
+    handleselectChange (val) {
       this.teacherForm.startTime = val
     },
     serviceAgreement () {
