@@ -70,12 +70,12 @@
                     <el-input v-model="teacherForm.email" placeholder="请填写您的常用邮箱"></el-input>
                   </div>
                 </div>
-                <div class="con-item name clearfix">
+                <div class="con-item style clearfix">
                   <div class="fl">擅长领域：</div>
                   <div class="fr clearfix">
-                    <el-checkbox-group v-model="teacherForm.direction" @change="changeDirection">
-                      <el-checkbox v-for="item in directionData" :label="item.id" :key="item.id">{{item.name}}</el-checkbox>
-                      <!-- <el-input class="other" v-model="teacherForm.directionOther" max="15" placeholder="请填写您填写"></el-input> -->
+                    <el-checkbox-group v-model="direction" @change="changeDirection">
+                      <el-checkbox v-for="(area,index) in directionData" :label="area.id" :key="'area'+index">{{area.name}}</el-checkbox>
+                      <el-input v-if="isShowOther" v-model="teacherForm.otherArea" placeholder="请输入您擅长的领域"></el-input>
                     </el-checkbox-group>
                   </div>
                 </div>
@@ -84,17 +84,6 @@
                   <div class="fr clearfix">
                     <el-checkbox-group v-model="teacherForm.service" @change="handleserviceChange">
                       <el-checkbox v-for="(service,index) in offerService" :label="service.id" :key="'service'+index">{{service.name}}</el-checkbox>
-                      <!-- <i class="el-icon-question styleAsk">
-                                    <div class="descript-text" style="width:530px;">
-                                        <div>
-                                            <p>线上授课：与1911学堂合作录制在线课程，学员登录1911学堂平台进行学习；</p>
-                                            <p>线下授课：授课地点为北京，主要形式包括大班课，小班课以及讲座；</p>
-                                            <p>课程顾问：亲临项目所在地，实地授课；</p>
-                                            <p>咨询：项目相关的课程研发、培训流程及活动设计等问题的咨询服务；</p>
-                                            <p>课题研究：基于客户提出的科研主题，协助客户完成相关内容的研究。</p>
-                                        </div>
-                                    </div>
-                </i>-->
                     </el-checkbox-group>
                   </div>
                 </div>
@@ -131,21 +120,23 @@
                   </div>
                 </div> -->
                 <div class="con-item uploadFile clearfix">
-                  <div class="fl"><i class="red">*</i>上传学生证：</div>
-                  <div :class="['fr',{'height':isShowFile}]">
-                    <div class="load" v-show="isShowFile">
-                      <div class="upload">
-                        <input type="file" id="uploadImg" @change="handleFileChange" accept="image/png, image/gif, image/jpeg">
+                    <div class="fl"><i class="red">*</i>请上传您的照片：</div>
+                    <div :class="['fr',{'height':isShowImg}]">
+                      <div class="load" v-show="isShowImg">
+                        <div class="upload">
+                          <input type="file" id="uploadImg" @change="teacherImgUpload" accept="image/png, image/gif, image/jpeg">
+                        </div>
+                        <div class="uploadMask">
+                          <i class="el-icon-plus"></i>
+                        </div>
+                        <span class="imgAlert">图片不能超过10M</span>
                       </div>
-                      <div class="uploadMask">
-                        <i class="el-icon-plus"></i>
-                      </div>
+                      <p class="uploadP" v-show="!isShowImg">
+                        <span class="uploadImgs"><img :src="teacherForm.photo" alt=""></span>
+                        <span class="deleteImg" @click="deleteImg">删除</span>
+                      </p>
+
                     </div>
-                    <p class="uploadP" v-show="!isShowFile">
-                      <span class="uploadImgs"><img :src="teacherForm.phone" alt=""></span>
-                      <span class="deleteImg" @click="deleteFile">删除</span>
-                    </p>
-                  </div>
                 </div>
                 <div class="con-item desc clearfix">
                   <div class="fl">自我介绍：</div>
@@ -170,18 +161,13 @@
                     <el-input v-model="teacherForm.email" placeholder="请填写您的常用邮箱"></el-input>
                   </div>
                 </div>
-                <div class="con-item name clearfix">
+                <div class="con-item style clearfix">
                   <div class="fl">擅长领域：</div>
                   <div class="fr clearfix">
-
-                    <el-checkbox-group v-model="teacherForm.direction" @change="changeDirection">
-                      <el-checkbox v-for="(item,index) in directionData" :key="index" :label="item.name"></el-checkbox>
+                    <el-checkbox-group v-model="direction" @change="changeDirection">
+                      <el-checkbox v-for="(area,index) in directionData" :label="area.id" :key="'area'+index">{{area.name}}</el-checkbox>
+                      <el-input v-if="isShowOther" v-model="teacherForm.otherArea" placeholder="请输入您擅长的领域"></el-input>
                     </el-checkbox-group>
-
-                    <!-- <el-checkbox-group v-model="teacherForm.direction" @change="changeDirection">
-                      <el-checkbox v-for="item in directionData" :label="item.id" :key="item.id">{{item.name}}</el-checkbox>
-                      <el-input class="other" v-model="teacherForm.directionOther" placeholder="请填写您填写"></el-input>
-                    </el-checkbox-group> -->
                   </div>
                 </div>
                 <div class="con-item clearfix">
@@ -195,37 +181,40 @@
                 </div>
                 <div class="con-item uploadFile clearfix">
                   <div class="fl"><i class="red">*</i>上传学生证：</div>
-                  <div :class="['fr',{'height':isShowImg}]">
-                    <div class="load" v-show="isShowImg">
+                  <div :class="['fr',{'height':isShowCardImg}]">
+                    <div class="load" v-show="isShowCardImg">
                       <div class="upload">
-                        <input type="file" id="uploadImg" @change="add_img" accept="image/png, image/gif, image/jpeg">
+                        <input type="file" id="uploadImg" @change="cardUpload" accept="image/png, image/gif, image/jpeg">
                       </div>
                       <div class="uploadMask">
                         <i class="el-icon-plus"></i>
                       </div>
+                        <span class="imgAlert">图片不能超过1M</span>
                     </div>
-                    <p class="uploadP" v-show="!isShowImg">
+                    <p class="uploadP" v-show="!isShowCardImg">
                       <span class="uploadImgs"><img :src="teacherForm.studentCard" alt=""></span>
-                      <span class="deleteImg" @click="deleteImg">删除</span>
+                      <span class="deleteImg" @click="deleteCardImg">删除</span>
                     </p>
                   </div>
                 </div>
                 <div class="con-item uploadFile clearfix">
-                  <div class="fl"><i class="red">*</i>请上传您的照片：</div>
-                  <div :class="['fr',{'height':isShowImg}]">
-                    <div class="load" v-show="isShowImg">
-                      <div class="upload">
-                        <input type="file" id="uploadImg" @change="handleFileChange" accept="image/png, image/gif, image/jpeg">
+                    <div class="fl"><i class="red">*</i>请上传您的照片：</div>
+                    <div :class="['fr',{'height':isShowImg}]">
+                      <div class="load" v-show="isShowImg">
+                        <div class="upload">
+                          <input type="file" id="uploadImg" @change="teacherImgUpload" accept="image/png, image/gif, image/jpeg">
+                        </div>
+                        <div class="uploadMask">
+                          <i class="el-icon-plus"></i>
+                        </div>
+                        <span class="imgAlert">图片不能超过10M</span>
                       </div>
-                      <div class="uploadMask">
-                        <i class="el-icon-plus"></i>
-                      </div>
+                      <p class="uploadP" v-show="!isShowImg">
+                        <span class="uploadImgs"><img :src="teacherForm.photo" alt=""></span>
+                        <span class="deleteImg" @click="deleteImg">删除</span>
+                      </p>
+
                     </div>
-                    <p class="uploadP" v-show="!isShowImg">
-                      <span class="uploadImgs"><img :src="teacherForm.phone" alt=""></span>
-                      <span class="deleteImg" @click="deleteImg">删除</span>
-                    </p>
-                  </div>
                 </div>
                 <div class="con-item desc clearfix">
                   <div class="fl">自我介绍：</div>
@@ -267,13 +256,15 @@ import { auth, list } from "~/lib/v1_sdk/index";
 export default {
   data () {
     return {
+      isShowOther:false,
       isShowPop: false,
       codeInterval: null,
       uploadFileName: "",
-      uploadImgName: "",
+      teacherImgName:"",
       codeClick: true,
       isShowFile: true,
-      isShowImg: true,
+      isShowImg: true,//展示照片
+      isShowCardImg:true,//展示学生证
       isClick: false,
       isOnlineChecked: false,
       isOfflineChecked: false,
@@ -309,17 +300,23 @@ export default {
         {
           name: "人工智能",
           id: '5'
+        },
+        {
+          name: "其他",
+          id: '6'
         }
       ],
+      direction:[],
       teacherForm: {
         name: "", //姓名
         tel: "", //手机号
         code: "", //手机验证码
         school: "", //所在学校
-        identity: "", //身份
+        identity: "1", //身份
         dutyName: "", //职称
         email: "", //常用邮箱
-        direction: [], //擅长领域
+        directionArr:[],//擅长领域
+        otherArea: '', //其他擅长领域
         service: [], //合作形式
         consult: "", //是否提供咨询服务
         courseName: "", //授课名称
@@ -367,6 +364,8 @@ export default {
             this.teacherForm[key] = [];
           } else {
             this.teacherForm[key] = "";
+            this.isShowImg = true
+            this.isShowCardImg = true
           }
         }
       }
@@ -378,8 +377,13 @@ export default {
     }
   },
   methods: {
-    changeDirection (item) {
-      console.log(this.teacherForm.direction, item);
+    changeDirection (val) {
+      if(val.indexOf('6')>0){
+        this.isShowOther = true
+      }else{
+        this.isShowOther = false
+
+      }
     },
     handleSelectChange (val) {
       this.teacherForm.school = val;
@@ -412,7 +416,8 @@ export default {
       }
     },
     //多选框
-    handleserviceChange (val) { },
+    handleserviceChange (val) {
+    },
     //获取验证码
     getCode () {
       const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/;
@@ -452,64 +457,74 @@ export default {
       }
     },
     //删除上传的文件
-    deleteFile () {
-      this.isShowFile = true;
-      this.uploadFileName = "";
-    },
+    // deleteFile () {
+    //   this.isShowFile = true;
+    //   this.uploadFileName = "";
+    // },
+     //处理文件上传
+    // handleFileChange (event) {
+    //   var reader = new FileReader();
+    //   let imgFiles = event.target.files[0];
+    //   this.uploadFileName = imgFiles.name;
+    //   var formdata = new window.FormData();
+    //   formdata.append("file", imgFiles);
+    //   formdata.file = imgFiles;
+    //   reader.readAsDataURL(imgFiles);
+    //   this.fileForm.FILESS = [];
+    //   reader.onloadend = () => {
+    //     this.fileForm.FILESS.push(reader.result);
+    //     this.fileForm.fileName = imgFiles.name;
+    //     list.uploadResume(this.fileForm).then(res => {
+    //       if (res.status == 0) {
+    //         this.teacherForm.phone = res.data.full_path;
+    //         this.isShowFile = !this.isShowFile;
+    //         event.target.value = "";
+    //       } else {
+    //         message(this, "error", res.msg);
+    //       }
+    //     });
+    //   };
+    // },
     //删除上传图片
     deleteImg () {
       this.isShowImg = true;
-      this.uploadImgName = "";
     },
-    //处理文件上传
-    handleFileChange (event) {
-      var reader = new FileReader();
-      let imgFiles = event.target.files[0];
-      this.uploadFileName = imgFiles.name;
-      var formdata = new window.FormData();
-      formdata.append("file", imgFiles);
-      formdata.file = imgFiles;
-      reader.readAsDataURL(imgFiles);
-      this.fileForm.FILESS = [];
-      reader.onloadend = () => {
-        this.fileForm.FILESS.push(reader.result);
-        this.fileForm.fileName = imgFiles.name;
-        list.uploadResume(this.fileForm).then(res => {
-          if (res.status == 0) {
-            this.teacherForm.phone = res.data.full_path;
-            this.isShowFile = !this.isShowFile;
-            event.target.value = "";
-          } else {
-            message(this, "error", res.msg);
-          }
-        });
-      };
+    //删除上传照片
+    deleteCardImg(){
+      this.isShowImg = true;
     },
     //处理图片上传
-    add_img (event) {
+    handleImgUpload (event,param,show) {
       // var that = this
       var reader = new FileReader();
       let imgFiles = event.target.files[0];
-      this.uploadImgName = imgFiles.name;
       var formdata = new window.FormData();
       formdata.append("image", imgFiles);
       formdata.image = imgFiles;
       reader.readAsDataURL(imgFiles);
       this.imgForm.FILESS = [];
       reader.onloadend = () => {
-        // console.log(reader.result);
         this.imgForm.FILESS.push(reader.result);
         this.imgForm.fileName = imgFiles.name;
         list.leafletsUpload(this.imgForm).then(res => {
           if (res.status == 0) {
-            this.teacherForm.studentCard = res.data.full_path;
-            this.isShowImg = !this.isShowImg;
+            this.teacherForm[param] = res.data.full_path;
+            // this.isShowImg = !this.isShowImg;
+            this[show]= !this[show];
             event.target.value = "";
           } else {
             message(this, "error", res.msg);
           }
         });
       };
+    },
+    //照片上传
+    teacherImgUpload(event){
+      this.handleImgUpload(event,'photo','isShowImg')
+    },
+    //学生证上传
+    cardUpload(){
+      this.handleImgUpload(event,'studentCard','isShowCardImg')
     },
     //选项信息
     getRecruitSelect () {
@@ -527,6 +542,7 @@ export default {
     },
     // 提交
     handleSubmit () {
+      this.teacherForm.directionArr = this.direction;
       this.teacherForm.tel = Trim(this.teacherForm.tel);
       list.submitBeTeacher(this.teacherForm).then(res => {
         this.isClick = false;
@@ -542,6 +558,7 @@ export default {
     },
     //表单验证
     validate () {
+      console.log(this.teacherForm);
       if (this.isClick) {
         return false;
       }

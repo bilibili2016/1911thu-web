@@ -5,7 +5,7 @@
       <i class="el-icon-close" @click="closeForm"></i>
       <p class="tips">亲爱的学员，欢迎您使用预约咨询服务，请选择您方便接收回复的时间段，<br>
         我们将会在此时间段通过视频直播的方式为您提供一对一的咨询服务！</p>
-      <el-form :model="teacherForm" :rules="rules" ref="teacherForm" label-width="210px" class="teacherForm">
+      <el-form :model="teacherForm" :rules="rules" ref="teacherForm"  class="teacherForm">
         <el-form-item label="您的联系方式：" prop="tel">
           <el-input v-model="teacherForm.tel" :disabled="teacherForm.hasTel"></el-input>
         </el-form-item>
@@ -18,18 +18,19 @@
         <el-form-item label="咨询时长：">
           <el-input class="min" v-model="teacherForm.courseTimeName" disabled></el-input>
         </el-form-item>
-        <el-form-item label="请选择开始时间：" prop="time">
-          <el-select v-model="teacherForm.startTime" placeholder="请选择开始时间">
+        <el-form-item class="selectTime" label="请选择开始时间：" prop="startTime">
+          <el-select v-model="teacherForm.startTime" placeholder="请选择开始时间" @change="handleselectChange">
             <el-option v-for="item in timeList" :key="item.id" :label="item.start_time" :value="item.id"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="请简单描述您想要咨询的问题" prop="remark">
+        <el-form-item class="descItem" label="请简单描述您想要咨询的问题" prop="remark">
           <el-input type="textarea" placeholder="请输入您想要咨询的问题，预约成功，导师将一对一解答。" v-model="teacherForm.remark"></el-input>
         </el-form-item>
-        <div class="agreement">
+        <el-form-item class="agreement" label="" prop="checked">
           <el-checkbox v-model="teacherForm.checked">我已阅读并同意</el-checkbox><i @click="serviceAgreement">《服务协议》</i>
           <span class="cost">咨询费用100元</span>
-        </div>
+        </el-form-item>
+
         <el-form-item size="large" class="submit">
           <el-button type="primary" class="submitAble" @click="appointmentTeacher('teacherForm')" round>提交</el-button>
         </el-form-item>
@@ -99,7 +100,7 @@ export default {
         courseTimeName: "50分钟", //授课时长
         remark: "", //其他需求
         problems: "",
-        checked: false,
+        checked: [],
         hasTel: true,
         hasName: false
       },
@@ -120,7 +121,7 @@ export default {
             trigger: "blur"
           }
         ],
-        time: [
+        startTime: [
           { required: true, message: '请选择开始时间', trigger: 'change' }
         ],
         remark: [
@@ -130,6 +131,9 @@ export default {
             trigger: "blur"
           }
         ],
+        checked:[
+           { type: 'array',  required: true, message: '请先阅读并同意《服务协议》', trigger: 'change' }
+        ]
       },
     };
   },
@@ -139,10 +143,9 @@ export default {
     },
     // 提交预约导师
     appointmentTeacher (formName) {
-      this.$refs[formName].validate(valid => {
+      this.$refs[formName].validate((valid) => {
         if (valid) {
-          if (this.teacherForm.checked) {
-            teacherInfo.teacherBespoke(this.teacherForm).then(response => {
+         teacherInfo.teacherBespoke(this.teacherForm).then(response => {
               //不需要验证是否登录
               if (response.status === 0) {
                 this.closeForm();
@@ -151,9 +154,6 @@ export default {
                 message(this, "error", response.msg);
               }
             });
-          } else {
-            message(this, "error", "请先阅读并同意《服务协议");
-          }
         }
       });
     },
@@ -174,8 +174,10 @@ export default {
         }
       });
     },
+    handleselectChange(val){
+      this.teacherForm.startTime = val
+    },
     serviceAgreement () {
-      // console.log(123123123123);
     }
   },
   watch: {
@@ -193,5 +195,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "assets/style/teacher/appointmentTeacher";
+// @import "assets/style/teacher/appointmentTeacher";
 </style>
