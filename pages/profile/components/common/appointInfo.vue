@@ -8,7 +8,7 @@
       </h4>
       <div class="inner">
         <div class="item">
-          <div class="left">{{config.isTeacher?'老师姓名：':'学生姓名：'}}</div>
+          <div class="left">{{!config.isTeacher?'导师姓名：':'学生姓名：'}}</div>
           <div class="right">{{detail.real_name}}</div>
         </div>
         <div class="item">

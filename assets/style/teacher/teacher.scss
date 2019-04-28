@@ -120,6 +120,9 @@
         }
 
         ul {
+          max-height: 225px;
+          overflow-y: auto;
+
           li {
             width: 100%;
             line-height: 35px;
