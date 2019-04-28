@@ -315,6 +315,7 @@ export default {
         identity: "1", //身份
         dutyName: "", //职称
         email: "", //常用邮箱
+        directionArr:[],//擅长领域
         otherArea: '', //其他擅长领域
         service: [], //合作形式
         consult: "", //是否提供咨询服务
@@ -541,6 +542,7 @@ export default {
     },
     // 提交
     handleSubmit () {
+      this.teacherForm.directionArr = this.direction;
       this.teacherForm.tel = Trim(this.teacherForm.tel);
       list.submitBeTeacher(this.teacherForm).then(res => {
         this.isClick = false;
