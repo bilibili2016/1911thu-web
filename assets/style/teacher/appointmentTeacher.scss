@@ -50,6 +50,31 @@
 
     .el-form-item {
       margin-bottom: 16px;
+
+      .el-form-item__label {
+        width: 150px;
+        color: #222;
+      }
+
+      .el-form-item__content {
+        margin-left: 150px;
+      }
+    }
+
+    .el-form-item.descItem {
+      .el-form-item__label {
+        width: 220px;
+      }
+
+      .el-form-item__content {
+        margin-left: 0;
+      }
+    }
+
+    .el-form-item.agreement {
+      .el-form-item__content {
+        margin-left: 0;
+      }
     }
 
     .el-form-item__error {
@@ -133,8 +158,8 @@
 
     .agreement {
       font-size: 12px;
-      line-height: 24px;
-      margin: 10px 0;
+      // line-height: 24px;
+      // margin: 10px 0;
 
       i {
         color: #822788;
@@ -169,6 +194,38 @@
         &:hover {
           background-color: #5f068d;
         }
+      }
+    }
+
+    .submit {
+      text-align: center;
+
+      .el-form-item__content {
+        margin-left: 0;
+      }
+
+      .el-button {
+        padding: 0;
+        border-radius: 6px;
+        width: 150px;
+        height: 40px;
+        text-align: center;
+
+        span {
+          font-size: 14px;
+          font-weight: normal;
+          ;
+        }
+
+        &:hover {
+          background-color: #5f068d;
+        }
+      }
+    }
+
+    .selectTime {
+      .el-select {
+        width: 100%;
       }
     }
   }
