@@ -2240,6 +2240,16 @@ input::-webkit-credentials-auto-fill-button {
     .el-input__inner {
       height: 35px;
       line-height: 35px;
+
+    }
+
+
+    &.is-disabled .el-input__inner {
+      color: #333;
+    }
+
+    &.min .el-input__inner {
+      color: #06bb09;
     }
   }
 }

@@ -26,7 +26,7 @@
       <div class="con-item name clearfix">
         <div class="fl">咨询时长：</div>
         <div class="fr">
-          <el-input v-model="teacherForm.courseTimeName" disabled></el-input>
+          <el-input class="min" v-model="teacherForm.courseTimeName" disabled></el-input>
         </div>
       </div>
       <div class="con-item name clearfix">
@@ -84,7 +84,7 @@ export default {
         tel: "", //手机号
         teacherName: "",
         startTime: "",
-        courseTimeName: "50min", //授课时长
+        courseTimeName: "50分钟", //授课时长
         remark: "", //其他需求
         problems: "",
         checked: false,
