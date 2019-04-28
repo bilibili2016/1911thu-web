@@ -10,13 +10,13 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      img: 'http://static-image.1911edu.com/404.png'
+      img: 'https://static-image.1911edu.com/404.png'
     }
   },
   methods: {
-    go(link) {
+    go (link) {
       this.$router.push(link)
     }
   }
@@ -24,5 +24,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~assets/style/components/lost';
+@import "~assets/style/components/lost";
 </style>

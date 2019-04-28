@@ -100,10 +100,10 @@ export default {
       bgMsg: false,
       isShowLRBtn: false,
       user: {
-        userImg: "http://static-image.1911edu.com/defaultHeadImg.jpg",
-        userType: ''
+        userImg: "https://static-image.1911edu.com/defaultHeadImg.jpg",
+        isTeacher: ''
       },
-      QRcode: "http://static-image.1911edu.com/wechatLogin.png",
+      QRcode: "https://static-image.1911edu.com/wechatLogin.png",
 
       gidForm: {
         gids: null
@@ -164,11 +164,12 @@ export default {
           link: "tab-twelfth",
           text: "我的咨询"
         },
-        {
-          link: "tab-thirteenth",
-          text: "教师入口"
-        }
+        // {
+        //   link: "tab-thirteenth",
+        //   text: "教师入口"
+        // }
       ],
+
       pass: false,
       skip: "" //兑换码类型
     };
@@ -468,11 +469,17 @@ export default {
       persistStore.set("phone", this.userInfo.user_name);
       if (this.userInfo.head_img && this.userInfo.head_img != "") {
         this.user.userImg = this.userInfo.head_img;
-        this.user.userType = this.userInfo.user_type;
+        this.user.isTeacher = this.userInfo.is_teacher;
       }
-      if (this.user.userType == '4' && this.subPagesData[this.subPagesData.length - 1].text == '教师入口') {
-        return
-      } else {
+      //   当前用户是教师但最后一项不是教师  添加
+      if (this.user.isTeacher == '1' && this.subPagesData[this.subPagesData.length - 1].text != '教师入口') {
+        this.subPagesData.push({
+          link: "tab-thirteenth",
+          text: "教师入口"
+        })
+      }
+      //   当前用户不是教师但最后一项是教师  删除
+      if (this.user.isTeacher != '1' && this.subPagesData[this.subPagesData.length - 1].text == '教师入口') {
         this.subPagesData.pop()
       }
     },

@@ -3,7 +3,7 @@
     <div class="liveCon">
       <div>
         <div class="topBar"></div>
-        <!-- <img src="http://static-image.1911edu.com/live-bg1.png" alt=""> -->
+        <!-- <img src="https://static-image.1911edu.com/live-bg1.png" alt=""> -->
         <div class="clearfix">
           <div id="mediaPlayer" ref="mediaPlayer" class="mediaCon"></div>
           <!-- <div class="pull" id="pullUrl" ref="pullUrl"></div> -->
@@ -37,7 +37,7 @@ import { message, matchSplits } from "@/lib/util/helper";
 import PlayerError from "@/components/common/PlayerError.vue";
 
 export default {
-  data() {
+  data () {
     return {
       isOver: false,
       nearEnd: false,
@@ -67,7 +67,7 @@ export default {
     };
   },
   methods: {
-    getdefaultPlayerInfo() {
+    getdefaultPlayerInfo () {
       live.teacherBespokeInfo(this.studengtInfo).then(res => {
         if (res.status == 0) {
           this.pullaliPlayer.source = res.data.pullUrl;
@@ -86,28 +86,28 @@ export default {
       });
     },
     // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
-    playerLoad() {
+    playerLoad () {
       if (document.getElementsByClassName("prism-hide")[0]) {
         document.getElementsByClassName("prism-hide")[0].className =
           "prism-loading";
       }
     },
     // 视频准备好之后执行
-    readyPlay() {
+    readyPlay () {
       console.log("ready");
     },
     // 播放开始--启动计时器
-    playerPlay() {
+    playerPlay () {
       console.log("playerPlay");
     },
-    playerEnded() {
+    playerEnded () {
       console.log("playerEnded");
     },
-    playerError(error) {
+    playerError (error) {
       console.log(error);
     }
   },
-  mounted() {
+  mounted () {
     this.studengtInfo.appointId = matchSplits("id");
     this.getdefaultPlayerInfo();
   }

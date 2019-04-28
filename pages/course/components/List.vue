@@ -21,13 +21,16 @@
               </ul>
             </div>
           </div>
+          <!-- <div class="secondLevel courseArea"> -->
           <div class="secondLevel">
-            <li class="title">课程领域：</li>
-            <ul>
-              <li v-for="(items,index) in pidData.childList" :index="index" :key="index" :class="{btnBg: pid == items.id ? true : false }">
-                <el-button @click="selectPid(items,index)">{{items.category_name}}</el-button>
-              </li>
-            </ul>
+            <div class="inner">
+              <li class="title">课程领域：</li>
+              <ul>
+                <li v-for="(items,index) in pidData.childList" :index="index" :key="index" :class="{btnBg: pid == items.id ? true : false }">
+                  <el-button @click="selectPid(items,index)">{{items.category_name}}</el-button>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         <!-- 项目分类 -->

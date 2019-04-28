@@ -43,7 +43,7 @@
           <span>培养目标</span>
         </h4>
         <div class="centerBar">
-          1911学堂教育学院的培养目标是培养具有良好职业素养和较高业务能力、适应教育事业发展需求的教育管理人才队伍。通过“线上+线下”混合式学习模式，使中小学骨干教师创新教育教学理念、提升教学能力、丰富教学方法，提升对教育教学活动的规划和实施能力；使校长及行政管理人员提高党建和教育管理水平及教育突发事件舆情应对能力，从而助力教育系统相关从业人员适应环境变化、跟上新时代的发展步伐。
+          1911学堂教育学院的培养目标是培养具备开阔视野、良好素养且努力践行社会主义核心价值观的学生和教育从业者。使中小学生感受高尚精神文化，增强综合素养，实现更好的全面成长；使大学生丰富学识、提升知识的应用和创新能力，提升社会适应能力，具备未来胜任力；使中小学骨干教师更新教育理念、提升教学能力、丰富教学方法，提升对教育教学活动的规划和实施能力；使校长及行政管理人员提高党建和教育管理水平，提高教育综合治理能力，适应环境变化、跟上新时代的发展步伐。
         </div>
       </div>
 
@@ -63,11 +63,11 @@
               <span class="text">学员参加1911学堂教育学院在线学院或相关项目学习考核通过者将获得1911学堂结业证书。</span>
             </div>
             <div class="three-right">
-              <img src="http://static-image.1911edu.com/college-pic13.png" alt>
+              <img src="https://static-image.1911edu.com/college-pic13.png" alt>
             </div>
           </div>
           <div class="three-certification">
-            <img src="http://static-image.1911edu.com/edu-icon4.png" alt>
+            <img src="https://static-image.1911edu.com/edu-icon4.png" alt>
           </div>
         </div>
       </div>
@@ -92,50 +92,50 @@ export default {
       ],
       objectList: [
         {
-          src: "http://static-image.1911edu.com/edu-icon1.png",
+          src: "https://static-image.1911edu.com/edu-icon1.png",
           text: "大中小学生"
         },
         {
-          src: "http://static-image.1911edu.com/edu-icon6.png",
+          src: "https://static-image.1911edu.com/edu-icon6.png",
           text: "教育系统内的中小学校长"
         },
         {
-          src: "http://static-image.1911edu.com/edu-icon7.png",
+          src: "https://static-image.1911edu.com/edu-icon7.png",
           text: "骨干教师"
         },
         {
-          src: "http://static-image.1911edu.com/edu-icon8.png",
+          src: "https://static-image.1911edu.com/edu-icon8.png",
           text: "行政机构管理人员"
         }
       ],
       productList: [
         {
-          src: "http://static-image.1911edu.com/production-edu.png",
+          src: "https://static-image.1911edu.com/production-edu.png",
           text: "在线教育学院"
         },
         {
-          src: "http://static-image.1911edu.com/production-icon1.png",
+          src: "https://static-image.1911edu.com/production-icon1.png",
           text: "混合式标准项目"
         },
         {
-          src: "http://static-image.1911edu.com/production-icon2.png",
+          src: "https://static-image.1911edu.com/production-icon2.png",
           text: "教育硕士（MEd）国际学位项目"
         },
         {
-          src: "http://static-image.1911edu.com/production-icon3.png",
+          src: "https://static-image.1911edu.com/production-icon3.png",
           text: "研学项目"
         },
         {
-          src: "http://static-image.1911edu.com/production-icon4.png",
+          src: "https://static-image.1911edu.com/production-icon4.png",
           text: "学分认证项目"
         }
       ],
       collegeList: [
-        "http://static-image.1911edu.com/college_QH.png",
-        "http://static-image.1911edu.com/college_BSD.png",
-        "http://static-image.1911edu.com/college_JYKY.png",
-        "http://static-image.1911edu.com/college_JYXH.png",
-        "http://static-image.1911edu.com/college_HDWYH.png"
+        "https://static-image.1911edu.com/college_QH.png",
+        "https://static-image.1911edu.com/college_BSD.png",
+        "https://static-image.1911edu.com/college_JYKY.png",
+        "https://static-image.1911edu.com/college_JYXH.png",
+        "https://static-image.1911edu.com/college_HDWYH.png"
       ]
     };
   }

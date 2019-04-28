@@ -14,9 +14,9 @@
       <div class="content-inner">
         <div class="program-bg">
           <div class="title">
-            <img class="titlt-icon-left" src="http://static-image.1911edu.com/program-yellow-icon1.png" alt="">
+            <img class="titlt-icon-left" src="https://static-image.1911edu.com/program-yellow-icon1.png" alt="">
             <span class="text">项目背景</span>
-            <img class="titlt-icon-right" src="http://static-image.1911edu.com/program-yellow-icon2.png" alt="">
+            <img class="titlt-icon-right" src="https://static-image.1911edu.com/program-yellow-icon2.png" alt="">
           </div>
           <div class="desc">
             <p>干部教育培训是建设高素质干部队伍的先导性、基础性、战略性工程，在推进中国特色社会主义伟大事业和党的建设中具有不可替代的地位和作用。中央组织部办公厅印发的《干部教育培训工作条例》中明确强调，干部教育培训是传播党的理论和路线方针政策的重要载体，是建设学习型、服务型、创新型马克思主义执政党的有效抓手，是提高干部教育培训质量效益的基础保障。</p>
@@ -26,34 +26,34 @@
         </div>
         <div class="study-info">
           <div class="title">
-            <img class="titlt-icon-left" src="http://static-image.1911edu.com/program-yellow-icon1.png" alt="">
+            <img class="titlt-icon-left" src="https://static-image.1911edu.com/program-yellow-icon1.png" alt="">
             <span class="text">学习对象</span>
-            <img class="titlt-icon-right" src="http://static-image.1911edu.com/program-yellow-icon2.png" alt="">
+            <img class="titlt-icon-right" src="https://static-image.1911edu.com/program-yellow-icon2.png" alt="">
           </div>
           <div class="info clearfix">
             <div class="item item-one">
-              <img src="http://static-image.1911edu.com/policy-icon1.png" alt="">
+              <img src="https://static-image.1911edu.com/policy-icon1.png" alt="">
               <p>各级党政机关领导干部</p>
             </div>
             <div class="item item-two">
-              <img src="http://static-image.1911edu.com/policy-icon2.png" alt="">
+              <img src="https://static-image.1911edu.com/policy-icon2.png" alt="">
               <p>事业单位领导干部</p>
             </div>
             <div class="item item-three">
-              <img src="http://static-image.1911edu.com/policy-icon3.png" alt="">
+              <img src="https://static-image.1911edu.com/policy-icon3.png" alt="">
               <p>中青年后备干部</p>
             </div>
             <div class="item item-four">
-              <img src="http://static-image.1911edu.com/policy-icon4.png" alt="">
+              <img src="https://static-image.1911edu.com/policy-icon4.png" alt="">
               <p>基层干部等</p>
             </div>
           </div>
         </div>
         <div class="teach-info">
           <div class="title">
-            <img class="titlt-icon-left" src="http://static-image.1911edu.com/program-yellow-icon1.png" alt="">
+            <img class="titlt-icon-left" src="https://static-image.1911edu.com/program-yellow-icon1.png" alt="">
             <span class="text">线上模式</span>
-            <img class="titlt-icon-right" src="http://static-image.1911edu.com/program-yellow-icon2.png" alt="">
+            <img class="titlt-icon-right" src="https://static-image.1911edu.com/program-yellow-icon2.png" alt="">
           </div>
           <div class="item clearfix">
             <div class="left">
@@ -108,9 +108,9 @@
         </div>
         <div class="other-info">
           <div class="title">
-            <img class="titlt-icon-left" src="http://static-image.1911edu.com/program-yellow-icon1.png" alt="">
+            <img class="titlt-icon-left" src="https://static-image.1911edu.com/program-yellow-icon1.png" alt="">
             <span class="text">学习方式及优势</span>
-            <img class="titlt-icon-right" src="http://static-image.1911edu.com/program-yellow-icon2.png" alt="">
+            <img class="titlt-icon-right" src="https://static-image.1911edu.com/program-yellow-icon2.png" alt="">
           </div>
           <div class="study-content clearfix">
             <div class="info info1">
@@ -155,7 +155,7 @@
         <div class="distinctive">
           <div class="lietOne">
             <div class="dttImg fl">
-              <img src="http://static-image.1911edu.com/distinctive_1.png" alt="">
+              <img src="https://static-image.1911edu.com/distinctive_1.png" alt="">
             </div>
             <h4 class="fl">项目特色</h4>
             <div class="inner">
@@ -170,7 +170,7 @@
           </div>
           <div class="lietOne">
             <div class="dttImg fl">
-              <img src="http://static-image.1911edu.com/distinctive_2.png" alt="">
+              <img src="https://static-image.1911edu.com/distinctive_2.png" alt="">
             </div>
             <h4 class="fl">学习收获</h4>
             <div class="inner">
@@ -187,9 +187,9 @@
         </div>
         <div class="course">
           <div class="title">
-            <img class="titlt-icon-left" src="http://static-image.1911edu.com/program-yellow-icon1.png" alt="">
+            <img class="titlt-icon-left" src="https://static-image.1911edu.com/program-yellow-icon1.png" alt="">
             <span class="text">授课师资</span>
-            <img class="titlt-icon-right" src="http://static-image.1911edu.com/program-yellow-icon2.png" alt="">
+            <img class="titlt-icon-right" src="https://static-image.1911edu.com/program-yellow-icon2.png" alt="">
           </div>
           <p class="course-info">师资是一个培训项目质量的关键，良好的师资队伍是学员学习收益最大化的保障。本项目授课师资由三支队伍组成：</p>
           <div class="course-item clearfix">
@@ -226,9 +226,9 @@
       <!-- 线下面授课程 -->
       <div class="studyCourse">
         <div class="title">
-          <img class="titlt-icon-left" src="http://static-image.1911edu.com/policy-pic05.png" alt="">
+          <img class="titlt-icon-left" src="https://static-image.1911edu.com/policy-pic05.png" alt="">
           <span class="text">课程及师资介绍</span>
-          <img class="titlt-icon-right" src="http://static-image.1911edu.com/policy-pic06.png" alt="">
+          <img class="titlt-icon-right" src="https://static-image.1911edu.com/policy-pic06.png" alt="">
         </div>
         <div class="studyInfo">
           <h5>
@@ -361,7 +361,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       tableOne: "1",
       tableTwo: "1",
@@ -592,7 +592,7 @@ export default {
     };
   },
   methods: {
-    checkFirst(items) {
+    checkFirst (items) {
       if (items === "1") {
         this.courseDataOne = this.courseDataOnea;
       } else {
@@ -600,7 +600,7 @@ export default {
       }
       this.tableOne = items;
     },
-    checkSecond(items) {
+    checkSecond (items) {
       if (items === "1") {
         this.courseDataTwo = this.courseDataTwoa;
       } else if (items === "2") {
@@ -612,7 +612,7 @@ export default {
       }
       this.tableTwo = items;
     },
-    checkThird(items) {
+    checkThird (items) {
       if (items === "1") {
         this.courseDataThree = this.courseDataThreea;
       } else {
@@ -621,7 +621,7 @@ export default {
       this.tableThree = items;
     }
   },
-  mounted() {
+  mounted () {
     this.courseDataOne = this.courseDataOnea;
     this.courseDataTwo = this.courseDataTwoa;
     this.courseDataThree = this.courseDataThreea;

@@ -2,7 +2,7 @@
 .player-olympic-player-next {
   width: 24px;
   height: 28px;
-  background: url('http://static-image.1911edu.com/next.png') center no-repeat;
+  background: url('https://static-image.1911edu.com/next.png') center no-repeat;
   background-size: contain;
   float: left;
   margin-left: 15px;
@@ -10,6 +10,7 @@
   cursor: pointer;
   position: relative;
 }
+
 .player-olympic-player-next-tip {
   position: absolute;
   top: -45px;
@@ -26,15 +27,16 @@
   left: 50%;
   margin-left: -29px;
 }
+
 .player-olympic-player-next:hover .player-olympic-player-next-tip {
   display: block;
 }
+
 // 视频播放 切换上一小节
 .player-olympic-player-previous {
   width: 24px;
   height: 28px;
-  background: url('http://static-image.1911edu.com/previous.png') center
-    no-repeat;
+  background: url('https://static-image.1911edu.com/previous.png') center no-repeat;
   background-size: contain;
   float: left;
   margin-left: 15px;
@@ -42,6 +44,7 @@
   cursor: pointer;
   position: relative;
 }
+
 .player-olympic-player-previous-tip {
   position: absolute;
   top: -45px;
@@ -58,6 +61,7 @@
   left: 50%;
   margin-left: -29px;
 }
+
 .player-olympic-player-previous:hover .player-olympic-player-previous-tip {
   display: block;
 }

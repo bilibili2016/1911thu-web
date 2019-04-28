@@ -21,27 +21,27 @@
 <script>
 export default {
   props: [
-    'mobileloginmsg',
-    'registerMobileData',
-    'codeClick',
-    'bindTelData',
-    'isloginClick'
+    "mobileloginmsg",
+    "registerMobileData",
+    "codeClick",
+    "bindTelData",
+    "isloginClick"
   ],
   methods: {
     handleMobileGetCode(val) {
-      this.$emit('handleMobileGetCode', val)
+      this.$emit("handleMobileGetCode", val);
     },
     mobilelogin() {
-      this.$emit('mobilelogin')
+      this.$emit("mobilelogin");
     },
     signInsMobile(val) {
-      this.$emit('signInsMobile', val)
+      this.$emit("signInsMobile", val);
     },
     forget() {
-      this.$emit('forget')
+      this.$emit("forget");
     }
   }
-}
+};
 </script>
 
 <style scoped>

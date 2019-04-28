@@ -1,160 +1,163 @@
 .profile-banner {
-	width: 100%;
-	height: 148px;
-	background: rgba(100, 23, 166, 1);
-	background-image: url('http://static-image.1911edu.com/profile_banner01.png');
-	background-size: 100% 100%;
-	margin-bottom: 64px;
+  width: 100%;
+  height: 148px;
+  background: rgba(100, 23, 166, 1);
+  background-image: url('https://static-image.1911edu.com/profile_banner01.png');
+  background-size: 100% 100%;
+  margin-bottom: 64px;
 
-	.center-box {
-		position: relative;
-	}
+  .center-box {
+    position: relative;
+  }
 
-	img.topImg {
-		width: 112px;
-		height: 112px;
-		border-radius: 50%;
-		position: absolute;
-		left: 4px;
-		top: 53px;
-	}
+  img.topImg {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    position: absolute;
+    left: 4px;
+    top: 53px;
+  }
 
-	img.noImg {
-		width: 0;
-		height: 0;
-		border-radius: 50%;
-		position: absolute;
-		left: 4px;
-		top: 54px;
-	}
+  img.noImg {
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    position: absolute;
+    left: 4px;
+    top: 54px;
+  }
 
-	.up-user-avtor {
-		position: absolute;
-		top: 55px;
-		left: 5px;
-		width: 110px;
-		height: 110px;
-		border-radius: 50%;
-		overflow: hidden;
-		.upload-img {
-			position: absolute;
-			left: 0;
-			bottom: 0;
-			width: 110px;
-			height: 30px;
-			z-index: 10;
-			opacity: 0;
+  .up-user-avtor {
+    position: absolute;
+    top: 55px;
+    left: 5px;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
 
-			input {
-				width: 110px;
-				height: 30px;
-				font-size: 0;
-				cursor: pointer;
-			}
-		}
-		.mask {
-			position: absolute;
-			left: 0;
-			bottom: 0;
-			width: 110px;
-			height: 30px;
-			z-index: 1;
-			cursor: pointer;
-			span {
-				display: block;
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				height: 30px;
-				width: 108px;
-				color: #fff;
-				line-height: 30px;
-				text-align: center;
-				background: rgba(143, 74, 203, 1);
-			}
-		}
+    .upload-img {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 110px;
+      height: 30px;
+      z-index: 10;
+      opacity: 0;
 
-		.el-upload {
-			width: 100%;
-		}
-	}
+      input {
+        width: 110px;
+        height: 30px;
+        font-size: 0;
+        cursor: pointer;
+      }
+    }
 
-	.avator {
-		float: left;
-		height: 148px;
-		overflow: hidden;
+    .mask {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 110px;
+      height: 30px;
+      z-index: 1;
+      cursor: pointer;
 
-		.img {
-			width: 120px;
-			height: 120px;
-			margin-top: 50px;
-			position: relative;
-			border-radius: 50%;
-			border: solid 5px #fff;
-			overflow: hidden;
-		}
-	}
+      span {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 30px;
+        width: 108px;
+        color: #fff;
+        line-height: 30px;
+        text-align: center;
+        background: rgba(143, 74, 203, 1);
+      }
+    }
+
+    .el-upload {
+      width: 100%;
+    }
+  }
+
+  .avator {
+    float: left;
+    height: 148px;
+    overflow: hidden;
+
+    .img {
+      width: 120px;
+      height: 120px;
+      margin-top: 50px;
+      position: relative;
+      border-radius: 50%;
+      border: solid 5px #fff;
+      overflow: hidden;
+    }
+  }
 }
 
 .center-box {
-	width: 1100px;
-	margin: 0 auto;
-	height: 148px;
+  width: 1100px;
+  margin: 0 auto;
+  height: 148px;
 
-	.name {
-		float: left;
-		margin: 64px 0px 0px 33px;
-		color: rgba(255, 255, 255, 1);
+  .name {
+    float: left;
+    margin: 64px 0px 0px 33px;
+    color: rgba(255, 255, 255, 1);
 
-		.nickName {
-			font-size: 24px;
-			height: 27px;
-			width: 700px;
-			overflow: hidden;
-		}
+    .nickName {
+      font-size: 24px;
+      height: 27px;
+      width: 700px;
+      overflow: hidden;
+    }
 
-		.companyName {
-			font-size: 16px;
-			margin-top: 20px;
-			height: 24px;
-			width: 700px;
-			overflow: hidden;
-		}
+    .companyName {
+      font-size: 16px;
+      margin-top: 20px;
+      height: 24px;
+      width: 700px;
+      overflow: hidden;
+    }
 
-		.vipCard {
-			img {
-				width: 20px;
-				margin-top: 20px;
-				vertical-align: middle;
-			}
+    .vipCard {
+      img {
+        width: 20px;
+        margin-top: 20px;
+        vertical-align: middle;
+      }
 
-			.el-button {
-				background: none;
-				margin: 0;
-				padding: 0;
-				border: none;
-				margin-right: 20px;
-			}
-		}
-	}
+      .el-button {
+        background: none;
+        margin: 0;
+        padding: 0;
+        border: none;
+        margin-right: 20px;
+      }
+    }
+  }
 
-	.time {
-		width: 204px;
-		float: right;
-		border-left: 1px rgba(232, 214, 247, 1) solid;
-		height: 60px;
-		margin: 68px 0px 0px 0px;
-		color: #fff;
-		overflow: hidden;
-		text-align: center;
+  .time {
+    width: 204px;
+    float: right;
+    border-left: 1px rgba(232, 214, 247, 1) solid;
+    height: 60px;
+    margin: 68px 0px 0px 0px;
+    color: #fff;
+    overflow: hidden;
+    text-align: center;
 
-		:nth-child(1) {
-			font-size: 20px;
-			margin: 0px 0px 15px 0px;
-		}
+    :nth-child(1) {
+      font-size: 20px;
+      margin: 0px 0px 15px 0px;
+    }
 
-		:nth-child(2) {
-			font-size: 17px;
-		}
-	}
+    :nth-child(2) {
+      font-size: 17px;
+    }
+  }
 }

@@ -1,13 +1,13 @@
 <template>
   <div>
     <h2 v-if="error.statusCode == 404">
-      <img src="http://static-image.1911edu.com/404.png" alt>
+      <img src="https://static-image.1911edu.com/404.png" alt>
     </h2>
     <h2 v-else-if="error.statusCode == 500">
-      <img src="http://static-image.1911edu.com/500.png" alt>
+      <img src="https://static-image.1911edu.com/500.png" alt>
     </h2>
     <h2 class="pageAbnormal" v-else>
-      <img src="http://static-image.1911edu.com/pageAbnormal.png" alt>
+      <img src="https://static-image.1911edu.com/pageAbnormal.png" alt>
       <span>页面发生异常,请刷新重试！</span>
     </h2>
     <ul>

@@ -1,51 +1,52 @@
 .noData {
-	text-align: center;
-	padding-bottom: 50px;
-	img {
-		margin-top: 50px;
-	}
-	h4 {
-		height: 70px;
-		line-height: 70px;
-		text-align: center;
-		color: #999;
-		font-size: 20px;
-	}
-	.link {
-		margin: 0 auto;
-		width: 100px;
-		height: 40px;
-		line-height: 40px;
-		text-align: center;
-		background: #773084;
-		color: #fff;
-		font-size: 14px;
-		border-radius: 20px;
-		cursor: pointer;
-		&:hover {
-			background-color: #5f068d;
-		}
-	}
+    text-align: center;
+    padding-bottom: 50px;
+    img {
+        width: 260px;
+        margin-top: 80px;
+    }
+    h4 {
+        height: 70px;
+        line-height: 70px;
+        text-align: center;
+        color: #999;
+        font-size: 20px;
+    }
+    .link {
+        margin: 0 auto;
+        width: 100px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        background: #773084;
+        color: #fff;
+        font-size: 14px;
+        border-radius: 20px;
+        cursor: pointer;
+        &:hover {
+            background-color: #5f068d;
+        }
+    }
 }
 
 //购物车限制图片大小
 .shopCartNoData.noData {
-	img {
-		width: 316px;
-		height: 274px;
-	}
+    img {
+        width: 316px;
+        height: 274px;
+    }
 }
 
 //证书查询
 .searchCer {
-	.bottom {
-		.noData {
-			padding-bottom: 0;
-			img {
-				width: 210px;
-				height: 210px;
-				margin-top: -30px;
-			}
-		}
-	}
+    .bottom {
+        .noData {
+            padding-bottom: 0;
+            img {
+                width: 210px;
+                height: 210px;
+                margin-top: -30px;
+            }
+        }
+    }
 }

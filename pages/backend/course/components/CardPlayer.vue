@@ -50,8 +50,8 @@ export default {
         curriculumType: 1,
         seek: 0
       },
-      playImg: "http://static-image.1911edu.com/playImg.gif",
-      pauseImg: "http://static-image.1911edu.com/video.png",
+      playImg: "https://static-image.1911edu.com/playImg.gif",
+      pauseImg: "https://static-image.1911edu.com/video.png",
       playerPreviousForm: {
         curriculumId: "",
         catalogId: ""
@@ -95,8 +95,6 @@ export default {
       },
       players: "",
       player: "",
-      ceshiUrl: "http://ceshi.1911edu.com",
-      localUrl: "http://localhost:8080",
       seconds: 500000,
       nextCatalogId: "", //下一小节的播放id
       link: "",
@@ -123,31 +121,31 @@ export default {
     // 根据 课程id以及小节id 获取url
     getdefaultPlayerUrl () {
       // 判断socket 连接
-      //   let that = this;
-      //   // 新建socket 传地址
-      //   this.socket = new io(getNet());
-      //   // 连接socket
-      //   this.socket.on("connect", () => {
-      //     //用户登录
-      //     that.socket.emit("login", persistStore.get("token"), "ordinaryUser");
-      //     //用户分组
-      //     that.socket.emit("userGroup", "ordinaryUser");
-      //   });
-      //   // 支付推送来消息时
-      //   this.socket.on("new_msg", function (msg) {
-      //     //支付成功
-      //     if (msg.pay_status == "0") {
-      //       that.$bus.$emit("payResult", true);
-      //     }
-      //     //支付失败
-      //     if (msg.pay_status == 100100) {
-      //       that.$bus.$emit("payResult", false);
-      //       return false;
-      //     }
-      //   });
-      //   // 断线重连
-      //   this.socket.on("reconnect", function (msg) { });
-      // this.player = new Aliplayer(this.aliPlayer)
+      let that = this;
+      // 新建socket 传地址
+      this.socket = new io(getNet());
+      // 连接socket
+      this.socket.on("connect", () => {
+        //用户登录
+        that.socket.emit("login", persistStore.get("token"), "ordinaryUser");
+        //用户分组
+        that.socket.emit("userGroup", "ordinaryUser");
+      });
+      // 支付推送来消息时
+      this.socket.on("new_msg", function (msg) {
+        //支付成功
+        if (msg.pay_status == "0") {
+          that.$bus.$emit("payResult", true);
+        }
+        //支付失败
+        if (msg.pay_status == 100100) {
+          that.$bus.$emit("payResult", false);
+          return false;
+        }
+      });
+      // 断线重连
+      this.socket.on("reconnect", function (msg) { });
+      this.player = new Aliplayer(this.aliPlayer)
 
 
 

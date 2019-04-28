@@ -60,7 +60,7 @@ export default {
       pageType: {
         page: "category",
         text: "未找到相关内容",
-        imgUrl: "http://static-image.1911edu.com/noMsg.png"
+        imgUrl: "https://static-image.1911edu.com/noMsg.png"
       },
       cidData: [],
       pidData: [],
@@ -456,8 +456,12 @@ export default {
   },
   updated() {
     if (matchSplits("cp") === "0") {
-      //课程
-      setTitle("全部课程-1911学堂");
+      if (matchSplits("vid") === "-1") {
+        setTitle("课程中心-1911学堂");
+      } else {
+        //课程
+        setTitle("全部课程-1911学堂");
+      }
     } else if (matchSplits("cp") === "1") {
       //项目
       setTitle("培训项目-1911学堂");

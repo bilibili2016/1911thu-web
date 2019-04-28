@@ -6,7 +6,7 @@
           <el-carousel-item class="elCarouselItem" v-for="(img,index) in items" :key="index">
             <div class="videoDiv" v-if="img.jump_type==5" @click="playVideo(img.jump_url)">
               <img id="innerImg" class="bannerImg" :src="img.picture">
-              <img class="playImg" src="http://static-image.1911edu.com/videoPlay.png" alt="">
+              <img class="playImg" src="https://static-image.1911edu.com/videoPlay.png" alt="">
             </div>
             <img v-if="img.jump_type!=5" class="bannerImg" id="innerImg" :src="img.picture" alt="" @click="handleLink(img)">
           </el-carousel-item>
@@ -37,37 +37,15 @@
         </el-carousel-item>
       </el-carousel>
     </div>
-    <!-- 核心优势轮播 -->
-    <div class="coreCarousel" v-if="config.carousel==='coreLeft'">
-      <el-carousel v-if="config.flag==='left'" :interval="4000" indicator-position="outside" @change="setActiveItem">
-        <el-carousel-item class="clearfix" v-for="(item,index) in coreData" :key="index">
-          <div class="newsLi">
-            <div class="info">
-              <h4>{{item.title}}</h4>
-              <div class="line"></div>
-              <div class="text">
-                <p v-for="(text,index) in item.textList" :key="index">{{text}}</p>
-              </div>
-            </div>
-          </div>
-          <!-- <div class="carRight">
-            <img class="rightImg" :src="item.imgUrl">
-          </div> -->
-        </el-carousel-item>
-      </el-carousel>
-      <!-- <el-carousel class="coreRight" v-if="config.flag==='right'" :interval="4000" ref="coreRightCarousel" indicator-position="none">
-          <el-carousel-item v-for="(item,index) in coreData" :key="index">
-            <img class="rightImg" :src="item.imgUrl">
+    <!-- 名师智库 -->
+    <div class="banner" v-if="config.carousel==='teacher'">
+      <div class="carousel homeCarousel">
+        <el-carousel :interval="5000" class="lbt indexBanner" ref="elCarousel">
+          <el-carousel-item class="teacherElCarouselItem" v-for="(img,index) in teacherBanner" :key="index">
+            <img class="bannerImg" style="cursor:inherit" id="innerImg" :src="img.picture" alt="">
           </el-carousel-item>
-        </el-carousel> -->
-    </div>
-
-    <div class="coreCarousel" v-if="config.carousel==='coreRight'">
-      <el-carousel class="coreRight" v-if="config.flag==='right'" :interval="4000" ref="coreRightCarousel" indicator-position="none">
-        <el-carousel-item v-for="(item,index) in coreData" :key="index">
-          <img class="rightImg" :src="item.imgUrl">
-        </el-carousel-item>
-      </el-carousel>
+        </el-carousel>
+      </div>
     </div>
   </div>
 </template>
@@ -78,8 +56,8 @@ import { mapActions } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
 import { open, checkURL } from "@/lib/util/helper";
 export default {
-  props: ["items", "config", "swiperData", "coreData"],
-  data () {
+  props: ["items", "config", "swiperData", "coreData", "teacherBanner"],
+  data() {
     return {
       timer: null,
       showShadow: false,
@@ -99,7 +77,7 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setKid"]),
-    setActiveItem (index) {
+    setActiveItem(index) {
       // if (this.$refs.coreCarousel.$el.style.display == "none") {
       //   return false;
       // }
@@ -110,7 +88,7 @@ export default {
         // this.$refs.elCarousel.setActiveItem(index);
       });
     },
-    handleLink (img) {
+    handleLink(img) {
       // jump_type = 0  普通跳转 根据jump_url地址跳转
       // jump_type = 1  跳转至课程详情 jump_id 课程id
       // jump_type = 2  跳转至项目详情 jump_id 项目id
@@ -131,10 +109,10 @@ export default {
         });
       }
     },
-    goDetail (news) {
+    goDetail(news) {
       this.$router.push("/home/news/" + news.id);
     },
-    setWidth () {
+    setWidth() {
       let Dwidth = document.body.clientWidth;
       if (document.getElementsByClassName("el-carousel").length != 0) {
         if (Dwidth > 1920) {
@@ -146,7 +124,7 @@ export default {
         }
       }
     },
-    playVideo (url) {
+    playVideo(url) {
       this.player.url = url;
       this.showShadow = true;
       this.$nextTick(() => {
@@ -154,18 +132,25 @@ export default {
       });
     },
     //暂停
-    pauseVideo () {
+    pauseVideo() {
       this.showShadow = false;
       this.$refs.video.pause();
     }
   },
-  mounted () {
+  mounted() {
     this.setWidth();
     window.onresize = () => {
       return (() => {
         this.setWidth();
         let Dwidth = document.body.clientWidth;
-        let imgArr = document.getElementsByClassName("elCarouselItem");
+        let imgArr;
+        if (document.getElementsByClassName("elCarouselItem")) {
+          imgArr = document.getElementsByClassName("elCarouselItem");
+        }
+        if (document.getElementsByClassName("teacherElCarouselItem")) {
+          imgArr = document.getElementsByClassName("teacherElCarouselItem");
+        }
+
         if (Dwidth <= 1920) {
           let marginLeft = (1920 - Dwidth) / 2;
           for (var i = 0; i < imgArr.length; i++) {

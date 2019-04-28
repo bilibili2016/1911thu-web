@@ -33,9 +33,7 @@
               <span v-if="produceOrderInfo.study_type==='1'">培训方式：线上</span>
               <span v-else-if="produceOrderInfo.study_type==='2'">培训方式：混合</span>
               <span v-else-if="produceOrderInfo.study_type==='3'">培训方式：互动</span>
-              <span
-                v-if="produceOrderInfo.study_type==='2'||produceOrderInfo.study_type==='3'"
-              >培训人数：{{produceOrderInfo.study_persion_number}}人</span>
+              <span v-if="produceOrderInfo.study_type==='2'||produceOrderInfo.study_type==='3'">培训人数：{{produceOrderInfo.study_persion_number}}人</span>
             </p>
             <!-- 混合项目和互动项目显示线下培训天数 -->
             <p v-if="produceOrderInfo.study_type==='2'||produceOrderInfo.study_type==='3'">
@@ -66,7 +64,7 @@
       <!-- 支付成功 -->
       <div class="paySuccess" v-show="paySuccess">
         <i @click="close" class="el-icon-close fr"></i>
-        <img src="http://static-image.1911edu.com/success.png" alt>
+        <img src="https://static-image.1911edu.com/success.png" alt>
         <h5>支付成功</h5>
         <div class="goodsTime">
           <p>您已购买《{{produceOrderInfo.title}}》</p>
@@ -84,7 +82,7 @@
       <!-- 支付失败 -->
       <div class="payError" v-show="payError">
         <i @click="close" class="el-icon-close fr"></i>
-        <img src="http://static-image.1911edu.com/error.png" alt>
+        <img src="https://static-image.1911edu.com/error.png" alt>
         <h5>支付失败</h5>
       </div>
     </div>

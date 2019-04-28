@@ -39,7 +39,7 @@ export default {
         position: true, //是否显示当前位置
         text: "新闻资讯"
       },
-      bannerImg: "http://static-image.1911edu.com/profile_banner03.png",
+      bannerImg: "https://static-image.1911edu.com/profile_banner03.png",
       newsDetail: {},
       loading: true,
     };

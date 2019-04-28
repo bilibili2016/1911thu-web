@@ -3,7 +3,9 @@
 
 /* 默认的 Element 无法满足需要时，就在下面进行扩展，建议扩展方式仍然参考 Element 的风格 */
 
+
 /* Button */
+
 .el-container {
   width: 100%;
   max-width: 1920px;
@@ -40,6 +42,7 @@ html {
     color: #222;
   }
 }
+
 
 /* Menu */
 
@@ -1138,8 +1141,8 @@ html {
 
     .el-tabs__item {
       text-align: left;
-      // transition: all 360ms ease-in;
 
+      // transition: all 360ms ease-in;
       span {
         padding-left: 10px;
       }
@@ -1643,7 +1646,6 @@ input:-webkit-autofill {
 // .main-crumb .main-crumbs .el-breadcrumb__inner:hover {
 //   cursor: pointer;
 // }
-
 //单位入口页
 .allInfo {
   .bottomForm .el-form .el-button.el-button--primary {
@@ -1846,7 +1848,7 @@ input::-webkit-input-safebox-button {
 .beTeacher {
   .phone {
     .el-input {
-      width: 320px;
+      width: 295px;
       margin-right: 50px;
     }
 
@@ -2096,7 +2098,6 @@ input::-webkit-credentials-auto-fill-button {
       top: 8px;
       left: 320px;
     }
-
   }
 
   .province .el-form-item__content .el-form-item__error {
@@ -2132,6 +2133,113 @@ input::-webkit-credentials-auto-fill-button {
     .el-button {
       width: 150px;
       border-radius: 6px;
+    }
+  }
+}
+
+//个人中心-教师入口
+.my-teacher {
+  .el-card__body {
+    position: relative;
+
+    .btns-con {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      z-index: 100;
+
+      .viewTimeTable {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 16px;
+        color: #222;
+        cursor: pointer;
+
+        &:hover {
+          color: #773084;
+        }
+      }
+
+      .btns-Time {
+        display: inline-block;
+        vertical-align: middle;
+        cursor: pointer;
+        margin-right: 30px;
+
+        img {
+          width: 18px;
+          vertical-align: middle;
+          margin-right: 5px;
+        }
+
+        span {
+          font-size: 16px;
+          color: #222;
+          vertical-align: middle;
+        }
+
+        &:hover {
+          span {
+            color: #773084;
+          }
+        }
+      }
+    }
+  }
+
+  .el-radio-group {
+    display: block;
+    line-height: normal;
+    margin-top: 10px;
+
+    .el-radio {
+      .el-radio__label {
+        line-height: 20px;
+      }
+
+      .el-radio__inner {
+        width: 18px;
+        height: 18px;
+        border-color: #572281;
+      }
+
+      .el-radio__input.is-checked .el-radio__inner {
+        background-color: #fff;
+      }
+
+      .el-radio__inner::after {
+        width: 10px;
+        height: 10px;
+        background-color: #572281;
+      }
+
+      .el-radio__input.is-checked+.el-radio__label {
+        color: #344;
+      }
+    }
+  }
+}
+
+// 个人中心 教师入口 申请修改时间
+.updateTable {
+  .textarea {
+    .el-textarea {
+      textarea {
+        resize: none;
+      }
+    }
+  }
+}
+
+// 预约咨询
+.appointment {
+  .el-input {
+    height: 35px;
+    line-height: 35px;
+
+    .el-input__inner {
+      height: 35px;
+      line-height: 35px;
     }
   }
 }

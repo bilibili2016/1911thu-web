@@ -2,31 +2,15 @@
   <!-- 兑换码弹框 -->
   <div class="exchange">
     <div class="innerWord">
-      <i
-        class="el-icon-close closeEcg"
-        @click="closeEcg"
-      ></i>
+      <i class="el-icon-close closeEcg" @click="closeEcg"></i>
       <div class="changeContent">
         <div class="changeInput">
-          <div class="code-icon"> <img
-              src="http://static-image.1911edu.com/code-icon.png"
-              alt=""
-            ></div>
+          <div class="code-icon"> <img src="https://static-image.1911edu.com/code-icon.png" alt=""></div>
           <p class="code-text">绑定兑换码</p>
           <div class="code-input">
-            <input
-              v-model="bindForm.courseId"
-              placeholder="请输入您的兑换码，注意区分大小写"
-            >
-            <span
-              class="bindCode input"
-              v-if="bindForm.isInput"
-              @click="detection"
-            >绑定</span>
-            <span
-              class="bindCode"
-              v-else
-            >立即绑定</span>
+            <input v-model="bindForm.courseId" placeholder="请输入您的兑换码，注意区分大小写">
+            <span class="bindCode input" v-if="bindForm.isInput" @click="detection">绑定</span>
+            <span class="bindCode" v-else>立即绑定</span>
           </div>
           <p class="code-desc">兑换码是用户为多人办理学籍或购买多门课程生成的6位代码。</p>
           <!-- 错误提醒：绑定码已过期失效 -->
@@ -51,10 +35,10 @@
 export default {
   props: ["bindForm"],
   methods: {
-    closeEcg() {
+    closeEcg () {
       this.$emit("closeEcg");
     },
-    detection() {
+    detection () {
       this.$emit("detection");
     }
   }

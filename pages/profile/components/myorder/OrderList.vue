@@ -22,8 +22,8 @@
             <div class="courseOne" v-if="computedLength(courseList.orderCurriculumList,courseList.orderProjectList,index)" v-for="(project,index) in courseList.orderProjectList" :key="'project'+index">
               <div class="courseImg">
                 <!-- 项目图标 -->
-                <img v-if="project.project_type==2" class="project-img" src="http://static-image.1911edu.com/p5.png" alt="">
-                <img v-else class="project-img" src="http://static-image.1911edu.com/p4.png" alt="">
+                <img v-if="project.project_type==2" class="project-img" src="https://static-image.1911edu.com/p5.png" alt="">
+                <img v-else class="project-img" src="https://static-image.1911edu.com/p4.png" alt="">
 
                 <img @click="goProjrctInfo(project)" class="fl" :src="project.picture" alt="">
               </div>
@@ -65,10 +65,12 @@
             <!-- 已完成订单剩余时间 -->
             <p class="payReady" v-if="courseList.pay_status == '6'&&courseList.expire_day>=1">剩余{{courseList.expire_day}}天</p>
             <p class="payReady" v-if="(courseList.pay_status == '2'  || courseList.pay_status == '6')&&courseList.expire_day<1">已过期</p>
-            <p class="payClose" v-if="courseList.pay_status == '3' || courseList.pay_status == '4'">已关闭</p>
+            <p class="payClose" v-if="courseList.pay_status == '3'">已关闭</p>
+            <p class="payClose" v-if="courseList.pay_status == '4'">已退款</p>
+            <p class="payClose" v-if="courseList.pay_status == '7'">退款中</p>
             <p>
               <span class="pay" v-if="courseList.pay_status == '1'" @click="goPay(courseList.id,courseList)">立即支付</span>
-              <span class="buy" v-if="courseList.pay_status == '3' || courseList.pay_status == '4'" @click="goShopping(courseList)">立即购买</span>
+              <span class="buy" v-if="courseList.pay_status == '3'" @click="goShopping(courseList)">立即购买</span>
             </p>
           </div>
         </div>
@@ -234,7 +236,6 @@ export default {
           this.goAffirmorder(courseList.orderProjectList[0], "self");
         }
       } else if (courseList.order_type == "3") {
-        console.log(333);
         //学院
         this.goAffirmorder(courseList.orderVipList[0], "vip");
       }
@@ -276,7 +277,7 @@ export default {
       });
     },
     goTeacherInfo(teacher) {
-      console.log(teacher);
+      // console.log(teacher);
     },
     //列表详情
     selectPayApply(item, type) {

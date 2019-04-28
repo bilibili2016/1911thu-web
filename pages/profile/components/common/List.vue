@@ -122,13 +122,13 @@ export default {
   components: {
     "v-dialog": Dialog
   },
-  data() {
+  data () {
     return {
       showDialog: false,
       dialogInfo: {},
-      readyImg: "http://static-image.1911edu.com/ready.png",
-      overTimeImg: "http://static-image.1911edu.com/overtime.png",
-      jinImg: "http://static-image.1911edu.com/jin.png",
+      readyImg: "https://static-image.1911edu.com/ready.png",
+      overTimeImg: "https://static-image.1911edu.com/overtime.png",
+      jinImg: "https://static-image.1911edu.com/jin.png",
       kidForm: {
         kids: ""
       },
@@ -149,32 +149,32 @@ export default {
     };
   },
   methods: {
-    study(item) {
+    study (item) {
       this.openDetail(item);
     },
     //继续学习
-    goonStudy(item) {
+    goonStudy (item) {
       this.kidForm.kids = item.id;
       this.courseUrl.kid = item.id;
       //从个人中心-我的课程-继续学习跳转到课程详情页默认播放
       window.open(
         window.location.origin +
-          "/course/coursedetail?kid=" +
-          item.id +
-          "&page=0&paly="
+        "/course/coursedetail?kid=" +
+        item.id +
+        "&page=0&paly="
       );
     },
-    openDetail(item) {
+    openDetail (item) {
       this.kidForm.kids = item.id;
       this.courseUrl.kid = item.id;
       open(this.courseUrl);
     },
-    goTeacherInfo(id) {
+    goTeacherInfo (id) {
       this.tidForm.tids = id * 1;
       this.$router.push("/home/teacher/" + this.tidForm.tids);
     },
     // 判断购物车数量
-    goodsNmber() {
+    goodsNmber () {
       if (persistStore.get("productsNum") < 70) {
         profileHome.addShopCart(this.curriculumcartids).then(response => {
           this.$router.push("/shop/shoppingcart");
@@ -185,12 +185,12 @@ export default {
       }
     },
     //关闭dialog提示框
-    closeDialog() {
+    closeDialog () {
       this.showDialog = false;
       this.$router.push("/shop/shoppingcart");
     },
     // 已过期商品直接加入购物车
-    addShopCarts(item, index) {
+    addShopCarts (item, index) {
       this.curriculumcartids.cartid = item.id;
       this.curriculumcartids.type = 1;
       this.goodsNmber();

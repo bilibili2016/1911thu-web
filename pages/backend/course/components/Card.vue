@@ -65,7 +65,7 @@ export default {
   data () {
     return {
       isShowCover: true,
-      playImg: "http://static-image.1911edu.com/play.png",
+      playImg: "https://static-image.1911edu.com/play.png",
       curriculumcartids: {
         cartid: null,
         type: 1

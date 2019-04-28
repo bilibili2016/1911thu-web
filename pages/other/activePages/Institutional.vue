@@ -1,7 +1,7 @@
 <template>
   <div class="allInfo">
     <div :class="{ topImg: true, topFixed:istopFixed, topRelative:istopRelative}" ref="topImg">
-      <img src="http://static-image.1911edu.com/hrentry-pic5.png" alt>
+      <img src="https://static-image.1911edu.com/hrentry-pic5.png" alt>
       <div class="top-text">
         <h1 class="top-h1">1911学堂</h1>
         <p class="top-desc">1911学堂根据各政府机关和企业事业单位的需求，量身定制系统、权威、实用的教育培训整体解决方案。在满足学员学习需求的同时，更能助力各单位实现组织的发展战略及目标。</p>
@@ -17,7 +17,7 @@
         <h3>1911学堂的特色及优势</h3>
         <div class="why-con clearfix">
           <div class="img">
-            <img src="http://static-image.1911edu.com/institutional-icon.png" alt>
+            <img src="https://static-image.1911edu.com/institutional-icon.png" alt>
           </div>
           <div class="con-text">
             <div class="first text clearfix">
@@ -46,7 +46,7 @@
           <div class="clearfix">
             <div class="course-left courseCon clearfix">
               <div class="img">
-                <img src="http://static-image.1911edu.com/institutional-icon3.png" alt>
+                <img src="https://static-image.1911edu.com/institutional-icon3.png" alt>
                 <div>标准内训项目</div>
               </div>
               <div class="con">
@@ -56,7 +56,7 @@
             </div>
             <div class="course-right courseCon clearfix">
               <div class="img">
-                <img src="http://static-image.1911edu.com/institutional-icon2.png" alt>
+                <img src="https://static-image.1911edu.com/institutional-icon2.png" alt>
                 <div>自定制项目</div>
               </div>
               <div class="con">
@@ -155,17 +155,17 @@ export default {
       recommend: true,
       project: [
         {
-          src: "http://static-image.1911edu.com/hrEntry_7.png",
+          src: "https://static-image.1911edu.com/hrEntry_7.png",
           title: "单位课程定制",
           link: "/other/activePages/enterprisecustom"
         },
         {
-          src: "http://static-image.1911edu.com/hrEntry_8.png",
+          src: "https://static-image.1911edu.com/hrEntry_8.png",
           title: "学位项目",
           link: "/other/activePages/degree"
         },
         {
-          src: "http://static-image.1911edu.com/hrEntry_9.png",
+          src: "https://static-image.1911edu.com/hrEntry_9.png",
           title: "面授及线下活动",
           link: "/other/activePages/faceteach"
         }

@@ -32,7 +32,6 @@
     overflow: hidden;
     z-index: 9999;
 
-
     h4 {
       font-size: 20px;
       color: #222;
@@ -135,7 +134,7 @@
     bottom: 0;
     margin: auto;
     width: 600px;
-    height: 420px;
+    height: 630px;
     background-color: #fff;
     border-radius: 10px;
     overflow: hidden;
@@ -171,6 +170,18 @@
       }
     }
 
+    .focus {
+      margin-top: 30px;
+      color: #7f7b83;
+      text-align: center;
+
+      img {
+        width: 180px;
+        height: 180px;
+        margin: 0 auto;
+      }
+    }
+
     .goodsBtn {
       text-align: center;
 
@@ -179,7 +190,7 @@
         height: 40px;
         line-height: 40px;
         margin: 30px 30px 0;
-        background-color: #5b20a0;
+        background-color: #773084;
         color: #fff;
         border-radius: 5px;
         font-size: 14px;

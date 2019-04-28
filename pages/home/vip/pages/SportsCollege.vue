@@ -20,17 +20,17 @@
         <div class="object">
           <div class="one">
             <h5>运动员</h5>
-            <img src="http://static-image.1911edu.com/sportCollege_icon8.png" alt="">
+            <img src="https://static-image.1911edu.com/sportCollege_icon8.png" alt="">
             <p>包括国家队体育运动员，全国各省、自治区、直辖市以及地（市）、县（市）高等体育类院校运动员，全国各级体工队运动员，全国各俱乐部体育运动员。</p>
           </div>
           <div class="two">
             <h5>体育系统干部</h5>
-            <img src="http://static-image.1911edu.com/sportCollege_icon9.png" alt="">
+            <img src="https://static-image.1911edu.com/sportCollege_icon9.png" alt="">
             <p>包括各级体育局机关领导干部、体育事业单位领导干部、中青年后备干部、基层干部、体育社团组织领导等。</p>
           </div>
           <div class="three">
             <h5>体育产业经营管理人员</h5>
-            <img src="http://static-image.1911edu.com/sportCollege_icon10.png" alt="">
+            <img src="https://static-image.1911edu.com/sportCollege_icon10.png" alt="">
             <p>包括各地体育运动社团组织、体育培训服务机构、体育赛事组织、体育运动俱乐部、体育场馆、体育用品生产与销售企业、体育地产企业、体育旅游企业、体育中介企业等组织机构的经营管理者。</p>
           </div>
         </div>
@@ -56,15 +56,15 @@
           <h2>业务产品</h2>
           <div class="production">
             <div class="item">
-              <img src="http://static-image.1911edu.com/production-sport.png" alt="">
+              <img src="https://static-image.1911edu.com/production-sport.png" alt="">
               <p>在线体育学院</p>
             </div>
             <div class="item">
-              <img src="http://static-image.1911edu.com/production-icon1.png" alt="">
+              <img src="https://static-image.1911edu.com/production-icon1.png" alt="">
               <p>混合式标准项目</p>
             </div>
             <div class="item">
-              <img src="http://static-image.1911edu.com/production-icon2.png" alt="">
+              <img src="https://static-image.1911edu.com/production-icon2.png" alt="">
               <p>
                 体育管理硕士（MSA）国际学位项目
               </p>
@@ -86,11 +86,11 @@
         <h2>师资来源</h2>
         <p class="teacherText">本学院授课师资来自以下及其他相关单位</p>
         <div class="school">
-          <img src="http://static-image.1911edu.com/college_QH.png" alt="">
-          <img src="http://static-image.1911edu.com/college_BD.png" alt="">
-          <img src="http://static-image.1911edu.com/college_CU.png" alt="">
-          <img src="http://static-image.1911edu.com/college_TY.png" alt="">
-          <img src="http://static-image.1911edu.com/college_NYU.png" alt="">
+          <img src="https://static-image.1911edu.com/college_QH.png" alt="">
+          <img src="https://static-image.1911edu.com/college_BD.png" alt="">
+          <img src="https://static-image.1911edu.com/college_CU.png" alt="">
+          <img src="https://static-image.1911edu.com/college_TY.png" alt="">
+          <img src="https://static-image.1911edu.com/college_NYU.png" alt="">
 
         </div>
         <h2>考核认证</h2>
@@ -101,11 +101,11 @@
               <span class="text">学员参加1911学堂体育学院在线学院或相关项目学习，考核通过者将获得1911学堂结业证书。</span>
             </div>
             <div class="right fr">
-              <img src="http://static-image.1911edu.com/cadreCollege_icon2.png" alt>
+              <img src="https://static-image.1911edu.com/cadreCollege_icon2.png" alt>
             </div>
           </div>
           <div class="certification">
-            <img src="http://static-image.1911edu.com/sportCollege_certificate.png" alt>
+            <img src="https://static-image.1911edu.com/sportCollege_certificate.png" alt>
           </div>
         </div>
       </div>
@@ -115,7 +115,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       conList: [
         "体育行业发展",

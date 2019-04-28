@@ -31,41 +31,39 @@
 
     .firstLevel {
       padding: 16px 0;
+      padding-top: 20px;
       // height: 78px;
       border-bottom: 1px rgba(232, 214, 247, 1) solid;
+      padding-left: 10px;
 
       &>li,
       .firstTitle {
         display: inline-block;
         height: 45px;
         line-height: 45px;
+        font-size: 16px;
+        color: #222222;
+        margin-right: 5px;
       }
 
       ul {
-        width: 1030px;
+        width: 1000px;
         display: inline-block;
-        vertical-align: top;
 
         li {
           list-style: none;
           display: inline-block;
           line-height: 45px;
           font-size: 14px;
-          padding-right: 17px;
-          // cursor: pointer;
+          margin-right: 30px;
         }
       }
 
       ul.projrctCollege {
         li {
-          span {
-            background-color: #773084;
-          }
-
           &:hover {
             .el-button {
-              background-color: #5f068d;
-              color: #fff;
+              color: #773084;
             }
           }
         }
@@ -74,10 +72,9 @@
       ul.courseCollege {
         li {
           span {
-            font-size: 14px;
-            color: #333;
+            font-size: 16px;
+            color: #222;
             vertical-align: middle;
-
           }
 
           span.name {
@@ -94,52 +91,79 @@
         li {
           &:hover {
             .el-button {
-              background-color: #5f068d;
-              color: #fff;
+              color: #773084;
             }
           }
         }
       }
 
       .title {
-        font-size: 14px;
-        color: rgba(34, 34, 34, 1);
+        font-size: 16px;
+        color: #222222;
       }
     }
 
     .secondLevel {
       position: relative;
       padding: 16px 0;
+      padding-left: 10px;
 
-      &>li {
+      &>li,
+      .title {
         display: inline-block;
         height: 45px;
         line-height: 45px;
+        font-size: 16px;
+        color: #222222;
+        margin-right: 5px;
+        vertical-align: top;
       }
 
       ul {
-        width: 1030px;
+        width: 1000px;
         display: inline-block;
-        vertical-align: top;
 
         li {
           list-style: none;
           display: inline-block;
           line-height: 45px;
           font-size: 14px;
-          padding-right: 17px;
+          margin-right: 30px;
           cursor: pointer;
-
-          span {
-            background-color: #773084;
-          }
 
           &:hover {
             .el-button {
-              background-color: #5f068d;
-              color: #fff;
+              color: #773084;
             }
           }
+        }
+      }
+    }
+
+    .courseArea {
+      max-height: 115px;
+      overflow: hidden;
+      transition: all 600ms;
+
+      .inner {
+        width: 1100px;
+        position: relative;
+        top: -16px;
+        left: -10px;
+        padding: 16px 0;
+        padding-left: 10px;
+        transition: all 400ms;
+        z-index: 100;
+      }
+
+      &:hover {
+        overflow: inherit;
+
+        .inner {
+          border-radius: 8px;
+          //  background: #fff;
+          background-color: #ebe7ed;
+          box-shadow: 0 7px 12px rgba(53, 53, 53, .09);
         }
       }
     }
@@ -150,7 +174,10 @@
     }
 
     .el-button {
+      padding: 0;
       font-weight: 400;
+      font-size: 16px;
+      color: #666;
     }
   }
 }
@@ -194,7 +221,7 @@
   position: fixed;
   top: 500px;
   left: 93%; // margin-left: 300px;
-  background: url('http://static-image.1911edu.com/allChecked.png');
+  background: url('https://static-image.1911edu.com/allChecked.png');
   background-size: cover;
   z-index: 9;
   cursor: pointer;
@@ -256,11 +283,9 @@
   min-height: 500px;
 }
 
-.btnBg {
+.banner .center .btnBg {
   .el-button {
-    background-color: #773084;
-    color: #fff;
-    border: none;
+    color: #773084;
   }
 }
 

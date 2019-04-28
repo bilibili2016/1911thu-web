@@ -344,8 +344,8 @@
             margin-top: -50px;
         }
         img {
-            width: 316px;
-            height: 274px;
+            width: 260px;
+            // height: 274px;
             margin-top: 100px;
         }
         h4 {
@@ -353,7 +353,7 @@
             line-height: 70px;
             text-align: center;
             color: #999;
-            font-size: 20px;
+            font-size: 18px;
         }
         p {
             width: 140px;
@@ -428,6 +428,14 @@
                 background: url('~assets/images/icon_college1.png') no-repeat center;
                 background-size: contain;
             }
+            &.icon-teacher {
+                background: url('~assets/images/icon_teacher1.png') no-repeat center;
+                background-size: contain;
+            }
+            &.icon-student {
+                background: url('~assets/images/icon_student1.png') no-repeat center;
+                background-size: contain;
+            }
         }
     }
     .el-tabs__item.is-active i,
@@ -474,6 +482,14 @@
         }
         &.icon-college {
             background: url('~assets/images/icon_college2.png') no-repeat center;
+            background-size: contain;
+        }
+        &.icon-teacher {
+            background: url('~assets/images/icon_teacher2.png') no-repeat center;
+            background-size: contain;
+        }
+        &.icon-student {
+            background: url('~assets/images/icon_student2.png') no-repeat center;
             background-size: contain;
         }
     }

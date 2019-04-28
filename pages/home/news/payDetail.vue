@@ -37,9 +37,9 @@ export default {
   components: {
     "v-banner": CustomBanner
   },
-  data() {
+  data () {
     return {
-      bannerImg: "http://static-image.1911edu.com/profile_banner03.png",
+      bannerImg: "https://static-image.1911edu.com/profile_banner03.png",
       newsDetail: {},
       loading: true,
       afterNews: {
@@ -50,22 +50,14 @@ export default {
         id: "",
         title: ""
       },
-      configShare: {
-        url: "http://edu.1911thu.com/",
-        sites: ["qzone", "qq", "weibo", "wechat"],
-        source: "http://edu.1911thu.com/"
-        // wechatQrcodeTitle: '微信扫一扫：分享',
-        // wechatQrcodeHelper:
-        //   '<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>'
-      }
     };
   },
   methods: {
-    getMore(item) {
+    getMore (item) {
       this.$router.push(item);
     },
     // 获取资讯详情
-    getNewInfoDetail(id) {
+    getNewInfoDetail (id) {
       let me = this;
       if (!id) return;
       let newsId = {
@@ -101,7 +93,7 @@ export default {
       });
     }
   },
-  mounted() {
+  mounted () {
     let nid = window.location.pathname.split("/")[3];
     this.getNewInfoDetail(nid);
   }

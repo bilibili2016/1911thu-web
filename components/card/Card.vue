@@ -11,7 +11,7 @@
             <img :src="newTag " alt=" ">
           </div> -->
           <!-- <div class="projectImg" v-if="cp==='1'">
-            <img src="http://static-image.1911edu.com/p4.png" alt="" class="project-img">
+            <img src="https://static-image.1911edu.com/p4.png" alt="" class="project-img">
           </div> -->
           <div class="mask-style" @click="handleLinkDetail(card)">
             <img :src="jinImg" alt="" class="jin-style">
@@ -110,8 +110,8 @@ export default {
       },
       cp: "",
       isIndex: true,
-      jinImg: "http://static-image.1911edu.com/jin.png",
-      newTag: "http://static-image.1911edu.com/new.png",
+      jinImg: "https://static-image.1911edu.com/jin.png",
+      newTag: "https://static-image.1911edu.com/new.png",
       numSrc: require("@/assets/images/home_num.png"),
       courseUrl: {
         base: "/course/coursedetail",

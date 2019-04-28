@@ -7,15 +7,15 @@
       <div class="center">
         <div class="payOne" @click="selectWx" :class="{borderColor: wxMsg}">
           <img class="payImg" :src="wechatPay" alt="">
-          <img class="payOk" src="http://static-image.1911edu.com/ok.png" alt="" v-if="wxMsg">
+          <img class="payOk" src="https://static-image.1911edu.com/ok.png" alt="" v-if="wxMsg">
         </div>
         <div class="payOne" @click="selectZfb" :class="{borderColor: zfbMsg}">
           <img class="payImg" :src="zfbPay" alt="">
-          <img class="payOk" src="http://static-image.1911edu.com/ok.png" alt="" v-if="zfbMsg">
+          <img class="payOk" src="https://static-image.1911edu.com/ok.png" alt="" v-if="zfbMsg">
         </div>
         <div class="payOne" @click="selectPub" :class="{borderColor: pubMsg}">
-          <img class="payImg" src="http://static-image.1911edu.com/payPublic.png" alt="">
-          <img class="payOk" src="http://static-image.1911edu.com/ok.png" alt="" v-if="pubMsg">
+          <img class="payImg" src="https://static-image.1911edu.com/payPublic.png" alt="">
+          <img class="payOk" src="https://static-image.1911edu.com/ok.png" alt="" v-if="pubMsg">
         </div>
       </div>
     </div>
@@ -53,8 +53,8 @@ export default {
     return {
       showDialog: false,
       dialogInfo: {},
-      wechatPay: "http://static-image.1911edu.com/wxp.png",
-      zfbPay: "http://static-image.1911edu.com/zfb.png",
+      wechatPay: "https://static-image.1911edu.com/wxp.png",
+      zfbPay: "https://static-image.1911edu.com/zfb.png",
       orderType: "",
       wxMsg: true,
       zfbMsg: false,
@@ -89,8 +89,8 @@ export default {
         this.wxMsg = false;
         this.zfbMsg = false;
         this.pubMsg = true;
-        this.wechatPay = "http://static-image.1911edu.com/wxp.png";
-        this.zfbPay = "http://static-image.1911edu.com/zfb.png";
+        this.wechatPay = "https://static-image.1911edu.com/wxp.png";
+        this.zfbPay = "https://static-image.1911edu.com/zfb.png";
       } else if (val.order_amount >= 500000) {
         this.showDialog = true;
         this.dialogInfo.info =
@@ -98,13 +98,13 @@ export default {
 
         this.selectPub();
         this.isWSW = true;
-        this.wechatPay = "http://static-image.1911edu.com/wxpUnclick.png";
-        this.zfbPay = "http://static-image.1911edu.com/zfbUnclick.png";
+        this.wechatPay = "https://static-image.1911edu.com/wxpUnclick.png";
+        this.zfbPay = "https://static-image.1911edu.com/zfbUnclick.png";
       } else {
         this.showDialog = false;
 
-        this.wechatPay = "http://static-image.1911edu.com/wxp.png";
-        this.zfbPay = "http://static-image.1911edu.com/zfb.png";
+        this.wechatPay = "https://static-image.1911edu.com/wxp.png";
+        this.zfbPay = "https://static-image.1911edu.com/zfb.png";
         this.isWSW = false;
       }
     }

@@ -51,7 +51,7 @@
         <h1 class="title">三、单位内训项目</h1>
         <div class="text clearfix">
           <div class="left">
-            <img src="http://static-image.1911edu.com/contentSys-icon1.png" alt="">
+            <img src="https://static-image.1911edu.com/contentSys-icon1.png" alt="">
           </div>
           <div class="right">
             <p>根据各机构单位的需求，包括党政机关各组织部门，体育、教育、金融、军转、税务、司法等各系统，各类国企、民企、外企以及房地产、建筑施工、IT、物流、餐饮酒店等各行业的企业，1911学堂一方面研发相应的在线专业学院，另一方面设计专业的线下面授课程，针对性研发形成量身定制的混合式单位内训项目。相关单位的学习者，可通过学习相应在线学院的内容及线下面授的专业课程，协同实现组织战略发展目标与个人成长目标。</p>
@@ -81,7 +81,7 @@
 <script>
 import { setTitle } from "~/lib/util/helper";
 export default {
-  mounted() {
+  mounted () {
     setTitle("核心优势-内容体系及运营模式-1911学堂");
   }
 };

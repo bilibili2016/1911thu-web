@@ -22,7 +22,7 @@
                   <p><span class="courseForm">邮箱：</span><span>info@1911thu.com</span></p>
                   <p><span class="courseForm">电话：</span><span>18612651911 </span></p>
                 </div>
-                <p class="code"><img src="http://static-image.1911edu.com/teacherCode.png" alt=""><span>添加学堂教务微信，预约导师</span></p>
+                <p class="code"><img src="https://static-image.1911edu.com/teacherCode.png" alt=""><span>添加学堂教务微信，预约导师</span></p>
                 <!-- <p><span class="courseForm">添加微信预约导师：</span><span>xuetang</span></p> -->
               </div>
             </div>
