@@ -6,9 +6,6 @@
         <div class="bg-text">
           <div class="left-teacher">
             <img :src="teacherData.head_img" alt="">
-            <span class="btn" v-if="teacherData.is_meet==1" @click="handleAppoint">预约导师</span>
-            <span class="btn unBtn" v-else>预约导师</span>
-
           </div>
           <div class="desc">
             <h4>{{teacherData.teacher_name}}</h4>
@@ -22,18 +19,26 @@
         <div class="middle-con clearfix">
           <div class="left">
             <div class="title">擅长的话题</div>
-            <ul class="topic">
-              <li v-for="(item,index) in topicList" :key="index">{{item}}</li>
+            <ul class="topic" v-if="questionLeft.length>0">
+              <li v-for="(item,index) in questionLeft" :key="index">{{item.title}}</li>
             </ul>
-            <span class="btn apponit">预约咨询</span>
+            <div class="noTopic" v-else>
+              <img :src="noTopic" alt="">
+              <p>暂无擅长的话题</p>
+            </div>
+            <span class="btn apponit" v-if="teacherData.is_meet==1" @click="handleAppoint">预约咨询</span>
+            <span class="btn unBtn" v-else>预约导师</span>
           </div>
           <div class="right">
             <div class="title">讲授的课程</div>
-             <ul class="course">
-              <li v-for="(item,index) in topicList" :key="index">{{item}}</li>
+            <ul class="course" v-if="questionRight.length>0">
+              <li v-for="(item,index) in questionRight" :key="index">{{item.title}}</li>
             </ul>
-            <span class="btn invite">邀请导师授课</span>
-
+            <div class="noTopic" v-else>
+              <img :src="noTopic" alt="">
+              <p>暂无擅长的话题</p>
+            </div>
+            <span class="btn invite" @click="inviteTutor">邀请导师授课</span>
           </div>
         </div>
       </div>
@@ -69,7 +74,7 @@ export default {
     "v-appointment": Appointment,
     "v-pay": Pay
   },
-  data() {
+  data () {
     return {
       showAppointment: false,
       showPay: false,
@@ -80,11 +85,14 @@ export default {
         text: "暂无在教的课程",
         imgUrl: "https://static-image.1911edu.com/noMsg.png"
       },
+      noTopic: "https://static-image.1911edu.com/noTopic.png",
       config: {
         card_type: "profile",
         card: "home"
       },
       teacherData: {},
+      questionLeft: '',
+      questionRight: '',
       teacherCourse: [],
       teacherID: null,
       tidForm: {
@@ -92,30 +100,30 @@ export default {
       },
       teacherBg: "https://static-image.1911edu.com/teacher_bannerBG.png",
       loading: false,
-      topicList:[
-        '创业公司如何利用社群低成本营销创业公司如何利用社群低成本营销销',
+      topicList: [
+        '创业公司如何利用社群低成本营销创业公司如何利用社群低成本营销销创业公司如何利用社群低成本营销创业公司如何利用社群低成本营销销',
         '创业公司如何利用社群低成本营销',
-        '创业公司如何利用社群低成本营销',
-        '创业公司如何利用社群低成本营销',
-        '创业公司如何利用社群低成本营销',
+        '创业公司如何利用社群低成本营销创业公司如何利用社群低成本营销创业公司如何利用社群低成本营销',
+        '创业公司如何利用社群低成本营销创业公司如何利用社群低成本营销创业公司如何利用社群低成本营销',
+        '创业公司如何利用社群低成本营销创业公司如何利用社群低成本营销创业公司如何利用社群低成本营销',
         '创业公司如何利用社群低成本营销',
         '创业公司如何利用社群低成本营销'
       ]
     };
   },
   methods: {
-    goPay(id) {
+    goPay (id) {
       this.showPay = true;
       this.orderId = id;
     },
-    closeForm() {
+    closeForm () {
       this.showAppointment = !this.showAppointment;
     },
     // 支付弹框关闭的回调
-    closePayed() {
+    closePayed () {
       this.showPay = !this.showPay;
     },
-    reservation(teacher) {
+    reservation (teacher) {
       if (persistStore.get("token")) {
         this.getUserInfo();
         this.teacherInfo = teacher;
@@ -124,27 +132,32 @@ export default {
         this.$bus.$emit("loginShow", true);
       }
     },
-    getUserInfo() {
+    inviteTutor () {
+      this.$router.push(`/home/teacher/orderTeacher?id=${this.tidForm.tids}`)
+    },
+    getUserInfo () {
       banner.getUserInfo().then(res => {
         if (res.status === 0) {
           this.userInfo = res.data.userInfo;
         }
       });
     },
-    getTeacherInfo() {
+    getTeacherInfo () {
       teacherInfo.getTeacherInfo(this.tidForm).then(response => {
         this.teacherData = response.data.teacherInfo;
+        this.questionLeft = response.data.teacherInfo.questionLeft
+        this.questionRight = response.data.teacherInfo.questionRight
         this.loading = false;
       });
     },
-    getTeacherCourse() {
+    getTeacherCourse () {
       teacherInfo.getTeacherCourse(this.tidForm).then(response => {
         this.teacherCourse = response.data.curriculumList;
         this.loading = false;
       });
     },
     //预约导师
-    handleAppoint() {
+    handleAppoint () {
       if (persistStore.get("token")) {
         this.showAppointment = true;
         this.getUserInfo();
@@ -153,7 +166,7 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     let tid = window.location.pathname.split("/")[3];
     this.tidForm.tids = tid;
     this.loading = true;
