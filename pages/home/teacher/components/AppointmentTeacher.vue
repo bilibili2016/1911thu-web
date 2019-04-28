@@ -5,7 +5,37 @@
       <i class="el-icon-close" @click="closeForm"></i>
       <p class="tips">亲爱的学员，欢迎您使用预约咨询服务，请选择您方便接收回复的时间段，<br>
         我们将会在此时间段通过视频直播的方式为您提供一对一的咨询服务！</p>
-      <div class="con-item name clearfix">
+      <el-form :model="teacherForm" :rules="rules" ref="teacherForm" label-width="210px" class="teacherForm">
+        <el-form-item label="您的联系方式：" prop="tel">
+          <el-input v-model="teacherForm.tel" :disabled="teacherForm.hasTel"></el-input>
+        </el-form-item>
+        <el-form-item label="真实姓名：" prop="name">
+          <el-input v-model="teacherForm.name" :disabled="teacherForm.hasName" placeholder="请填写您的联系方式"></el-input>
+        </el-form-item>
+        <el-form-item label="预约咨询的导师：" prop="teacherName">
+          <el-input v-model="teacherForm.teacherName" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="咨询时长：">
+          <el-input class="min" v-model="teacherForm.courseTimeName" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="请选择开始时间：" prop="time">
+          <el-select v-model="teacherForm.startTime" placeholder="请选择开始时间">
+            <el-option v-for="item in timeList" :key="item.id" :label="item.start_time" :value="item.id"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="请简单描述您想要咨询的问题" prop="remark">
+          <el-input type="textarea" placeholder="请输入您想要咨询的问题，预约成功，导师将一对一解答。" v-model="teacherForm.remark"></el-input>
+        </el-form-item>
+        <div class="agreement">
+          <el-checkbox v-model="teacherForm.checked">我已阅读并同意</el-checkbox><i @click="serviceAgreement">《服务协议》</i>
+          <span class="cost">咨询费用100元</span>
+        </div>
+        <el-form-item size="large" class="submit">
+          <el-button type="primary" class="submitAble" @click="appointmentTeacher('teacherForm')" round>提交</el-button>
+        </el-form-item>
+      </el-form>
+
+      <!-- <div class="con-item name clearfix">
         <div class="fl">您的联系方式：</div>
         <div class="fr">
           <el-input v-model="teacherForm.tel" :disabled="teacherForm.hasTel" placeholder="请填写您的联系方式"></el-input>
@@ -38,24 +68,6 @@
           </el-select>
         </div>
       </div>
-      <!-- <div class="con-item name clearfix">
-        <div class="fl">请选择咨询日期：</div>
-        <div class="fr">
-          <el-date-picker v-model="teacherForm.appointmentDate" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" placeholder="请选择开始日期" :picker-options="pickerOptions">
-          </el-date-picker>
-          <el-time-select v-model="teacherForm.appointmentTime" :picker-options="{start: '08:00',step: '01:00',end: '20:00'}" placeholder="请选择开始时间">
-          </el-time-select>
-        </div>
-      </div> -->
-      <!-- <div class="con-item clearfix">
-        <div class="fl">请选择咨询的问题：</div>
-        <div class="fr selectFr">
-          <el-select v-model="teacherForm.problems" multiple collapse-tags placeholder="请选择">
-            <el-option v-for="item in problems" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select>
-        </div>
-      </div> -->
       <div class="textarea">
         <p>请简单描述您想要咨询的问题</p>
         <textarea placeholder="请输入您想要咨询的问题，预约成功，导师将一对一解答。" v-model="teacherForm.remark"></textarea>
@@ -66,7 +78,7 @@
       </div>
       <div class="btns">
         <span class="btn save active " @click="validate">提交</span>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -92,42 +104,56 @@ export default {
         hasName: false
       },
       problems: [],
-      timeList: []
+      timeList: [],
+      rules: {
+        name: [
+          {
+            required: true,
+            message: "请填写您的真实姓名",
+            trigger: "blur"
+          }
+        ],
+        tel: [
+          {
+            required: true,
+            message: "请输入您的联系方式",
+            trigger: "blur"
+          }
+        ],
+        time: [
+          { required: true, message: '请选择开始时间', trigger: 'change' }
+        ],
+        remark: [
+          {
+            required: true,
+            message: "请选择您的想要咨询的问题",
+            trigger: "blur"
+          }
+        ],
+      },
     };
   },
   methods: {
     closeForm () {
       this.$emit("closeForm");
     },
-    // 提交数据
-    validate () {
-      //   const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/;
-      try {
-        if (Trim(this.teacherForm.tel) === "") throw "请填写手机号码";
-        // if (!this.teacherForm.hasTel) {
-        //   if (!telReg.test(Trim(this.teacherForm.tel)))
-        //     throw "请填写正确的手机号码";
-        // }
-        if (Trim(this.teacherForm.name) === "") throw "请填写姓名";
-        if (this.teacherForm.startTime === "") throw "请选择咨询开始时间";
-        // if (this.teacherForm.problems === "") throw "请选择您想要咨询的问题";
-        if (this.teacherForm.remark === "") throw "请简单描述您想要咨询的问题";
-        if (!this.teacherForm.checked) throw "请先阅读《服务协议》";
-      } catch (err) {
-        message(this, "error", err);
-        return false;
-      }
-      this.appointmentTeacher();
-    },
     // 提交预约导师
-    appointmentTeacher () {
-      teacherInfo.teacherBespoke(this.teacherForm).then(response => {
-        //不需要验证是否登录
-        if (response.status === 0) {
-          this.closeForm();
-          this.$emit("goPay", response.data.id);
-        } else {
-          message(this, "error", response.msg);
+    appointmentTeacher (formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          if (this.teacherForm.checked) {
+            teacherInfo.teacherBespoke(this.teacherForm).then(response => {
+              //不需要验证是否登录
+              if (response.status === 0) {
+                this.closeForm();
+                this.$emit("goPay", response.data.id);
+              } else {
+                message(this, "error", response.msg);
+              }
+            });
+          } else {
+            message(this, "error", "请先阅读并同意《服务协议");
+          }
         }
       });
     },
