@@ -26,7 +26,7 @@
               <span v-if="item.result_status==3" class="confirmed">已确认</span>
               <span v-if="item.result_status==4">调整失败</span>
               <span v-if="item.result_status==5">已改签</span>
-              <span v-if="item.result_status==6">待调整</span>
+              <span v-if="item.result_status==6">已调整待确认</span>
             </td>
             <td>
               <div v-if="item.result_status==2">

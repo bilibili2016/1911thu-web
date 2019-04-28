@@ -109,7 +109,7 @@
                     <el-input v-model="teacherForm.courseName" placeholder="请填写您讲授的课程名称"></el-input>
                   </div>
                 </div>
-                <div class="con-item uploadFile clearfix">
+                <!-- <div class="con-item uploadFile clearfix">
                   <div class="fl">上传简历：</div>
                   <div :class="['fr',{'height':isShowFile}]">
                     <div class="load" v-show="isShowFile">
@@ -125,9 +125,9 @@
                       <span class="deleteFile" @click="deleteFile">删除</span>
                     </p>
                   </div>
-                </div>
+                </div> -->
                 <div class="con-item desc clearfix">
-                  <div class="fl">其他信息：</div>
+                  <div class="fl">自我介绍：</div>
                   <div class="fr">
                     <el-input type="textarea" v-model.trim="teacherForm.otherInfo" :rows="3" maxlength="200" placeholder="请输入您的其他信息，方便我们更多的了解您，还可以提高审核通过率哦！" autosize></el-input>
                     <span class="input-inner">还可以输入{{descLength}}字</span>
@@ -182,7 +182,7 @@
                   </div>
                 </div>
                 <div class="con-item desc clearfix">
-                  <div class="fl">其他信息：</div>
+                  <div class="fl">自我介绍：</div>
                   <div class="fr">
                     <el-input type="textarea" v-model.trim="teacherForm.otherInfo" :rows="3" maxlength="200" placeholder="请输入您的其他信息，方便我们更多的了解您，还可以提高审核通过率哦！" autosize></el-input>
                     <span class="input-inner">还可以输入{{descLength}}字</span>
