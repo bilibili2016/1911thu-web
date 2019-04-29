@@ -25,10 +25,8 @@
         </div>
         <div class="item">
           <div class="left">咨询的问题：</div>
-          <div class="right last">
-            <p>{{detail.remark}}</p>
-            <!-- <p>1、课程总费用是多少？课程总费用是多少？课程总费用是多少？</p> -->
-            <!-- <p>2、课程总费用是多少？课程总费用是多少？课程总费用是多少？ 课程总费用是多少？</p> -->
+          <div class="right last askQuestion">
+            <p v-for="(item,index) in detail.ask_question" :key="index">{{(index+1)+'、'+item}}</p>
           </div>
         </div>
       </div>
