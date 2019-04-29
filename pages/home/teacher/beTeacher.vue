@@ -74,7 +74,7 @@
                   <div class="fl">擅长领域：</div>
                   <div class="fr clearfix">
                     <el-checkbox-group v-model="direction" @change="changeDirection">
-                      <el-checkbox v-for="(area,index) in directionData" :label="area.id" :key="'area'+index">{{area.name}}</el-checkbox>
+                      <el-checkbox v-for="(area,index) in teacherDirData" :label="area.id" :key="'area'+index">{{area.name}}</el-checkbox>
                       <el-input v-if="isShowOther" v-model="teacherForm.otherArea" placeholder="请输入您擅长的领域"></el-input>
                     </el-checkbox-group>
                   </div>
@@ -165,7 +165,7 @@
                   <div class="fl">擅长领域：</div>
                   <div class="fr clearfix">
                     <el-checkbox-group v-model="direction" @change="changeDirection">
-                      <el-checkbox v-for="(area,index) in directionData" :label="area.id" :key="'area'+index">{{area.name}}</el-checkbox>
+                      <el-checkbox v-for="(area,index) in studentDirData" :label="area.id" :key="'area'+index">{{area.name}}</el-checkbox>
                       <el-input v-if="isShowOther" v-model="teacherForm.otherArea" placeholder="请输入您擅长的领域"></el-input>
                     </el-checkbox-group>
                   </div>
@@ -280,33 +280,9 @@ export default {
       graduateList: [],
       fileList: [],
       offerService: [],
-      directionData: [
-        {
-          name: "公共管理",
-          id: '1'
-        },
-        {
-          name: "经济管理",
-          id: '2'
-        },
-        {
-          name: "教育管理",
-          id: '3'
-        },
-        {
-          name: "大健康",
-          id: '4'
-        },
-        {
-          name: "人工智能",
-          id: '5'
-        },
-        {
-          name: "其他",
-          id: '6'
-        }
-      ],
-      direction: [],
+      teacherDirData:[],
+      studentDirData: [],
+      direction:[],
       teacherForm: {
         name: "", //姓名
         tel: "", //手机号
@@ -378,11 +354,11 @@ export default {
   },
   methods: {
     changeDirection (val) {
-      if (val.indexOf('6') > 0) {
+      console.log(val,'val');
+      if (val.indexOf('-1') >= 0) {
         this.isShowOther = true
       } else {
         this.isShowOther = false
-
       }
     },
     handleSelectChange (val) {
@@ -494,7 +470,7 @@ export default {
       this.isShowImg = true;
     },
     //处理图片上传
-    handleImgUpload (event, param, show) {
+    handleImgUpload (event, param, show,size) {
       // var that = this
       var reader = new FileReader();
       let imgFiles = event.target.files[0];
@@ -503,6 +479,10 @@ export default {
       formdata.image = imgFiles;
       reader.readAsDataURL(imgFiles);
       this.imgForm.FILESS = [];
+      if(imgFiles.size>size){
+        message(this,'error','图片不能超过'+size/1024+'M')
+        return false
+      }
       reader.onloadend = () => {
         this.imgForm.FILESS.push(reader.result);
         this.imgForm.fileName = imgFiles.name;
@@ -520,11 +500,11 @@ export default {
     },
     //照片上传
     teacherImgUpload (event) {
-      this.handleImgUpload(event, 'photo', 'isShowImg')
+      this.handleImgUpload(event, 'photo', 'isShowImg',10*1024)
     },
     //学生证上传
     cardUpload () {
-      this.handleImgUpload(event, 'studentCard', 'isShowCardImg')
+      this.handleImgUpload(event, 'studentCard', 'isShowCardImg',10*1024)
     },
     //选项信息
     getRecruitSelect () {
@@ -535,6 +515,17 @@ export default {
           this.school = res.data.schoolList;
           this.educationList = res.data.education;
           this.graduateList = res.data.graduate;
+          let direction = res.data.studyDirectionList
+          direction.forEach((item) => {
+            //教师擅长领域
+            if(item.identity==1){
+              this.teacherDirData.push(item)
+            }else if(item.identity==2){//学生
+              this.studentDirData.push(item)
+            }
+          });
+          this.teacherDirData.push({id:'-1',name:'其他'})
+          this.studentDirData.push({id:'-1',name:'其他'})
         } else {
           message(this, "error", res.msg);
         }
@@ -542,8 +533,13 @@ export default {
     },
     // 提交
     handleSubmit () {
+      let dIndex = this.direction.indexOf('-1')
+      if (dIndex >= 0) {
+        this.direction.splice(dIndex,1)
+      }
       this.teacherForm.directionArr = this.direction;
       this.teacherForm.tel = Trim(this.teacherForm.tel);
+       console.log(this.teacherForm);
       list.submitBeTeacher(this.teacherForm).then(res => {
         this.isClick = false;
         //不需要验证是否登录
@@ -558,7 +554,6 @@ export default {
     },
     //表单验证
     validate () {
-      console.log(this.teacherForm);
       if (this.isClick) {
         return false;
       }
