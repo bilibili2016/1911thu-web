@@ -3,7 +3,7 @@
     <div class="inner">
       <h2 class="title">专家组组长</h2>
       <div class="list" v-loading="teacherListLoading">
-        <div class="item" v-for="(item,index) in groupLeader" :key="index">
+        <div class="item" v-for="(item,index) in groupLeader" :key="index" @click="handleItem(item)">
           <img :src="item.head_img" alt="">
           <div class="intro">
             <h4>{{item.teacher_name}}<span>{{item.college_name}}</span></h4>
@@ -19,6 +19,11 @@
 <script>
 export default {
   props: ['groupLeader', 'teacherListLoading'],
+  methods:{
+    handleItem(item){
+      this.$router.push(`home/teacher/${item.teacher_id}`)
+    }
+  }
 }
 </script>
 
