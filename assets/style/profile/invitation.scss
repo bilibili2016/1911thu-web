@@ -1,158 +1,113 @@
 .invitation {
-  background-color: #fff;
-  // margin: 0 auto;
-  margin: 30px 30px 0;
-
-  .table {
-    clear: both;
-    border: 1px solid #e8d6f7;
-
-    .tr_header {
-      height: 60px;
-      line-height: 60px;
-      background-color: #ebe7ed;
-      text-align: center;
-      font-size: 14px;
-      color: #773084;
-      display: flex;
-      justify-content: space-around;
-
-      span {
-        font-weight: 400;
-        background-color: transparent;
-
-        &:last-child {
-          padding-left: 70px;
+    background-color: #fff;
+    // margin: 0 auto;
+    margin: 30px 30px 0;
+    .table {
+        clear: both;
+        border: 1px solid #e8d6f7;
+        .tr_header {
+            height: 60px;
+            line-height: 60px;
+            background-color: #ebe7ed;
+            text-align: center;
+            font-size: 14px;
+            color: #773084;
+            display: flex;
+            justify-content: space-around;
+            span {
+                font-weight: 400;
+                background-color: transparent;
+                &:last-child {
+                    padding-left: 70px;
+                }
+            }
         }
-      }
-    }
-
-    &>div>span:nth-child(1) {
-      width: 20%;
-    }
-
-    &>div>span:nth-child(2) {
-      width: 10%;
-    }
-
-    &>div>span:nth-child(3) {
-      width: 20%;
-    }
-
-    &>div>span:nth-child(4) {
-      width: 10%;
-    }
-
-    &>div>span:nth-child(5) {
-      width: 10%;
-    }
-
-    &>div>span:nth-child(6) {
-      width: 30%;
-      text-align: left;
-    }
-
-    .tr_body {
-      height: 52px;
-      line-height: 52px;
-      background-color: #fafafa;
-      text-align: center;
-      color: #222;
-      font-size: 14px;
-      display: flex;
-      justify-content: space-around;
-      border-bottom: 1px solid #e8d6f7;
-
-      &:last-child {
-        border: none;
-      }
-
-      span {
-        height: 52px;
-
-        &:last-child {
-          padding-left: 15px;
+        &>div>span:nth-child(1) {
+            width: 20%;
         }
-      }
-
-      &.noCodes {
-        color: #aaa;
-
-        span {
-          position: relative;
+        &>div>span:nth-child(2) {
+            width: 10%;
         }
-
-        i {
-          background-color: #fff;
-          width: 56px;
-          height: 36px;
-          position: absolute;
-          top: 6px;
-          right: 10px;
-
-          &.efficacy {
-            background: url('https://static-image.1911edu.com/loseEfficacy.png') no-repeat;
-            background-size: contain;
-          }
-
-          &.used {
-            background: url('https://static-image.1911edu.com/used.png') no-repeat;
-            background-size: contain;
-          }
+        &>div>span:nth-child(3) {
+            width: 20%;
         }
-      }
+        &>div>span:nth-child(4) {
+            width: 10%;
+        }
+        &>div>span:nth-child(5) {
+            width: 10%;
+        }
+        &>div>span:nth-child(6) {
+            width: 30%;
+            text-align: left;
+        }
+        .tr_body {
+            height: 52px;
+            line-height: 52px;
+            background-color: #fafafa;
+            text-align: center;
+            color: #222;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-around;
+            border-bottom: 1px solid #e8d6f7;
+            &:last-child {
+                border: none;
+            }
+            span {
+                height: 52px;
+                &:last-child {
+                    padding-left: 15px;
+                }
+            }
+            &.noCodes {
+                color: #aaa;
+                span {
+                    position: relative;
+                }
+                i {
+                    background-color: #fff;
+                    width: 56px;
+                    height: 36px;
+                    position: absolute;
+                    top: 6px;
+                    right: 10px;
+                    &.efficacy {
+                        background: url('https://static-image.1911edu.com/loseEfficacy.png') no-repeat;
+                        background-size: contain;
+                    }
+                    &.used {
+                        background: url('https://static-image.1911edu.com/used.png') no-repeat;
+                        background-size: contain;
+                    }
+                }
+            }
+        }
+        .orderNum {
+            cursor: pointer;
+            transition: all 300ms;
+            &:hover {
+                color: #5f068d;
+            }
+        }
     }
-
-    .noCodes {
-      width: 100%;
-      text-align: center;
-      padding-bottom: 50px;
-
-      img {
-        width: 316px;
-        height: 274px;
-        margin-top: 100px;
-      }
-
-      p {
-        height: 70px;
-        line-height: 70px;
-        text-align: center;
-        color: #999;
-        font-size: 20px;
-      }
+    .rules {
+        margin: 0 30px;
+        padding-bottom: 50px;
+        h5 {
+            line-height: 66px;
+            height: 56px;
+            color: #222;
+            font-size: 16px;
+        }
+        .word {
+            padding: 20px 15px;
+            border: 1px solid #e8d6f7;
+            p {
+                color: #222;
+                font-size: 12px;
+                line-height: 24px;
+            }
+        }
     }
-
-    .orderNum {
-      cursor: pointer;
-      transition: all 300ms;
-
-      &:hover {
-        color: #5f068d;
-      }
-    }
-  }
-
-  .rules {
-    margin: 0 30px;
-    padding-bottom: 50px;
-
-    h5 {
-      line-height: 66px;
-      height: 56px;
-      color: #222;
-      font-size: 16px;
-    }
-
-    .word {
-      padding: 20px 15px;
-      border: 1px solid #e8d6f7;
-
-      p {
-        color: #222;
-        font-size: 12px;
-        line-height: 24px;
-      }
-    }
-  }
 }

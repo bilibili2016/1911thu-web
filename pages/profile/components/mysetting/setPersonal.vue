@@ -27,7 +27,7 @@
           <el-select v-model="psnForm.city_name" placeholder="市" no-data-text="请先选择所在省份" @change="cityChange">
             <el-option :label="p.label" :value="p.value" v-for="(p,index) in city" :key="'city'+index"></el-option>
           </el-select>
-          <el-select v-model="psnForm.area_name" placeholder="区" no-data-text="请先选择所在城市" @change="areaChange">
+          <el-select class="lastSelect" v-model="psnForm.area_name" placeholder="区" no-data-text="请先选择所在城市" @change="areaChange">
             <el-option :label="p.label" :value="p.value" v-for="(p,index) in area" :key="'area'+index"></el-option>
           </el-select>
         </el-form-item>
