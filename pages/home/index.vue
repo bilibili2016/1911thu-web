@@ -23,7 +23,10 @@
       <!-- 学堂资讯 -->
       <v-info v-if="newsListData.length" v-loading="infoLoading" :newsListData="newsListData" :outNewData="outNewData" :infoTwo="infoTwo" :infoOne="infoOne" :title="infotitle" :link="linkinfo" class="index-new bgfff"></v-info>
       <!-- 核心优势 -->
-      <v-core></v-core>
+      <!-- <v-core></v-core> -->
+      <!-- 专家组组长 -->
+      <v-leader></v-leader>
+
       <!-- 媒体报道 -->
       <v-outnews v-if="outNewsListData.length" v-loading="outNewsLoading" :outNewsListData="outNewsListData" :title="outNewsTitle" :link="outNewsLink" class="index-outNews bgf8f8fd"></v-outnews>
       <v-backtotop :data="showCheckedCourse"></v-backtotop>
@@ -37,6 +40,7 @@ import Info from "@/pages/home/news/info.vue";
 import outNews from "@/pages/home/news/outNews.vue";
 // import Core from "@/pages/home/core/coreAdvantage.vue";
 import Core from "@/pages/home/core/index.vue";
+import Leader from "@/pages/home/teacher/components/GroupLeader.vue";
 
 import BackToTop from "@/components/common/BackToTop.vue";
 import HomeCourse from "@/pages/home/components/homecourse.vue";
@@ -50,7 +54,8 @@ export default {
     "v-backtotop": BackToTop,
     "v-course": HomeCourse,
     "v-outnews": outNews,
-    "v-core": Core
+    "v-core": Core,
+    "v-leader": Leader,
   },
   data () {
     return {
