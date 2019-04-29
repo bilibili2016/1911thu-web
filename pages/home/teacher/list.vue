@@ -27,7 +27,7 @@
           <v-nodata v-else :pageType="pageType"></v-nodata>
         </div>
         <div class="right" id="rightCon" ref="rightCon">
-          <div class="right-con" :class="{rightFixed:isFixed}" v-html="introduce"></div>
+          <div class="right-con" :class="{rightFixed:isFixed}" v-if="introduce!=''" v-html="introduce"></div>
         </div>
       </div>
     </div>
