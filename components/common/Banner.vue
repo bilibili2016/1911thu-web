@@ -39,6 +39,7 @@
           <div class="name">
             <p class="nickName">{{userInfo.nick_name}}</p>
             <!-- <p class="companyName">{{userInfo.company_name}}</p> -->
+            <p class="studyTime">已学{{userInfo.study_time}}学时 | {{time.hour}}小时{{time.minutes}}分钟</p>
             <p class="vipCard">
               <span v-for="(vip,index) in userInfo.vipPrivateList" :key="index">
                 <el-popover placement="bottom-start" :title="vip.title" width="180" trigger="hover" :content="'剩余'+(vip.expire_days)+'天'">
@@ -49,10 +50,7 @@
               </span>
             </p>
           </div>
-          <div class="time">
-            <p>已学{{userInfo.study_time}}学时</p>
-            <p>{{time.hour}}小时{{time.minutes}}分钟</p>
-          </div>
+          <div class="teacher" @click="goTeacher">申请成为导师</div>
         </div>
       </div>
     </template>
@@ -71,7 +69,7 @@ export default {
   computed: {
     ...mapGetters("auth", ["isAuthenticated"])
   },
-  data() {
+  data () {
     return {
       time: {
         hour: null,
@@ -86,14 +84,14 @@ export default {
     };
   },
   watch: {
-    userInfo() {
+    userInfo () {
       // 已学习时长
       this.changeTime(this.userInfo.study_curriculum_time);
     }
   },
   methods: {
     ...mapActions("auth", ["signOut"]),
-    add_img(event) {
+    add_img (event) {
       // var that = this
       var reader = new FileReader();
       let imgFiles = event.target.files[0];
@@ -112,7 +110,10 @@ export default {
         });
       };
     },
-    goVipInfo(vip) {
+    goTeacher () {
+      this.$router.push("/home/teacher/beTeacher");
+    },
+    goVipInfo (vip) {
       this.$router.push({
         path: "/home/vip/collegeDetail",
         query: {
@@ -122,7 +123,7 @@ export default {
         }
       });
     },
-    changeTime(timing) {
+    changeTime (timing) {
       this.time.hour = parseInt(timing / 3600);
       this.time.minutes = parseInt(
         (parseFloat(timing / 3600.0) - parseInt(timing / 3600.0)) * 60
@@ -134,7 +135,7 @@ export default {
           parseInt(
             (parseFloat(timing / 3600.0) - parseInt(timing / 3600.0)) * 60
           )) *
-          60
+        60
       );
     }
   }
