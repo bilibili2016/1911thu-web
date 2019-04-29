@@ -1,5 +1,5 @@
 <template>
-  <div class="appointment">
+  <div class="appointment" @click.stop="closeSelect">
     <div class="content">
       <h3>预约咨询</h3>
       <i class="el-icon-close closeAppoint" @click="closeForm"></i>
@@ -24,9 +24,25 @@
           </el-select>
         </el-form-item>
         <el-form-item class="selectTime" label="请选择咨询问题：" prop="problems">
-          <el-select v-model="teacherForm.problems" multiple collapse-tags placeholder="请选择咨询问题">
+          <!-- <el-select v-model="teacherForm.problems" multiple collapse-tags placeholder="请选择咨询问题">
             <el-option v-for="item in questionList" :key="item.id" :label="item.title" :value="item.title"></el-option>
-          </el-select>
+          </el-select> -->
+          <div @click.stop="handleSearchSelect " class="selectFr">
+            <el-input placeholder="请选择咨询问题" v-model="problems" readonly></el-input>
+            <span class="pull-down">
+              <i class="el-icon-caret-bottom"></i>
+            </span>
+            <div class="pull-down-text" v-if="isShowSearchSelect">
+              <ul>
+                <li v-for="(item,index) in questionList " :key="index " class="clearfix">
+                  <div class="liChecked" @click.stop="chooseSearch(item)">
+                    <input type="checkbox" v-model="item.checked" class="item-checkbox" :id="item.id" @click.stop="chooseSearchInput ">
+                    <label :for="item.id" class="item-checkbox-label">{{item.title}}</label>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
         </el-form-item>
         <el-form-item class="descItem" label="请输入您的想要咨询的其他问题" prop="remark">
           <el-input type="textarea" placeholder="请输入您想要咨询的问题，预约成功，导师将一对一解答。" v-model="teacherForm.remark"></el-input>
@@ -40,51 +56,6 @@
           <el-button type="primary" class="submitAble" @click="appointmentTeacher('teacherForm')" round>提交</el-button>
         </el-form-item>
       </el-form>
-
-      <!-- <div class="con-item name clearfix">
-        <div class="fl">您的联系方式：</div>
-        <div class="fr">
-          <el-input v-model="teacherForm.tel" :disabled="teacherForm.hasTel" placeholder="请填写您的联系方式"></el-input>
-        </div>
-      </div>
-      <div class="con-item name clearfix">
-        <div class="fl">真实姓名：</div>
-        <div class="fr">
-          <el-input v-model="teacherForm.name" :disabled="teacherForm.hasName" placeholder="请填写您的用户昵称"></el-input>
-        </div>
-      </div>
-      <div class="con-item name clearfix">
-        <div class="fl">预约咨询的导师：</div>
-        <div class="fr">
-          <el-input v-model="teacherForm.teacherName" disabled></el-input>
-        </div>
-      </div>
-      <div class="con-item name clearfix">
-        <div class="fl">咨询时长：</div>
-        <div class="fr">
-          <el-input class="min" v-model="teacherForm.courseTimeName" disabled></el-input>
-        </div>
-      </div>
-      <div class="con-item name clearfix">
-        <div class="fl">请选择开始时间：</div>
-        <div class="fr">
-          <el-select v-model="teacherForm.startTime" placeholder="请选择开始时间">
-            <el-option v-for="item in timeList" :key="item.id" :label="item.start_time" :value="item.id">
-            </el-option>
-          </el-select>
-        </div>
-      </div>
-      <div class="textarea">
-        <p>请简单描述您想要咨询的问题</p>
-        <textarea placeholder="请输入您想要咨询的问题，预约成功，导师将一对一解答。" v-model="teacherForm.remark"></textarea>
-      </div>
-      <div class="agreement">
-        <el-checkbox v-model="teacherForm.checked">我已阅读并同意</el-checkbox><i @click="serviceAgreement">《服务协议》</i>
-        <span class="cost">咨询费用100元</span>
-      </div>
-      <div class="btns">
-        <span class="btn save active " @click="validate">提交</span>
-      </div> -->
     </div>
   </div>
 </template>
@@ -109,8 +80,11 @@ export default {
         hasTel: true,
         hasName: false
       },
+      problems: "",
+      isShowSearchSelect: false,
       questionList: [],
       timeList: [],
+      chooseData: [],
       rules: {
         name: [
           {
@@ -145,6 +119,9 @@ export default {
     closeForm () {
       this.$emit("closeForm");
     },
+    closeSelect () {
+      this.isShowSearchSelect = false
+    },
     // 提交预约导师
     appointmentTeacher (formName) {
       this.$refs[formName].validate((valid) => {
@@ -168,12 +145,47 @@ export default {
         this.teacherForm.hasName = true;
       }
     },
+    //按课程搜索-下拉
+    handleSearchSelect (item) {
+      this.isShowSearchSelect = !this.isShowSearchSelect;
+    },
+    chooseSearch (item) {
+      let arrIndex;
+      this.questionList.forEach((n, index) => {
+        if (n.id == item.id) {
+          arrIndex = index;
+        }
+      });
+      if (this.chooseData.indexOf(item.id) < 0) {
+        this.chooseData.push(item.id);
+        this.questionList[arrIndex].checked = true;
+      } else {
+        this.chooseData.splice(this.chooseData.indexOf(item.id), 1)
+        this.questionList[arrIndex].checked = false;
+      }
+      this.teacherForm.problems = []
+      this.questionList.forEach((n, index) => {
+        if (n.checked) {
+          this.teacherForm.problems.push(n.title)
+        }
+      });
+      this.problems = this.teacherForm.problems.join(',')
+    },
+    //选择按课程搜索，阻止点击li时，label触发两次
+    chooseSearchInput (e) {
+      e.stopPropagation();
+    },
     teacherBespokeInfo () {
       teacherInfo.teacherBespokeInfo(this.teacherForm).then(response => {
         //不需要验证是否登录
         if (response.status === 0) {
           this.timeList = response.data.timeList;
           this.questionList = response.data.questionList;
+          if (this.questionList.length > 0) {
+            this.questionList.forEach((item, index) => {
+              this.questionList[index].checked = false;
+            });
+          }
         } else {
           message(this, "error", response.msg);
         }

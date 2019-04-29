@@ -7,8 +7,12 @@
         <i class="el-icon-close" @click="close"></i>
       </h4>
       <div class="inner">
-        <div class="item">
-          <div class="left">{{!config.isTeacher?'导师姓名：':'学生姓名：'}}</div>
+        <div class="item" v-if="!config.isTeacher">
+          <div class="left">导师姓名：</div>
+          <div class="right">{{detail.teacher_user_name}}</div>
+        </div>
+        <div class="item" v-else>
+          <div class="left">学生姓名：</div>
           <div class="right">{{detail.real_name}}</div>
         </div>
         <div class="item">
@@ -39,7 +43,7 @@
 export default {
   props: ["detail", "config"],
   methods: {
-    close() {
+    close () {
       this.$emit("closeDetailPop");
     }
   }

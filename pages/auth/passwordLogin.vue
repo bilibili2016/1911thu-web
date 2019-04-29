@@ -3,7 +3,7 @@
   <div>
     <div>
       <el-form-item prop="phonenum">
-        <el-input v-model.number="loginData.phonenum" auto-complete="off" placeholder="请输入您的手机号/学号" clearable type="text" @change="phonesChange"></el-input>
+        <el-input v-model.number="loginData.phonenum" auto-complete="off" placeholder="请输入您的手机号" clearable type="text" @change="phonesChange"></el-input>
       </el-form-item>
       <el-form-item prop="password">
         <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="8-16位密码，包含字母、数字、标点符号等"></el-input>
@@ -22,19 +22,19 @@
 export default {
   props: ['loginData', 'mobileloginmsg', 'isloginClick'],
   methods: {
-     phonesChange(val){
-      this.$emit('phonesChange',val)
+    phonesChange (val) {
+      this.$emit('phonesChange', val)
     },
-    changePwd() {
+    changePwd () {
       this.$emit('changePwd')
     },
-    forget() {
+    forget () {
       this.$emit('forget')
     },
-    mobilelogin() {
+    mobilelogin () {
       this.$emit('mobilelogin')
     },
-    signIns(val) {
+    signIns (val) {
       this.$emit('signIns', val)
     }
   }
