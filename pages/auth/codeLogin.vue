@@ -29,8 +29,7 @@ export default {
   ],
   methods: {
     phonesChange(val){
-      this.$emit('phonesChange')
-      console.log(val,'kkk');
+      this.$emit('phonesChange',val)
     },
     handleMobileGetCode(val) {
       this.$emit("handleMobileGetCode", val);
