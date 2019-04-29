@@ -141,7 +141,7 @@
                 <div class="con-item desc clearfix">
                   <div class="fl">自我介绍：</div>
                   <div class="fr">
-                    <el-input type="textarea" v-model.trim="teacherForm.otherInfo" :rows="3" maxlength="200" placeholder="请输入您的其他信息，方便我们更多的了解您，还可以提高审核通过率哦！" autosize></el-input>
+                    <el-input type="textarea" v-model.trim="teacherForm.otherInfo" :rows="3" maxlength="200" placeholder="例如：清华大学医学院教授，博士生导师。研究领域：肿瘤病理、粘膜癌早期诊断新方法的研究等。在《自然》、《自然免疫》、《Immunity》等国际权威学术期刊上发表论著百余篇。主持2项国家自然科学基金青年基金项目和1项863的子课题项目，同时参与多项973、863及自然科学基金项目。参与编写“十二五”规划教材《急诊与灾难医学》、《临床用药须知》。目前开设课程有《组织学》、《病理学》、《实验探究课》等。" autosize></el-input>
                     <span class="input-inner">还可以输入{{descLength}}字</span>
                   </div>
                 </div>
@@ -219,7 +219,7 @@
                 <div class="con-item desc clearfix">
                   <div class="fl">自我介绍：</div>
                   <div class="fr">
-                    <el-input type="textarea" v-model.trim="teacherForm.otherInfo" :rows="3" maxlength="200" placeholder="请输入您的其他信息，方便我们更多的了解您，还可以提高审核通过率哦！" autosize></el-input>
+                    <el-input type="textarea" v-model.trim="teacherForm.otherInfo" :rows="3" maxlength="200" placeholder="例如：清华大学法学院大三学生，学生会副主席。以浙江省某市文科状元省份被清华大学法学院法学专业录取。学术兴趣为民法、劳动法。已发表学术论文2篇。热心社会公益活动，创办了清华大学法律公益互助协会，曾组织免费法律咨询活动，为下岗职工的再就业和创业活动提供法律支持。" autosize></el-input>
                     <span class="input-inner">还可以输入{{descLength}}字</span>
                   </div>
                 </div>
@@ -312,7 +312,7 @@ export default {
         tel: "", //手机号
         code: "", //手机验证码
         school: "", //所在学校
-        identity: "1", //身份
+        identity: "", //身份
         dutyName: "", //职称
         email: "", //常用邮箱
         directionArr: [],//擅长领域
