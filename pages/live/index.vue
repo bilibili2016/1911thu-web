@@ -25,8 +25,7 @@
         <div class="problemBox">
           <h4>咨询问题大纲</h4>
           <ul ref="ul">
-            <li v-for="(item,index) in questionList" :key="index">{{index+1+'、'}}{{item.title}}</li>
-            <li>{{questionList.length+1+'、'}}{{time.remark}}</li>
+            <li v-for="(item,index) in questionList" :key="index">{{index+1+'、'}}{{item}}</li>
           </ul>
         </div>
         <div class="liveBtn clearfix">
@@ -163,7 +162,7 @@ export default {
         if (response.status == 0) {
           this.url = response.data;
           this.time = response.data.teacherBespokeInfo;
-          this.questionList = response.data.teacherBespokeInfo.questionList;
+          this.questionList = response.data.teacherBespokeInfo.ask_question;
           this.justTime();
         } else {
           this.begin = false;

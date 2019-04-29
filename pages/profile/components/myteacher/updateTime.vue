@@ -49,7 +49,7 @@
       <div class="textarea clearfix">
         <p class="fl">咨询问题概述：</p>
         <ul>
-          <li v-for="(item,index) in questionList" :key="index">{{index+1+'、'}}{{item.title}}</li>
+          <li v-for="(item,index) in questionList" :key="index">{{index+1+'、'}}{{item}}</li>
         </ul>
       </div>
       <div class="textarea clearfix">
@@ -100,31 +100,12 @@ export default {
         startTime: "", //预约开始时间
         courseTimeName: "50分钟", //咨询时长（固定）
         describe: "", //修改原因描述
-        problems: "", //咨询问题概述
         nextTime: "",
         timeType: "1", //期待修改时间的方式
         customTime: "" //自定义时间 字符串
       },
       appointTimeList: [],
-      questionList: [
-        {
-          id: '1',
-          title: '我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间'
-        },
-        {
-          id: '2',
-          title: '我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间'
-        },
-        {
-          id: '3',
-          title: '欢迎您使用预约咨询服务3'
-        },
-        {
-          id: '4',
-          title: '我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间我们会在12个小时内联系您并确定时间'
-        },
-
-      ]
+      questionList: []
     };
   },
   watch: {
@@ -195,9 +176,8 @@ export default {
           let data = res.data.bespokeDetail;
           this.updateTimeForm.name = data.real_name;
           this.updateTimeForm.startTime = data.start_time;
-          this.updateTimeForm.problems = data.remark;
           this.appointTimeList = res.data.otherTimeList;
-          this.questionList = res.data.bespokeDetail.questionList;
+          this.questionList = res.data.bespokeDetail.ask_question;
         }
       });
     }
