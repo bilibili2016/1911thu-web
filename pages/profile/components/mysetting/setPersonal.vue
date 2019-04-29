@@ -20,7 +20,7 @@
         <el-form-item label="生日" prop="birthday">
           <el-date-picker v-model="psnForm.birthday" type="date" value-format="yyyy-MM-dd"></el-date-picker>
         </el-form-item>
-        <el-form-item label="所在地区" prop="province">
+        <el-form-item label="所在地区" prop="province" class="location">
           <el-select v-model="psnForm.province_name" placeholder="省" @change="provinceChange">
             <el-option :label="p.label" :value="p.value" v-for="(p,index) in province" :key="'prov'+index"></el-option>
           </el-select>
@@ -31,7 +31,7 @@
             <el-option :label="p.label" :value="p.value" v-for="(p,index) in area" :key="'area'+index"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="职业" prop="position">
+        <el-form-item label="职业" prop="position" class="">
           <el-select v-model="psnForm.position" placeholder="请选择" class="profession">
             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
@@ -53,6 +53,10 @@
         </el-form-item>
         <el-form-item label="单位名称" v-else>
           <el-input v-model="psnForm.company_name" maxlength="30" placeholder="请输入您的单位名称"></el-input>
+        </el-form-item>
+        <el-form-item label="银行卡信息" class="bankInfo" v-if="userInfo.is_teacher==1" prop="bank_card">
+          <el-input v-model="psnForm.bank_name"  placeholder="请输入开户银行"></el-input>
+          <el-input class="cardInput" v-model="psnForm.bank_card"  maxlength="20" placeholder="请输入银行卡号"></el-input>
         </el-form-item>
         <el-form-item size="large" class="submit">
           <el-button type="primary" class="submitAble" @click="onSubmit('psnForm')" round>提交</el-button>
@@ -76,8 +80,19 @@ import { checkPhone, checkCode } from "~/lib/util/validatefn";
 import { IEPopup } from "~/lib/util/helper";
 
 export default {
-  props: ["data", "hasCompany"],
+  props: ["data", "hasCompany","userInfo"],
   data() {
+     var bankCard = (rule, value, callback) => {
+      if(this.oldCard !=this.psnForm.bank_card && this.psnForm.bank_card!=''){
+        if (!((/^[0-9]{8,20}$/).test(value))){
+          callback(
+            new Error("请输入8-20位数字")
+          );
+        }
+      }
+
+      callback();
+    };
     var nickName = (rule, value, callback) => {
       if (!/^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(value)) {
         callback(
@@ -97,6 +112,7 @@ export default {
       callback();
     };
     return {
+      oldCard:"",
       showBindBg: false,
       area: [],
       province: [],
@@ -118,7 +134,9 @@ export default {
         area: "", //所在区编码
         area_name: "", //区名称
         company_name: "", //所在公司名称
-        company_code: "" //所在公司名称
+        company_code: "", //所在公司名称
+        bank_name:'',//银行名称
+        bank_card:''//银行卡号
       },
       rules: {
         real_name: [
@@ -182,7 +200,21 @@ export default {
             validator: validateEmail,
             trigger: "blur"
           }
-        ]
+        ],
+        bank_card: [
+          { required: false, message: "请输入8-20位数字" },
+          {
+            min: 8,
+            max: 20,
+            message:
+              "请输入8-20位数字",
+            trigger: "blur"
+          },
+          {
+            validator: bankCard,
+            trigger: "blur"
+          }
+        ],
       },
       bindTelData: {
         phones: "",
@@ -343,6 +375,7 @@ export default {
     }
   },
   mounted() {
+    this.oldCard = this.data.bank_card
     this.psnForm = this.data;
     if (persistStore.get("gid") && persistStore.get("gid") == "tab-sixth") {
       this.getPositionList();

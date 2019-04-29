@@ -42,13 +42,18 @@
         <span>单位名称：</span>
         <span class="default oneLine">{{psnForm.company_name.substring(0,30)}}</span>
       </li>
+      <li  v-if="userInfo.is_teacher==1">
+        <span>银行卡信息：</span>
+        <span class=" " style="margin-right:10px">{{psnForm.bank_name}}</span>
+        <span class=" ">{{psnForm.bank_card}}</span>
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["psnForm"],
+  props: ["psnForm","userInfo"],
   methods: {
     // 切换性别
     getSex(sex) {

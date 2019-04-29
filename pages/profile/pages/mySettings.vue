@@ -6,9 +6,9 @@
         <!-- 填写个人信息 -->
         <el-tab-pane label="基础信息" name="first">
           <!-- 设置个人信息 -->
-          <v-setPer v-if="hasPersonalInfo" :data="psnForm" :hasCompany="hasCompany" @changeStatus="changeStatus" @getUserData="getUserData"></v-setPer>
+          <v-setPer v-if="hasPersonalInfo" :data="psnForm" :hasCompany="hasCompany" :userInfo="userInfo" @changeStatus="changeStatus" @getUserData="getUserData"></v-setPer>
           <!-- 展示个人信息 -->
-          <v-showPer v-if="showInfo" :psnForm="psnForm"></v-showPer>
+          <v-showPer v-if="showInfo" :psnForm="psnForm"  :userInfo="userInfo"></v-showPer>
         </el-tab-pane>
         <!-- 修改密码 -->
         <el-tab-pane label="修改密码" name="second">

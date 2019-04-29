@@ -41,7 +41,7 @@
               <div class="con-item clearfix">
                 <div class="fl"><i class="red">*</i>所在学校：</div>
                 <div class="fr">
-                  <el-select v-model="teacherForm.school" filterable placeholder="请选择" @change="handleSelectChange">
+                  <el-select v-model="teacherForm.school" filterable placeholder="请选择学校" @change="handleSelectChange">
                     <el-option v-for="item in school" :key="item.name" :label="item.name" :value="item.id"></el-option>
                   </el-select>
                 </div>
@@ -76,15 +76,17 @@
                     <el-checkbox-group v-model="direction" @change="changeDirection">
                       <el-checkbox v-for="(area,index) in teacherDirData" :label="area.id" :key="'area'+index">{{area.name}}</el-checkbox>
                     </el-checkbox-group>
-                      <el-input v-if="isShowOther" v-model="teacherForm.otherArea" placeholder="请输入您擅长的领域"></el-input>
+                      <el-input v-if="isShowOther" v-model="teacherForm.otherArea" maxlength="15" placeholder="请输入您擅长的领域"></el-input>
                   </div>
                 </div>
-                <div class="con-item style clearfix">
+                <div class="con-item style area clearfix">
                   <div class="fl">合作形式：</div>
                   <div class="fr clearfix">
                     <el-checkbox-group v-model="teacherForm.service" @change="handleserviceChange">
                       <el-checkbox v-for="(service,index) in offerService" :label="service.id" :key="'service'+index">{{service.name}}</el-checkbox>
                     </el-checkbox-group>
+                    <el-input v-if="isShowOtherService" v-model="teacherForm.otherService" maxlength="15" placeholder="请输入您的合作形式"></el-input>
+
                   </div>
                 </div>
                 <div class="con-item clearfix">
@@ -167,7 +169,7 @@
                     <el-checkbox-group v-model="direction" @change="changeDirection">
                       <el-checkbox v-for="(area,index) in studentDirData" :label="area.id" :key="'area'+index">{{area.name}}</el-checkbox>
                     </el-checkbox-group>
-                      <el-input v-if="isShowOther" v-model="teacherForm.otherArea" placeholder="请输入您擅长的领域"></el-input>
+                      <el-input v-if="isShowOther" v-model="teacherForm.otherArea" maxlength="15"  placeholder="请输入您擅长的领域"></el-input>
 
                   </div>
                 </div>
@@ -258,6 +260,7 @@ export default {
   data () {
     return {
       isShowOther: false,
+      isShowOtherService: false,
       isShowPop: false,
       codeInterval: null,
       uploadFileName: "",
@@ -295,6 +298,7 @@ export default {
         directionArr: [],//擅长领域
         otherArea: '', //其他擅长领域
         service: [], //合作形式
+        otherService:'',//其他合作形式
         consult: "", //是否提供咨询服务
         courseName: "", //授课名称
         resume: "", //上传文件简历
@@ -356,11 +360,18 @@ export default {
   },
   methods: {
     changeDirection (val) {
-      // console.log(val,'val');
       if (val.indexOf('-1') >= 0) {
         this.isShowOther = true
       } else {
         this.isShowOther = false
+      }
+    },
+     //多选框
+    handleserviceChange (val) {
+      if (val.indexOf('-1') >= 0) {
+        this.isShowOtherService = true
+      } else {
+        this.isShowOtherService = false
       }
     },
     handleSelectChange (val) {
@@ -393,9 +404,7 @@ export default {
         this.isOfflineChecked = false;
       }
     },
-    //多选框
-    handleserviceChange (val) {
-    },
+
     //获取验证码
     getCode () {
       const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/;
@@ -514,6 +523,8 @@ export default {
         //不需要验证是否登录
         if (res.status === 0) {
           this.offerService = res.data.offerService;
+          this.offerService.push({id:'-1',name:'其他'})
+
           this.school = res.data.schoolList;
           this.educationList = res.data.education;
           this.graduateList = res.data.graduate;
@@ -536,9 +547,15 @@ export default {
     // 提交
     handleSubmit () {
       let dIndex = this.direction.indexOf('-1')
+      let SIndex = this.teacherForm.service.indexOf('-1')
+
       if (dIndex >= 0) {
         this.direction.splice(dIndex,1)
       }
+      if (SIndex >= 0) {
+        this.teacherForm.service.splice(dIndex,1)
+      }
+      console.log(this.teacherForm.service);
       this.teacherForm.directionArr = this.direction;
       this.teacherForm.tel = Trim(this.teacherForm.tel);
       //  console.log(this.teacherForm);
