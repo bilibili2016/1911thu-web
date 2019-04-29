@@ -70,13 +70,13 @@
                     <el-input v-model="teacherForm.email" placeholder="请填写您的常用邮箱"></el-input>
                   </div>
                 </div>
-                <div class="con-item style clearfix">
+                <div class="con-item style area clearfix">
                   <div class="fl">擅长领域：</div>
                   <div class="fr clearfix">
                     <el-checkbox-group v-model="direction" @change="changeDirection">
                       <el-checkbox v-for="(area,index) in teacherDirData" :label="area.id" :key="'area'+index">{{area.name}}</el-checkbox>
-                      <el-input v-if="isShowOther" v-model="teacherForm.otherArea" placeholder="请输入您擅长的领域"></el-input>
                     </el-checkbox-group>
+                      <el-input v-if="isShowOther" v-model="teacherForm.otherArea" placeholder="请输入您擅长的领域"></el-input>
                   </div>
                 </div>
                 <div class="con-item style clearfix">
@@ -161,13 +161,14 @@
                     <el-input v-model="teacherForm.email" placeholder="请填写您的常用邮箱"></el-input>
                   </div>
                 </div>
-                <div class="con-item style clearfix">
+                <div class="con-item style area clearfix">
                   <div class="fl">擅长领域：</div>
                   <div class="fr clearfix">
                     <el-checkbox-group v-model="direction" @change="changeDirection">
                       <el-checkbox v-for="(area,index) in studentDirData" :label="area.id" :key="'area'+index">{{area.name}}</el-checkbox>
-                      <el-input v-if="isShowOther" v-model="teacherForm.otherArea" placeholder="请输入您擅长的领域"></el-input>
                     </el-checkbox-group>
+                      <el-input v-if="isShowOther" v-model="teacherForm.otherArea" placeholder="请输入您擅长的领域"></el-input>
+
                   </div>
                 </div>
                 <div class="con-item clearfix">
