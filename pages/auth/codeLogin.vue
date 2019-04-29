@@ -1,9 +1,9 @@
 <template>
-  <!-- 微信登录 -->
+  <!-- 账号密码登录 -->
   <div>
     <div v-if="mobileloginmsg">
       <el-form-item prop="phones">
-        <el-input v-model.number="registerMobileData.phones" placeholder="请输入您的手机号" clearable auto-complete="off" type="text"></el-input>
+        <el-input v-model.number="registerMobileData.phones" placeholder="请输入您的手机号" clearable auto-complete="off" type="text"  @change="phonesChange"></el-input>
       </el-form-item>
       <el-form-item prop="codes">
         <el-input class="captcha" v-model="registerMobileData.codes" placeholder="请输入短信验证码" auto-complete="off" type="text"></el-input>
@@ -28,6 +28,10 @@ export default {
     "isloginClick"
   ],
   methods: {
+    phonesChange(val){
+      this.$emit('phonesChange')
+      console.log(val,'kkk');
+    },
     handleMobileGetCode(val) {
       this.$emit("handleMobileGetCode", val);
     },

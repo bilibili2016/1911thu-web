@@ -5,6 +5,7 @@
         v-model.number="registerData.phones"
         placeholder="请输入您的手机号"
         clearable
+        @change="phonesChange"
       ></el-input>
     </el-form-item>
     <el-form-item prop="codes">
@@ -87,6 +88,9 @@ export default {
     };
   },
   methods: {
+      phonesChange(val){
+      this.$emit('phonesChange',val)
+    },
     // 验证手机号是否存在
     verifyRgTel() {
       this.$emit("verifyRgTel");

@@ -10,18 +10,18 @@
           <!-- 登录 表单-->
           <!-- 账号密码登录-->
           <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm" @keyup.enter.native="signIns('loginData')" v-if="mobileloginmsg === false">
-            <v-passwordlogin :loginData="loginData" :mobileloginmsg="mobileloginmsg" :isloginClick="isloginClick" @changePwd="changePwd" @forget="forget" @mobilelogin="mobilelogin" @signIns="signIns"></v-passwordlogin>
+            <v-passwordlogin :loginData="loginData" :mobileloginmsg="mobileloginmsg" :isloginClick="isloginClick" @changePwd="changePwd" @forget="forget" @mobilelogin="mobilelogin" @signIns="signIns"  @phonesChange="phonesChange"></v-passwordlogin>
           </el-form>
           <!-- 手机验证码登录-->
           <el-form :model="registerMobileData" status-icon :rules="loginDXRules" ref="loginDatamobile" class="demo-ruleForm telLogin" v-if="mobileloginmsg === true">
-            <v-codelogin :mobileloginmsg="mobileloginmsg" :registerMobileData="registerMobileData" :codeClick="codeClick" :bindTelData="bindTelData" :isloginClick="isloginClick" @handleMobileGetCode="handleMobileGetCode" @mobilelogin="mobilelogin" @signInsMobile="signInsMobile" @forget="forget"></v-codelogin>
+            <v-codelogin :mobileloginmsg="mobileloginmsg" :registerMobileData="registerMobileData" :codeClick="codeClick" :bindTelData="bindTelData" :isloginClick="isloginClick" @handleMobileGetCode="handleMobileGetCode" @mobilelogin="mobilelogin" @signInsMobile="signInsMobile" @forget="forget" @phonesChange="phonesChange"></v-codelogin>
           </el-form>
           <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
         </el-tab-pane>
         <!-- 注册 -->
         <el-tab-pane label="注册" name="register">
           <el-form :model="registerData" status-icon :rules="registRules" id="registerData" ref="registerData" class="demo-ruleForm">
-            <v-register :registerData="registerData" :codeClick="codeClick" :isClick="isClick" :isloading="isloading" :bindTelData="bindTelData" @userProtocol="userProtocol" @verifyRgTel="verifyRgTel" @signUp="signUp"></v-register>
+            <v-register :registerData="registerData" :codeClick="codeClick" :isClick="isClick" :isloading="isloading" :bindTelData="bindTelData" @userProtocol="userProtocol" @verifyRgTel="verifyRgTel" @signUp="signUp" @phonesChange="phonesChange"></v-register>
           </el-form>
           <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
         </el-tab-pane>
@@ -367,6 +367,12 @@ export default {
       "setToken",
       "setPwd"
     ]),
+    phonesChange(val){
+      this.registerMobileData.phones = val
+       this.loginData.phonenum=val
+       this.registerData.phones=val
+
+    },
     //清除计时操作
     clearTime() {
       clearInterval(this.codeInterval);
@@ -380,8 +386,6 @@ export default {
       //切换时清除计时器
       this.clearTime();
       this.mobileloginmsg = !this.mobileloginmsg;
-       //切换不清空手机号
-      this.registerMobileData.phones =  this.loginData.phonenum==''?this.registerData.phones: this.loginData.phonenum
       this.registerMobileData.codes = "";
       this.emptyForm();
     },
@@ -821,11 +825,9 @@ export default {
       this.loginData.loginTypes = 1;
 
       // 注册
-      //切换不清空手机号
-      this.registerData.phones = this.loginData.phonenum==''?this.registerMobileData.phones:this.loginData.phonenum;
-      this.registerData.passwords = "";
       this.registerData.types = 1;
       this.registerData.codes = "";
+      this.registerData.passwords = '';
       // this.registerData.checked = [false]
       this.registerData.checked = false;
       this.registerData.companyCodes = "";
