@@ -37,7 +37,7 @@
             <div class="img"></div>
           </div>
           <div class="name">
-            <p class="nickName">{{userInfo.nick_name}}</p>
+            <p class="nickName"><span>{{userInfo.is_teacher=='1'?"导师":"学生"}}</span>{{userInfo.nick_name}}</p>
             <!-- <p class="companyName">{{userInfo.company_name}}</p> -->
             <p class="studyTime">已学{{userInfo.study_time}}学时 | {{time.hour}}小时{{time.minutes}}分钟</p>
             <p class="vipCard">
@@ -50,7 +50,7 @@
               </span>
             </p>
           </div>
-          <div class="teacher" @click="goTeacher">申请成为导师</div>
+          <div class="teacher" v-if="userInfo.is_teacher!='1'" @click="goTeacher">申请成为导师</div>
         </div>
       </div>
     </template>
