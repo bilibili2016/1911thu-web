@@ -21,8 +21,8 @@
               </ul>
             </div>
           </div>
-          <!-- <div class="secondLevel courseArea"> -->
-          <div class="secondLevel">
+          <div class="secondLevel courseArea">
+          <!-- <div class="secondLevel"> -->
             <div class="inner">
               <li class="title">课程领域：</li>
               <ul>
