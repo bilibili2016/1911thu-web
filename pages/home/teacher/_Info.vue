@@ -36,7 +36,7 @@
             </ul>
             <div class="noTopic" v-else>
               <img :src="noTopic" alt="">
-              <p>暂无擅长的话题</p>
+              <p>暂无讲授的课程</p>
             </div>
             <span class="btn invite" @click="inviteTutor">邀请导师授课</span>
           </div>
