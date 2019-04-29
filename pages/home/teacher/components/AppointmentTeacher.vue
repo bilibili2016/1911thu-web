@@ -2,7 +2,7 @@
   <div class="appointment">
     <div class="content">
       <h3>预约咨询</h3>
-      <i class="el-icon-close" @click="closeForm"></i>
+      <i class="el-icon-close closeAppoint" @click="closeForm"></i>
       <p class="tips">亲爱的学员，欢迎您使用预约咨询服务，请选择您方便接收回复的时间段，<br>
         我们将会在此时间段通过视频直播的方式为您提供一对一的咨询服务！</p>
       <el-form :model="teacherForm" :rules="rules" ref="teacherForm" class="teacherForm">

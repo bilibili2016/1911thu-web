@@ -50,7 +50,7 @@
             <div class="line-wrap">
               <div class="line-center" v-if="card.is_free === '1'&&cp==='1'">
                 <p class="price freePrise" v-if="card.study_type==='1'">¥{{card.present_price}}/人</p>
-                <p class="price freePrise" v-else>¥{{card.present_price}}/班</p>
+                <p class="price freePrise" v-else>¥{{card.present_price}}起/班</p>
               </div>
               <div class="line-center" v-if="cp==='0'&&card.is_free === '1'">
                 <p class="price freePrise">¥{{card.present_price}}</p>
