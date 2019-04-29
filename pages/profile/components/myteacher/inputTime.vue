@@ -32,10 +32,10 @@ import { myTeacher } from "~/lib/v1_sdk/index";
 import { message } from "~/lib/util/helper";
 
 export default {
-  data() {
+  data () {
     return {
       pickerOptions: {
-        disabledDate(time) {
+        disabledDate (time) {
           return time.getTime() <= Date.now();
         }
       },
@@ -54,16 +54,16 @@ export default {
   },
 
   methods: {
-    handleChange() {
+    handleChange () {
       this.appointTimeForm.endTime = "";
       let time = parseInt(this.appointTimeForm.startTime.split(":")[0]) + 1;
       this.computedTime = time < 10 ? `0${time}:00` : `${time}:00`;
     },
-    handleGoTo(url) {
+    handleGoTo (url) {
       let obj = { name: url };
       this.$bus.$emit("gotoURL", obj);
     },
-    validate() {
+    validate () {
       try {
         if (this.appointTimeForm.date == "") throw "请选择可以预约的日期";
         if (this.appointTimeForm.startTime == "")
@@ -76,7 +76,6 @@ export default {
       this.form.date = this.appointTimeForm.date;
       this.form.startTime = this.appointTimeForm.startTime.split(":")[0];
       this.form.endTime = this.appointTimeForm.endTime.split(":")[0];
-
       myTeacher.doBespokeTime(this.form).then(res => {
         if (res.status == 0) {
           this.handleGoTo("timeTable");

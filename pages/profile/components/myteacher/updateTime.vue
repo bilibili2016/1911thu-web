@@ -151,6 +151,7 @@ export default {
         " " +
         this.updateTimeForm.appointmentTime;
       this.updateTimeForm.id = this.timeID;
+      console.log(this.updateTimeForm);
 
       myTeacher.doModifyBespokeTime(this.updateTimeForm).then(res => {
         if (res.status == 0) {

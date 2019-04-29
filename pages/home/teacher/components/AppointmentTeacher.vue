@@ -129,16 +129,8 @@ export default {
         startTime: [
           { required: true, message: '请选择开始时间', trigger: 'change' }
         ],
-        problems: [
-          {
-            required: true,
-            message: "请选择您的想要咨询的问题",
-            trigger: "blur"
-          }
-        ],
         remark: [
           {
-            required: true,
             message: "请输入您的想要咨询的其他问题",
             trigger: "blur"
           }
