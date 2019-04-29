@@ -15,30 +15,32 @@
         </div>
       </div>
       <div class="middle">
-        <h3>您可在线预约导师咨询问题，也可以学习其课程或邀请导师授课！</h3>
-        <div class="middle-con clearfix">
-          <div class="left">
-            <div class="title">擅长的话题</div>
-            <ul class="topic" v-if="questionLeft.length>0">
-              <li v-for="(item,index) in questionLeft" :key="index">{{item.title}}</li>
-            </ul>
-            <div class="noTopic" v-else>
-              <img :src="noTopic" alt="">
-              <p>暂无擅长的话题</p>
+        <div class="inner">
+          <h3>您可在线预约导师咨询问题，也可以学习其课程或邀请导师授课！</h3>
+          <div class="middle-con clearfix">
+            <div class="left">
+              <div class="title">擅长的话题</div>
+              <ul class="topic" v-if="questionLeft.length>0">
+                <li v-for="(item,index) in questionLeft" :key="index">{{item.title}}</li>
+              </ul>
+              <div class="noTopic" v-else>
+                <img :src="noTopic" alt="">
+                <p>暂无擅长的话题</p>
+              </div>
+              <div class="btn apponit" v-if="teacherData.is_meet==1" @click="handleAppoint">预约咨询</div>
+              <div class="btn unBtn" v-else>预约导师</div>
             </div>
-            <span class="btn apponit" v-if="teacherData.is_meet==1" @click="handleAppoint">预约咨询</span>
-            <span class="btn unBtn" v-else>预约导师</span>
-          </div>
-          <div class="right">
-            <div class="title">讲授的课程</div>
-            <ul class="course" v-if="questionRight.length>0">
-              <li v-for="(item,index) in questionRight" :key="index">{{item.title}}</li>
-            </ul>
-            <div class="noTopic" v-else>
-              <img :src="noTopic" alt="">
-              <p>暂无讲授的课程</p>
+            <div class="right">
+              <div class="title">讲授的课程</div>
+              <ul class="course" v-if="questionRight.length>0">
+                <li v-for="(item,index) in questionRight" :key="index">{{item.title}}</li>
+              </ul>
+              <div class="noTopic" v-else>
+                <img :src="noTopic" alt="">
+                <p>暂无讲授的课程</p>
+              </div>
+              <div class="btn invite" @click="inviteTutor">邀请导师授课</div>
             </div>
-            <span class="btn invite" @click="inviteTutor">邀请导师授课</span>
           </div>
         </div>
       </div>

@@ -25,7 +25,7 @@
       <!-- 核心优势 -->
       <!-- <v-core></v-core> -->
       <!-- 专家组组长 -->
-      <v-leader></v-leader>
+      <v-leader v-if="groupLeader.length>0" :groupLeader="groupLeader" :teacherListLoading="teacherListLoading"></v-leader>
 
       <!-- 媒体报道 -->
       <v-outnews v-if="outNewsListData.length" v-loading="outNewsLoading" :outNewsListData="outNewsListData" :title="outNewsTitle" :link="outNewsLink" class="index-outNews bgf8f8fd"></v-outnews>
@@ -59,6 +59,7 @@ export default {
   },
   data () {
     return {
+      teacherListLoading: false,
       outNewsLoading: false,
       bannerLoading: false,
       infoLoading: false,
@@ -88,6 +89,7 @@ export default {
       projectData: [],
       cadreCourseList: [],
       commercialCourseList: [],
+      groupLeader: [],
       showCheckedCourse: false,
       configCarousel: {
         carousel: "home"
@@ -215,6 +217,7 @@ export default {
       //   项目列表
       //   this.getProjectList();
       this.getOutNewsList();
+      this.teacherExpertList()
       // this.$bus.$emit('getClassifyList')
     },
     // 获取banner
@@ -307,6 +310,15 @@ export default {
         if (response.status === 0) {
           this.outNewsLoading = false;
           this.outNewsListData = response.data.newsList;
+        }
+      });
+    },
+    teacherExpertList () {
+      this.teacherListLoading = true;
+      home.teacherExpertList({ pages: 1, limits: 6 }).then(response => {
+        if (response.status === 0) {
+          this.teacherListLoading = false;
+          this.groupLeader = response.data.expertList;
         }
       });
     },
