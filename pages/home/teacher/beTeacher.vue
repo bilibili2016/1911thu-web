@@ -189,7 +189,7 @@
                       <div class="uploadMask">
                         <i class="el-icon-plus"></i>
                       </div>
-                      <span class="imgAlert">图片不能超过1M</span>
+                      <span class="imgAlert">图片不能超过10M</span>
                     </div>
                     <p class="uploadP" v-show="!isShowCardImg">
                       <span class="uploadImgs"><img :src="teacherForm.studentCard" alt=""></span>
@@ -300,8 +300,7 @@ export default {
         otherInfo: "", //其他信息
         academic: "", //学历
         studentCard: "", //学生证
-        directionOther: "",
-        photo: ""
+        photo: "" //个人照片
       },
       fileForm: {
         FILESS: [],
@@ -342,6 +341,8 @@ export default {
             this.teacherForm[key] = "";
             this.isShowImg = true
             this.isShowCardImg = true
+            this.isShowOther=false
+            this.direction = []
           }
         }
       }
@@ -354,7 +355,7 @@ export default {
   },
   methods: {
     changeDirection (val) {
-      console.log(val,'val');
+      // console.log(val,'val');
       if (val.indexOf('-1') >= 0) {
         this.isShowOther = true
       } else {
@@ -461,13 +462,13 @@ export default {
     //     });
     //   };
     // },
-    //删除上传图片
+    //删除上传个人照片
     deleteImg () {
       this.isShowImg = true;
     },
-    //删除上传照片
+    //删除上传学生证
     deleteCardImg () {
-      this.isShowImg = true;
+      this.isShowCardImg = true;
     },
     //处理图片上传
     handleImgUpload (event, param, show,size) {
@@ -479,7 +480,7 @@ export default {
       formdata.image = imgFiles;
       reader.readAsDataURL(imgFiles);
       this.imgForm.FILESS = [];
-      if(imgFiles.size>size){
+      if(imgFiles.size/1024>size){
         message(this,'error','图片不能超过'+size/1024+'M')
         return false
       }
@@ -539,7 +540,7 @@ export default {
       }
       this.teacherForm.directionArr = this.direction;
       this.teacherForm.tel = Trim(this.teacherForm.tel);
-       console.log(this.teacherForm);
+      //  console.log(this.teacherForm);
       list.submitBeTeacher(this.teacherForm).then(res => {
         this.isClick = false;
         //不需要验证是否登录
@@ -554,6 +555,7 @@ export default {
     },
     //表单验证
     validate () {
+
       if (this.isClick) {
         return false;
       }
@@ -570,10 +572,14 @@ export default {
         if (this.teacherForm.identity == 1) {
           if (this.teacherForm.dutyName === "") throw "请选择您的职称";
           if (this.teacherForm.consult === "") throw "请选择是否提供咨询服务";
+           if (this.teacherForm.photo === "") throw "请上传您的照片";
+
         } else {
           if (this.teacherForm.academic === "") throw "请选择您的学历";
           if (this.teacherForm.consult === "") throw "请选择是否提供咨询服务";
           if (this.teacherForm.studentCard === "") throw "请上传学生证";
+           if (this.teacherForm.photo === "") throw "请上传您的照片";
+
         }
         if (
           !emailReg.test(Trim(this.teacherForm.email)) &&
