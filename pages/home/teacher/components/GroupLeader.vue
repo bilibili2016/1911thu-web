@@ -3,7 +3,7 @@
     <div class="inner">
       <h2 class="title">专家组组长</h2>
       <div class="list" v-loading="teacherListLoading">
-        <div class="item" v-for="(item,index) in groupLeader" :key="index" @click="handleItem(item)">
+        <div class="item" v-for="(item,index) in groupLeader" :key="index" v-if="index<6" @click="handleItem(item)">
           <img :src="item.head_img" alt="">
           <div class="intro">
             <h4>{{item.teacher_name}}<span>{{item.college_name}}</span></h4>
@@ -17,11 +17,13 @@
 </template>
 
 <script>
+import { store as persistStore } from "~/lib/core/store";
 export default {
   props: ['groupLeader', 'teacherListLoading'],
-  methods:{
-    handleItem(item){
-      this.$router.push(`home/teacher/${item.teacher_id}`)
+  methods: {
+    handleItem (item) {
+      persistStore.set("cid", item.college_id);
+      this.$router.push("/home/teacher/list");
     }
   }
 }
