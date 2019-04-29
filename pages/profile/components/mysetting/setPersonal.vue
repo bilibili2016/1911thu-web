@@ -329,6 +329,11 @@ export default {
 
       this.$refs[formName].validate(valid => {
         if (valid) {
+          if(this.oldCard == this.psnForm.bank_card){
+            //老数据和新数据一样时，不传此字段（不能传带有*的数据）
+            delete this.psnForm.bank_card
+            // this.psnForm.bank_card =''
+          }
           personalset.perInformation(this.psnForm).then(res => {
             if (res.status == 0) {
               this.getUserData();
