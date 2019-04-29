@@ -55,7 +55,7 @@ import { mapState, mapActions } from "vuex";
 import { list } from "~/lib/v1_sdk/index";
 export default {
   props: ["unitData", "categoryData", "childList", "sortData", "tagsList"],
-  data() {
+  data () {
     return {
       isTeacher: false,
       isFirst: true,
@@ -70,12 +70,12 @@ export default {
     };
   },
   methods: {
-    selectTags(item) {
+    selectTags (item) {
       this.identity = item.id;
       this.$emit("selectTags", item.id);
     },
     // 大类 单个
-    selectCid(item, index) {
+    selectCid (item, index) {
       if (item.id == 0) {
         this.isTeacher = false;
         this.isFirst = true;
@@ -90,7 +90,7 @@ export default {
       this.$emit("processData");
     },
     // 小类 单个
-    selectPid(item, index) {
+    selectPid (item, index) {
       if (this.cid == 0) {
         //一级分类全部--专长领域下拉点击效果
         this.cid = item.parent_id;
@@ -111,16 +111,16 @@ export default {
       }
     },
     //所在单位
-    selectUid(item, index) {
+    selectUid (item, index) {
       this.uid = item.id;
       this.$emit("selectUid", item, index);
     },
-    selectKid(item, index) {
+    selectKid (item, index) {
       this.kid = item.id;
       this.$emit("selectKid", item, index);
     }
   },
-  mounted() {
+  mounted () {
     this.$bus.$on("selectChange", data => {
       this.selectCid(data);
     });
