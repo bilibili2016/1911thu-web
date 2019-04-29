@@ -312,7 +312,7 @@ export default {
         tel: "", //手机号
         code: "", //手机验证码
         school: "", //所在学校
-        identity: "1", //身份
+        identity: "", //身份
         dutyName: "", //职称
         email: "", //常用邮箱
         directionArr: [],//擅长领域
