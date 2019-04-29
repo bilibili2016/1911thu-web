@@ -325,7 +325,6 @@ export default {
           message(this, "error", response.msg);
         } else if (response.status == 100008 || response.status == 100007) {
           this.$router.push("/");
-          message(this, "error", response.msg);
         }
       });
     },

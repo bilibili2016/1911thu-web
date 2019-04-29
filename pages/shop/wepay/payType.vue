@@ -152,7 +152,6 @@ export default {
                 path: "/shop/payResult" + "?order=" + cpyid
               });
             } else if (response.status == 100007 || response.status == 100008) {
-              message(this, 'error', response.msg)
               this.$router.push("/");
               clearInterval(this.interval);
             } else if (response.status == 100100) {
