@@ -54,7 +54,7 @@
         <el-form-item label="单位名称" v-else>
           <el-input v-model="psnForm.company_name" maxlength="30" placeholder="请输入您的单位名称"></el-input>
         </el-form-item>
-        <el-form-item label="银行卡信息" class="bankInfo" v-if="userInfo.is_teacher==1"  prop="bank_card">
+        <el-form-item label="银行卡信息" class="bankInfo" v-if="userInfo.is_teacher==1" prop="bank_card">
           <el-input v-model="psnForm.bank_name"  placeholder="请输入开户银行"></el-input>
           <el-input class="cardInput" v-model="psnForm.bank_card"  maxlength="20" placeholder="请输入银行卡号"></el-input>
         </el-form-item>
@@ -83,11 +83,14 @@ export default {
   props: ["data", "hasCompany","userInfo"],
   data() {
      var bankCard = (rule, value, callback) => {
-      if (!((/^[0-9*]{8,20}$/).test(value))){
-            callback(
-              new Error("请输入8-20位数字")
-            );
+      if(this.oldCard !=this.psnForm.bank_card && this.psnForm.bank_card!=''){
+        if (!((/^[0-9]{8,20}$/).test(value))){
+          callback(
+            new Error("请输入8-20位数字")
+          );
+        }
       }
+
       callback();
     };
     var nickName = (rule, value, callback) => {
@@ -109,6 +112,7 @@ export default {
       callback();
     };
     return {
+      oldCard:"",
       showBindBg: false,
       area: [],
       province: [],
@@ -371,6 +375,7 @@ export default {
     }
   },
   mounted() {
+    this.oldCard = this.data.bank_card
     this.psnForm = this.data;
     if (persistStore.get("gid") && persistStore.get("gid") == "tab-sixth") {
       this.getPositionList();

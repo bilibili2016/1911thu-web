@@ -76,7 +76,7 @@
                     <el-checkbox-group v-model="direction" @change="changeDirection">
                       <el-checkbox v-for="(area,index) in teacherDirData" :label="area.id" :key="'area'+index">{{area.name}}</el-checkbox>
                     </el-checkbox-group>
-                      <el-input v-if="isShowOther" v-model="teacherForm.otherArea" placeholder="请输入您擅长的领域"></el-input>
+                      <el-input v-if="isShowOther" v-model="teacherForm.otherArea" maxlength="15" placeholder="请输入您擅长的领域"></el-input>
                   </div>
                 </div>
                 <div class="con-item style area clearfix">
@@ -85,7 +85,7 @@
                     <el-checkbox-group v-model="teacherForm.service" @change="handleserviceChange">
                       <el-checkbox v-for="(service,index) in offerService" :label="service.id" :key="'service'+index">{{service.name}}</el-checkbox>
                     </el-checkbox-group>
-                    <el-input v-if="isShowOtherService" v-model="teacherForm.otherService" placeholder="请输入您的合作形式"></el-input>
+                    <el-input v-if="isShowOtherService" v-model="teacherForm.otherService" maxlength="15" placeholder="请输入您的合作形式"></el-input>
 
                   </div>
                 </div>
@@ -169,7 +169,7 @@
                     <el-checkbox-group v-model="direction" @change="changeDirection">
                       <el-checkbox v-for="(area,index) in studentDirData" :label="area.id" :key="'area'+index">{{area.name}}</el-checkbox>
                     </el-checkbox-group>
-                      <el-input v-if="isShowOther" v-model="teacherForm.otherArea" placeholder="请输入您擅长的领域"></el-input>
+                      <el-input v-if="isShowOther" v-model="teacherForm.otherArea" maxlength="15"  placeholder="请输入您擅长的领域"></el-input>
 
                   </div>
                 </div>
