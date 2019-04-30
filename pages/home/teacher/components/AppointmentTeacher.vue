@@ -195,7 +195,7 @@ export default {
       this.teacherForm.startTime = val
     },
     serviceAgreement () {
-      open('/other/activePages/serviceAgreement')
+      window.open('/other/activePages/serviceAgreement')
     }
   },
   watch: {
