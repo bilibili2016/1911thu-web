@@ -1,0 +1,35 @@
+.userProtocol {
+  width: 1100px;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 6px;
+  box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+  padding: 0 53px 53px 53px;
+  color: #333;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 70px;
+
+  .title {
+    font-size: 28px;
+    text-align: center;
+    padding-top: 50px;
+  }
+
+  .smal-title {
+    font-size: 18px;
+    line-height: 32px;
+    margin-top: 48px;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 32px;
+    color: #666;
+    text-indent: 2em;
+
+    span {
+      color: red;
+      text-indent: 0;
+    }
+  }
+}

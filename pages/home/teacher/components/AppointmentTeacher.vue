@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { message, Trim } from "~/lib/util/helper";
+import { message, Trim, open } from "~/lib/util/helper";
 import { teacherInfo } from "~/lib/v1_sdk/index";
 export default {
   props: ["teacherInfo", "userInfo"],
@@ -195,6 +195,7 @@ export default {
       this.teacherForm.startTime = val
     },
     serviceAgreement () {
+      open('/other/activePages/serviceAgreement')
     }
   },
   watch: {
