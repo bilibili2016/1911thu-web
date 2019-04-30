@@ -25,7 +25,7 @@
       <!-- 核心优势 -->
       <!-- <v-core></v-core> -->
       <!-- 专家组组长 -->
-      <v-leader v-if="groupLeader.length>0" :groupLeader="groupLeader" :teacherListLoading="teacherListLoading"></v-leader>
+      <v-leader v-if="groupLeader.length>0" :groupLeader="groupLeader" :teacherListLoading="teacherListLoading" :title="groupTitle" :link="groupLink"></v-leader>
 
       <!-- 媒体报道 -->
       <v-outnews v-if="outNewsListData.length" v-loading="outNewsLoading" :outNewsListData="outNewsListData" :title="outNewsTitle" :link="outNewsLink" class="index-outNews bgf8f8fd"></v-outnews>
@@ -80,6 +80,8 @@ export default {
       linkfamouscourse: "/teacher/list",
       famoustitle: "名师智库",
       infotitle: "学堂资讯",
+      groupTitle: '学堂专家',
+      groupLink: '/home/teacher/list',
       linkinfo: "/home/news/list",
       outNewsTitle: "媒体报道",
       outNewsLink: "/home/news/outNewsList",

@@ -1,7 +1,7 @@
 <template>
   <div class="groupLeader">
     <div class="inner">
-      <h2 class="title">专家组组长</h2>
+      <v-title :title="title" :link="link"></v-title>
       <div class="list" v-loading="teacherListLoading">
         <div class="item" v-for="(item,index) in groupLeader" :key="index" v-if="index<6" @click="handleItem(item)">
           <img :src="item.head_img" alt="">
@@ -17,9 +17,13 @@
 </template>
 
 <script>
+import CustomTitle from "@/components/common/Title.vue";
 import { store as persistStore } from "~/lib/core/store";
 export default {
-  props: ['groupLeader', 'teacherListLoading'],
+  props: ['groupLeader', 'teacherListLoading', 'title', 'link'],
+  components: {
+    "v-title": CustomTitle,
+  },
   methods: {
     handleItem (item) {
       persistStore.set("cid", item.college_id);
