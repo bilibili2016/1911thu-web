@@ -61,5 +61,31 @@
                 }
             }
         }
+        .btn {
+            margin-bottom: 50px;
+            text-align: center;
+            span {
+                width: 150px;
+                height: 40px;
+                line-height: 40px;
+                cursor: pointer;
+                border: 1px solid #773084;
+                border-radius: 20px;
+                &.accept {
+                    margin-right: 30px;
+                    background-color: #773084;
+                    color: #fff;
+                    &:hover {
+                        background-color: #5f068d;
+                    }
+                }
+                &.update {
+                    &:hover {
+                        background-color: #5f068d;
+                        color: #fff;
+                    }
+                }
+            }
+        }
     }
 }

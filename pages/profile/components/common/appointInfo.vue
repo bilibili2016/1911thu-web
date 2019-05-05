@@ -34,18 +34,45 @@
           </div>
         </div>
       </div>
+      <div class="btn" v-if="isConfirm">
+        <span class="accept" @click="acceptInvite()">接受时间</span>
+        <span class="update" @click="updateTime()">申请修改时间</span>
+      </div>
     </div>
 
   </div>
 </template>
 
 <script>
+import { myTeacher } from "~/lib/v1_sdk/index";
+import {  message } from "@/lib/util/helper";
+
 export default {
-  props: ["detail", "config"],
+  props: ["detail", "config","isConfirm"],
   methods: {
     close () {
       this.$emit("closeDetailPop");
+    },
+     //接受邀请
+    acceptInvite(item) {
+      myTeacher.acceptInvitation({ id: this.detail.id }).then(res => {
+        if (res.status == 0) {
+          message(this, "success", res.msg);
+          this.$bus.$emit('getTeacherData')
+          this.$bus.$emit('closeDetailPop')
+          // this.bespokeTimeList();
+        } else {
+          message(this, "error", res.msg);
+        }
+      });
+    },
+    //申请修改时间
+    updateTime(){
+      let obj = { name: 'updateTime' ,id:this.detail.id };
+      this.$bus.$emit("gotoURL", obj);
     }
+  },
+  mounted(){
   }
 };
 </script>

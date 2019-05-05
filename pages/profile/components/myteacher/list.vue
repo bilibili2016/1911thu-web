@@ -4,21 +4,21 @@
     <el-tabs v-model="activeName" @tab-click="handleActive">
       <!-- 学习中 -->
       <el-tab-pane label="未开始" name="first" value="1">
-        <v-part :teacherData="data" :teacherPagemsg="teacherPagemsg" :config="config"></v-part>
+        <v-part :teacherData="data" :teacherPagemsg="teacherPagemsg" :config="config" :isOver='false'></v-part>
         <div class="pagination" v-if="teacherPagemsg && teacherPagemsg.total>12">
           <el-pagination background layout="prev, pager, next" :page-size="teacherPagemsg.pagesize" :pager-count="5" :page-count="teacherPagemsg.pagesize" :current-page="teacherPagemsg.page" :total="teacherPagemsg.total" @current-change="teacherListChange"></el-pagination>
         </div>
       </el-tab-pane>
       <!-- 已完成 -->
       <el-tab-pane label="已完成" name="second" value="2">
-        <v-part :teacherData="data" :teacherPagemsg="teacherPagemsg" :config="config"></v-part>
+        <v-part :teacherData="data" :teacherPagemsg="teacherPagemsg" :config="config" :isOver='false'></v-part>
         <div class="pagination" v-if="teacherPagemsg && teacherPagemsg.total>12">
           <el-pagination background layout="prev, pager, next" :page-size="teacherPagemsg.pagesize" :pager-count="5" :page-count="teacherPagemsg.pagesize" :current-page="teacherPagemsg.page" :total="teacherPagemsg.total" @current-change="teacherListChange"></el-pagination>
         </div>
       </el-tab-pane>
       <!-- 已失效 -->
       <el-tab-pane label="已失效" name="fourth" value="3">
-        <v-part :teacherData="data" :teacherPagemsg="teacherPagemsg" :config="config"></v-part>
+        <v-part :teacherData="data" :teacherPagemsg="teacherPagemsg" :config="config" :isOver='true'></v-part>
         <div class="pagination" v-if="teacherPagemsg && teacherPagemsg.total>12">
           <el-pagination background layout="prev, pager, next" :page-size="teacherPagemsg.pagesize" :pager-count="5" :page-count="teacherPagemsg.pagesize" :current-page="teacherPagemsg.page" :total="teacherPagemsg.total" @current-change="teacherListChange"></el-pagination>
         </div>
@@ -55,7 +55,7 @@ export default {
       getData: {
         statusType: 1,
         type: 2
-      }
+      },
     };
   },
   methods: {
@@ -75,7 +75,7 @@ export default {
     }
   },
   mounted(){
-     this.$bus.$on('activeTeacher', data => {
+    this.$bus.$on('activeTeacher', data => {
       this.activeName = 'first'
     })
   }
