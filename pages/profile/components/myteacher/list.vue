@@ -74,7 +74,11 @@ export default {
       this.$bus.$emit("gotoURL", obj);
     }
   },
-  mounted() {}
+  mounted(){
+     this.$bus.$on('activeTeacher', data => {
+      this.activeName = 'first'
+    })
+  }
 };
 </script>
 <style lang="scss" scoped>
