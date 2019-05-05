@@ -91,7 +91,7 @@
         <!-- 教师入口  -->
         <el-tab-pane class="my-course my-teacher" name="tab-thirteenth" v-if="userInfo.is_teacher=='1'">
           <span slot="label" class="tabList">
-            <i class="icon-teacher"></i>&nbsp;教师入口
+            <i class="icon-teacher"></i>&nbsp;导师入口
           </span>
           <v-myteacher :data="teacherData" :teacherPagemsg="teacherPagemsg" @getTeacherData="getTeacherData"></v-myteacher>
         </el-tab-pane>
