@@ -64,7 +64,13 @@ export default {
     },
     getTeacherData(data) {
       this.$emit("getTeacherData", data);
-    }
+    },
+
+  },
+  mounted(){
+     this.$bus.$on('activeStudent', data => {
+      this.activeName = 'first'
+    })
   }
 };
 </script>

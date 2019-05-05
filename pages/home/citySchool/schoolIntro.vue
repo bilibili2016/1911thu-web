@@ -3,17 +3,17 @@
     <div class="schoolBanner">
       <h4>1911学堂城市分校校长招募计划</h4>
       <p>1911学堂是由清华大学、北京大学、中国传媒大学等国内外知名高校资深教授与校友企业家联合发起创立的终身教育平台，作为《中国教育现代化2035》的践行者，以构建终身教育体系、助力创建学习型社会为使命，致力于打造全球教育共同体，为不同成长阶段人群提供“线上+线下”相结合的混合式教学服务。</p>
-      <p>城市分校校长招募计划是1911学堂推动全球布局、实现多方共赢的重大战略举措。在1911学堂总部的支持下，各城市分校也将在办学中获得成长与收益：</p>
+      <p>城市分校校长招募计划是1911学堂推动全球布局、实现多方共赢的重大战略举措。在1911学堂总部的支持下，各城市分校也将获得成长与收益：</p>
     </div>
     <div class="con-one">
       <div class="earnings clearfix">
-        <div class="item">
+        <!-- <div class="item">
           <p class="img-con ">
             <img class="img1" src="https://static-image.1911edu.com/school-icon1.png" alt="">
           </p>
           <p class="title">品牌赋能</p>
           <p class="text">1911学堂，是终身教育领域的顶级品牌，有其巨大价值的赋能，将迅速提升自身影响力。</p>
-        </div>
+        </div> -->
         <div class="item">
           <p class="img-con ">
             <img class="img2" src="https://static-image.1911edu.com/school-icon2.png" alt="">
@@ -43,11 +43,13 @@
         <div class="desc">
           <div class="desc-con one">
             <p class="top"><i class="circle"></i>合作目标</p>
-            <p class="bottom">在1911学堂现有的平台、产品、资源等基础上，我们希望与您共建1911学堂城市分校，让1911学堂的旗帜遍布全球，推动终身教育事业的发展。</p>
+            <p class="bottom">在1911学堂现有的平台、产品、资源等基础上，我们诚挚邀请您加入1911学堂城市分校计划，让1911学堂的旗帜遍布全球，推动终身教育事业的发展。</p>
           </div>
           <div class="desc-con two">
             <p class="top"><i class="circle"></i>合作模式</p>
-            <p class="bottom">城市分校缴纳一定数额的技术服务费、市场支持费与品牌保证金，以获得1911学堂的品牌授权。合作期间，1911学堂总部负责提供课程、师资及相关服务与支持，城市分校负责在当地代表1911学堂办学。</p>
+            <p class="bottom">城市分校缴纳一定数额的技术服务费、市场支持费与品牌保证金，以获得1911学堂的品牌授权。合作期间，1911学堂总部负责提供课程、师资及相关服务与支持，城市分校负责在当地代表1911学堂招生。</p>
+            <p class="bottom">申请提交后，1911学堂分校管理部将与您进一步沟通。</p>
+
           </div>
           <div class="desc-con three">
             <p class="top"><i class="circle"></i>合作内容</p>
@@ -134,8 +136,8 @@
           <h4 class="title">总部支持</h4>
           <div class="index clearfix">
             <div class="index-left">
-              <p class="index-item"><span class="num">1.</span><span class="index-title">品牌授权：</span>授权当地使用1911学堂品牌办学</p>
-              <p class="index-item"><span class="num">2.</span><span class="index-title">认证证书：</span>1911学堂结业证书&nbsp;&nbsp;&nbsp;</p>
+              <p class="index-item"><span class="num">1.</span><span class="index-title">品牌授权：</span>授权当地使用1911学堂品牌招生</p>
+              <p class="index-item"><span class="num">2.</span><span class="index-title">认证证书：</span>1911学堂学习认证&nbsp;&nbsp;&nbsp;</p>
               <p class="index-item"><span class="num">3.</span><span class="index-title">产品支撑：</span>线上课程全提供及技术平台支撑</p>
               <p class="index-item"><span class="num">4.</span><span class="index-title">业务指导：</span>全流程、全周期的业务指导培训</p>
             </div>

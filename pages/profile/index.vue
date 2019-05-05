@@ -571,12 +571,15 @@ export default {
             this.collegeList();
             break;
           case "tab-twelfth": //我的咨询
+          this.$bus.$emit("activeStudent");
             this.getTeacherData({
               statusType: 1,
               type: 1
             });
             break;
           case "tab-thirteenth": //教师入口
+          this.$bus.$emit("activeTeacher");
+
             this.getTeacherData({
               statusType: 1,
               type: 2
