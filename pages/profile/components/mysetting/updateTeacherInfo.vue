@@ -150,7 +150,7 @@ export default {
       callback();
     };
     var validateEmail = (rule, value, callback) => {
-      if (
+      if (value != "" &&
         !/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/.test(
           value
         )
@@ -410,10 +410,10 @@ export default {
           if (this.teacherForm.photo) {
             this.isShowImg = false
           }
-          if (this.teacherForm.otherArea == "") {
+          if (this.teacherForm.otherArea != "") {
             this.direction.push({ id: '-1', name: '其他' })
           }
-          if (this.teacherForm.otherService == "") {
+          if (this.teacherForm.otherService != "") {
             this.offerService.push({ id: '-1', name: '其他' })
           }
         } else {
