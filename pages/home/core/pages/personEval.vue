@@ -56,7 +56,7 @@
           <div class="details detail-three clearfix">
             <div class="left"><span>测评报告</span></div>
             <div class="right clearfix">
-              <p class="text">测评体系能根据用户输入的个人信息免费生成相应的测评报告，对个人的测评结果进行解析，提出相应的职业成长建议。</p>
+              <p class="text">测评体系基于用户输入的个人背景信息及测评结果免费生成相应的测评报告，对个人的测评结果进行解析，并提出相应的职业成长建议。</p>
               <img src="https://static-image.1911edu.com/person-icon2.png" alt="">
             </div>
           </div>
@@ -64,7 +64,7 @@
       </div>
       <div class="con-three">
         <div class="three">
-          <p>测评体系基于用户输入的个人背景信息及测评结果免费生成相应的测评报告，对个人的测评结果进行解析，并提出相应的职业成长建议。</p>
+          <p>通过1911学堂人才测评体系，使组织机构能够挖掘行业发展痛点，使学习者能够充分了解其学习现状与需求，定位岗位胜任的短板，制定个性化的学习解决方案，精准推荐相应的学习内容，对学习效果进行评估，提升职场竞争力，促进职业成长与发展。</p>
         </div>
       </div>
     </div>
