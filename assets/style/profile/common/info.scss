@@ -8,15 +8,18 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, .7);
     z-index: 110;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     .content {
         width: 600px;
         // max-height: 700px;
         background-color: #fff;
         border-radius: 10px;
-        position: absolute;
-        left: 50%;
-        margin-left: -300px;
-        top: 100px;
+        // position: absolute;
+        // left: 50%;
+        // margin-left: -300px;
+        // top: 100px;
         h4 {
             height: 80px;
             line-height: 80px;
@@ -55,8 +58,34 @@
                         line-height: 25px;
                     }
                     &.askQuestion {
-                        height: 260px;
+                        max-height: 260px;
                         overflow-y: auto;
+                    }
+                }
+            }
+        }
+        .btn {
+            margin-bottom: 50px;
+            text-align: center;
+            span {
+                width: 150px;
+                height: 40px;
+                line-height: 40px;
+                cursor: pointer;
+                border: 1px solid #773084;
+                border-radius: 20px;
+                &.accept {
+                    margin-right: 30px;
+                    background-color: #773084;
+                    color: #fff;
+                    &:hover {
+                        background-color: #5f068d;
+                    }
+                }
+                &.update {
+                    &:hover {
+                        background-color: #5f068d;
+                        color: #fff;
                     }
                 }
             }

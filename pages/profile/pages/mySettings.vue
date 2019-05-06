@@ -8,11 +8,15 @@
           <!-- 设置个人信息 -->
           <v-setPer v-if="hasPersonalInfo" :data="psnForm" :hasCompany="hasCompany" :userInfo="userInfo" @changeStatus="changeStatus" @getUserData="getUserData"></v-setPer>
           <!-- 展示个人信息 -->
-          <v-showPer v-if="showInfo" :psnForm="psnForm"  :userInfo="userInfo"></v-showPer>
+          <v-showPer v-if="showInfo" :psnForm="psnForm" :userInfo="userInfo"></v-showPer>
         </el-tab-pane>
         <!-- 修改密码 -->
         <el-tab-pane label="修改密码" name="second">
           <v-password v-show="showPwd"></v-password>
+        </el-tab-pane>
+        <!-- 导师信息 -->
+        <el-tab-pane label="导师信息" name="third" v-if="userInfo.is_teacher_recruit">
+          <v-teacherInfo></v-teacherInfo>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -33,12 +37,14 @@ import { store as persistStore } from '~/lib/core/store'
 import ShowPerson from '@/pages/profile/components/mysetting/showPersonal'
 import SetPerson from '@/pages/profile/components/mysetting/setPersonal'
 import SetPassword from '@/pages/profile/components/mysetting/updatePassword'
+import TeacherInfo from '@/pages/profile/components/mysetting/updateTeacherInfo'
 export default {
   props: ['userInfo'],
   components: {
     'v-showPer': ShowPerson,
     'v-setPer': SetPerson,
-    'v-password': SetPassword
+    'v-password': SetPassword,
+    'v-teacherInfo': TeacherInfo,
   },
   data () {
     return {

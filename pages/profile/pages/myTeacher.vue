@@ -50,6 +50,7 @@ export default {
       switch (data.name) {
         case "list":
           this.isShowList = true;
+          this.$bus.$emit('getTeacherData')
           break;
         case "timeTable":
           this.isShowTimeTable = true;

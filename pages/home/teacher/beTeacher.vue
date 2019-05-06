@@ -76,7 +76,7 @@
                     <el-checkbox-group v-model="direction" @change="changeDirection">
                       <el-checkbox v-for="(area,index) in teacherDirData" :label="area.id" :key="'area'+index">{{area.name}}</el-checkbox>
                     </el-checkbox-group>
-                      <el-input v-if="isShowOther" v-model="teacherForm.otherArea" maxlength="15" placeholder="请输入您擅长的领域"></el-input>
+                    <el-input v-if="isShowOther" v-model="teacherForm.otherArea" maxlength="15" placeholder="请输入您擅长的领域"></el-input>
                   </div>
                 </div>
                 <div class="con-item style area clearfix">
@@ -169,7 +169,7 @@
                     <el-checkbox-group v-model="direction" @change="changeDirection">
                       <el-checkbox v-for="(area,index) in studentDirData" :label="area.id" :key="'area'+index">{{area.name}}</el-checkbox>
                     </el-checkbox-group>
-                      <el-input v-if="isShowOther" v-model="teacherForm.otherArea" maxlength="15"  placeholder="请输入您擅长的领域"></el-input>
+                    <el-input v-if="isShowOther" v-model="teacherForm.otherArea" maxlength="15" placeholder="请输入您擅长的领域"></el-input>
 
                   </div>
                 </div>
@@ -284,9 +284,9 @@ export default {
       graduateList: [],
       fileList: [],
       offerService: [],
-      teacherDirData:[],
+      teacherDirData: [],
       studentDirData: [],
-      direction:[],
+      direction: [],
       teacherForm: {
         name: "", //姓名
         tel: "", //手机号
@@ -298,7 +298,7 @@ export default {
         directionArr: [],//擅长领域
         otherArea: '', //其他擅长领域
         service: [], //合作形式
-        otherService:'',//其他合作形式
+        otherService: '',//其他合作形式
         consult: "", //是否提供咨询服务
         courseName: "", //授课名称
         resume: "", //上传文件简历
@@ -346,7 +346,7 @@ export default {
             this.teacherForm[key] = "";
             this.isShowImg = true
             this.isShowCardImg = true
-            this.isShowOther=false
+            this.isShowOther = false
             this.direction = []
           }
         }
@@ -366,7 +366,7 @@ export default {
         this.isShowOther = false
       }
     },
-     //多选框
+    //多选框
     handleserviceChange (val) {
       if (val.indexOf('-1') >= 0) {
         this.isShowOtherService = true
@@ -481,7 +481,7 @@ export default {
       this.isShowCardImg = true;
     },
     //处理图片上传
-    handleImgUpload (event, param, show,size) {
+    handleImgUpload (event, param, show, size) {
       // var that = this
       var reader = new FileReader();
       let imgFiles = event.target.files[0];
@@ -490,8 +490,8 @@ export default {
       formdata.image = imgFiles;
       reader.readAsDataURL(imgFiles);
       this.imgForm.FILESS = [];
-      if(imgFiles.size/1024>size){
-        message(this,'error','图片不能超过'+size/1024+'M')
+      if (imgFiles.size / 1024 > size) {
+        message(this, 'error', '图片不能超过' + size / 1024 + 'M')
         return false
       }
       reader.onloadend = () => {
@@ -511,11 +511,11 @@ export default {
     },
     //照片上传
     teacherImgUpload (event) {
-      this.handleImgUpload(event, 'photo', 'isShowImg',10*1024)
+      this.handleImgUpload(event, 'photo', 'isShowImg', 10 * 1024)
     },
     //学生证上传
     cardUpload () {
-      this.handleImgUpload(event, 'studentCard', 'isShowCardImg',10*1024)
+      this.handleImgUpload(event, 'studentCard', 'isShowCardImg', 10 * 1024)
     },
     //选项信息
     getRecruitSelect () {
@@ -523,7 +523,7 @@ export default {
         //不需要验证是否登录
         if (res.status === 0) {
           this.offerService = res.data.offerService;
-          this.offerService.push({id:'-1',name:'其他'})
+          this.offerService.push({ id: '-1', name: '其他' })
 
           this.school = res.data.schoolList;
           this.educationList = res.data.education;
@@ -531,14 +531,14 @@ export default {
           let direction = res.data.studyDirectionList
           direction.forEach((item) => {
             //教师擅长领域
-            if(item.identity==1){
+            if (item.identity == 1) {
               this.teacherDirData.push(item)
-            }else if(item.identity==2){//学生
+            } else if (item.identity == 2) {//学生
               this.studentDirData.push(item)
             }
           });
-          this.teacherDirData.push({id:'-1',name:'其他'})
-          this.studentDirData.push({id:'-1',name:'其他'})
+          this.teacherDirData.push({ id: '-1', name: '其他' })
+          this.studentDirData.push({ id: '-1', name: '其他' })
         } else {
           message(this, "error", res.msg);
         }
@@ -550,12 +550,11 @@ export default {
       let SIndex = this.teacherForm.service.indexOf('-1')
 
       if (dIndex >= 0) {
-        this.direction.splice(dIndex,1)
+        this.direction.splice(dIndex, 1)
       }
       if (SIndex >= 0) {
-        this.teacherForm.service.splice(dIndex,1)
+        this.teacherForm.service.splice(dIndex, 1)
       }
-      console.log(this.teacherForm.service);
       this.teacherForm.directionArr = this.direction;
       this.teacherForm.tel = Trim(this.teacherForm.tel);
       //  console.log(this.teacherForm);
@@ -590,13 +589,13 @@ export default {
         if (this.teacherForm.identity == 1) {
           if (this.teacherForm.dutyName === "") throw "请选择您的职称";
           if (this.teacherForm.consult === "") throw "请选择是否提供咨询服务";
-           if (this.teacherForm.photo === "") throw "请上传您的照片";
+          if (this.teacherForm.photo === "") throw "请上传您的照片";
 
         } else {
           if (this.teacherForm.academic === "") throw "请选择您的学历";
           if (this.teacherForm.consult === "") throw "请选择是否提供咨询服务";
           if (this.teacherForm.studentCard === "") throw "请上传学生证";
-           if (this.teacherForm.photo === "") throw "请上传您的照片";
+          if (this.teacherForm.photo === "") throw "请上传您的照片";
 
         }
         if (

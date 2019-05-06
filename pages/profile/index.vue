@@ -91,7 +91,7 @@
         <!-- 教师入口  -->
         <el-tab-pane class="my-course my-teacher" name="tab-thirteenth" v-if="userInfo.is_teacher=='1'">
           <span slot="label" class="tabList">
-            <i class="icon-teacher"></i>&nbsp;教师入口
+            <i class="icon-teacher"></i>&nbsp;导师入口
           </span>
           <v-myteacher :data="teacherData" :teacherPagemsg="teacherPagemsg" @getTeacherData="getTeacherData"></v-myteacher>
         </el-tab-pane>
@@ -579,7 +579,6 @@ export default {
             break;
           case "tab-thirteenth": //教师入口
           this.$bus.$emit("activeTeacher");
-
             this.getTeacherData({
               statusType: 1,
               type: 2
@@ -980,7 +979,6 @@ export default {
       this.teacherBespokeData.statusType = data.statusType;
       this.teacherBespokeData.page = 1;
       this.teacherPagemsg.page = 1;
-
       this.teacherBespokeListData();
     },
     // 获取预约老师列表
@@ -1144,6 +1142,9 @@ export default {
     this.$bus.$on("changeAppointLIst", data => {
       this.changeAppointLIst(data);
     });
+    this.$bus.$on('getTeacherData',()=>{
+      this.getTeacherData({statusType: 1,type: 2});
+    })
 
     this.infoNum = persistStore.get("infoNum");
     this.$bus.$on("profileInfoNum", data => {

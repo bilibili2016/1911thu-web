@@ -50,7 +50,7 @@
               </span>
             </p>
           </div>
-          <div class="teacher" v-if="userInfo.is_teacher!='1'" @click="goTeacher">申请成为导师</div>
+          <div class="teacher" v-if="!userInfo.is_teacher_recruit" @click="goTeacher">申请成为导师</div>
         </div>
       </div>
     </template>

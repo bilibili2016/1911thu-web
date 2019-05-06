@@ -1,0 +1,184 @@
+.updateTeacherInfo {
+  padding: 35px 35px 35px 0;
+
+  .el-form.teacherForm {
+    color: #222;
+
+    .el-form-item {
+      color: #222;
+
+      .el-form-item__label {
+        color: #222;
+        font-size: 16px;
+      }
+
+      .el-select {
+        width: 100%;
+      }
+
+      .el-input.is-disabled .el-input__inner {
+        color: #222;
+      }
+
+      .el-radio {
+        color: #222;
+
+        .el-radio__inner {
+          width: 18px;
+          height: 18px;
+          border-color: #572281;
+        }
+
+        .el-radio__input.is-checked .el-radio__inner {
+          background-color: #fff;
+        }
+
+        .el-radio__inner::after {
+          width: 10px;
+          height: 10px;
+          background-color: #572281;
+        }
+
+        .el-radio__input.is-checked+.el-radio__label {
+          color: #344;
+        }
+      }
+
+      .el-checkbox {
+        font-weight: normal;
+      }
+
+      .el-checkbox:last-child {
+        margin-right: 0;
+      }
+
+      .el-checkbox__input {
+        .el-checkbox__inner {
+          width: 18px;
+          height: 18px;
+          border: 1px solid #6417a6;
+          border-radius: 4px;
+        }
+      }
+
+      .el-checkbox__inner::after {
+        left: 6px;
+        top: 3px;
+      }
+
+      .el-checkbox__label {
+        font-size: 16px;
+      }
+
+      .el-textarea__inner {
+        min-height: 130px !important;
+      }
+
+      &.submit {
+        text-align: center;
+        height: 45px;
+        line-height: 45px;
+
+        .el-form-item__content {
+          margin: 0 !important;
+
+          .el-button {
+            padding: 8px 30px;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+
+  .uploadFile {
+    position: relative;
+    line-height: 40px;
+    height: 100px;
+
+    .load {
+      position: relative;
+      height: 100px;
+    }
+
+    .upload {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100px;
+      height: 100px;
+      z-index: 10;
+      border: 1px solid #dddddd;
+    }
+
+    .uploadMask {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100px;
+      height: 100px;
+      background-color: #fff;
+      border-color: #dddddd;
+      z-index: 1;
+
+      .el-icon-plus {
+        position: absolute;
+        left: 27px;
+        top: 27px;
+        font-size: 46px;
+        color: #ddd;
+      }
+    }
+
+    #uploadFile,
+    #uploadImg {
+      display: block;
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      top: 0;
+      left: 0;
+      outline: none;
+      background-color: transparent;
+      filter: alpha(opacity=0);
+      -moz-opacity: 0;
+      -khtml-opacity: 0;
+      opacity: 0;
+      z-index: 100;
+    }
+
+    .deleteFile,
+    .deleteImg {
+      font-size: 14px;
+      margin-left: 20px;
+      color: #6417a6;
+      cursor: pointer;
+    }
+
+    .el-upload {
+      position: relative;
+    }
+
+    .uploadBtn.el-button.el-button--primary {
+      width: 100px;
+      height: 100px;
+      background-color: #fff;
+      border-color: #dddddd;
+    }
+
+    .uploadImgs {
+      width: 100px;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .imgAlert {
+      color: red;
+      margin-left: 120px;
+      line-height: 100px;
+    }
+  }
+}
