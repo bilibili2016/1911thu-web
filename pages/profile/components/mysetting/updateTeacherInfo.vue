@@ -5,7 +5,7 @@
         <el-input v-model="teacherForm.name" maxlength="20" disabled></el-input>
       </el-form-item>
       <el-form-item label="学校" prop="school">
-        <el-input v-model="teacherForm.school" v-if="hasSchool"></el-input>
+        <el-input v-model="teacherForm.school" v-if="hasSchool" disabled></el-input>
         <el-select v-model="teacherForm.school" filterable placeholder="请选择学校" @change="handleSelectChange" v-else>
           <el-option v-for="item in school" :key="item.name" :label="item.name" :value="item.id"></el-option>
         </el-select>
