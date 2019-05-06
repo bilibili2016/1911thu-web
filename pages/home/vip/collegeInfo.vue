@@ -2,6 +2,7 @@
   <div>
     <div class="collegeInfo" v-if="noCollege" v-loading="loading">
       <v-chineseCollege v-if="title=='chineseCollege'"></v-chineseCollege>
+      <!-- <v-k12College v-if="title=='chineseCollege'"></v-k12College> -->
       <v-healthCollege v-if="title=='healthCollege'"></v-healthCollege>
       <v-sportsCollege v-if="title=='sportsCollege'"></v-sportsCollege>
       <v-smartCollege v-if="title=='smartCollege'"></v-smartCollege>
@@ -13,7 +14,8 @@
       <div class="btns clearfix" ref="btns" :class="{fixedBottom:!bottom,bottomHeight:bottom}">
         <div class="btn-con">
           <span class="button" @click="lookProject">混合式项目</span>
-          <span class="button" @click="goVipDetail">在线学院</span>
+          <span class="button"  @click="goVipDetail">在线学院</span>
+          <!-- <span class="button" v-if="title!='chineseCollege'"  @click="goVipDetail">在线学院</span> -->
           <span class="button" v-if="title!='chineseCollege'" @click="goLink('/project/degreeProject')">学位项目</span>
         </div>
       </div>
@@ -37,6 +39,7 @@ import {
 import { mapState, mapActions, mapGetters } from "vuex";
 import CadreCollege from "@/pages/home/vip/pages/CadreCollege";
 import ChineseCollege from "@/pages/home/vip/pages/ChineseCollege";
+// import K12College from "@/pages/home/vip/pages/K12College";
 import CommercialCollege from "@/pages/home/vip/pages/CommercialCollege";
 import EduCollege from "@/pages/home/vip/pages/EduCollege";
 import HealthCollege from "@/pages/home/vip/pages/HealthCollege";
@@ -48,6 +51,7 @@ export default {
   components: {
     // "v-college": College,
     "v-chineseCollege": ChineseCollege,
+    // "v-k12College": K12College,
     "v-healthCollege": HealthCollege,
     "v-sportsCollege": SportsCollege,
     "v-smartCollege": SmartCollege,
