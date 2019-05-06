@@ -5,7 +5,10 @@
         <el-input v-model="teacherForm.name" maxlength="20" disabled></el-input>
       </el-form-item>
       <el-form-item label="学校" prop="school">
-        <el-input v-model="teacherForm.school" disabled></el-input>
+        <el-input v-model="teacherForm.school" v-if="hasSchool"></el-input>
+        <el-select v-model="teacherForm.school" filterable placeholder="请选择学校" @change="handleSelectChange" v-else>
+          <el-option v-for="item in school" :key="item.name" :label="item.name" :value="item.id"></el-option>
+        </el-select>
       </el-form-item>
       <div v-if="teacherForm.identity==1">
         <el-form-item label="您的身份" prop="identity">
@@ -173,6 +176,7 @@ export default {
       isShowOtherService: false,
       isShowImg: true,//展示照片
       isShowCardImg: true,//展示学生证
+      hasSchool: false,
       imgForm: {
         FILESS: [],
         fileName: ""
@@ -225,7 +229,6 @@ export default {
         ],
         service: [
           {
-            required: true,
             message: "请选择您的合作形式",
             trigger: "change"
           }
@@ -411,6 +414,9 @@ export default {
           this.teacherForm.photo = res.data.teacherRecruitDetail.photo
           this.teacherForm.teacherRemark = res.data.teacherRecruitDetail.teacher_remark
           this.teacherForm.id = res.data.teacherRecruitDetail.id
+          if (this.teacherForm.school != "") {
+            this.hasSchool = true
+          }
           if (this.teacherForm.studentCard) {
             this.isShowCardImg = false
           }
