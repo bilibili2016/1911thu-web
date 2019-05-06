@@ -425,9 +425,11 @@ export default {
           }
           if (this.teacherForm.otherArea != "") {
             this.direction.push({ id: '-1', name: '其他' })
+            this.isShowOther = true
           }
           if (this.teacherForm.otherService != "") {
             this.offerService.push({ id: '-1', name: '其他' })
+            this.isShowOtherService = true
           }
         } else {
           message(this, "error", res.msg);
