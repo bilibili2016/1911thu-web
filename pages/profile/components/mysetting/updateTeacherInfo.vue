@@ -22,13 +22,13 @@
         <el-form-item label="常用邮箱" prop="email">
           <el-input v-model="teacherForm.email" placeholder="请填写您的常用邮箱"></el-input>
         </el-form-item>
-        <el-form-item label="擅长领域" prop="directionArr">
+        <el-form-item label="擅长领域">
           <el-checkbox-group v-model="direction" @change="changeDirection">
             <el-checkbox v-for="(area,index) in teacherDirData" :label="area.id" :key="'area'+index">{{area.name}}</el-checkbox>
           </el-checkbox-group>
           <el-input v-if="isShowOther" v-model="teacherForm.otherArea" maxlength="15" placeholder="请输入您擅长的领域"></el-input>
         </el-form-item>
-        <el-form-item label="合作形式" prop="service">
+        <el-form-item label="合作形式">
           <el-checkbox-group v-model="teacherForm.service" @change="handleserviceChange">
             <el-checkbox v-for="(service,index) in offerService" :label="service.id" :key="'service'+index">{{service.name}}</el-checkbox>
           </el-checkbox-group>
@@ -78,7 +78,7 @@
         <el-form-item label="常用邮箱" prop="email">
           <el-input v-model="teacherForm.email" placeholder="请填写您的常用邮箱"></el-input>
         </el-form-item>
-        <el-form-item label="擅长领域" prop="directionArr">
+        <el-form-item label="擅长领域">
           <el-checkbox-group v-model="direction" @change="changeDirection">
             <el-checkbox v-for="(area,index) in studentDirData" :label="area.id" :key="'area'+index">{{area.name}}</el-checkbox>
           </el-checkbox-group>
@@ -220,19 +220,6 @@ export default {
             trigger: "blur"
           }
         ],
-        direction: [
-          {
-            required: true,
-            message: "请选择您的专业领域",
-            trigger: "change"
-          }
-        ],
-        service: [
-          {
-            message: "请选择您的合作形式",
-            trigger: "change"
-          }
-        ],
         consult: [
           {
             required: true,
@@ -321,7 +308,6 @@ export default {
         if (res.status === 0) {
           this.offerService = res.data.offerService;
           this.offerService.push({ id: '-1', name: '其他' })
-
           this.school = res.data.schoolList;
           this.educationList = res.data.education;
           this.graduateList = res.data.graduate;
@@ -424,11 +410,11 @@ export default {
             this.isShowImg = false
           }
           if (this.teacherForm.otherArea != "") {
-            this.direction.push({ id: '-1', name: '其他' })
+            this.direction.push('-1')
             this.isShowOther = true
           }
           if (this.teacherForm.otherService != "") {
-            this.offerService.push({ id: '-1', name: '其他' })
+            this.teacherForm.service.push('-1')
             this.isShowOtherService = true
           }
         } else {
