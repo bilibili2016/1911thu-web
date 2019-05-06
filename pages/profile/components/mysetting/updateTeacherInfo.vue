@@ -336,6 +336,7 @@ export default {
       if (val.indexOf('-1') >= 0) {
         this.isShowOtherService = true
       } else {
+        this.teacherForm.otherService = ""
         this.isShowOtherService = false
       }
     },
@@ -343,6 +344,7 @@ export default {
       if (val.indexOf('-1') >= 0) {
         this.isShowOther = true
       } else {
+        this.teacherForm.otherArea = ""
         this.isShowOther = false
       }
       this.teacherForm.directionArr = this.direction
@@ -366,6 +368,7 @@ export default {
         if (valid) {
           profileHome.editTeacherRecruit(this.teacherForm).then(res => {
             if (res.status == 0) {
+              this.teacherRecruitDetail()
               this.$alert("您的信息已提交成功，1911学堂后台管理人员审核通过后会将您的信息发布到网页展示，请耐心等待。", res.msg, {
                 confirmButtonText: "确定",
                 callback: action => {
@@ -422,10 +425,13 @@ export default {
         }
       });
     },
+    getData () {
+      this.getRecruitSelect();
+      this.teacherRecruitDetail()
+    }
   },
   mounted () {
-    this.getRecruitSelect();
-    this.teacherRecruitDetail()
+    this.getData()
   },
 }
 </script>
