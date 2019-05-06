@@ -207,7 +207,6 @@ export default {
         ],
         email: [
           {
-            required: true,
             type: "string",
             message: "请输入正确的邮箱地址",
             trigger: "change"
@@ -253,7 +252,6 @@ export default {
         ],
         otherInfo: [
           {
-            required: true,
             message: "请填写自我介绍",
             trigger: "blur"
           }
@@ -376,7 +374,7 @@ export default {
       this.teacherForm.directionArr = this.direction;
       this.$refs[formName].validate(valid => {
         if (valid) {
-          profileHome.teacherRecruitDetail(this.teacherForm).then(res => {
+          profileHome.editTeacherRecruit(this.teacherForm).then(res => {
             if (res.status == 0) {
               message(this, "success", res.msg);
             } else {
@@ -406,23 +404,18 @@ export default {
           this.teacherForm.studentCard = res.data.teacherRecruitDetail.student_card
           this.teacherForm.photo = res.data.teacherRecruitDetail.photo
           this.teacherForm.teacherRemark = res.data.teacherRecruitDetail.teacher_remark
-          // name: "", //姓名
-          // tel: "", //手机号
-          // school: "", //所在学校
-          // identity: "1", //身份
-          // dutyName: "", //职称
-          // email: "", //常用邮箱
-          // directionArr: [],//擅长领域
-          // otherArea: '', //其他擅长领域
-          // service: [], //合作形式
-          // otherService: '',//其他合作形式
-          // consult: "", //是否提供咨询服务
-          // courseName: "", //授课名称
-          // otherInfo: "", //其他信息
-          // academic: "", //学历
-          // studentCard: "", //学生证
-          // photo: "" //个人照片
-
+          if (this.teacherForm.studentCard) {
+            this.isShowCardImg = false
+          }
+          if (this.teacherForm.photo) {
+            this.isShowImg = false
+          }
+          if (this.teacherForm.otherArea == "") {
+            this.direction.push({ id: '-1', name: '其他' })
+          }
+          if (this.teacherForm.otherService == "") {
+            this.offerService.push({ id: '-1', name: '其他' })
+          }
         } else {
           message(this, "error", res.msg);
         }
