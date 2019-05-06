@@ -178,6 +178,7 @@ export default {
         fileName: ""
       },
       teacherForm: {
+        id: "",
         name: "", //姓名
         tel: "", //手机号
         school: "", //所在学校
@@ -404,6 +405,7 @@ export default {
           this.teacherForm.studentCard = res.data.teacherRecruitDetail.student_card
           this.teacherForm.photo = res.data.teacherRecruitDetail.photo
           this.teacherForm.teacherRemark = res.data.teacherRecruitDetail.teacher_remark
+          this.teacherForm.id = res.data.teacherRecruitDetail.id
           if (this.teacherForm.studentCard) {
             this.isShowCardImg = false
           }
