@@ -29,7 +29,7 @@
         font-size: 36px;
         color: #F2812F;
         margin-bottom: 20px;
-        font-weight: bold;
+        font-weight: 500;
       }
 
       span {
@@ -202,6 +202,12 @@
         vertical-align: middle;
         margin-left: 80px;
         font-weight: 500;
+      }
+    }
+
+    @media only screen and (max-device-width: 375px) {
+      .bar {
+        width: 1155px;
       }
     }
   }
