@@ -68,18 +68,21 @@
         <div class="four-item clearfix">
           <div class="left">
             <div class="item" v-for="(item,index) in leftList" :key="'left'+index">
-            <span class="icon"><span class="inner">{{index+1}}</span></span>
-            <span>{{item}}</span>
-          </div>
+              <span class="icon"><span class="inner">{{index+1}}</span></span>
+              <span>{{item}}</span>
+            </div>
           </div>
           <div class="right">
-             <div class="item " v-for="(item,index) in rightList" :key="'right'+index">
-            <span class="icon"><span class="inner">{{index+5}}</span></span>
-            <span>{{item}}</span>
-          </div>
+            <div class="item " v-for="(item,index) in rightList" :key="'right'+index">
+              <span class="icon"><span class="inner">{{index+5}}</span></span>
+              <span>{{item}}</span>
+            </div>
           </div>
         </div>
       </div>
+      <!-- <div class="certificate">
+        <img src="https://static-image.1911edu.com/k12-certificate.png" alt="" srcset="">
+      </div> -->
     </div>
   </div>
 </template>
@@ -88,7 +91,7 @@
 export default {
   data () {
     return {
-      proList:[
+      proList: [
         '清华北大文化浸润小学生研学项目',
         '清华北大文化浸润中学生研学项目',
         '中小学生科学艺术素养提升研学项目',
@@ -102,7 +105,7 @@ export default {
         "高效学习与科学应试",
 
       ],
-      rightList:[
+      rightList: [
         "心理健康与沟通技巧",
         "中国传统文化素养",
         "法律素养与社会常识",
