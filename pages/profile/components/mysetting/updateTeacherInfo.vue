@@ -37,7 +37,7 @@
         <el-form-item label="是否提供咨询服务" prop="consult">
           <el-radio-group v-model="teacherForm.consult">
             <el-radio label="1">是</el-radio>
-            <el-radio label="2">否</el-radio>
+            <el-radio label="0">否</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="授课名称" prop="courseName">
@@ -87,7 +87,7 @@
         <el-form-item label="是否提供咨询服务" prop="consult">
           <el-radio-group v-model="teacherForm.consult">
             <el-radio label="1">是</el-radio>
-            <el-radio label="2">否</el-radio>
+            <el-radio label="0">否</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="上传学生证" prop="studentCard" class="uploadFile">
