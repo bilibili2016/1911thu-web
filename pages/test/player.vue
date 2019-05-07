@@ -1,5 +1,7 @@
 <template>
   <div>
+    <input type="text" v-model="aliPlayer.room">
+    <div class="button" @click="begin">开始咨询</div>
     <video ref="video" autoplay></video>
   </div>
 </template>
@@ -19,6 +21,12 @@ export default {
     }
   },
   methods: {
+    begin () {
+      console.log(123);
+
+      this.otherAli()
+      this.creatAliplayer()
+    },
     creatAliplayer () {
       this.aliWebrtc = new AliRtcEngine();
       this.aliWebrtc.startPreview(this.$refs.video).then((obj) => {
@@ -88,13 +96,33 @@ export default {
     }
   },
   mounted () {
-    this.otherAli()
-    this.creatAliplayer()
+    // this.otherAli()
+    // this.creatAliplayer()
   },
 }
 </script>
 
 <style scoped>
+input {
+  width: 200px;
+  height: 40px;
+  border: 1px solid #000;
+  margin: 30px;
+  z-index: 9999;
+  position: relative;
+}
+.button {
+  width: 100px;
+  height: 40px;
+  margin: 0 30px;
+  line-height: 40px;
+  text-align: center;
+  background-color: skyblue;
+  color: #000;
+  z-index: 9999;
+  position: relative;
+  cursor: pointer;
+}
 video {
   width: 100%;
   height: 100%;
@@ -103,6 +131,5 @@ video {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 9999;
 }
 </style>
