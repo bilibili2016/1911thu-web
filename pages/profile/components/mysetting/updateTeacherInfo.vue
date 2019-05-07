@@ -1,5 +1,5 @@
 <template>
-  <div class="updateTeacherInfo">
+  <div class="updateTeacherInfo" v-loading="!isClick">
     <el-form :model="teacherForm" :rules="rules" ref="teacherForm" label-width="165px" class="teacherForm">
       <el-form-item label="姓名" prop="name">
         <el-input v-model="teacherForm.name" maxlength="20" disabled></el-input>
@@ -129,7 +129,8 @@
         </el-form-item>
       </div>
       <el-form-item size="large" class="submit">
-        <el-button type="primary" class="submitAble" @click="onSubmit('teacherForm')" round>提交</el-button>
+        <el-button v-if="isClick" type="primary" class="submitAble" @click="onSubmit('teacherForm')" round>提交</el-button>
+        <el-button v-else type="primary" class="submitAble" round>提交</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -163,6 +164,7 @@ export default {
       callback();
     };
     return {
+      isClick: true,
       options: [],
       school: [],
       educationList: [],
@@ -354,6 +356,7 @@ export default {
     },
     // 提交个 人信息表单
     onSubmit (formName) {
+      this.isClick = false;
       let dIndex = this.direction.indexOf('-1')
       let SIndex = this.teacherForm.service.indexOf('-1')
 
@@ -373,10 +376,13 @@ export default {
                 confirmButtonText: "确定",
                 callback: action => {
                   document.body.scrollTop = document.documentElement.scrollTop = 0;
+                  this.isClick = true;
                 }
               });
+
             } else {
               message(this, "error", res.msg);
+              this.isClick = true;
             }
           });
         }

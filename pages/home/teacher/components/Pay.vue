@@ -136,6 +136,7 @@ export default {
         this.startTime = arr.join('');
         this.endTime = timestampToTime(response.data.produceOrderInfo.end_time).split(' ')[1]
         // this.changeTime(response.data.produceOrderInfo.end_time - Math.round(new Date() / 1000))
+
       })
     },
     // 转换时间格式
