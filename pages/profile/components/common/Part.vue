@@ -25,7 +25,7 @@
                 <span class="efficacy">已失效</span>
               </div>
               <div v-else>
-                <span v-if="teacher.result_status == 2" class="wait" >等待预约确认</span>
+                <span v-if="teacher.result_status == 2" class="wait studentWait" >等待预约确认</span>
                 <span v-if="teacher.result_status == 3">
                   <span v-if="(Number(teacher.start_time)-teacher.service_time)/60>5" class="soon">等待开始</span>
                   <span v-else>
