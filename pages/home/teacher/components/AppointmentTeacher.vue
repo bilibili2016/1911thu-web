@@ -10,7 +10,7 @@
           <el-input v-model="teacherForm.tel" :disabled="teacherForm.hasTel"></el-input>
         </el-form-item>
         <el-form-item label="真实姓名：" prop="name">
-          <el-input v-model="teacherForm.name" :disabled="teacherForm.hasName" placeholder="请填写您的联系方式"></el-input>
+          <el-input v-model="teacherForm.name" :disabled="teacherForm.hasName" placeholder="请填写您的真实姓名"></el-input>
         </el-form-item>
         <el-form-item label="预约咨询的导师：" prop="teacherName">
           <el-input v-model="teacherForm.teacherName" disabled></el-input>
