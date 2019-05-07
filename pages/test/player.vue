@@ -22,13 +22,14 @@ export default {
   },
   methods: {
     begin () {
-      console.log(123);
+      // 先关闭之前的推流
+      this.aliWebrtc.leaveChannel();
+      this.aliWebrtc.dispose();
 
       this.otherAli()
       this.creatAliplayer()
     },
     creatAliplayer () {
-      this.aliWebrtc = new AliRtcEngine();
       this.aliWebrtc.startPreview(this.$refs.video).then((obj) => {
         console.log(this.authInfo, this.userName, 'yes');
         this.aliwebrtc.joinChannel(this.authInfo, this.userName).then((obj) => {
@@ -96,6 +97,7 @@ export default {
     }
   },
   mounted () {
+    this.aliWebrtc = new AliRtcEngine();
     // this.otherAli()
     // this.creatAliplayer()
   },
