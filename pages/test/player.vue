@@ -2,7 +2,10 @@
   <div>
     <input type="text" v-model="aliPlayer.room">
     <div class="button" @click="begin">开始咨询</div>
-    <video ref="video" autoplay></video>
+    <video class="pushVideo" ref="video" autoplay></video>
+    <div class="pullBox" ref="pullBox">
+      <video class="pullVideo" autoplay ref="pullVideo"></video>
+    </div>
   </div>
 </template>
 
@@ -19,6 +22,9 @@ export default {
       },
       userName: "1911学堂在线咨询",
       authInfo: {},
+      hvuex: {
+        publisherList: []
+      }
     }
   },
   methods: {
@@ -50,9 +56,8 @@ export default {
       this.aliWebrtc.publish().then((res) => {
         console.log('发布流成功');
         message(this, "success", '发布流成功')
+        this.addevent()
       }, (error) => {
-        console.log(1);
-
         alert(error.message);
       });
     },
@@ -66,6 +71,61 @@ export default {
           message(this, "error", res.msg);
         }
       });
+    },
+    // 事件监听
+    addevent () {
+      this.aliWebrtc.on('onPublisher', (publisher) => {
+        this.hvuex.publisherList.push(publisher);
+        this.receivePublish(publisher);
+        //远程发布者ID
+        console.log(publisher.publisherId, '啦啦啦啦啦啦啦啦啦啦啦');
+        //远程发布名字
+        console.log(publisher.displayName);
+        //远程流内容，streamConfigs是数组，mslabel字段就是streamId
+        console.log(publisher.streamConfigs);
+      });
+      //订阅remote流成功后，显示remote流
+      this.aliWebrtc.on('onMediaStream', (subscriber, stream) => {
+        if (subscriber.publishId != subscriber.subscribeId) {
+          var publisher = this.hvuex.publisherList.filter(item => {
+            return item.publisherId === subscriber.publishId;
+          });
+          publisher.length > 0 ? publisher[0].subscribeId = subscriber.subscribeId : '';
+          var video = this.getDisplayRemoteVideo(subscriber.publishId, subscriber.subscribeId, subscriber
+            .displayName);
+          this.aliWebrtc.setDisplayRemoteVideo(subscriber, video, stream)
+        }
+      });
+    },
+    receivePublish (publisher) {
+      var publisherId = publisher.publisherId,
+        displayName = publisher.displayName;
+      //5.订阅remote流
+      this.aliWebrtc.subscribe(publisherId).then((subscribeCallId) => {
+        console.log('订阅成功')
+      }, (error) => {
+        alert(error.message);
+      });
+    },
+    // 获取显示远程视频
+    getDisplayRemoteVideo (publisherId, subscribeCallId, displayName) {
+      console.log(displayName, 'displayNamedisplayNamedisplayNamedisplayNamedisplayName');
+
+      //   var id = subscribeCallId + '_' + publisherId;
+      //   var videoWrapper = $('#' + id);
+      //   if (videoWrapper.length == 0) {
+      //     videoWrapper = $('<div class="pullVideo" ref="pullVideo" id=' + id +
+      //       '> <video autoplay=""></video><div class="display-name"></div></div>');
+      //     // $('.video-container').append(videoWrapper);
+      //   }
+      //   videoWrapper.find('.display-name').text(displayName);
+      //   return videoWrapper.find('video')[0];
+
+
+      //   this.$refs.pullBox
+      //   this.$refs.pullVideo
+      return this.$refs.pullVideo;
+
     }
   },
   mounted () {
@@ -97,13 +157,21 @@ input {
   position: relative;
   cursor: pointer;
 }
-video {
-  width: 100%;
-  height: 100%;
+.pushVideo {
+  width: 300px;
+  height: 300px;
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
+  top: 100px;
+  right: 500px;
+}
+.pullVideo {
+  width: 300px;
+  height: 300px;
+  position: fixed;
+  top: 100px;
   right: 0;
+}
+.pullBox {
+  display: inline-block;
 }
 </style>
