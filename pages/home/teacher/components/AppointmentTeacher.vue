@@ -7,7 +7,7 @@
         我们将会在此时间段通过视频直播的方式为您提供一对一的咨询服务！</p>
       <el-form :model="teacherForm" :rules="rules" ref="teacherForm" class="teacherForm">
         <el-form-item label="您的联系方式：" prop="tel">
-          <el-input v-model="teacherForm.tel" :disabled="teacherForm.hasTel"></el-input>
+          <el-input v-model="teacherForm.tel" :disabled="teacherForm.hasTel" placeholder="请填写您的联系方式"></el-input>
         </el-form-item>
         <el-form-item label="真实姓名：" prop="name">
           <el-input v-model="teacherForm.name" :disabled="teacherForm.hasName" placeholder="请填写您的真实姓名"></el-input>
