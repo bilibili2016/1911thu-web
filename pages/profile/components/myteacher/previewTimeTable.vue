@@ -1,10 +1,11 @@
 <template>
+<!-- 录入预约时间-预览时间表 -->
   <div class="timeTable">
-    <div class="top clearfix">
-      <div class="left"><span @click="handleGoTo('list')">教师入口 > </span> <span> 预约时间表</span></div>
-      <div class="right" @click="handleGoTo('inputTime')"> <img :src="rightIcon" alt=""> <span class="right">录入可预约时间</span></div>
-    </div>
-
+    <h4>
+      <span @click="handleGoTo('list')">教师入口 ></span>
+      <span @click="handleGoTo('timeTable')"> 预约时间表 ></span>
+      <span class="active"> 预览录入时间</span>
+    </h4>
     <div class="table">
       <div class="con">
         <table v-loading="isLoading">
@@ -51,6 +52,7 @@
           <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="timeListChange"></el-pagination>
         </div>
       </div>
+      <div class="inputConfirm" @click="confirmInput">确定</div>
     </div>
   </div>
 </template>
@@ -139,6 +141,9 @@ export default {
           message(this, "error", res.msg);
         }
       });
+    },
+    confirmInput(){
+      this.$bus.$emit('confirmInput')
     }
   },
   mounted() {

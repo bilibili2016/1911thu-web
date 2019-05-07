@@ -11,11 +11,14 @@
         <div class="newsCarousel fl">
           <div class="newsLi" @click="goDetail(outNewData)">
             <div class="newImg">
-              <img class="outImg" :src="outNewData.picture" alt=""></div>
+              <img class="outImg" :src="outNewData.picture" alt="">
+              <div class="firstTime">{{changeTime(outNewData.create_time)}}</div>
+            </div>
             <div class="info">
               <h4>{{outNewData.title}}</h4>
               <p>{{outNewData.introduce}}</p>
             </div>
+
           </div>
         </div>
         <div class="info-list">
