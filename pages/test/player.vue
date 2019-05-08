@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="text" v-model="aliPlayer.room">
+    房间号：<input type="text" v-model="aliPlayer.room">
     <div class="button" @click="begin">开始咨询</div>
     <video class="pushVideo" ref="video" autoplay></video>
     <div class="pullBox" ref="pullBox">
@@ -29,11 +29,12 @@ export default {
   },
   methods: {
     begin () {
-      // 先关闭之前的推流
-      //   this.aliWebrtc.leaveChannel();
-      //   this.aliWebrtc.dispose();
+      if (this.aliPlayer.room) {
+        this.otherAli()
 
-      this.otherAli()
+      } else {
+        message(this, "error", "填写房间号啊！！！");
+      }
     },
     // 2. 找到播放器预览
     creatAliplayer () {
@@ -55,10 +56,12 @@ export default {
     publishLocalStreams () {
       this.aliWebrtc.publish().then((res) => {
         console.log('发布流成功');
-        message(this, "success", '发布流成功')
-        this.addevent()
+
       }, (error) => {
         alert(error.message);
+        console.log('发布流失败');
+
+
       });
     },
     // 1. 获取频道鉴权令牌参数
@@ -76,16 +79,18 @@ export default {
     addevent () {
       this.aliWebrtc.on('onPublisher', (publisher) => {
         this.hvuex.publisherList.push(publisher);
-        this.receivePublish(publisher);
         //远程发布者ID
-        console.log(publisher.publisherId, '啦啦啦啦啦啦啦啦啦啦啦');
+        console.log("监听到远程视频", '啦啦啦啦啦啦啦啦啦啦啦');
         //远程发布名字
-        console.log(publisher.displayName);
+        // console.log(publisher.displayName);
         //远程流内容，streamConfigs是数组，mslabel字段就是streamId
-        console.log(publisher.streamConfigs);
+        // console.log(publisher.streamConfigs);
+
+        this.receivePublish(publisher);
       });
       //订阅remote流成功后，显示remote流
       this.aliWebrtc.on('onMediaStream', (subscriber, stream) => {
+
         if (subscriber.publishId != subscriber.subscribeId) {
           var publisher = this.hvuex.publisherList.filter(item => {
             return item.publisherId === subscriber.publishId;
@@ -93,6 +98,8 @@ export default {
           publisher.length > 0 ? publisher[0].subscribeId = subscriber.subscribeId : '';
           var video = this.getDisplayRemoteVideo(subscriber.publishId, subscriber.subscribeId, subscriber
             .displayName);
+          console.log(subscriber, video, stream, '对方的直播参数');
+
           this.aliWebrtc.setDisplayRemoteVideo(subscriber, video, stream)
         }
       });
@@ -102,36 +109,20 @@ export default {
         displayName = publisher.displayName;
       //5.订阅remote流
       this.aliWebrtc.subscribe(publisherId).then((subscribeCallId) => {
-        console.log('订阅成功')
+        console.log('订阅remote流----------订阅成功')
       }, (error) => {
         alert(error.message);
       });
     },
     // 获取显示远程视频
     getDisplayRemoteVideo (publisherId, subscribeCallId, displayName) {
-      console.log(displayName, 'displayNamedisplayNamedisplayNamedisplayNamedisplayName');
-
-      //   var id = subscribeCallId + '_' + publisherId;
-      //   var videoWrapper = $('#' + id);
-      //   if (videoWrapper.length == 0) {
-      //     videoWrapper = $('<div class="pullVideo" ref="pullVideo" id=' + id +
-      //       '> <video autoplay=""></video><div class="display-name"></div></div>');
-      //     // $('.video-container').append(videoWrapper);
-      //   }
-      //   videoWrapper.find('.display-name').text(displayName);
-      //   return videoWrapper.find('video')[0];
-
-
-      //   this.$refs.pullBox
-      //   this.$refs.pullVideo
+      console.log(publisherId, subscribeCallId, displayName, '显示视频开始直播');
       return this.$refs.pullVideo;
-
     }
   },
   mounted () {
     this.aliWebrtc = new AliRtcEngine();
-    // this.otherAli()
-    // this.creatAliplayer()
+    this.addevent()
   },
 }
 </script>
