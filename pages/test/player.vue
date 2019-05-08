@@ -3,14 +3,15 @@
     房间号：<input type="text" v-model="aliPlayer.room">
     <div class="button" @click="begin">开始咨询</div>
     <video class="pushVideo" ref="video" autoplay></video>
-    <div class="pullBox" ref="pullBox">
+    <div class="pullBox">
       <video class="pullVideo" autoplay ref="pullVideo"></video>
     </div>
+    <div v-if="action">累计开始时长：{{minute}}分钟{{second}}秒</div>
   </div>
 </template>
 
 <script>
-import { profileHome } from "~/lib/v1_sdk/index";
+import { live } from "~/lib/v1_sdk/index";
 import { message } from "@/lib/util/helper";
 export default {
   data () {
@@ -24,14 +25,18 @@ export default {
       authInfo: {},
       hvuex: {
         publisherList: []
-      }
+      },
+      time: 0,
+      timer: "",
+      second: 0,
+      minute: 0,
+      action: false
     }
   },
   methods: {
     begin () {
       if (this.aliPlayer.room) {
         this.otherAli()
-
       } else {
         message(this, "error", "填写房间号啊！！！");
       }
@@ -66,7 +71,7 @@ export default {
     },
     // 1. 获取频道鉴权令牌参数
     otherAli () {
-      profileHome.otherAli(this.aliPlayer).then(res => {
+      live.otherAli(this.aliPlayer).then(res => {
         if (res.code == 0) {
           this.authInfo = res.data
           this.creatAliplayer()
@@ -110,14 +115,26 @@ export default {
       //5.订阅remote流
       this.aliWebrtc.subscribe(publisherId).then((subscribeCallId) => {
         console.log('订阅remote流----------订阅成功')
+        this.theTimer()
       }, (error) => {
         alert(error.message);
       });
     },
     // 获取显示远程视频
     getDisplayRemoteVideo (publisherId, subscribeCallId, displayName) {
-      console.log(publisherId, subscribeCallId, displayName, '显示视频开始直播');
       return this.$refs.pullVideo;
+    },
+    theTimer () {
+      if (this.timer) {
+        clearInterval(this.timer)
+      }
+      this.time = 0
+      this.action = true
+      this.timer = setInterval(() => {
+        this.time++
+        this.second = this.time % 60 < 10 ? '0' + this.time % 60 : this.time % 60
+        this.minute = parseInt(this.time / 60) < 10 ? '0' + parseInt(this.time / 60) : parseInt(this.time / 60)
+      }, 1000);
     }
   },
   mounted () {
