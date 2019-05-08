@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="btns">
-      <span class="btn" @click="next()">下一步</span>
+      <span class="btn" @click="validate()">下一步</span>
       <!-- <span class="btn" @click="validate">确定</span> -->
     </div>
   </div>
@@ -31,7 +31,6 @@
 <script>
 import { myTeacher } from "~/lib/v1_sdk/index";
 import { message } from "~/lib/util/helper";
-
 export default {
   data () {
     return {
@@ -93,7 +92,9 @@ export default {
       this.form.endTime = this.appointTimeForm.endTime.split(":")[0];
       myTeacher.doBespokeTime(this.form).then(res => {
         if (res.status == 0) {
-          this.handleGoTo("timeTable");
+          // this.handleGoTo("timeTable");
+           let obj = { name: 'previewTimeTable' ,data:res.data.bespokeList};
+           this.$bus.$emit("gotoURL", obj);
         } else {
           message(this, "error", res.msg);
         }

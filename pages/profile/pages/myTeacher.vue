@@ -10,7 +10,7 @@
     <!-- 修改时间 -->
     <v-updatetime v-if="isShowUpdateTime" :timeID="timeID"></v-updatetime>
     <!-- 预览可预约时间表 -->
-    <v-previewtime v-if="isShowPreviewTimeTable" ></v-previewtime>
+    <v-previewtime v-if="isShowPreviewTimeTable" :bespokeList="bespokeList"></v-previewtime>
   </el-card>
 </template>
 
@@ -38,7 +38,8 @@ export default {
       isShowInputTime: false,
       isShowUpdateTime: false,
       isShowPreviewTimeTable:false,
-      timeID: ""
+      timeID: "",
+      bespokeList:''
     };
   },
   methods: {
@@ -71,6 +72,7 @@ export default {
           break;
         case "previewTimeTable":
           this.isShowPreviewTimeTable = true;
+          this.bespokeList = data.data
           break;
         default:
           break;
