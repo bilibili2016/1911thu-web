@@ -53,7 +53,8 @@
         </el-form-item>
 
         <el-form-item size="large" class="submit">
-          <el-button type="primary" class="submitAble" @click="appointmentTeacher('teacherForm')" round>提交</el-button>
+          <el-button v-if="isUnpay==1" type="primary" class="submitAble" @click="unPay" round>有未支付的预约</el-button>
+          <el-button v-else type="primary" class="submitAble" @click="appointmentTeacher('teacherForm')" round>提交预约</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -67,6 +68,7 @@ export default {
   props: ["teacherInfo", "userInfo"],
   data () {
     return {
+      isUnpay:'',
       teacherForm: {
         teacherId: "", //导师ID
         name: "", //姓名
@@ -116,6 +118,9 @@ export default {
     };
   },
   methods: {
+    unPay(){
+      this.$emit('unPay')
+    },
     closeForm () {
       this.$emit("closeForm");
     },
@@ -130,7 +135,7 @@ export default {
             //不需要验证是否登录
             if (response.status === 0) {
               this.closeForm();
-              this.$emit("goPay", response.data.id);
+              this.$emit("goPay", response.data);
             } else {
               message(this, "error", response.msg);
             }
@@ -179,6 +184,7 @@ export default {
       teacherInfo.teacherBespokeInfo(this.teacherForm).then(response => {
         //不需要验证是否登录
         if (response.status === 0) {
+          this.isUnpay = response.data.is_unpay_bespoke
           this.timeList = response.data.timeList;
           this.questionList = response.data.questionList;
           if (this.questionList.length > 0) {

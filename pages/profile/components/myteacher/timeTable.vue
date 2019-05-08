@@ -47,7 +47,7 @@
             </td>
           </tr>
         </table>
-        <div class="pagination" v-if="pagemsg.total>6">
+        <div class="pagination" v-if="pagemsg.total>9">
           <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="timeListChange"></el-pagination>
         </div>
       </div>

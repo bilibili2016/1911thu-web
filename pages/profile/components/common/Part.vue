@@ -84,7 +84,7 @@
       </div>
     </div>
     <v-appointinfo v-if="isShowDetail" :detail="appointInfo" :config="config" :isConfirm="isConfirm" @closeDetailPop="closeDetailPop"></v-appointinfo>
-    <v-pay v-if="showPay" @closePayed="closePayed" :userInfo="userInfo" :teacherInfo="teacherPayData" :orderId="orderId"></v-pay>
+    <v-pay v-if="showPay" @closePayed="closePayed" :userInfo="userInfo" :teacherInfo="teacherPayData" :orderInfo="orderInfo" :config="'myConsult'" @close="closePayed"></v-pay>
 
   </div>
 </template>
@@ -109,9 +109,8 @@ export default {
       isConfirm:false,
       isShowDetail: false,
       appointInfo: "",
-      userInfo:'',
       teacherPayData:'',
-      orderId:"",
+      orderInfo:{id:''},
       noMsg: {
         type: "myTeacher",
         text: "您暂未加入任何学院，快去加入吧！"
@@ -124,7 +123,7 @@ export default {
     goToPay(teacher){
       this.showPay=true
       this.teacherPayData = teacher;
-      this.orderId=teacher.id
+      this.orderInfo.id=teacher.id
     },
      // 支付弹框关闭的回调
     closePayed () {

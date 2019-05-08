@@ -24,31 +24,11 @@
             <td>{{item.real_name}}</td>
             <td>
               <span v-if="item.result_status==1">未预约</span>
-              <span v-if="item.result_status==2" class="unconfirmed">待确认</span>
-              <span v-if="item.result_status==3" class="confirmed">已确认</span>
-              <span v-if="item.result_status==4">调整失败</span>
-              <span v-if="item.result_status==5">已改签</span>
-              <span v-if="item.result_status==6">已调整待确认</span>
             </td>
-            <td>
-              <div v-if="item.result_status==2">
-                <span class="operate accept" @click="acceptInvite(item)">接受时间</span>
-                <span class="operate update" @click="handleGoTo('updateTime',item)">申请修改时间</span>
-              </div>
-              <div v-if="item.result_status==3">
-                <div v-if="item.start_time >=serviceTime">
-                  <span class="operate readyStart" v-if="(parseInt(item.start_time) - serviceTime)/60<=30">{{timeout(item,index)}}</span>
-                  <span v-else></span>
-                </div>
-                <div v-else>
-                  <span class="operate over" v-if="serviceTime > item.end_time">已结束</span>
-                  <span v-else class="operate enterLive" @click="handleEnterLive(item)">进入直播</span>
-                </div>
-              </div>
-            </td>
+            <td></td>
           </tr>
         </table>
-        <div class="pagination" v-if="pagemsg.total>6">
+        <div class="pagination" v-if="pagemsg.total>9">
           <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="timeListChange"></el-pagination>
         </div>
       </div>

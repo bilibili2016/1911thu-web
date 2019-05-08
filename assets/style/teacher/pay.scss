@@ -1,211 +1,196 @@
 .pay {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  overflow: hidden;
-  z-index: 9999;
-
-  i.el-icon-close {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    font-size: 30px;
-    color: #773084;
-    cursor: pointer;
-    z-index: 3;
-  }
-
-  .note {
-    position: relative;
-    vertical-align: middle;
-    margin: 0 auto;
-    width: 700px;
-    margin-top: 130px;
-    // height: 530px;
-    background-color: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    z-index: 9999;
-
-    h4 {
-      font-size: 20px;
-      color: #222;
-      margin: 36px 0 15px;
-      font-weight: 600;
-      text-align: center;
-      position: relative;
-    }
-
-    .goodsInfo {
-      padding: 0 50px;
-      margin-top: 35px;
-      margin-bottom: 10px;
-
-      .userImg {
-        margin-bottom: 5px;
-
-        img {
-          width: 36px;
-          height: 36px;
-          border-radius: 50%;
-          background-color: #eee;
-        }
-
-        span {
-          color: #333;
-          line-height: 36px;
-          margin-left: 10px;
-          font-size: 20px;
-          vertical-align: top;
-        }
-      }
-
-      p {
-        font-size: 16px;
-        color: #333;
-        line-height: 30px;
-
-        span {
-          width: 300px;
-
-          strong {
-            font-weight: 400;
-            color: #ff2424;
-          }
-        }
-      }
-    }
-
-    .code {
-      padding: 0 70px;
-      display: flex;
-      justify-content: space-around;
-
-      div.codeC {
-        height: 110px;
-        width: 2px;
-        margin: 40px 0 0;
-        background-color: #ebebec;
-      }
-
-      p {
-        line-height: 30px;
-        height: 30px;
-        text-align: center;
-        font-size: 16px;
-        color: #222;
-      }
-
-      .codeBox {
-        width: 130px;
-        height: 130px;
-      }
-
-      .qrcode {
-        display: block;
-        width: 130px;
-        height: 130px;
-        background-color: #cccccc;
-      }
-    }
-
-    .bottom {
-      height: 60px;
-      margin-top: 30px;
-
-      p {
-        text-align: center;
-        color: #ff2424;
-      }
-    }
-  }
-
-  .paySuccess,
-  .payError {
-    position: absolute;
-    top: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
     left: 0;
     right: 0;
+    top: 0;
     bottom: 0;
-    margin: auto;
-    width: 600px;
-    height: 630px;
-    background-color: #fff;
-    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
     overflow: hidden;
     z-index: 9999;
-
-    img {
-      display: block;
-      margin: 60px auto 0;
-      width: 90px;
-      height: 90px;
-    }
-
-    h5 {
-      margin: 21px 0 30px;
-      text-align: center;
-      color: #773084;
-      font-size: 20px;
-    }
-
-    .goodsTime {
-      width: 530px;
-      margin: 0 auto;
-
-      p {
-        font-size: 14px;
-        line-height: 28px;
-        text-align: center;
-        color: #7f7b83;
-
-        span {
-          color: #222;
-        }
-      }
-    }
-
-    .focus {
-      margin-top: 20px;
-      color: #7f7b83;
-      text-align: center;
-
-      img {
-        width: 180px;
-        height: 180px;
-        margin: 10px auto 0;
-      }
-    }
-
-    .goodsBtn {
-      text-align: center;
-
-      span {
-        width: 150px;
-        height: 40px;
-        line-height: 40px;
-        margin: 30px 30px 0;
-        background-color: #773084;
-        color: #fff;
-        border-radius: 5px;
-        font-size: 14px;
-        transition: all 300ms;
+    i.el-icon-close {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        font-size: 30px;
+        color: #773084;
         cursor: pointer;
-
-        &:hover {
-          background-color: #5f068d;
-        }
-      }
+        z-index: 3;
     }
-  }
-
-  .payError {
-    width: 400px;
-    height: 282px;
-  }
+    .note {
+        position: relative;
+        vertical-align: middle;
+        margin: 0 auto;
+        width: 700px;
+        margin-top: 130px;
+        // height: 530px;
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        z-index: 9999;
+        h4 {
+            font-size: 20px;
+            color: #222;
+            margin: 36px 0 15px;
+            font-weight: 600;
+            text-align: center;
+            position: relative;
+        }
+        .goodsInfo {
+            padding: 0 50px;
+            margin-top: 35px;
+            margin-bottom: 10px;
+            .userImg {
+                margin-bottom: 5px;
+                img {
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 50%;
+                    background-color: #eee;
+                }
+                span {
+                    color: #333;
+                    line-height: 36px;
+                    margin-left: 10px;
+                    font-size: 20px;
+                    vertical-align: top;
+                }
+            }
+            p {
+                font-size: 16px;
+                color: #333;
+                line-height: 30px;
+                span {
+                    width: 300px;
+                    strong {
+                        font-weight: 400;
+                        color: #ff2424;
+                    }
+                }
+            }
+        }
+        .code {
+            padding: 0 70px;
+            display: flex;
+            justify-content: space-around;
+            div.codeC {
+                height: 110px;
+                width: 2px;
+                margin: 40px 0 0;
+                background-color: #ebebec;
+            }
+            p {
+                line-height: 30px;
+                height: 30px;
+                text-align: center;
+                font-size: 16px;
+                color: #222;
+            }
+            .codeBox {
+                width: 130px;
+                height: 130px;
+            }
+            .qrcode {
+                display: block;
+                width: 130px;
+                height: 130px;
+                background-color: #cccccc;
+            }
+        }
+        .bottom {
+            text-align: center;
+            margin: 30px auto;
+            p {
+                text-align: center;
+                color: #ff2424;
+            }
+            .cancelBtn {
+                width: 150px;
+                height: 40px;
+                line-height: 40px;
+                color: #fff;
+                background-color: #773084;
+                text-align: center;
+                border-radius: 6px;
+                margin: 30px auto 0;
+                cursor: pointer;
+                &:hover {
+                    background-color: #5f068d;
+                }
+            }
+        }
+    }
+    .paySuccess,
+    .payError {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        width: 600px;
+        height: 630px;
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        z-index: 9999;
+        img {
+            display: block;
+            margin: 60px auto 0;
+            width: 90px;
+            height: 90px;
+        }
+        h5 {
+            margin: 21px 0 30px;
+            text-align: center;
+            color: #773084;
+            font-size: 20px;
+        }
+        .goodsTime {
+            width: 530px;
+            margin: 0 auto;
+            p {
+                font-size: 14px;
+                line-height: 28px;
+                text-align: center;
+                color: #7f7b83;
+                span {
+                    color: #222;
+                }
+            }
+        }
+        .focus {
+            margin-top: 20px;
+            color: #7f7b83;
+            text-align: center;
+            img {
+                width: 180px;
+                height: 180px;
+                margin: 10px auto 0;
+            }
+        }
+        .goodsBtn {
+            text-align: center;
+            span {
+                width: 150px;
+                height: 40px;
+                line-height: 40px;
+                margin: 30px 30px 0;
+                background-color: #773084;
+                color: #fff;
+                border-radius: 5px;
+                font-size: 14px;
+                transition: all 300ms;
+                cursor: pointer;
+                &:hover {
+                    background-color: #5f068d;
+                }
+            }
+        }
+    }
+    .payError {
+        width: 400px;
+        height: 282px;
+    }
 }

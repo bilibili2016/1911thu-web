@@ -1145,6 +1145,9 @@ export default {
     this.$bus.$on('getTeacherData',()=>{
       this.getTeacherData({statusType: 1,type: 2});
     })
+    this.$bus.$on('getStudentData',()=>{
+      this.getTeacherData({statusType: 1,type: 1});
+    })
 
     this.infoNum = persistStore.get("infoNum");
     this.$bus.$on("profileInfoNum", data => {
