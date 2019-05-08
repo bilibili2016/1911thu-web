@@ -10,7 +10,7 @@
             <span>{{userInfo.nick_name}}</span>
           </div>
           <div>
-            <p>咨询的导师：{{teacherInfo.teacher_name}}</p>
+            <p>咨询的导师：{{teacherInfo.teacher_name?teacherInfo.teacher_name:teacherInfo.teacher_user_name}}</p>
             <p>咨询费用：{{produceOrderInfo.price}}元</p>
           </div>
         </div>

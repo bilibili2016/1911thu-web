@@ -113,6 +113,11 @@
                             border: 1px solid #87868B;
                             color: #87868B;
                         }
+                        &.waitPay {
+                            cursor: pointer;
+                            border: 1px solid #844490;
+                            color: #844490;
+                        }
                     }
                 }
             }

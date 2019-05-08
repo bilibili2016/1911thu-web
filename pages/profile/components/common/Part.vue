@@ -25,6 +25,7 @@
                 <span class="efficacy">已失效</span>
               </div>
               <div v-else>
+                <span v-if="teacher.result_status == 1" class="waitPay" @click="goToPay(teacher)">等待支付</span>
                 <span v-if="teacher.result_status == 2" class="wait studentWait" >等待预约确认</span>
                 <span v-if="teacher.result_status == 3">
                   <span v-if="(Number(teacher.start_time)-teacher.service_time)/60>5" class="soon">等待开始</span>
@@ -83,26 +84,34 @@
       </div>
     </div>
     <v-appointinfo v-if="isShowDetail" :detail="appointInfo" :config="config" :isConfirm="isConfirm" @closeDetailPop="closeDetailPop"></v-appointinfo>
+    <v-pay v-if="showPay" @closePayed="closePayed" :userInfo="userInfo" :teacherInfo="teacherPayData" :orderId="orderId"></v-pay>
+
   </div>
 </template>
 
 <script>
 import { timestampToTime, message, IEPopup } from "@/lib/util/helper";
-import { myTeacher } from "~/lib/v1_sdk/index";
+import { myTeacher,banner } from "~/lib/v1_sdk/index";
 import NoMsg from "@/pages/profile/components/common/noMsg.vue";
 import Info from "@/pages/profile/components/common/appointInfo.vue";
+import Pay from "@/pages/home/teacher/components/Pay.vue";
 
 export default {
-  props: ["teacherData", "config", "teacherPagemsg","isOver"],
+  props: ["teacherData", "config", "teacherPagemsg","isOver",'userInfo'],
   components: {
     "v-nomsg": NoMsg,
-    "v-appointinfo": Info
+    "v-appointinfo": Info,
+    "v-pay": Pay
   },
   data () {
     return {
+      showPay:false,
       isConfirm:false,
       isShowDetail: false,
       appointInfo: "",
+      userInfo:'',
+      teacherPayData:'',
+      orderId:"",
       noMsg: {
         type: "myTeacher",
         text: "您暂未加入任何学院，快去加入吧！"
@@ -112,6 +121,22 @@ export default {
     };
   },
   methods: {
+    goToPay(teacher){
+      this.showPay=true
+      this.teacherPayData = teacher;
+      this.orderId=teacher.id
+    },
+     // 支付弹框关闭的回调
+    closePayed () {
+      this.showPay = !this.showPay;
+    },
+    getUserInfo () {
+      banner.getUserInfo().then(res => {
+        if (res.status === 0) {
+          this.userInfo = res.data.userInfo;
+        }
+      });
+    },
     //待确认
     handleConfirm(item){
       this.isConfirm = true;
