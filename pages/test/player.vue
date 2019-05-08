@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="text" v-model="aliPlayer.room">
+    房间号：<input type="text" v-model="aliPlayer.room">
     <div class="button" @click="begin">开始咨询</div>
     <video class="pushVideo" ref="video" autoplay></video>
     <div class="pullBox" ref="pullBox">
@@ -29,7 +29,12 @@ export default {
   },
   methods: {
     begin () {
-      this.otherAli()
+      if (this.aliPlayer.room) {
+        this.otherAli()
+
+      } else {
+        message(this, "error", "填写房间号啊！！！");
+      }
     },
     // 2. 找到播放器预览
     creatAliplayer () {
@@ -54,6 +59,9 @@ export default {
 
       }, (error) => {
         alert(error.message);
+        console.log('发布流失败');
+
+
       });
     },
     // 1. 获取频道鉴权令牌参数
@@ -90,6 +98,8 @@ export default {
           publisher.length > 0 ? publisher[0].subscribeId = subscriber.subscribeId : '';
           var video = this.getDisplayRemoteVideo(subscriber.publishId, subscriber.subscribeId, subscriber
             .displayName);
+          console.log(subscriber, video, stream, '对方的直播参数');
+
           this.aliWebrtc.setDisplayRemoteVideo(subscriber, video, stream)
         }
       });
@@ -106,9 +116,8 @@ export default {
     },
     // 获取显示远程视频
     getDisplayRemoteVideo (publisherId, subscribeCallId, displayName) {
-      console.log(displayName, '显示视频开始直播');
+      console.log(publisherId, subscribeCallId, displayName, '显示视频开始直播');
       return this.$refs.pullVideo;
-
     }
   },
   mounted () {
