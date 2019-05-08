@@ -13,7 +13,7 @@
       </div>
       <div class="right" ref="right">
         <div class="problemBox">
-          <h4>咨询问题大纲{{authInfo.channel}}</h4>
+          <h4>咨询问题大纲</h4>
           <ul ref="ul">
             <li v-for="(item,index) in questionList" :key="index">{{index+1+'、'}}{{item}}</li>
           </ul>
@@ -21,19 +21,9 @@
         <div class="liveBtn clearfix">
           <span v-if="begin" class="fl" @click="startPlay">开始直播</span>
           <span v-else class="fl begin">开始直播</span>
-          <span v-if="end" class="fr" @click="stopPlay">结束直播</span>
+          <span v-if="end" class="fr" @click="stopPlay(true)">结束直播</span>
           <span v-else class="fr end">结束直播</span>
         </div>
-      </div>
-      <!-- 即将结束 -->
-      <div class="pop nearEnd" v-if="nearEnd">
-        <i class="el-icon-close" @click="closeNearend"></i>
-        <p>尊敬的学员您好，本次的咨询时间即将结束，请您合理分配时间！</p>
-      </div>
-      <!-- 已结束 -->
-      <div class="pop over" v-if="isOver">
-        <p>本次一对一视频直播咨询服务已结束。</p>
-        <span class="btn" @click="goProfile">返回个人中心</span>
       </div>
     </div>
     <!-- 即将结束 -->
@@ -48,7 +38,7 @@
         <span class="btn" @click="goProfile">返回个人中心</span>
       </div>
     </div>
-    <div class="rightBtn" v-if="isShow">
+    <div class="rightBtn">
       <div class="yellow" @click="handleClick">
         <img v-if="!isShow" src="https://static-image.1911edu.com/live-white.png" alt="">
         <img v-else src="https://static-image.1911edu.com/live-yellow.png" alt="">
@@ -137,6 +127,8 @@ export default {
         this.aliWebrtc.joinChannel(this.authInfo, this.userName).then((obj) => {
           // 入会成功
           console.log('入会成功');
+          this.aliWebrtc.muteLocalMic(false)
+          this.aliWebrtc.muteLocalCamera(false)
 
           this.publishLocalStreams()
         }, (error) => {
@@ -246,18 +238,17 @@ export default {
         });
       }
     },
-    stopPlay () {
+    stopPlay (flag) {
       if (this.aliWebrtc) {
         // 离开房间，服务端会自动断流
+        this.aliWebrtc.unPublish()
         this.aliWebrtc.leaveChannel();
         this.aliWebrtc.dispose();
+        this.aliWebrtc.muteLocalMic(true)
+        this.aliWebrtc.muteLocalCamera(true)
         this.end = false
-        console.log(123123123);
-
-      } else {
-        console.log(11111111);
-
-        this.end = false
+      }
+      if (flag) {
         message(this, "info", "请确认在开始直播之后再结束！");
       }
     },
@@ -306,6 +297,10 @@ export default {
         }
         this.countdown(2);
       }
+      //   已经结束
+      if (parseInt(this.time.end_time) < this.time.service_time) {
+        this.isOver = true;
+      }
     },
     // 进入页面后 触发的倒计时
     countdown (num) {
@@ -328,7 +323,7 @@ export default {
           }
           //   直播结束
           if (this.showTime == 2) {
-            this.stopPlay();
+            this.stopPlay(false);
             this.begin = false;
             this.end = false;
             this.isOver = true;
@@ -349,23 +344,33 @@ export default {
     this.teacherLiveInfo.type = matchSplits("type");
     this.resize();
     window.addEventListener("resize", this.resize);
+    window.onbeforeunload = function (e) {
+      console.log("window.onbeforeunload,window.onbeforeunload,window.onbeforeunload");
+      this.stopPlay(false);
+    };
     this.teacherBespokeInfo();
     if (this.timer) {
       clearInterval(this.timer);
     }
+    this.$bus.$on("stopPlay", () => {
+      this.stopPlay(false);
+    });
   },
   //  销毁之前展示头部 底部
   destroyed () {
     this.$bus.$emit("headerFooterShow");
+    this.stopPlay(false);
   },
   //   进入页面的的时候
   beforeRouteEnter (to, from, next) {
     next(vm => {
       vm.$bus.$emit("headerFooterHide");
+      vm.stopPlay(false);
     });
   },
   beforeRouteLeave (to, from, next) {
     // this.$bus.$emit("headerFooterShow");
+    this.stopPlay(false);
     next();
   }
 };
