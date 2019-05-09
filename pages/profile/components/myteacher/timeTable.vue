@@ -30,6 +30,7 @@
               <span v-if="item.result_status==6">已调整待确认</span>
             </td>
             <td>
+              <span :data='serviceTime-item.create_time' v-if="(serviceTime>item.create_time)&&(serviceTime-item.create_time<1800)" class="delete" @click="deleteTime(item)">删除</span>
               <div v-if="item.result_status==2">
                 <span class="operate accept" @click="acceptInvite(item)">接受时间</span>
                 <span class="operate update" @click="handleGoTo('updateTime',item)">申请修改时间</span>
@@ -52,6 +53,18 @@
         </div>
       </div>
     </div>
+    <el-dialog
+    title="提示"
+    :visible.sync="centerDialogVisible"
+    width="30%"
+    center>
+    <span>确定删除此条内容吗？</span>
+    <span slot="footer" class="dialog-footer">
+      <el-button @click="cancelDelete">取 消</el-button>
+      <el-button type="primary" @click="confirmDelete">确 定</el-button>
+    </span>
+  </el-dialog>
+
   </div>
 </template>
 <script>
@@ -61,6 +74,8 @@ import { message, timestampToTime } from "~/lib/util/helper";
 export default {
   data() {
     return {
+      deleteID:'',
+      centerDialogVisible:false,
       serviceTime: "",
       isLoading: true,
       rightIcon: "https://static-image.1911edu.com/myTeacher-icon1.png",
@@ -139,6 +154,22 @@ export default {
           message(this, "error", res.msg);
         }
       });
+    },
+    cancelDelete(){
+       this.centerDialogVisible=false
+    },
+    confirmDelete(){
+      myTeacher.deleteBespokeTime({id:this.deleteID}).then(res => {
+        if (res.status == 0) {
+          this.centerDialogVisible=false
+          this.bespokeTimeList()
+        }
+      });
+    },
+    //删除时间表
+    deleteTime(item){
+        this.centerDialogVisible=true
+        this.deleteID = item.id
     }
   },
   mounted() {

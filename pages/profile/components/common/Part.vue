@@ -121,6 +121,7 @@ export default {
   },
   methods: {
     goToPay(teacher){
+       IEPopup("pane-tab-twelfth", "-ms-page", 0);
       this.showPay=true
       this.teacherPayData = teacher;
       this.orderInfo.id=teacher.id
@@ -128,6 +129,7 @@ export default {
      // 支付弹框关闭的回调
     closePayed () {
       this.showPay = !this.showPay;
+      IEPopup("pane-tab-twelfth", "relative", 1);
     },
     getUserInfo () {
       banner.getUserInfo().then(res => {

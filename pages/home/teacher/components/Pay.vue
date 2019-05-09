@@ -42,7 +42,7 @@
         <img src="https://static-image.1911edu.com/success.png" alt>
         <h5>支付成功</h5>
         <div class="goodsTime">
-          <p>亲爱的{{userInfo.real_name}}，您已预约咨询{{teacherInfo.teacher_name}}导师，预约时间为{{startTime}}-{{endTime}},请等待导师的确认信息。<span v-if="config!='myConsult'">您可以通过“个人中心-我的咨询”查看预约状态，</span>时间确定后，请提前5分钟进入直播间。</p>
+          <p>亲爱的{{userInfo.real_name}}，您已预约咨询{{teacherInfo.teacher_name?teacherInfo.teacher_name:teacherInfo.teacher_user_name}}导师，预约时间为{{startTime}}-{{endTime}},请等待导师的确认信息。<span v-if="config!='myConsult'">您可以通过“个人中心-我的咨询”查看预约状态，</span>时间确定后，请提前5分钟进入直播间。</p>
         </div>
         <div class="focus">
           <p>关注1911学堂公众号，第一时间获得1911学堂资讯！</p>
@@ -107,7 +107,10 @@ export default {
         currentTime:"",
         creatTime:""
       },
-      restSecond:null
+      restSecond:null,
+      cancelForm:{
+        id:''
+      }
     }
   },
   computed: {
@@ -128,12 +131,22 @@ export default {
     },
     //个人中心-我的咨询-取消预约
     cancelAppoint(){
-      home.cancelAppoint({id:this.teacherInfo.id}).then(res=>{
+      //老师详情支付弹窗 teacherDetail
+      if(this.config=='teacherDetail'){
+        this.cancelForm.id=this.orderInfo.id
+      }else{//个人中心-我的咨询-支付弹窗 myConsult
+        this.cancelForm.id=this.teacherInfo.id
+      }
+      home.cancelAppoint(this.cancelForm).then(res=>{
         if(res.status==0){
-          // console.log(res); c
           clearInterval(this.interval)
-          this.$emit('close')
-          this.$bus.$emit('getStudentData')
+           //老师详情支付弹窗 teacherDetail
+          if(this.config=='teacherDetail'){
+           this.close()
+          }else{//个人中心-我的咨询-支付弹窗 myConsult
+            this.$emit('close')
+            this.$bus.$emit('getStudentData')
+          }
         }else{
           message(this,'error',res.msg)
         }
@@ -169,19 +182,16 @@ export default {
     },
     // 转换时间格式
     changeTime () {
-    //  console.log( timestampToTime(this.rest.currentTime ),'qqq');
-    //  console.log( timestampToTime(this.rest.creatTime ),'eee');
-    //  console.log(this.rest.currentTime-this.rest.creatTime,'倒计时');
      let restTime = this.rest.currentTime-this.rest.creatTime
       if(restTime<=1800){//在有效期内
         this.restSecond = 1800-restTime
-        // console.log(this.restSecond,'restSecond');
       }
+
       clearInterval(this.interval)
       this.interval = setInterval(() => {
-        if(this.restSecond<=0){
+        if(this.restSecond<=1){
+          this.cancelAppoint()
           clearInterval(this.interval)
-
         }
         --this.restSecond
         this.rest.minute = parseInt(this.restSecond/60)

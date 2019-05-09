@@ -136,13 +136,13 @@ export default {
     unPay(){
       this.showAppointment=false
       this.isShowProfile = true
-
     },
     goPay (data) {
+      console.log(data,'datat');
+
       this.showPay = true;
       this.orderInfo.id = data.id;
       this.orderInfo.time = data.update_time;
-
     },
     closeForm () {
       this.showAppointment = !this.showAppointment;
