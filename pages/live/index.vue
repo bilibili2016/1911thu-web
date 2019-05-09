@@ -152,18 +152,18 @@ export default {
     addevent () {
       // 远程连接正在建立中时触发
       this.aliWebrtc.on('OnConnecting', (data) => {
-        console.log(data.displayName + " 正在建立连接中...");
-        console.log(data.type);
+        // console.log(data.displayName + " 正在建立连接中...");
+        // console.log(data.type);
       });
       // 完成连接建立时会触发
       this.aliWebrtc.on('OnConnected', (data) => {
-        console.log(data.displayName + " 连接已经建立");
-        console.log(data.type);
+        // console.log(data.displayName + " 连接已经建立");
+        // console.log(data.type);
       });
       this.aliWebrtc.on('onPublisher', (publisher) => {
         this.hvuex.publisherList.push(publisher);
         //远程发布者ID
-        console.log("监听到远程视频", '啦啦啦啦啦啦啦啦啦啦啦');
+        // console.log("监听到远程视频", '啦啦啦啦啦啦啦啦啦啦啦');
         //远程发布名字
         // console.log(publisher.displayName);
         //远程流内容，streamConfigs是数组，mslabel字段就是streamId
@@ -180,22 +180,21 @@ export default {
           publisher.length > 0 ? publisher[0].subscribeId = subscriber.subscribeId : '';
           let video = this.getDisplayRemoteVideo(subscriber.publishId, subscriber.subscribeId, subscriber
             .displayName);
-          console.log(subscriber, video, stream, '对方的直播参数');
+          //   console.log(subscriber, video, stream, '对方的直播参数');
           this.aliWebrtc.setDisplayRemoteVideo(subscriber, video, stream)
         }
       });
       //   当频道里的其他人取消发布本地流时时触发
       this.aliWebrtc.on('onUnPublisher', (publisher) => {
         //远程发布者ID,subscribe方法需要这个参数值
-        console.log(publisher.publisherId);
+        // console.log(publisher.publisherId);
         //远程发布名字
-        console.log(publisher.displayName);
+        // console.log(publisher.displayName);
         //所在频道
-        console.log(publisher.channel);
+        // console.log(publisher.channel);
       });
       //   当其他用户离开频道时触发
       this.aliWebrtc.on('onLeave', (data) => {
-        console.log(data.displayName + "离开频道");
         message(this, "info", "对方离开了频道");
 
       });
@@ -213,7 +212,7 @@ export default {
         displayName = publisher.displayName;
       //5.订阅remote流
       this.aliWebrtc.subscribe(publisherId).then((subscribeCallId) => {
-        console.log('订阅remote流----------订阅成功')
+
       }, (error) => {
         message(this, "error", error.message);
       });
@@ -345,7 +344,7 @@ export default {
     this.resize();
     window.addEventListener("resize", this.resize);
     window.onbeforeunload = function (e) {
-      console.log("window.onbeforeunload,window.onbeforeunload,window.onbeforeunload");
+      //   console.log("window.onbeforeunload,window.onbeforeunload,window.onbeforeunload");
       this.stopPlay(false);
     };
     this.teacherBespokeInfo();
