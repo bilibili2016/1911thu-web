@@ -147,7 +147,6 @@ export default {
       this.isShowDetail = false;
       IEPopup("pane-tab-twelfth", "relative", 1);
       IEPopup("pane-tab-thirteenth", "relative", 1);
-
     },
     handleDetail (item) {
       this.isConfirm = false;

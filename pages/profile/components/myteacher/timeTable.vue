@@ -69,7 +69,7 @@
 </template>
 <script>
 import { myTeacher } from "~/lib/v1_sdk/index";
-import { message, timestampToTime } from "~/lib/util/helper";
+import { message, timestampToTime,IEPopup } from "~/lib/util/helper";
 
 export default {
   data() {
@@ -161,6 +161,7 @@ export default {
     confirmDelete(){
       myTeacher.deleteBespokeTime({id:this.deleteID}).then(res => {
         if (res.status == 0) {
+          IEPopup("pane-tab-thirteenth", "relative", 1);
           this.centerDialogVisible=false
           this.bespokeTimeList()
         }
@@ -168,6 +169,7 @@ export default {
     },
     //删除时间表
     deleteTime(item){
+        IEPopup("pane-tab-thirteenth", "-ms-page", 0);
         this.centerDialogVisible=true
         this.deleteID = item.id
     }
