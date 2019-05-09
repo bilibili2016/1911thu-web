@@ -131,7 +131,7 @@
                       <div class="uploadMask">
                         <i class="el-icon-plus"></i>
                       </div>
-                      <span class="imgAlert">图片不能超过10M</span>
+                      <span class="imgAlert">图片不能超过10M，审核通过后你的照片用来在名师智库展示</span>
                     </div>
                     <p class="uploadP" v-show="!isShowImg">
                       <span class="uploadImgs"><img :src="teacherForm.photo" alt=""></span>
@@ -195,7 +195,7 @@
                       <span class="imgAlert">图片不能超过10M</span>
                     </div>
                     <p class="uploadP" v-show="!isShowCardImg">
-                      <span class="uploadImgs"><img :src="teacherForm.studentCard" alt=""></span>
+                      <span class="studentCardImg"><img :src="teacherForm.studentCard" alt=""></span>
                       <span class="deleteImg" @click="deleteCardImg">删除</span>
                     </p>
                   </div>
@@ -210,7 +210,7 @@
                       <div class="uploadMask">
                         <i class="el-icon-plus"></i>
                       </div>
-                      <span class="imgAlert">图片不能超过10M</span>
+                      <span class="imgAlert">图片不能超过10M，审核通过后你的照片用来在名师智库展示</span>
                     </div>
                     <p class="uploadP" v-show="!isShowImg">
                       <span class="uploadImgs"><img :src="teacherForm.photo" alt=""></span>

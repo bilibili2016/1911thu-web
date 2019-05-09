@@ -93,7 +93,7 @@ export default {
         pid: 0,
         uid: 0,
         kid: "",
-        identity: []
+        identity: 0
       },
       pagemsg: {
         page: 1,
@@ -232,6 +232,7 @@ export default {
       list.teacherTagsList().then(res => {
         if (res.status == 0) {
           this.tagsList = res.data.teacherTagsList;
+          this.tagsList.unshift({id:0,tag_name:'全部'})
           this.bannerList = res.data.teacherBannerList;
           //设置banner溢出居中显示
           this.$nextTick(() => {

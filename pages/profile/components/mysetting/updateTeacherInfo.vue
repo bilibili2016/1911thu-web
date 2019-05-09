@@ -101,7 +101,7 @@
             <span class="imgAlert">图片不能超过10M</span>
           </div>
           <p class="uploadP" v-show="!isShowCardImg">
-            <span class="uploadImgs"><img :src="teacherForm.studentCard" alt=""></span>
+            <span class="studentCardImg"><img :src="teacherForm.studentCard" alt=""></span>
             <span class="deleteImg" @click="deleteCardImg">删除</span>
           </p>
         </el-form-item>
