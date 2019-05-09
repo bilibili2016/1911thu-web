@@ -21,7 +21,7 @@
         <div class="liveBtn clearfix">
           <span v-if="begin" class="fl" @click="startPlay">开始直播</span>
           <span v-else class="fl begin">开始直播</span>
-          <span v-if="end" class="fr" @click="stopPlay(true)">结束直播</span>
+          <span v-if="end" class="fr" @click="stopPlay">结束直播</span>
           <span v-else class="fr end">结束直播</span>
         </div>
       </div>
@@ -120,13 +120,11 @@ export default {
     },
     // 2. 找到播放器预览
     creatAliplayer () {
-      console.log('找到播放器预览');
       this.aliWebrtc.startPreview(this.$refs.pushVideo).then((obj) => {
         // 3. 加入房间
-        console.log(this.authInfo.channel, '加入房间');
+        console.log('我的房间号：', this.authInfo.channel);
         this.aliWebrtc.joinChannel(this.authInfo, this.userName).then((obj) => {
           // 入会成功
-          console.log('入会成功');
           this.aliWebrtc.muteLocalMic(false)
           this.aliWebrtc.muteLocalCamera(false)
 
@@ -152,22 +150,22 @@ export default {
     addevent () {
       // 远程连接正在建立中时触发
       this.aliWebrtc.on('OnConnecting', (data) => {
-        console.log(data.displayName + " 正在建立连接中...");
-        console.log(data.type);
+        // console.log(data.displayName + " 正在建立连接中...");
+        // console.log(data.type);
       });
       // 完成连接建立时会触发
       this.aliWebrtc.on('OnConnected', (data) => {
-        console.log(data.displayName + " 连接已经建立");
-        console.log(data.type);
+        // console.log(data.displayName + " 连接已经建立");
+        // console.log(data.type);
       });
       this.aliWebrtc.on('onPublisher', (publisher) => {
         this.hvuex.publisherList.push(publisher);
         //远程发布者ID
         console.log("监听到远程视频", '啦啦啦啦啦啦啦啦啦啦啦');
         //远程发布名字
-        // console.log(publisher.displayName);
+        console.log(publisher.displayName);
         //远程流内容，streamConfigs是数组，mslabel字段就是streamId
-        // console.log(publisher.streamConfigs);
+        console.log(publisher.streamConfigs);
 
         this.receivePublish(publisher);
       });
@@ -180,7 +178,7 @@ export default {
           publisher.length > 0 ? publisher[0].subscribeId = subscriber.subscribeId : '';
           let video = this.getDisplayRemoteVideo(subscriber.publishId, subscriber.subscribeId, subscriber
             .displayName);
-          console.log(subscriber, video, stream, '对方的直播参数');
+          //   console.log(subscriber, video, stream, '对方的直播参数');
           this.aliWebrtc.setDisplayRemoteVideo(subscriber, video, stream)
         }
       });
@@ -195,7 +193,6 @@ export default {
       });
       //   当其他用户离开频道时触发
       this.aliWebrtc.on('onLeave', (data) => {
-        console.log(data.displayName + "离开频道");
         message(this, "info", "对方离开了频道");
 
       });
@@ -213,7 +210,8 @@ export default {
         displayName = publisher.displayName;
       //5.订阅remote流
       this.aliWebrtc.subscribe(publisherId).then((subscribeCallId) => {
-        console.log('订阅remote流----------订阅成功')
+        console.log("订阅remote流");
+
       }, (error) => {
         message(this, "error", error.message);
       });
@@ -238,18 +236,15 @@ export default {
         });
       }
     },
-    stopPlay (flag) {
+    stopPlay () {
       if (this.aliWebrtc) {
         // 离开房间，服务端会自动断流
         this.aliWebrtc.unPublish()
-        this.aliWebrtc.leaveChannel();
-        this.aliWebrtc.dispose();
+        this.aliWebrtc.leaveChannel()
+        this.aliWebrtc.dispose()
         this.aliWebrtc.muteLocalMic(true)
         this.aliWebrtc.muteLocalCamera(true)
-        this.end = false
-      }
-      if (flag) {
-        message(this, "info", "请确认在开始直播之后再结束！");
+        this.aliWebrtc.stopPreview()
       }
     },
     // 关闭即将结束
@@ -323,7 +318,7 @@ export default {
           }
           //   直播结束
           if (this.showTime == 2) {
-            this.stopPlay(false);
+            this.stopPlay();
             this.begin = false;
             this.end = false;
             this.isOver = true;
@@ -345,32 +340,33 @@ export default {
     this.resize();
     window.addEventListener("resize", this.resize);
     window.onbeforeunload = function (e) {
-      console.log("window.onbeforeunload,window.onbeforeunload,window.onbeforeunload");
-      this.stopPlay(false);
+      //   console.log("window.onbeforeunload,window.onbeforeunload,window.onbeforeunload");
+      this.stopPlay();
     };
     this.teacherBespokeInfo();
     if (this.timer) {
       clearInterval(this.timer);
     }
     this.$bus.$on("stopPlay", () => {
-      this.stopPlay(false);
+      this.stopPlay();
     });
+
   },
   //  销毁之前展示头部 底部
   destroyed () {
     this.$bus.$emit("headerFooterShow");
-    this.stopPlay(false);
+    this.stopPlay();
   },
   //   进入页面的的时候
   beforeRouteEnter (to, from, next) {
     next(vm => {
       vm.$bus.$emit("headerFooterHide");
-      vm.stopPlay(false);
+      vm.stopPlay();
     });
   },
   beforeRouteLeave (to, from, next) {
     // this.$bus.$emit("headerFooterShow");
-    this.stopPlay(false);
+    this.stopPlay();
     next();
   }
 };
