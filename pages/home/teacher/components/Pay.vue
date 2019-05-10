@@ -50,7 +50,7 @@
           <p></p>
         </div>
         <div class="goodsBtn">
-          <span  v-if="config!='myConsult'" @click="lookAppointment">前往个人中心</span>
+          <span v-if="config!='myConsult'" @click="lookAppointment">前往个人中心</span>
         </div>
       </div>
       <!-- 支付失败 -->
@@ -76,8 +76,8 @@ export default {
   data () {
     return {
       produceOrderInfo: '',
-      pay: true,
-      paySuccess: false,
+      pay: false,
+      paySuccess: true,
       payError: false,
       codeForm: {
         type: '4',
@@ -101,13 +101,13 @@ export default {
       gidForm: {
         gids: ''
       },
-      rest:{
-        minute:'',
-        second:'',
-        currentTime:"",
-        creatTime:""
+      rest: {
+        minute: '',
+        second: '',
+        currentTime: "",
+        creatTime: ""
       },
-      restSecond:null
+      restSecond: null
     }
   },
   computed: {
@@ -122,20 +122,20 @@ export default {
       this.paySuccess = false;
       this.payError = false;
       this.$emit('closePayed')
-      if(this.config=='myConsult'){
-          this.$bus.$emit('getStudentData')
+      if (this.config == 'myConsult') {
+        this.$bus.$emit('getStudentData')
       }
     },
     //个人中心-我的咨询-取消预约
-    cancelAppoint(){
-      home.cancelAppoint({id:this.teacherInfo.id}).then(res=>{
-        if(res.status==0){
+    cancelAppoint () {
+      home.cancelAppoint({ id: this.teacherInfo.id }).then(res => {
+        if (res.status == 0) {
           // console.log(res); c
           clearInterval(this.interval)
           this.$emit('close')
           this.$bus.$emit('getStudentData')
-        }else{
-          message(this,'error',res.msg)
+        } else {
+          message(this, 'error', res.msg)
         }
       })
     },
@@ -162,30 +162,30 @@ export default {
         this.startTime = arr.join('');
         this.endTime = timestampToTime(response.data.produceOrderInfo.end_time).split(' ')[1]
         // this.changeTime(response.data.produceOrderInfo.end_time - Math.round(new Date() / 1000))
-       this.rest.currentTime = response.data.current_time
+        this.rest.currentTime = response.data.current_time
 
-       this.changeTime()
+        this.changeTime()
       })
     },
     // 转换时间格式
     changeTime () {
-    //  console.log( timestampToTime(this.rest.currentTime ),'qqq');
-    //  console.log( timestampToTime(this.rest.creatTime ),'eee');
-    //  console.log(this.rest.currentTime-this.rest.creatTime,'倒计时');
-     let restTime = this.rest.currentTime-this.rest.creatTime
-      if(restTime<=1800){//在有效期内
-        this.restSecond = 1800-restTime
+      //  console.log( timestampToTime(this.rest.currentTime ),'qqq');
+      //  console.log( timestampToTime(this.rest.creatTime ),'eee');
+      //  console.log(this.rest.currentTime-this.rest.creatTime,'倒计时');
+      let restTime = this.rest.currentTime - this.rest.creatTime
+      if (restTime <= 1800) {//在有效期内
+        this.restSecond = 1800 - restTime
         // console.log(this.restSecond,'restSecond');
       }
       clearInterval(this.interval)
       this.interval = setInterval(() => {
-        if(this.restSecond<=0){
+        if (this.restSecond <= 0) {
           clearInterval(this.interval)
 
         }
         --this.restSecond
-        this.rest.minute = parseInt(this.restSecond/60)
-        this.rest.second = this.restSecond%60
+        this.rest.minute = parseInt(this.restSecond / 60)
+        this.rest.second = this.restSecond % 60
         // console.log(this.rest);
 
       }, 1000);
@@ -218,17 +218,17 @@ export default {
       this.socket.on('reconnect', function (msg) { })
     },
   },
-   beforeDestroy () {
+  beforeDestroy () {
     this.$bus.$off('getStudentData')
   },
 
   mounted () {
     //老师详情支付弹窗 teacherDetail
-    if(this.config=='teacherDetail'){
+    if (this.config == 'teacherDetail') {
       this.rest.creatTime = this.orderInfo.time
       this.rest.minute = 29
       this.rest.second = 59
-    }else{//个人中心-我的咨询-支付弹窗 myConsult
+    } else {//个人中心-我的咨询-支付弹窗 myConsult
       this.rest.creatTime = this.teacherInfo.update_time
       this.rest.minute = 0
       this.rest.second = 0

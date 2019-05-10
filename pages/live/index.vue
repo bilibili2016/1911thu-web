@@ -109,6 +109,7 @@ export default {
     },
     // 开始直播
     startPlay () {
+      this.begin = false
       live.getPlayAuthInfo(this.aliPlayer).then(res => {
         if (res.status == 0) {
           this.authInfo = res.data.data
@@ -122,7 +123,6 @@ export default {
     creatAliplayer () {
       this.aliWebrtc.startPreview(this.$refs.pushVideo).then((obj) => {
         // 3. 加入房间
-        console.log('我的房间号：', this.authInfo.channel);
         this.aliWebrtc.joinChannel(this.authInfo, this.userName).then((obj) => {
           // 入会成功
           this.aliWebrtc.muteLocalMic(false)
@@ -132,18 +132,26 @@ export default {
         }, (error) => {
           // 入会失败，这里console下error内容，可以看到失败原因
           message(this, "error", error.message);
+          this.stopPlay()
+          this.begin = true
         });
       }).catch((error) => {
         // 预览失败
         message(this, "error", error.message);
+        this.stopPlay()
+        this.begin = true
       });
     },
     // 4. 发布本地流
     publishLocalStreams () {
       this.aliWebrtc.publish().then((res) => {
-        console.log('发布流成功');
+        if (this.begin) {
+          this.begin = false
+        }
       }, (error) => {
         message(this, "error", error.message);
+        this.stopPlay()
+        this.begin = true
       });
     },
     // 事件监听
@@ -180,6 +188,9 @@ export default {
             .displayName);
           //   console.log(subscriber, video, stream, '对方的直播参数');
           this.aliWebrtc.setDisplayRemoteVideo(subscriber, video, stream)
+          if (this.begin) {
+            this.begin = false
+          }
         }
       });
       //   当频道里的其他人取消发布本地流时时触发
@@ -203,6 +214,8 @@ export default {
           error = "请重新登录：" + msg;
         }
         message(this, "error", "错误：" + msg);
+        this.stopPlay()
+        this.begin = true
       });
     },
     receivePublish (publisher) {
@@ -210,10 +223,12 @@ export default {
         displayName = publisher.displayName;
       //5.订阅remote流
       this.aliWebrtc.subscribe(publisherId).then((subscribeCallId) => {
-        console.log("订阅remote流");
+        this.begin = false
 
       }, (error) => {
         message(this, "error", error.message);
+        this.stopPlay()
+        this.begin = true
       });
     },
     // 获取显示远程视频
@@ -245,6 +260,12 @@ export default {
         this.aliWebrtc.muteLocalMic(true)
         this.aliWebrtc.muteLocalCamera(true)
         this.aliWebrtc.stopPreview()
+      }
+      // 直播已经结束
+      if (parseInt(this.time.end_time) < this.time.service_time) {
+        this.isOver = true;
+      } else {
+        this.begin = true;
       }
     },
     // 关闭即将结束

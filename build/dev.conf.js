@@ -36,10 +36,6 @@ config.analyze = {
     async: true
   },
   {
-    src: 'https://js.1911edu.com/swfobject.js',
-    async: true
-  },
-  {
     src: 'https://js.1911edu.com/aliyun-webrtc-sdk-1.6.0.min.js',
     async: true
   },
