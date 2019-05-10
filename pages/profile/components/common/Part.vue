@@ -121,6 +121,7 @@ export default {
   },
   methods: {
     goToPay(teacher){
+       IEPopup("pane-tab-twelfth", "-ms-page", 0);
       this.showPay=true
       this.teacherPayData = teacher;
       this.orderInfo.id=teacher.id
@@ -128,6 +129,7 @@ export default {
      // 支付弹框关闭的回调
     closePayed () {
       this.showPay = !this.showPay;
+      IEPopup("pane-tab-twelfth", "relative", 1);
     },
     getUserInfo () {
       banner.getUserInfo().then(res => {
@@ -144,6 +146,7 @@ export default {
     closeDetailPop () {
       this.isShowDetail = false;
       IEPopup("pane-tab-twelfth", "relative", 1);
+      IEPopup("pane-tab-thirteenth", "relative", 1);
     },
     handleDetail (item) {
       this.isConfirm = false;
@@ -153,6 +156,7 @@ export default {
       myTeacher.BespokeDetail({ id: item.id, type: this.type }).then(res => {
         if (res.status == 0) {
           IEPopup("pane-tab-twelfth", "-ms-page", 0);
+          IEPopup("pane-tab-thirteenth", "-ms-page", 0);
           this.isShowDetail = true;
           this.appointInfo = res.data.teacherBespokeDetail;
           // this.handleGoTo("timeTable");

@@ -131,7 +131,7 @@
                       <div class="uploadMask">
                         <i class="el-icon-plus"></i>
                       </div>
-                      <span class="imgAlert">图片不能超过10M，审核通过后你的照片用来在名师智库展示</span>
+                      <span class="imgAlert">图片不能超过10M，审核通过后您的照片用来在名师智库展示</span>
                     </div>
                     <p class="uploadP" v-show="!isShowImg">
                       <span class="uploadImgs"><img :src="teacherForm.photo" alt=""></span>
@@ -210,7 +210,7 @@
                       <div class="uploadMask">
                         <i class="el-icon-plus"></i>
                       </div>
-                      <span class="imgAlert">图片不能超过10M，审核通过后你的照片用来在名师智库展示</span>
+                      <span class="imgAlert">图片不能超过10M，审核通过后您的照片用来在名师智库展示</span>
                     </div>
                     <p class="uploadP" v-show="!isShowImg">
                       <span class="uploadImgs"><img :src="teacherForm.photo" alt=""></span>
