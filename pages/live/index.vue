@@ -159,48 +159,34 @@ export default {
       // 远程连接正在建立中时触发
       this.aliWebrtc.on('OnConnecting', (data) => {
         // console.log(data.displayName + " 正在建立连接中...");
-        // console.log(data.type);
       });
       // 完成连接建立时会触发
       this.aliWebrtc.on('OnConnected', (data) => {
         // console.log(data.displayName + " 连接已经建立");
-        // console.log(data.type);
       });
       this.aliWebrtc.on('onPublisher', (publisher) => {
         this.hvuex.publisherList.push(publisher);
-        //远程发布者ID
-        console.log("监听到远程视频", '啦啦啦啦啦啦啦啦啦啦啦');
-        //远程发布名字
-        console.log(publisher.displayName);
-        //远程流内容，streamConfigs是数组，mslabel字段就是streamId
-        console.log(publisher.streamConfigs);
-
         this.receivePublish(publisher);
       });
       //订阅remote流成功后，显示remote流
       this.aliWebrtc.on('onMediaStream', (subscriber, stream) => {
         if (subscriber.publishId != subscriber.subscribeId) {
-          var publisher = this.hvuex.publisherList.filter(item => {
+          let publisher = this.hvuex.publisherList.filter(item => {
             return item.publisherId === subscriber.publishId;
           });
           publisher.length > 0 ? publisher[0].subscribeId = subscriber.subscribeId : '';
           let video = this.getDisplayRemoteVideo(subscriber.publishId, subscriber.subscribeId, subscriber
             .displayName);
-          //   console.log(subscriber, video, stream, '对方的直播参数');
           this.aliWebrtc.setDisplayRemoteVideo(subscriber, video, stream)
-          if (this.begin) {
-            this.begin = false
-          }
+        }
+        if (this.begin) {
+          this.begin = false
         }
       });
       //   当频道里的其他人取消发布本地流时时触发
       this.aliWebrtc.on('onUnPublisher', (publisher) => {
-        //远程发布者ID,subscribe方法需要这个参数值
-        console.log(publisher.publisherId);
-        //远程发布名字
-        console.log(publisher.displayName);
-        //所在频道
-        console.log(publisher.channel);
+        console.log("频道里的其他人取消发布本地流");
+
       });
       //   当其他用户离开频道时触发
       this.aliWebrtc.on('onLeave', (data) => {
@@ -264,8 +250,9 @@ export default {
       // 直播已经结束
       if (parseInt(this.time.end_time) < this.time.service_time) {
         this.isOver = true;
-      } else {
-        this.begin = true;
+      }
+      if (parseInt(this.time.end_time) > this.time.service_time && parseInt(this.time.start_time) < this.time.service_time) {
+        this.begin = true
       }
     },
     // 关闭即将结束
@@ -297,6 +284,8 @@ export default {
         if (this.timer) {
           clearInterval(this.timer);
         }
+        this.begin = false
+        this.end = false
         this.countdown(1);
       } else {
         this.begin = true;

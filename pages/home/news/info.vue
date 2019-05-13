@@ -12,11 +12,16 @@
           <div class="newsLi" @click="goDetail(outNewData)">
             <div class="newImg">
               <img class="outImg" :src="outNewData.picture" alt="">
-              <div class="firstTime">{{changeTime(outNewData.create_time)}}</div>
             </div>
             <div class="info">
               <h4>{{outNewData.title}}</h4>
-              <p>{{outNewData.introduce}}</p>
+              <div class="flex">
+                <div class="time">
+                  <p class="day">{{changeTime(outNewData.create_time).substring(5,10)}}</p>
+                  <p class="year">{{changeTime(outNewData.create_time).substring(0,4)}}</p>
+                </div>
+                <p class="introduce">{{outNewData.introduce}}</p>
+              </div>
             </div>
 
           </div>
@@ -57,7 +62,7 @@ export default {
     "v-carousel": Carousel
   },
   props: ["newsListData", "outNewData", "linkfive", "link", "title"],
-  data() {
+  data () {
     return {
       infoDescs: null,
       infoArticles: null,
@@ -68,10 +73,10 @@ export default {
     };
   },
   methods: {
-    changeTime(time) {
+    changeTime (time) {
       return timestampToYMD(time);
     },
-    goDetail(news) {
+    goDetail (news) {
       news.type == "3"
         ? window.open(checkURL(news.media_link))
         : this.$router.push("/home/news/" + news.id);
