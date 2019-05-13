@@ -76,8 +76,8 @@ export default {
   data () {
     return {
       produceOrderInfo: '',
-      pay: false,
-      paySuccess: true,
+      pay: true,
+      paySuccess: false,
       payError: false,
       codeForm: {
         type: '4',
