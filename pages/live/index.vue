@@ -129,12 +129,13 @@ export default {
           this.aliWebrtc.muteLocalCamera(false)
 
           this.publishLocalStreams()
-        }, (error) => {
+        }).catch((error) => {
+          console.log(error, '入会失败，这里console下error内容，可以看到失败原因');
           // 入会失败，这里console下error内容，可以看到失败原因
           message(this, "error", error.message);
           this.stopPlay()
           this.begin = true
-        });
+        })
       }).catch((error) => {
         // 预览失败
         message(this, "error", error.message);
