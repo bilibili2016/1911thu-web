@@ -37,7 +37,7 @@
         </div>
       </div>
       <!-- 支付成功 -->
-      <div class="paySuccess" v-show="paySuccess">
+      <div :class="config!='myConsult'?'paySuccess': 'paySuccess profileScs'" v-show="paySuccess">
         <i @click="close" class="el-icon-close fr"></i>
         <img src="https://static-image.1911edu.com/success.png" alt>
         <h5>支付成功</h5>
