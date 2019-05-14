@@ -5,9 +5,9 @@
         <el-form-item label="真实姓名" prop="real_name">
           <el-input v-model="psnForm.real_name" maxlength="20"></el-input>
         </el-form-item>
-        <el-form-item label="学号" prop="student_number">
+        <!-- <el-form-item label="学号" prop="student_number">
           <el-input v-model="psnForm.student_number" readonly></el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="昵称" prop="nick_name">
           <el-input v-model="psnForm.nick_name"></el-input>
         </el-form-item>
