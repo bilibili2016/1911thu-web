@@ -35,7 +35,7 @@
                   </span>
                 </span>
                 <span v-if="teacher.result_status == 4" class="efficacy">已失效</span>
-                <span v-if="teacher.result_status == 6" class="wait">调整待确认</span>
+                <span v-if="teacher.result_status == 6" class="wait studentWait">调整待确认</span>
               </div>
             </div>
           </div>
