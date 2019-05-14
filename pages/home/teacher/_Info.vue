@@ -57,11 +57,11 @@
     </div>
     <!-- 未支付提醒弹框 -->
     <div class="unPayDiv" v-if="isShowProfile">
-     <div class="inner-con">
+      <div class="inner-con">
         <i class="el-icon-close" @click="closeProfile"></i>
         <p class="text">您还有未支付的预约，请您到“个人中心-我的咨询”完成支付</p>
         <span class="btn" @click="handleGoto">前往个人中心</span>
-     </div>
+      </div>
     </div>
     <v-appointment v-if="showAppointment" @closeForm="closeForm" :teacherInfo="teacherData" @goPay="goPay" :userInfo="userInfo" @unPay="unPay"></v-appointment>
     <v-pay v-if="showPay" @closePayed="closePayed" :userInfo="userInfo" :teacherInfo="teacherData" :orderInfo="orderInfo" :config="'teacherDetail'"></v-pay>
@@ -86,12 +86,12 @@ export default {
   },
   data () {
     return {
-      isShowProfile:false,
+      isShowProfile: false,
       showAppointment: false,
       showPay: false,
-      orderInfo:{
-        id:'',
-        time:''
+      orderInfo: {
+        id: '',
+        time: ''
       },
       userInfo: "",
       pageType: {
@@ -112,6 +112,9 @@ export default {
       tidForm: {
         tids: null
       },
+      gidForm: {
+        gids: ""
+      },
       teacherBg: "https://static-image.1911edu.com/teacher_bannerBG.png",
       loading: false,
       topicList: [
@@ -125,20 +128,23 @@ export default {
       ]
     };
   },
-  methods:{
-    closeProfile(){
-      this.isShowProfile=false
+  methods: {
+    ...mapActions("auth", ["setGid"]),
+    closeProfile () {
+      this.isShowProfile = false
     },
-    handleGoto(){
+    handleGoto () {
+      this.gidForm.gids = "tab-twelfth";
+      this.setGid(this.gidForm);
       this.$router.push("/profile");
       this.$bus.$emit("selectProfileIndex", 'tab-twelfth');
     },
-    unPay(){
-      this.showAppointment=false
+    unPay () {
+      this.showAppointment = false
       this.isShowProfile = true
     },
     goPay (data) {
-      console.log(data,'datat');
+      console.log(data, 'datat');
 
       this.showPay = true;
       this.orderInfo.id = data.id;

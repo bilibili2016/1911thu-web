@@ -5,8 +5,8 @@
         <div :class="[isShow?'index self':'self']">
           <video class="mediaCon" ref="pushVideo" autoplay></video>
         </div>
-        <div :class="[isShow?'playInner':'playInner index']">
-          <video class="pullVideo" autoplay ref="pullVideo"></video>
+        <div :class="[isShow?'playInner':'playInner index']" ref="playInner">
+          <!-- <video class="pullVideo" autoplay ref="pullVideo"></video> -->
         </div>
         <div class="time" v-if="showTime==1">直播将在{{min}}分{{second}}秒后开始</div>
         <div class="time" v-if="showTime==2">直播倒计时：{{min}}分{{second}}秒</div>
@@ -84,7 +84,7 @@ export default {
       gidForm: {
         gids: "tab-twelfth"
       },
-      time: ""
+      time: "",
     };
   },
   methods: {
@@ -121,13 +121,16 @@ export default {
     },
     // 2. 找到播放器预览
     creatAliplayer () {
+      console.log("准备创建推流播放器");
+
       this.aliWebrtc.startPreview(this.$refs.pushVideo).then((obj) => {
+        console.log("创建推流播放器成功");
         // 3. 加入房间
         this.aliWebrtc.joinChannel(this.authInfo, this.userName).then((obj) => {
+          console.log("推流播放器---加入房间");
           // 入会成功
           this.aliWebrtc.muteLocalMic(false)
           this.aliWebrtc.muteLocalCamera(false)
-
           this.publishLocalStreams()
         }).catch((error) => {
           console.log(error, '入会失败，这里console下error内容，可以看到失败原因');
@@ -146,6 +149,7 @@ export default {
     // 4. 发布本地流
     publishLocalStreams () {
       this.aliWebrtc.publish().then((res) => {
+        console.log(res, '-----发布本地流成功-----');
         if (this.begin) {
           this.begin = false
         }
@@ -163,22 +167,30 @@ export default {
       });
       // 完成连接建立时会触发
       this.aliWebrtc.on('OnConnected', (data) => {
-        // console.log(data.displayName + " 连接已经建立");
+        console.log(data.displayName + " 连接已经建立");
       });
       this.aliWebrtc.on('onPublisher', (publisher) => {
         this.hvuex.publisherList.push(publisher);
         this.receivePublish(publisher);
+        //远程发布者ID
+        console.log(publisher, '完成连接建立时会触发');
       });
       //订阅remote流成功后，显示remote流
       this.aliWebrtc.on('onMediaStream', (subscriber, stream) => {
+        console.log("订阅remote流成功后，显示remote流");
+
         if (subscriber.publishId != subscriber.subscribeId) {
+          console.log("进入视频判断");
+
           let publisher = this.hvuex.publisherList.filter(item => {
             return item.publisherId === subscriber.publishId;
           });
           publisher.length > 0 ? publisher[0].subscribeId = subscriber.subscribeId : '';
           let video = this.getDisplayRemoteVideo(subscriber.publishId, subscriber.subscribeId, subscriber
             .displayName);
+          console.log("插入视频之前");
           this.aliWebrtc.setDisplayRemoteVideo(subscriber, video, stream)
+          console.log("插入视频之后");
         }
         if (this.begin) {
           this.begin = false
@@ -186,13 +198,18 @@ export default {
       });
       //   当频道里的其他人取消发布本地流时时触发
       this.aliWebrtc.on('onUnPublisher', (publisher) => {
-        console.log("频道里的其他人取消发布本地流");
-
+        this.stopPlay()
+        console.log("频道里的其他人取消发布本地流-----将会重新发布本地流");
+        this.$alert("您当前的网络状况太差，导致视频中断，请点击继续直播重新建立连接。", "温馨提示", {
+          confirmButtonText: "继续直播",
+          callback: action => {
+            this.startPlay()
+          }
+        });
       });
       //   当其他用户离开频道时触发
       this.aliWebrtc.on('onLeave', (data) => {
         message(this, "info", "对方离开了频道");
-
       });
       //  当有错误发生时触发
       this.aliWebrtc.on('onError', (error) => {
@@ -220,7 +237,20 @@ export default {
     },
     // 获取显示远程视频
     getDisplayRemoteVideo (publisherId, subscribeCallId, displayName) {
-      return this.$refs.pullVideo;
+      //   this.$refs.playInner.innerHTML = ''
+      //   let div = document.createElement('div')
+      //   div.innerHTML = '<video class="pullVideo" autoplay ref="pullVideo"></video>'
+      //   this.$refs.playInner.appendChild(div)
+      //   return this.$refs.pullVideo;
+      $('.playInner').html('')
+      var id = subscribeCallId + '_' + publisherId;
+      var videoWrapper = $('#' + id);
+      if (videoWrapper.length == 0) {
+        videoWrapper = $('<div class="pullVideo" id=' + id +
+          ' style="width:100%;height:100%;"> <video autoplay="" style="width:100%;height:100%;"></video><div class="display-name"></div></div>');
+        $('.playInner').append(videoWrapper);
+      }
+      return videoWrapper.find('video')[0];
     },
     // 改变屏幕宽度重置播放器大小
     resize () {
