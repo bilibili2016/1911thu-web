@@ -121,9 +121,13 @@ export default {
     },
     // 2. 找到播放器预览
     creatAliplayer () {
+      console.log("准备创建推流播放器");
+
       this.aliWebrtc.startPreview(this.$refs.pushVideo).then((obj) => {
+        console.log("创建推流播放器成功");
         // 3. 加入房间
         this.aliWebrtc.joinChannel(this.authInfo, this.userName).then((obj) => {
+          console.log("推流播放器---加入房间");
           // 入会成功
           this.aliWebrtc.muteLocalMic(false)
           this.aliWebrtc.muteLocalCamera(false)
