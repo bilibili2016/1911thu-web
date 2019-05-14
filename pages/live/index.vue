@@ -173,14 +173,20 @@ export default {
       });
       //订阅remote流成功后，显示remote流
       this.aliWebrtc.on('onMediaStream', (subscriber, stream) => {
+        console.log("订阅remote流成功后，显示remote流");
+
         if (subscriber.publishId != subscriber.subscribeId) {
+          console.log("进入视频判断");
+
           let publisher = this.hvuex.publisherList.filter(item => {
             return item.publisherId === subscriber.publishId;
           });
           publisher.length > 0 ? publisher[0].subscribeId = subscriber.subscribeId : '';
           let video = this.getDisplayRemoteVideo(subscriber.publishId, subscriber.subscribeId, subscriber
             .displayName);
+          console.log("插入视频之前");
           this.aliWebrtc.setDisplayRemoteVideo(subscriber, video, stream)
+          console.log("插入视频之后");
         }
         if (this.begin) {
           this.begin = false
