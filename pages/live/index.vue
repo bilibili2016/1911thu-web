@@ -147,7 +147,6 @@ export default {
     publishLocalStreams () {
       this.aliWebrtc.publish().then((res) => {
         console.log(res, '-----发布本地流成功-----');
-
         if (this.begin) {
           this.begin = false
         }
@@ -172,8 +171,6 @@ export default {
         this.receivePublish(publisher);
         //远程发布者ID
         console.log(publisher, '完成连接建立时会触发');
-
-        console.log("远程发布者ID=" + publisher.publisherId, "远程发布名字=" + publisher.displayName, '远程流内容=' + publisher.streamConfigs);
       });
       //订阅remote流成功后，显示remote流
       this.aliWebrtc.on('onMediaStream', (subscriber, stream) => {
@@ -182,14 +179,9 @@ export default {
             return item.publisherId === subscriber.publishId;
           });
           publisher.length > 0 ? publisher[0].subscribeId = subscriber.subscribeId : '';
-          console.log('准备展示视频');
-
           let video = this.getDisplayRemoteVideo(subscriber.publishId, subscriber.subscribeId, subscriber
             .displayName);
-          console.log(stream, 'stream');
-          console.log('标签已经插入展示视频');
           this.aliWebrtc.setDisplayRemoteVideo(subscriber, video, stream)
-          console.log('已经展示视频');
         }
         if (this.begin) {
           this.begin = false
@@ -198,26 +190,10 @@ export default {
       //   当频道里的其他人取消发布本地流时时触发
       this.aliWebrtc.on('onUnPublisher', (publisher) => {
         console.log("频道里的其他人取消发布本地流-----将会重新发布本地流");
-
       });
       //   当其他用户离开频道时触发
       this.aliWebrtc.on('onLeave', (data) => {
         message(this, "info", "对方离开了频道");
-
-        // 离开频道时  重新加入
-        this.aliWebrtc.joinChannel(this.authInfo, this.userName).then((obj) => {
-          // 入会成功
-          this.aliWebrtc.muteLocalMic(false)
-          this.aliWebrtc.muteLocalCamera(false)
-
-          this.publishLocalStreams()
-        }).catch((error) => {
-          console.log(error, '入会失败，这里console下error内容，可以看到失败原因');
-          // 入会失败，这里console下error内容，可以看到失败原因
-          message(this, "error", error.message);
-          this.stopPlay()
-          this.begin = true
-        })
       });
       //  当有错误发生时触发
       this.aliWebrtc.on('onError', (error) => {
@@ -253,16 +229,11 @@ export default {
       $('.playInner').html('')
       var id = subscribeCallId + '_' + publisherId;
       var videoWrapper = $('#' + id);
-      console.log(videoWrapper, 'videoWrapper');
-
       if (videoWrapper.length == 0) {
-        videoWrapper = $('<div class="remote-subscriber" id=' + id +
-          '> <video autoplay=""></video><div class="display-name"></div></div>');
+        videoWrapper = $('<div class="pullVideo" id=' + id +
+          ' style="width:100%;height:100%;"> <video autoplay="" style="width:100%;height:100%;"></video><div class="display-name"></div></div>');
         $('.playInner').append(videoWrapper);
       }
-      // videoWrapper.find('.display-name').text(displayName);
-      console.log(videoWrapper.find('video')[0]);
-
       return videoWrapper.find('video')[0];
     },
     // 改变屏幕宽度重置播放器大小
