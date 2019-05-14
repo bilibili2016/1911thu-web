@@ -204,6 +204,20 @@ export default {
       this.aliWebrtc.on('onLeave', (data) => {
         message(this, "info", "对方离开了频道");
 
+        // 离开频道时  重新加入
+        this.aliWebrtc.joinChannel(this.authInfo, this.userName).then((obj) => {
+          // 入会成功
+          this.aliWebrtc.muteLocalMic(false)
+          this.aliWebrtc.muteLocalCamera(false)
+
+          this.publishLocalStreams()
+        }).catch((error) => {
+          console.log(error, '入会失败，这里console下error内容，可以看到失败原因');
+          // 入会失败，这里console下error内容，可以看到失败原因
+          message(this, "error", error.message);
+          this.stopPlay()
+          this.begin = true
+        })
       });
       //  当有错误发生时触发
       this.aliWebrtc.on('onError', (error) => {
@@ -248,9 +262,6 @@ export default {
       }
       // videoWrapper.find('.display-name').text(displayName);
       console.log(videoWrapper.find('video')[0]);
-      console.log();
-
-
 
       return videoWrapper.find('video')[0];
     },
