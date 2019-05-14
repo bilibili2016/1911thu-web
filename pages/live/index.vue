@@ -382,7 +382,7 @@ export default {
     window.addEventListener("resize", this.resize);
     window.onbeforeunload = function (e) {
       //   console.log("window.onbeforeunload,window.onbeforeunload,window.onbeforeunload");
-      this.stopPlay();
+      //   this.stopPlay();
     };
     this.teacherBespokeInfo();
     if (this.timer) {
