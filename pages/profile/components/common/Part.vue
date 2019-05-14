@@ -26,7 +26,7 @@
               </div>
               <div v-else>
                 <span v-if="teacher.result_status == 1" class="waitPay" @click="goToPay(teacher)">等待支付</span>
-                <span v-if="teacher.result_status == 2" class="wait studentWait" >等待预约确认</span>
+                <span v-if="teacher.result_status == 2" class="wait studentWait">等待预约确认</span>
                 <span v-if="teacher.result_status == 3">
                   <span v-if="(Number(teacher.start_time)-teacher.service_time)/60>5" class="soon">等待开始</span>
                   <span v-else>
@@ -55,14 +55,15 @@
           <div class="btn clearfix">
             <div class="fl">￥{{teacher.price}}</div>
             <div class="fr">
-               <div v-if='isOver'>
+              <div v-if='isOver'>
                 <span class="efficacy">已失效</span>
               </div>
               <div v-else>
                 <span v-if="teacher.result_status == 2" class="wait" @click="handleConfirm(teacher)">等待预约确认</span>
                 <span v-if="teacher.result_status == 3">
                   <span v-if="(Number(teacher.start_time)-teacher.service_time)/60>5" class="soon">等待开始</span>
-                  <span v-else>
+                  <span v-if="(Number(teacher.start_time)-teacher.service_time)>=0&&(Number(teacher.start_time)-teacher.service_time)/60<=5" class="begin" @click="goLive(teacher)">等待开始</span>
+                  <span v-if="(Number(teacher.start_time)-teacher.service_time)<=0">
                     <span v-if="Number(teacher.end_time)-teacher.service_time>0" class="begin" @click="goLive(teacher)">进入直播</span>
                     <span v-else class="end">已结束</span>
                   </span>
@@ -91,13 +92,13 @@
 
 <script>
 import { timestampToTime, message, IEPopup } from "@/lib/util/helper";
-import { myTeacher,banner } from "~/lib/v1_sdk/index";
+import { myTeacher, banner } from "~/lib/v1_sdk/index";
 import NoMsg from "@/pages/profile/components/common/noMsg.vue";
 import Info from "@/pages/profile/components/common/appointInfo.vue";
 import Pay from "@/pages/home/teacher/components/Pay.vue";
 
 export default {
-  props: ["teacherData", "config", "teacherPagemsg","isOver",'userInfo'],
+  props: ["teacherData", "config", "teacherPagemsg", "isOver", 'userInfo'],
   components: {
     "v-nomsg": NoMsg,
     "v-appointinfo": Info,
@@ -105,12 +106,12 @@ export default {
   },
   data () {
     return {
-      showPay:false,
-      isConfirm:false,
+      showPay: false,
+      isConfirm: false,
       isShowDetail: false,
       appointInfo: "",
-      teacherPayData:'',
-      orderInfo:{id:''},
+      teacherPayData: '',
+      orderInfo: { id: '' },
       noMsg: {
         type: "myTeacher",
         text: "您暂未加入任何学院，快去加入吧！"
@@ -120,13 +121,13 @@ export default {
     };
   },
   methods: {
-    goToPay(teacher){
-       IEPopup("pane-tab-twelfth", "-ms-page", 0);
-      this.showPay=true
+    goToPay (teacher) {
+      IEPopup("pane-tab-twelfth", "-ms-page", 0);
+      this.showPay = true
       this.teacherPayData = teacher;
-      this.orderInfo.id=teacher.id
+      this.orderInfo.id = teacher.id
     },
-     // 支付弹框关闭的回调
+    // 支付弹框关闭的回调
     closePayed () {
       this.showPay = !this.showPay;
       IEPopup("pane-tab-twelfth", "relative", 1);
@@ -139,7 +140,7 @@ export default {
       });
     },
     //待确认
-    handleConfirm(item){
+    handleConfirm (item) {
       this.isConfirm = true;
       this.BespokeDetail(item)
     },
@@ -152,7 +153,7 @@ export default {
       this.isConfirm = false;
       this.BespokeDetail(item)
     },
-    BespokeDetail(item){
+    BespokeDetail (item) {
       myTeacher.BespokeDetail({ id: item.id, type: this.type }).then(res => {
         if (res.status == 0) {
           IEPopup("pane-tab-twelfth", "-ms-page", 0);
@@ -184,7 +185,7 @@ export default {
       this.noMsg.text = "你暂时没有已预约的直播咨询，快去名师智库预约导师吧。";
       this.type = 1;
     }
-     this.$bus.$on("closeDetailPop", () => {
+    this.$bus.$on("closeDetailPop", () => {
       this.closeDetailPop();
     });
   }
