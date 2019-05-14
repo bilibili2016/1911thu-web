@@ -198,7 +198,6 @@ export default {
       //   当频道里的其他人取消发布本地流时时触发
       this.aliWebrtc.on('onUnPublisher', (publisher) => {
         console.log("频道里的其他人取消发布本地流-----将会重新发布本地流");
-        this.publishLocalStreams()
 
       });
       //   当其他用户离开频道时触发
