@@ -185,13 +185,21 @@ export default {
      let restTime = this.rest.currentTime-this.rest.creatTime
       if(restTime<=1800){//在有效期内
         this.restSecond = 1800-restTime
+        // this.restSecond = 10
+
       }
 
       clearInterval(this.interval)
       this.interval = setInterval(() => {
         if(this.restSecond<=1){
-          this.cancelAppoint()
+          // this.cancelAppoint()
           clearInterval(this.interval)
+          if(this.config=='teacherDetail'){
+            this.close()
+          }else{//个人中心-我的咨询-支付弹窗 myConsult
+            this.$emit('close')
+            this.$bus.$emit('getStudentData')
+          }
         }
         --this.restSecond
         this.rest.minute = parseInt(this.restSecond/60)
