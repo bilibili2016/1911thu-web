@@ -49,6 +49,29 @@
     }
   }
 
+  h4 {
+    height: 60px;
+    line-height: 60px;
+    border-bottom: 1px solid #E8D6F7;
+    padding-left: 40px;
+    color: #222;
+    font-size: 16px;
+
+    // margin-bottom: 60px;
+    span {
+      margin-right: 5px;
+      cursor: pointer;
+
+      &.active {
+        color: #773084;
+      }
+
+      &:hover {
+        color: #773084;
+      }
+    }
+  }
+
   .table {
     padding: 30px 40px;
 
@@ -108,7 +131,6 @@
             color: #6585D1;
             border-color: #6585D1;
             font-size: 12px;
-
           }
 
           .readyStart {}
@@ -120,7 +142,11 @@
           .enterLive {
             background-color: #844490;
             color: #fff;
+          }
 
+          .delete {
+            color: red;
+            cursor: pointer;
           }
         }
 
@@ -131,6 +157,24 @@
         .confirmed {
           color: #06BB09;
         }
+      }
+    }
+
+    .inputConfirm {
+      width: 160px;
+      height: 42px;
+      line-height: 42px;
+      background-color: #773084;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 21px;
+      text-align: center;
+      cursor: pointer;
+      margin: 0 auto;
+      margin-top: 30px;
+
+      &:hover {
+        background-color: #5f068d;
       }
     }
   }

@@ -10,7 +10,7 @@
             <span>{{userInfo.nick_name}}</span>
           </div>
           <div>
-            <p>咨询的导师：{{teacherInfo.teacher_name}}</p>
+            <p>咨询的导师：{{teacherInfo.teacher_name?teacherInfo.teacher_name:teacherInfo.teacher_user_name}}</p>
             <p>咨询费用：{{produceOrderInfo.price}}元</p>
           </div>
         </div>
@@ -30,17 +30,19 @@
           </div>
         </div>
         <div class="bottom">
+          <p>预约已锁定，请在30分种内完成支付，支付剩余时间{{rest.minute}}分{{rest.second}}秒。</p>
           <!-- <p>截止支付时间：{{endTime}}</p>
           <p>倒计时：{{minute}}分{{second}}秒</p> -->
+          <span v-if="config=='myConsult'" class="cancelBtn" @click="cancelAppoint">取消预约</span>
         </div>
       </div>
       <!-- 支付成功 -->
-      <div class="paySuccess" v-show="paySuccess">
+      <div :class="config!='myConsult'?'paySuccess': 'paySuccess profileScs'" v-show="paySuccess">
         <i @click="close" class="el-icon-close fr"></i>
         <img src="https://static-image.1911edu.com/success.png" alt>
         <h5>支付成功</h5>
         <div class="goodsTime">
-          <p>亲爱的{{userInfo.real_name}}，您已预约咨询{{teacherInfo.teacher_name}}导师，预约时间为{{startTime}}-{{endTime}},请等待导师的确认信息。您可以通过“个人中心-我的咨询”查看预约状态，时间确定后，请提前5分钟进入直播间。</p>
+          <p>亲爱的{{userInfo.real_name}}，您已预约咨询{{teacherInfo.teacher_name?teacherInfo.teacher_name:teacherInfo.teacher_user_name}}导师，预约时间为{{startTime}}-{{endTime}},请等待导师的确认信息。<span v-if="config!='myConsult'">您可以通过“个人中心-我的咨询”查看预约状态，</span>时间确定后，请提前5分钟进入直播间。</p>
         </div>
         <div class="focus">
           <p>关注1911学堂公众号，第一时间获得1911学堂资讯！</p>
@@ -48,7 +50,7 @@
           <p></p>
         </div>
         <div class="goodsBtn">
-          <span @click="lookAppointment">前往个人中心</span>
+          <span v-if="config!='myConsult'" @click="lookAppointment">前往个人中心</span>
         </div>
       </div>
       <!-- 支付失败 -->
@@ -70,7 +72,7 @@ import { home, pay, wepay } from '~/lib/v1_sdk/index'
 import { matchSplits, getNet, timestampToTime } from '@/lib/util/helper'
 Vue.component(VueQrcode.name, VueQrcode)
 export default {
-  props: ['config', 'userInfo', 'teacherInfo', 'orderId'],
+  props: ['config', 'userInfo', 'teacherInfo', 'orderInfo'],
   data () {
     return {
       produceOrderInfo: '',
@@ -98,6 +100,16 @@ export default {
       interval: '',
       gidForm: {
         gids: ''
+      },
+      rest: {
+        minute: '',
+        second: '',
+        currentTime: "",
+        creatTime: ""
+      },
+      restSecond: null,
+      cancelForm: {
+        id: ''
       }
     }
   },
@@ -108,10 +120,37 @@ export default {
     ...mapActions('auth', ['setGid']),
     ...mapMutations('auth', ['setClosePay']),
     close () {
+      clearInterval(this.interval)
       this.pay = false;
       this.paySuccess = false;
       this.payError = false;
       this.$emit('closePayed')
+      if (this.config == 'myConsult') {
+        this.$bus.$emit('getStudentData')
+      }
+    },
+    //个人中心-我的咨询-取消预约
+    cancelAppoint () {
+      //老师详情支付弹窗 teacherDetail
+      if (this.config == 'teacherDetail') {
+        this.cancelForm.id = this.orderInfo.id
+      } else {//个人中心-我的咨询-支付弹窗 myConsult
+        this.cancelForm.id = this.teacherInfo.id
+      }
+      home.cancelAppoint(this.cancelForm).then(res => {
+        if (res.status == 0) {
+          clearInterval(this.interval)
+          //老师详情支付弹窗 teacherDetail
+          if (this.config == 'teacherDetail') {
+            this.close()
+          } else {//个人中心-我的咨询-支付弹窗 myConsult
+            this.$emit('close')
+            this.$bus.$emit('getStudentData')
+          }
+        } else {
+          message(this, 'error', res.msg)
+        }
+      })
     },
     lookAppointment () {
       this.close()
@@ -136,25 +175,37 @@ export default {
         this.startTime = arr.join('');
         this.endTime = timestampToTime(response.data.produceOrderInfo.end_time).split(' ')[1]
         // this.changeTime(response.data.produceOrderInfo.end_time - Math.round(new Date() / 1000))
+        this.rest.currentTime = response.data.current_time
+
+        this.changeTime()
       })
     },
     // 转换时间格式
-    changeTime (time) {
-      if (time <= 0) {
-        clearInterval(this.interval);
-        return false;
+    changeTime () {
+     let restTime = this.rest.currentTime-this.rest.creatTime
+      if(restTime<=1800){//在有效期内
+        this.restSecond = 1800-restTime
+        // this.restSecond = 10
+
       }
-      this.minute = parseInt(time / 60);
-      this.second = time % 60;
+
+      clearInterval(this.interval)
       this.interval = setInterval(() => {
-        this.second > 0
-          ? this.second--
-          : this.minute > 0
-            ? (this.minute-- , (this.second = 59))
-            : (this.minute = 0);
-        if (this.second == 0 && this.minute == 0) {
-          clearInterval(this.interval);
+        if(this.restSecond<=1){
+          // this.cancelAppoint()
+          clearInterval(this.interval)
+          if(this.config=='teacherDetail'){
+            this.close()
+          }else{//个人中心-我的咨询-支付弹窗 myConsult
+            this.$emit('close')
+            this.$bus.$emit('getStudentData')
+          }
         }
+        --this.restSecond
+        this.rest.minute = parseInt(this.restSecond / 60)
+        this.rest.second = this.restSecond % 60
+        // console.log(this.rest);
+
       }, 1000);
     },
     getStatus () {
@@ -185,10 +236,27 @@ export default {
       this.socket.on('reconnect', function (msg) { })
     },
   },
+  beforeDestroy () {
+    this.$bus.$off('getStudentData')
+  },
+
   mounted () {
-    this.codeForm.ids = this.orderId
+    //老师详情支付弹窗 teacherDetail
+    if (this.config == 'teacherDetail') {
+      this.rest.creatTime = this.orderInfo.time
+      this.rest.minute = 29
+      this.rest.second = 59
+    } else {//个人中心-我的咨询-支付弹窗 myConsult
+      this.rest.creatTime = this.teacherInfo.update_time
+      this.rest.minute = 0
+      this.rest.second = 0
+
+    }
+    this.codeForm.ids = this.orderInfo.id
     this.getStatus()
     this.getCode()
+    clearInterval(this.interval)
+
   }
 }
 </script>

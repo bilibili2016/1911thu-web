@@ -9,6 +9,8 @@
     <v-inputtime v-if="isShowInputTime"></v-inputtime>
     <!-- 修改时间 -->
     <v-updatetime v-if="isShowUpdateTime" :timeID="timeID"></v-updatetime>
+    <!-- 预览可预约时间表 -->
+    <v-previewtime v-if="isShowPreviewTimeTable" :bespokeList="bespokeList"></v-previewtime>
   </el-card>
 </template>
 
@@ -18,6 +20,7 @@ import List from "@/pages/profile/components/myteacher/list.vue";
 import timeTable from "@/pages/profile/components/myteacher/timeTable.vue";
 import inputTime from "@/pages/profile/components/myteacher/inputTime.vue";
 import updateTime from "@/pages/profile/components/myteacher/updateTime.vue";
+import previewTimeTable from "@/pages/profile/components/myteacher/previewTimeTable.vue";
 
 export default {
   props: ["data", "teacherPagemsg"],
@@ -25,7 +28,8 @@ export default {
     "v-list": List,
     "v-tabletime": timeTable,
     "v-inputtime": inputTime,
-    "v-updatetime": updateTime
+    "v-updatetime": updateTime,
+    'v-previewtime':previewTimeTable
   },
   data() {
     return {
@@ -33,7 +37,9 @@ export default {
       isShowTimeTable: false,
       isShowInputTime: false,
       isShowUpdateTime: false,
-      timeID: ""
+      isShowPreviewTimeTable:false,
+      timeID: "",
+      bespokeList:''
     };
   },
   methods: {
@@ -47,6 +53,8 @@ export default {
       this.isShowTimeTable = false;
       this.isShowInputTime = false;
       this.isShowUpdateTime = false;
+      this.isShowPreviewTimeTable = false;
+
       switch (data.name) {
         case "list":
           this.isShowList = true;
@@ -61,6 +69,10 @@ export default {
         case "updateTime":
           this.isShowUpdateTime = true;
           this.timeID = data.id;
+          break;
+        case "previewTimeTable":
+          this.isShowPreviewTimeTable = true;
+          this.bespokeList = data.data
           break;
         default:
           break;

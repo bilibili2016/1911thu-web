@@ -28,7 +28,7 @@ export default {
     backendHeader,
     backendFooter
   },
-  data() {
+  data () {
     return {
       HFShow: true,
       showNetwork: false,
@@ -37,7 +37,7 @@ export default {
     };
   },
   methods: {
-    fetchUrl() {
+    fetchUrl () {
       //检测网络连接情况
       if (navigator.onLine) {
         this.showNetwork = false;
@@ -52,9 +52,11 @@ export default {
       ) {
         //路有改变判断登录状态,后台预览页不需要验证
         this.$bus.$emit("getUserInfo");
+        //路由改变消除掉直播的播放器
+        this.$bus.$emit("stopPlay");
       }
     },
-    addHandler(element, type, handler) {
+    addHandler (element, type, handler) {
       if (element.addEventListener) {
         element.addEventListener(type, handler, false);
       } else if (element.attachEvent) {
@@ -63,7 +65,7 @@ export default {
         element["on" + type] = handler;
       }
     },
-    removeHandler(element, type, handler) {
+    removeHandler (element, type, handler) {
       if (element.removeEventListener) {
         element.removeEventListener(type, handler, false);
       } else if (element.detachEvent) {
@@ -73,7 +75,7 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     if (document.getElementsByClassName("headerBox")[0]) {
       document.getElementsByClassName("headerBox")[0].style.display = "inline";
       document.getElementsByClassName("footerBox")[0].style.display = "inline";
@@ -103,10 +105,10 @@ export default {
     });
 
     // 检测网络情况
-    this.addHandler(window, "online", function() {
+    this.addHandler(window, "online", function () {
       this.showNetwork = false;
     });
-    this.addHandler(window, "offline", function() {
+    this.addHandler(window, "offline", function () {
       this.showNetwork = true;
     });
   },

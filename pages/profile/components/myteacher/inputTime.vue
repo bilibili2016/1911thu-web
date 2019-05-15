@@ -23,14 +23,14 @@
       </div>
     </div>
     <div class="btns">
-      <span class="btn" @click="validate">确定</span>
+      <span class="btn" @click="validate()">下一步</span>
+      <!-- <span class="btn" @click="validate">确定</span> -->
     </div>
   </div>
 </template>
 <script>
 import { myTeacher } from "~/lib/v1_sdk/index";
 import { message } from "~/lib/util/helper";
-
 export default {
   data () {
     return {
@@ -52,7 +52,6 @@ export default {
       computedTime: ""
     };
   },
-
   methods: {
     handleChange () {
       this.appointTimeForm.endTime = "";
@@ -63,8 +62,8 @@ export default {
       let obj = { name: url };
       this.$bus.$emit("gotoURL", obj);
     },
-    validate () {
-      try {
+    next(){
+     try {
         if (this.appointTimeForm.date == "") throw "请选择可以预约的日期";
         if (this.appointTimeForm.startTime == "")
           throw "请选择可以预约的开始时间";
@@ -72,18 +71,40 @@ export default {
           throw "请选择可以预约的结束时间";
       } catch (error) {
         message(this, "error", error);
+        return false
       }
+      let obj = { name: 'previewTimeTable' };
+      this.$bus.$emit("gotoURL", obj);
+    },
+    validate () {
+      //  try {
+      //   if (this.appointTimeForm.date == "") throw "请选择可以预约的日期";
+      //   if (this.appointTimeForm.startTime == "")
+      //     throw "请选择可以预约的开始时间";
+      //   if (this.appointTimeForm.endTime == "")
+      //     throw "请选择可以预约的结束时间";
+      // } catch (error) {
+      //   message(this, "error", error);
+      //   return false
+      // }
       this.form.date = this.appointTimeForm.date;
       this.form.startTime = this.appointTimeForm.startTime.split(":")[0];
       this.form.endTime = this.appointTimeForm.endTime.split(":")[0];
       myTeacher.doBespokeTime(this.form).then(res => {
         if (res.status == 0) {
-          this.handleGoTo("timeTable");
+          // this.handleGoTo("timeTable");
+           let obj = { name: 'previewTimeTable' ,data:res.data.bespokeList};
+           this.$bus.$emit("gotoURL", obj);
         } else {
           message(this, "error", res.msg);
         }
       });
     }
+  },
+  mounted(){
+     this.$bus.$on('confirmInput',()=>{
+      this.validate();
+    })
   }
 };
 </script>

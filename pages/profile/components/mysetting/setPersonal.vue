@@ -5,9 +5,9 @@
         <el-form-item label="真实姓名" prop="real_name">
           <el-input v-model="psnForm.real_name" maxlength="20"></el-input>
         </el-form-item>
-        <el-form-item label="学号" prop="student_number">
+        <!-- <el-form-item label="学号" prop="student_number">
           <el-input v-model="psnForm.student_number" readonly></el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="昵称" prop="nick_name">
           <el-input v-model="psnForm.nick_name"></el-input>
         </el-form-item>
@@ -84,9 +84,9 @@ export default {
   data() {
      var bankCard = (rule, value, callback) => {
       if(this.oldCard !=this.psnForm.bank_card && this.psnForm.bank_card!=''){
-        if (!((/^[0-9]{8,20}$/).test(value))){
+        if (!((/^[0-9]{16,20}$/).test(value))){
           callback(
-            new Error("请输入8-20位数字")
+            new Error("请输入16-20位数字")
           );
         }
       }
@@ -202,12 +202,12 @@ export default {
           }
         ],
         bank_card: [
-          { required: false, message: "请输入8-20位数字" },
+          { required: false, message: "请输入16-20位数字" },
           {
             min: 8,
             max: 20,
             message:
-              "请输入8-20位数字",
+              "请输入16-20位数字",
             trigger: "blur"
           },
           {

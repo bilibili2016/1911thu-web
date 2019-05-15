@@ -86,7 +86,7 @@
           <span slot="label" class="tabList">
             <i class="icon-student"></i>&nbsp;我的咨询
           </span>
-          <v-mystudent :data="teacherData" :teacherPagemsg="teacherPagemsg" @getTeacherData="getTeacherData"></v-mystudent>
+          <v-mystudent :data="teacherData" :teacherPagemsg="teacherPagemsg" @getTeacherData="getTeacherData"  :userInfo="userInfo"></v-mystudent>
         </el-tab-pane>
         <!-- 教师入口  -->
         <el-tab-pane class="my-course my-teacher" name="tab-thirteenth" v-if="userInfo.is_teacher=='1'">
@@ -1144,6 +1144,9 @@ export default {
     });
     this.$bus.$on('getTeacherData',()=>{
       this.getTeacherData({statusType: 1,type: 2});
+    })
+    this.$bus.$on('getStudentData',()=>{
+      this.getTeacherData({statusType: 1,type: 1});
     })
 
     this.infoNum = persistStore.get("infoNum");

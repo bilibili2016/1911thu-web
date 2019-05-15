@@ -35,8 +35,9 @@
     <transition :name="transitionName">
       <div class="back-to-ceiling hasColor customStyleTwo" v-show="visible">
         <span></span>
-        <div class="telShow">
-          <p>咨询电话：18516821911</p>
+        <div class="telShow consult">
+          <p>客服热线：010-62701911-628，</p>
+          <p>工作时间：工作日 9:00-18:00。</p>
         </div>
       </div>
     </transition>

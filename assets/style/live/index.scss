@@ -7,7 +7,7 @@
   bottom: 0;
   right: 0;
   background-color: #181818;
-  z-index: 99999999;
+  z-index: 2;
 
   .liveCon {
     position: relative;
@@ -22,17 +22,6 @@
         background: url('https://static-image.1911edu.com/live-bg1.png') no-repeat;
         background-size: cover;
         position: relative;
-
-        .mediaCon {
-          width: 100%;
-          height: 100%;
-          background: url('https://static-image.1911edu.com/live-bg1.png') no-repeat;
-          background-size: cover;
-
-          .prism-ErrorMessage {
-            display: none !important;
-          }
-        }
       }
 
       .index {
@@ -40,27 +29,15 @@
       }
 
       .self {
-        width: 100%;
-        padding: 20px 0;
+        width: 300px;
+        height: 225px;
         position: absolute;
-        left: 0;
-        top: 0;
+        right: 10px;
+        top: 10px;
 
-        .tbliveDiv {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 580px;
-          height: 430px;
-          z-index: 10
-        }
-
-        .embedDiv {
-          position: absolute;
-          top: 0;
-          left: 0;
-          background-color: #626262;
-          z-index: 10
+        video {
+          width: 300px;
+          height: 225px;
         }
       }
 
