@@ -29,7 +29,7 @@
           <v-offlinedesc :project="project" :data="projectDetail"></v-offlinedesc>
         </el-tab-pane>
         <el-tab-pane label="常见问题" name="fourth" v-if="project.types == '1'">
-          <v-proproblems v-loading="problemLoad"></v-proproblems>
+          <v-proproblems v-loading="problemLoad" :projectDetail="projectDetail"></v-proproblems>
         </el-tab-pane>
       </el-tabs>
     </div>
