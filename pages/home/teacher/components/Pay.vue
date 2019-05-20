@@ -110,7 +110,8 @@ export default {
       restSecond: null,
       cancelForm: {
         id: ''
-      }
+      },
+      refreshCodeTime: 300,
     }
   },
   computed: {
@@ -121,6 +122,7 @@ export default {
     ...mapMutations('auth', ['setClosePay']),
     close () {
       clearInterval(this.interval)
+      clearInterval(this.countDown)
       this.pay = false;
       this.paySuccess = false;
       this.payError = false;
@@ -140,6 +142,7 @@ export default {
       home.cancelAppoint(this.cancelForm).then(res => {
         if (res.status == 0) {
           clearInterval(this.interval)
+          clearInterval(this.countDown)
           //老师详情支付弹窗 teacherDetail
           if (this.config == 'teacherDetail') {
             this.close()
@@ -160,43 +163,50 @@ export default {
     },
     // 获取去二维码的方法
     getCode () {
+      clearInterval(this.interval)
+      clearInterval(this.countDown)
       pay.getCode(this.codeForm).then(response => {
-        this.produceOrderInfo = response.data.produceOrderInfo
-        this.wechat = response.data.code_url
-        this.alipay = response.data.qr_code
-        this.loading = false
-        this.flag = true
-        let arr = timestampToTime(response.data.produceOrderInfo.start_time).split('-');
-        let arr1 = arr[2].split(' ');
-        arr[0] = arr[0] + '年'
-        arr[1] = arr[1] + '月'
-        arr[2] = arr1[0] + '日'
-        arr[3] = arr1[1]
-        this.startTime = arr.join('');
-        this.endTime = timestampToTime(response.data.produceOrderInfo.end_time).split(' ')[1]
-        // this.changeTime(response.data.produceOrderInfo.end_time - Math.round(new Date() / 1000))
-        this.rest.currentTime = response.data.current_time
+        if (response.status == 0) {
+          this.produceOrderInfo = response.data.produceOrderInfo
+          this.wechat = response.data.code_url
+          this.alipay = response.data.qr_code
+          this.loading = false
+          this.flag = true
+          let arr = timestampToTime(response.data.produceOrderInfo.start_time).split('-');
+          let arr1 = arr[2].split(' ');
+          arr[0] = arr[0] + '年'
+          arr[1] = arr[1] + '月'
+          arr[2] = arr1[0] + '日'
+          arr[3] = arr1[1]
+          this.startTime = arr.join('');
+          this.endTime = timestampToTime(response.data.produceOrderInfo.end_time).split(' ')[1]
+          // this.changeTime(response.data.produceOrderInfo.end_time - Math.round(new Date() / 1000))
+          this.rest.currentTime = response.data.current_time
 
-        this.changeTime()
+          this.changeTime()
+          this.refreshCodeTime = 300
+          this.refreshCode()
+        } else {
+          message(this, 'error', response.msg)
+        }
+
       })
     },
     // 转换时间格式
     changeTime () {
-     let restTime = this.rest.currentTime-this.rest.creatTime
-      if(restTime<=1800){//在有效期内
-        this.restSecond = 1800-restTime
+      let restTime = this.rest.currentTime - this.rest.creatTime
+      if (restTime <= 1800) {//在有效期内
+        this.restSecond = 1800 - restTime
         // this.restSecond = 10
-
       }
-
       clearInterval(this.interval)
       this.interval = setInterval(() => {
-        if(this.restSecond<=1){
+        if (this.restSecond <= 1) {
           // this.cancelAppoint()
           clearInterval(this.interval)
-          if(this.config=='teacherDetail'){
+          if (this.config == 'teacherDetail') {
             this.close()
-          }else{//个人中心-我的咨询-支付弹窗 myConsult
+          } else {//个人中心-我的咨询-支付弹窗 myConsult
             this.$emit('close')
             this.$bus.$emit('getStudentData')
           }
@@ -207,6 +217,18 @@ export default {
         // console.log(this.rest);
 
       }, 1000);
+    },
+    refreshCode () {
+      if (this.refreshCodeTime == 300) {
+        this.countDown = setInterval(() => {
+          if (this.refreshCodeTime <= 1) {
+            clearInterval(this.countDown)
+            this.getCode()
+          } else {
+            this.refreshCodeTime--
+          }
+        }, 1000);
+      }
     },
     getStatus () {
       let that = this
@@ -222,6 +244,7 @@ export default {
           that.pay = false;
           that.paySuccess = true;
           that.payError = false;
+          clearInterval(this.countDown)
           return false
         }
         //支付失败
@@ -256,6 +279,7 @@ export default {
     this.getStatus()
     this.getCode()
     clearInterval(this.interval)
+    clearInterval(this.countDown)
 
   }
 }
