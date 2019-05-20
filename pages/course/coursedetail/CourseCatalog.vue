@@ -10,6 +10,10 @@
       <el-tab-pane label="用户评论" name="third">
         <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentator="commentator" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" :pagemsg="pagemsg" @pagechange="pagechange"></v-userevaluate>
       </el-tab-pane>
+      <el-tab-pane label="资料下载" name="four">
+        <v-download :isConfig="isConfig"></v-download>
+        <!-- <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentator="commentator" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" :pagemsg="pagemsg" @pagechange="pagechange"></v-userevaluate> -->
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -19,11 +23,13 @@
  * 组件名字
  */
 import CustomLine from '@/components/common/Line.vue'
+import Download from '@/components/common/DataDownload.vue'
 import UserEvaluate from '@/pages/course/coursedetail/UserEvaluate.vue'
 export default {
   components: {
     'v-line': CustomLine,
-    'v-userevaluate': UserEvaluate
+    'v-userevaluate': UserEvaluate,
+    'v-download':Download
   },
   props: [
     'activeName',
@@ -42,6 +48,7 @@ export default {
   ],
   data() {
     return {
+       isConfig:true,
       activeNames: 'first'
     }
   },

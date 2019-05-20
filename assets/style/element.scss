@@ -2327,3 +2327,164 @@ input::-webkit-credentials-auto-fill-button {
     padding-top: 1px;
   }
 }
+
+.dataDownload .project {
+  .el-table {
+    overflow: inherit;
+  }
+
+  .el-table__header-wrapper {
+    overflow: inherit;
+
+    th {
+      overflow: inherit;
+
+      &.el-table-column--selection {
+        .cell {
+          position: absolute !important;
+          top: -40px;
+          left: 0;
+        }
+      }
+    }
+  }
+
+  .el-table__header {
+    th {
+      height: 75px;
+      line-height: 45px;
+      font-size: 18px;
+      color: #222;
+      font-weight: 400;
+      border-color: #DDDDDD;
+      text-align: center;
+
+      .el-checkbox__input.is-indeterminate .el-checkbox__inner::before {
+        display: none;
+      }
+
+      .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+        background-color: #fff;
+        border-color: #641CA1;
+      }
+
+
+    }
+  }
+
+  .el-table__body {
+    tr {
+      &.current-row {
+        td {
+          background-color: #fff;
+        }
+      }
+
+      &:hover {
+        td {
+          background-color: #fff;
+        }
+      }
+    }
+
+    td {
+      height: 65px;
+      border-color: #ddd;
+      font-size: 14px;
+      color: #222;
+      text-align: center;
+
+      .cell {
+        .el-button {
+          color: #7A3181;
+          border-color: #7A3181;
+          border-radius: 15px;
+        }
+
+        .el-button--mini {
+          padding: 8px 27px;
+        }
+      }
+    }
+  }
+
+  .el-checkbox__inner {
+    width: 18px;
+    height: 18px;
+    border-color: #641CA1;
+    border-radius: 4px;
+
+  }
+
+  .el-checkbox__input.is-checked .el-checkbox__inner::after {
+    width: 4px;
+    height: 8px;
+    border: none;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    left: 5px;
+    top: 1px;
+  }
+}
+
+.dataDownload .course {
+
+  .el-table__header {
+    th {
+      height: 50px;
+      font-size: 16px;
+      color: #222;
+      font-weight: 400;
+      text-align: center;
+      background-color: #F7F9FB;
+      border: none;
+
+      &:first-child {
+        text-align: left;
+        padding-left: 20px;
+      }
+    }
+  }
+
+  .el-table__body {
+    tr {
+      &.current-row {
+        td {
+          background-color: #fff;
+        }
+      }
+
+      &:hover {
+        td {
+          background-color: #fff;
+        }
+      }
+    }
+
+    tr {
+      td {
+        height: 70px;
+        border-color: #ddd;
+        font-size: 14px;
+        color: #222;
+        text-align: center;
+
+        &:first-child {
+          text-align: left;
+        }
+
+        .cell {
+          .el-button {
+            color: #7A3181;
+            border-color: #7A3181;
+            border-radius: 15px;
+          }
+
+          .el-button--mini {
+            padding: 8px 27px;
+          }
+        }
+      }
+    }
+  }
+}
