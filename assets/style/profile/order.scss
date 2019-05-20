@@ -1,184 +1,236 @@
+.orderCard {
+  box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+
+  .el-tabs__header {
+
+    box-shadow: none !important;
+  }
+
+  .el-tabs__content {
+    padding: 0 30px;
+
+  }
+}
+
+.ticketCard {
+  .el-tabs__content {
+    margin-top: 30px;
+  }
+}
+
 .orderList {
-	width: 100%;
-	margin: 0 auto;
-	border-radius: 6px;
-	margin-top: 30px;
-	box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
-	overflow: hidden;
-	&:first-child {
-		margin-top: 0;
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
-	}
-	.topBar {
-		height: 60px;
-		line-height: 60px;
-		background-color: #ebe7ed;
-		padding: 0 30px;
-		span.fl {
-			color: #332a51;
-			font-size: 16px;
-		}
-		span.fr {
-			color: #888;
-			font-size: 14px;
-		}
-	}
-	.list {
-		width: 100%;
-		.content {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			background-color: #fff;
+  width: 100%;
+  margin: 0 auto;
+  // border-radius: 6px;
+  margin-top: 30px;
+  // box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+  overflow: hidden;
+  border: 1px solid #e8d6f7;
 
-			.course {
-				width: 640px;
-				.courseOne {
-					width: 640px; // background-color: #fff;
-					height: 140px;
-					border-top: 1px solid #e8d6f7;
-					padding: 20px 0 20px 32px;
+  &:first-child {
+    margin-top: 0;
+    // border-top-left-radius: 0;
+    // border-top-right-radius: 0;
+  }
 
-					&:first-child {
-						border-top: none;
-					}
-					.courseImg {
-						position: relative;
-					}
-					.project-img {
-						width: 60px;
-						height: 28px;
-						position: absolute;
-						left: 0;
-						top: 0;
-					}
-					img {
-						width: 160px;
-						height: 100px;
-						margin-right: 20px;
-						cursor: pointer;
-					}
-					h4 {
-						width: 428px;
-						height: 54px;
-						color: #332a51;
-						font-size: 16px;
-						padding-top: 9px;
-						cursor: pointer;
-						overflow: hidden;
-						white-space: nowrap;
-						text-overflow: ellipsis;
-					}
-					h6 {
-						color: #6d687f;
-						font-size: 12px;
-						margin-bottom: 9px;
-					}
-					p {
-						color: #6d687f;
-						font-size: 14px;
-					}
-					.coursePrice {
-						display: inline-block;
-						width: 100px;
-						height: 140px;
-						text-align: center;
-						color: #ff5f5f;
-						font-size: 16px;
-						line-height: 78px;
-						margin-left: 158px;
-					}
-					.courseNumber {
-						display: inline-block;
-						width: 39px;
-						height: 140px;
-						text-align: center;
-						color: #332a51;
-						font-size: 16px;
-						line-height: 78px;
-						margin-left: 70px;
-					}
-				}
-				.more {
-					height: 60px;
-					line-height: 60px;
-					text-align: center;
-					color: #773084;
-					margin: 0 auto;
-					border-top: 1px solid #e8d6f7;
-					cursor: pointer;
-				}
-			}
-			.height {
-				height: auto;
-				font-size: 16px;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				flex-direction: column;
-			}
-			.price {
-				width: 132px;
-				color: #ff5f5f;
-				border-left: 1px solid #e8d6f7;
-				border-right: 1px solid #e8d6f7;
-				.detail {
-					margin-top: 15px;
-					color: #773084;
-					cursor: pointer;
-				}
-			}
-			.status {
-				width: 132px;
-				color: #332a51;
-				p {
-					width: 133px;
-					text-align: center;
-					&.cancelOrder {
-						color: #6d687f;
-						cursor: pointer;
-						&:hover {
-							color: #773084;
-						}
-					}
-					&.payReady {
-						color: #aaa;
-						margin-top: 5px;
-						&.payed {
-							margin: 0;
-							color: #06bb09;
-						}
-					}
-					&.payClose {
-						color: #332a51;
-					}
-					span {
-						width: 90px;
-						height: 30px;
-						line-height: 30px;
-						text-align: center;
-						border-radius: 15px;
-						margin-top: 10px;
-						font-size: 14px;
-						color: #fff;
-						cursor: pointer;
-						transition: all 300ms;
-						&.pay {
-							background-color: #ee9014;
-							&:hover {
-								background-color: #ffae5f;
-							}
-						}
-						&.buy {
-							background-color: #773084;
-							&:hover {
-								background-color: #5f068d;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+  .topBar {
+    height: 60px;
+    line-height: 60px;
+    background-color: #ebe7ed;
+    padding: 0 30px;
+
+    span.fl {
+      color: #332a51;
+      font-size: 16px;
+    }
+
+    span.fr {
+      color: #888;
+      font-size: 14px;
+    }
+  }
+
+  .list {
+    width: 100%;
+
+    .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #fff;
+
+      .course {
+        width: 600px;
+
+        .courseOne {
+          width: 640px; // background-color: #fff;
+          height: 140px;
+          border-top: 1px solid #e8d6f7;
+          padding: 20px 0 20px 32px;
+
+          &:first-child {
+            border-top: none;
+          }
+
+          .courseImg {
+            position: relative;
+          }
+
+          .project-img {
+            width: 60px;
+            height: 28px;
+            position: absolute;
+            left: 0;
+            top: 0;
+          }
+
+          img {
+            width: 160px;
+            height: 100px;
+            margin-right: 20px;
+            cursor: pointer;
+          }
+
+          h4 {
+            width: 428px;
+            height: 54px;
+            color: #332a51;
+            font-size: 16px;
+            padding-top: 9px;
+            cursor: pointer;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+
+          h6 {
+            color: #6d687f;
+            font-size: 12px;
+            margin-bottom: 9px;
+          }
+
+          p {
+            color: #6d687f;
+            font-size: 14px;
+          }
+
+          .coursePrice {
+            display: inline-block;
+            width: 100px;
+            height: 140px;
+            text-align: center;
+            color: #ff5f5f;
+            font-size: 16px;
+            line-height: 78px;
+            margin-left: 158px;
+          }
+
+          .courseNumber {
+            display: inline-block;
+            width: 39px;
+            height: 140px;
+            text-align: center;
+            color: #332a51;
+            font-size: 16px;
+            line-height: 78px;
+            margin-left: 70px;
+          }
+        }
+
+        .more {
+          height: 60px;
+          line-height: 60px;
+          text-align: center;
+          color: #773084;
+          margin: 0 auto;
+          border-top: 1px solid #e8d6f7;
+          cursor: pointer;
+        }
+      }
+
+      .height {
+        height: auto;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .price {
+        width: 132px;
+        color: #ff5f5f;
+        border-left: 1px solid #e8d6f7;
+        border-right: 1px solid #e8d6f7;
+
+        .detail {
+          margin-top: 15px;
+          color: #773084;
+          cursor: pointer;
+        }
+      }
+
+      .status {
+        width: 132px;
+        color: #332a51;
+
+        p {
+          width: 133px;
+          text-align: center;
+
+          &.cancelOrder {
+            color: #6d687f;
+            cursor: pointer;
+
+            &:hover {
+              color: #773084;
+            }
+          }
+
+          &.payReady {
+            color: #aaa;
+            margin-top: 5px;
+
+            &.payed {
+              margin: 0;
+              color: #06bb09;
+            }
+          }
+
+          &.payClose {
+            color: #332a51;
+          }
+
+          span {
+            width: 90px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 300ms;
+
+            &.pay {
+              background-color: #ee9014;
+
+              &:hover {
+                background-color: #ffae5f;
+              }
+            }
+
+            &.buy {
+              background-color: #773084;
+
+              &:hover {
+                background-color: #5f068d;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

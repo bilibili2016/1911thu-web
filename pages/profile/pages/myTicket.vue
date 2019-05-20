@@ -1,7 +1,7 @@
 <template>
   <!-- 发票 -->
   <el-card v-if="showTicketList">
-    <el-tabs v-model="activeName" @tab-click="handleTicket">
+    <el-tabs class="orderCard ticketCard" v-model="activeName" @tab-click="handleTicket">
       <el-tab-pane label="按订单开发票" name="ticketFirst" value="1">
         <div v-loading="allTicket" :class="{ minheight : allTicket}">
           <v-tkorder v-if="unTicketData  && unTicketData.length>0" :orderData="unTicketData" @handleUpdate="getUpdateMsg" @goTicketDetail="goTicketDetail" @chengeItem="chengeItem" v-loading="readyOrderLoad"></v-tkorder>
