@@ -2428,6 +2428,9 @@ input::-webkit-credentials-auto-fill-button {
 }
 
 .dataDownload .course {
+  .el-table::before {
+    display: none;
+  }
 
   .el-table__header {
     th {

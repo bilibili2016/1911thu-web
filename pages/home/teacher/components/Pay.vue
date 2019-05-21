@@ -186,7 +186,6 @@ export default {
       if(restTime<=1800){//在有效期内
         this.restSecond = 1800-restTime
         // this.restSecond = 10
-
       }
 
       clearInterval(this.interval)
@@ -205,7 +204,6 @@ export default {
         this.rest.minute = parseInt(this.restSecond / 60)
         this.rest.second = this.restSecond % 60
         // console.log(this.rest);
-
       }, 1000);
     },
     getStatus () {
