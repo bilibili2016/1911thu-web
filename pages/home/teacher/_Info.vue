@@ -144,8 +144,6 @@ export default {
       this.isShowProfile = true
     },
     goPay (data) {
-      console.log(data, 'datat');
-
       this.showPay = true;
       this.orderInfo.id = data.id;
       this.orderInfo.time = data.update_time;

@@ -291,7 +291,6 @@ export default {
       });
     },
     goTeacherInfo (teacher) {
-      console.log(teacher);
 
     },
     //列表详情

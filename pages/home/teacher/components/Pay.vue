@@ -182,21 +182,19 @@ export default {
     },
     // 转换时间格式
     changeTime () {
-     let restTime = this.rest.currentTime-this.rest.creatTime
-      if(restTime<=1800){//在有效期内
-        this.restSecond = 1800-restTime
+      let restTime = this.rest.currentTime - this.rest.creatTime
+      if (restTime <= 1800) {//在有效期内
+        this.restSecond = 1800 - restTime
         // this.restSecond = 10
-
       }
-
       clearInterval(this.interval)
       this.interval = setInterval(() => {
-        if(this.restSecond<=1){
+        if (this.restSecond <= 1) {
           // this.cancelAppoint()
           clearInterval(this.interval)
-          if(this.config=='teacherDetail'){
+          if (this.config == 'teacherDetail') {
             this.close()
-          }else{//个人中心-我的咨询-支付弹窗 myConsult
+          } else {//个人中心-我的咨询-支付弹窗 myConsult
             this.$emit('close')
             this.$bus.$emit('getStudentData')
           }
@@ -256,7 +254,14 @@ export default {
     this.getStatus()
     this.getCode()
     clearInterval(this.interval)
-
+    let that = this
+    // 网页标签切换到其它标签了，定时器会变慢的bug
+    window.onfocus = function () {
+      that.$nextTick(() => {
+        clearInterval(that.interval);
+        that.getCode()
+      })
+    }
   }
 }
 </script>
