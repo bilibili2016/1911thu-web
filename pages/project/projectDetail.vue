@@ -36,6 +36,9 @@
         <el-tab-pane label="常见问题" name="fourth" v-if="project.types == '1'">
           <v-proproblems v-loading="problemLoad" :projectDetail="projectDetail" ></v-proproblems>
         </el-tab-pane>
+        <el-tab-pane label="资料下载" name="fiveth">
+          <v-download :isConfig="isConfig"></v-download>
+        </el-tab-pane>
       </el-tabs>
     </div>
     <v-pay v-if="showPayment" :projectDetail="projectDetail" @closePay="closePay"></v-pay>
@@ -52,6 +55,8 @@ import Proevaluate from "@/pages/project/components/ProjectEvaluate";
 import Commonproblems from "@/pages/project/components/CommonProblems";
 import OfflineDesc from "@/pages/project/components/OfflineDesc";
 import Pay from "@/pages/project/components/Pay";
+import Download from '@/components/common/DataDownload.vue'
+
 import { store as persistStore } from "~/lib/core/store";
 import { message, matchSplits, setTitle } from "@/lib/util/helper";
 export default {
@@ -61,10 +66,12 @@ export default {
     "v-proproblems": Commonproblems,
     "v-detail": Detail,
     "v-offlinedesc": OfflineDesc,
-    "v-pay": Pay
+    "v-pay": Pay,
+    'v-download':Download
   },
   data () {
     return {
+      isConfig:false,
       showPayment: false,
       customerBanner:
         "https://static-image.1911edu.com/customer-detail-banner.png",
