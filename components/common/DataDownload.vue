@@ -103,8 +103,8 @@ import { matchSplits } from "@/lib/util/helper";
       },
       // 课程下载列表
       courseDownloadList(){
-        // let id = matchSplits("kid");
-        let id = 86;
+        let id = matchSplits("kid");
+        // let id = 86;
          coursedetail.curriculumResourceList({curriculumID:id}).then(res => {
           if (res.status === 0) {
             this.tableData = res.data.curriculumResourceList
