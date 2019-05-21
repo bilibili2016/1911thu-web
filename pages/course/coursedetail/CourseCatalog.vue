@@ -10,10 +10,9 @@
       <el-tab-pane label="用户评论" name="third">
         <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentator="commentator" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" :pagemsg="pagemsg" @pagechange="pagechange"></v-userevaluate>
       </el-tab-pane>
-      <el-tab-pane label="资料下载" name="four">
+      <!-- <el-tab-pane label="资料下载" name="four">
         <v-download :isConfig="isConfig"></v-download>
-        <!-- <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentator="commentator" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" :pagemsg="pagemsg" @pagechange="pagechange"></v-userevaluate> -->
-      </el-tab-pane>
+      </el-tab-pane> -->
     </el-tabs>
   </div>
 </template>
