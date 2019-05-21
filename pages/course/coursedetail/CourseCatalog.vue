@@ -10,9 +10,9 @@
       <el-tab-pane label="用户评论" name="third">
         <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentator="commentator" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" :pagemsg="pagemsg" @pagechange="pagechange"></v-userevaluate>
       </el-tab-pane>
-      <!-- <el-tab-pane label="资料下载" name="four">
-        <v-download :isConfig="isConfig"></v-download>
-      </el-tab-pane> -->
+      <el-tab-pane label="资料下载" name="four">
+        <v-download :isConfig="isConfig" :detailInfo="courseList"></v-download>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -47,7 +47,7 @@ export default {
   ],
   data() {
     return {
-       isConfig:true,
+      isConfig:true,
       activeNames: 'first'
     }
   },
@@ -58,6 +58,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.courseList);
     this.activeNames = this.activeName
   }
 }

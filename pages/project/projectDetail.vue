@@ -36,9 +36,9 @@
         <el-tab-pane label="常见问题" name="fourth" v-if="project.types == '1'">
           <v-proproblems v-loading="problemLoad" :projectDetail="projectDetail" ></v-proproblems>
         </el-tab-pane>
-        <!-- <el-tab-pane label="资料下载" name="fiveth">
+        <el-tab-pane label="资料下载" name="fiveth">
           <v-download :isConfig="isConfig"></v-download>
-        </el-tab-pane> -->
+        </el-tab-pane>
       </el-tabs>
     </div>
     <v-pay v-if="showPayment" :projectDetail="projectDetail" @closePay="closePay"></v-pay>

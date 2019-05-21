@@ -48,7 +48,7 @@
             </td>
           </tr>
         </table>
-        <div class="pagination" v-if="pagemsg.total>9">
+        <div class="pagination" v-if="pagemsg.total>13">
           <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="timeListChange"></el-pagination>
         </div>
       </div>
@@ -82,12 +82,12 @@ export default {
       timeData: "",
       pagemsg: {
         page: 1,
-        pagesize: 9,
+        pagesize: 13,
         total: 0
       },
       timeListForm: {
         page: 1,
-        limit: 9
+        limit: 13
       },
       statusText: "",
       countDownSecond: "",
@@ -129,7 +129,7 @@ export default {
     //翻页
     timeListChange(val) {
       this.timeListForm.page = val;
-      this.timeListForm.limit = 9;
+      this.timeListForm.limit = 13;
       this.bespokeTimeList();
     },
     //预约时间列表

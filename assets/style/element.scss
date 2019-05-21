@@ -2457,6 +2457,10 @@ input::-webkit-credentials-auto-fill-button {
       &:hover {
         td {
           background-color: #fff;
+
+          &:first-child {
+            color: #7A3181;
+          }
         }
       }
     }
@@ -2471,6 +2475,7 @@ input::-webkit-credentials-auto-fill-button {
 
         &:first-child {
           text-align: left;
+          cursor: pointer;
         }
 
         .cell {
