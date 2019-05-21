@@ -6,7 +6,7 @@
       <div class="top clearfix">
         <span class="choose">选择</span>
         <span class="left">全选</span>
-        <span class="allDownload">全部下载</span>
+        <span class="allDownload" @click="downloadMore">全部下载</span>
       </div>
       <el-table
       ref="multipleTable"
@@ -19,17 +19,17 @@
         width="100">
       </el-table-column>
       <el-table-column
-        prop="name"
+        prop="file_name"
         label="资料名称"
         width="350">
       </el-table-column>
       <el-table-column
-        prop="course"
+        prop="curriculum_title"
         label="所属课程"
         width="350">
       </el-table-column>
       <el-table-column
-        prop="num"
+        prop="download_number"
         label="下载量"
         width="150">
       </el-table-column>
@@ -73,6 +73,9 @@
       </el-table-column>
      </el-table>
     </div>
+    <div class="pagination" v-if="tableData && Pagemsg.total>9">
+      <el-pagination background layout="prev, pager, next" :page-size="Pagemsg.pagesize" :pager-count="5" :page-count="Pagemsg.pagesize" :current-page="Pagemsg.page" :total="Pagemsg.total" @current-change="PagemsgChange"></el-pagination>
+    </div>
   </div>
 </template>
 <script>
@@ -84,17 +87,64 @@ import { matchSplits } from "@/lib/util/helper";
     data(){
       return{
         tableData:null,
+        Pagemsg: {
+          page: 1,
+          pagesize: 9,
+          total: ''
+        },
+        downloadForm:{
+          id:'',
+          type:1,
+          page:1,
+          limit:9
+        },
+        fileForm:{id:[]},
+        downloadMoreFile:[],
+        downloadUrl:[]
       }
     },
     methods:{
       //多选
       handleSelectionChange(val){
-        console.log(val);
+        this.downloadMoreFile = val
+        console.log(this.downloadMoreFile);
+      },
+      handleBatchDownload() {
+        const data = ['各类地址1', '各类地址2'] // 需要下载打包的路径, 可以是本地相对路径, 也可以是跨域的全路径
+        const zip = new JSZip()
+        const cache = {}
+        const promises = []
+        data.forEach(item => {
+        const promise = getFile(item).then(data => { // 下载文件, 并存成ArrayBuffer对象
+        const arr_name = item.split("/")
+        const file_name = arr_name[arr_name.length - 1] // 获取文件名
+        zip.file(file_name, data, { binary: true }) // 逐个添加文件
+        cache[file_name] = data
+        })
+        promises.push(promise)
+        })
+        Promise.all(promises).then(() => {
+        zip.generateAsync({type:"blob"}).then(content => { // 生成二进制流
+        FileSaver.saveAs(content, "打包下载.zip") // 利用file-saver保存文件
+        })
+        })
+      },
+      //下载多个文件
+      downloadMore(){
+        this.downloadMoreFile.forEach(file => {
+          this.downloadUrl.push(file.file_url)
+        });
+        console.log( this.downloadUrl,'downloadUrl');
+        // for(var i =0;i<this.downloadMoreFile.length;i++){  //循环遍历调用downloadFile方法
+        //     const url = this.downloadMoreFile[i];
+        //      this.downloadFile(url);
+        // }
       },
       //下载文件
       handleDownload(index,row){
+        this.fileForm.id.push(row.id)
         // console.log(row);
-        coursedetail.resourceDownloadNum({id:row.id}).then(res => {
+        coursedetail.resourceDownloadNum(this.fileForm).then(res => {
           if (res.status === 0) {
             // this.tableData = res.data.curriculumResourceList
              window.location.href = row.file_url
@@ -110,23 +160,27 @@ import { matchSplits } from "@/lib/util/helper";
       },
       // 课程下载列表
       courseDownloadList(){
-        let id = matchSplits("kid");
-        // let id = 86;
-         coursedetail.curriculumResourceList({curriculumID:id}).then(res => {
+        coursedetail.curriculumResourceList(this.downloadForm).then(res => {
           if (res.status === 0) {
             this.tableData = res.data.curriculumResourceList
+            this.Pagemsg.total = res.data.pageCount
           }
         });
+      },
+      PagemsgChange(val){
+        this.downloadForm.page = val
+         this.downloadForm.limit = 9
+        this.courseDownloadList()
       }
-
     },
     mounted(){
+       this.downloadForm.id =  matchSplits("kid");
       if(this.isConfig){
-        this.courseDownloadList()
+        this.downloadForm.type = 1
       }else{
-
+        this.downloadForm.type = 2
       }
-
+      this.courseDownloadList()
     }
   }
 </script>

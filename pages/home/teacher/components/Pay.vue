@@ -203,7 +203,6 @@ export default {
         this.rest.minute = parseInt(this.restSecond / 60)
         this.rest.second = this.restSecond % 60
         // console.log(this.rest);
-
       }, 1000);
     },
     getStatus () {
