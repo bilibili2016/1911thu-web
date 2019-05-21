@@ -197,6 +197,7 @@
     border-radius: 21px;
     font-size: 16px;
     overflow: hidden;
+    transition: all 360px;
 
     &.hasWidth {
       width: auto;
@@ -215,6 +216,7 @@
       background-color: #773084;
       text-align: center;
       color: #fff;
+      cursor: pointer;
     }
   }
 }

@@ -70,8 +70,8 @@
         </div>
       </div>
     </div>
-    <div class="rightBar">
-      <!-- <div :data-id="showRightBar" :class="['rightBar',{'hasWidth':showRightBar}]"> -->
+    <!-- <div class="rightBar"> -->
+    <div :class="['rightBar',{'hasWidth':showRightBar}]">
       <span>{{projectDetail.present_price}}起/班</span>
       <div class="fr" @click="handleBuy(projectDetail.id)">立即支付</div>
     </div>
@@ -109,11 +109,6 @@ export default {
   },
   computed: {
     ...mapGetters("auth", ["isAuthenticated"]),
-    classObj: function () {
-      return {
-
-      }
-    }
   },
   methods: {
     ...mapActions("auth", ["setProductsNum"]),
@@ -209,12 +204,11 @@ export default {
   mounted () {
     this.project.projectId = matchSplits("kid");
     this.currentType = matchSplits("type");
-    window.onscroll = function () {
+    window.onscroll = () => {
       var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-
       if (scrollTop > 570) {
         this.showRightBar = true
-      } else {
+      } else if (scrollTop < 480) {
         this.showRightBar = false
       }
       console.log(scrollTop, this.showRightBar);
