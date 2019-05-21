@@ -93,7 +93,14 @@ import { matchSplits } from "@/lib/util/helper";
       },
       //下载文件
       handleDownload(index,row){
-        window.location.href = row.file_url
+        // console.log(row);
+        coursedetail.resourceDownloadNum({id:row.id}).then(res => {
+          if (res.status === 0) {
+            // this.tableData = res.data.curriculumResourceList
+             window.location.href = row.file_url
+             this.courseDownloadList()
+          }
+        });
       },
       //预览文件
       viewWord(row, column, cell, event){
