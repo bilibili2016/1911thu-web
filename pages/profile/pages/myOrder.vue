@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class="orderInfo">
+    <div class="orderDelete" v-if="showOrderList" @click="goDelete">
+      <i class="el-icon-delete delIcon"></i>订单回收站
+    </div>
     <!-- 订单 -->
     <el-card v-if="showOrderList">
       <el-tabs class="orderCard" v-model="activeName" @tab-click="handleOrder">
@@ -16,7 +19,6 @@
         <el-tab-pane name="orderThird" label="已付款">
           <!-- <span class="payOk" slot="label">已付款</span> -->
           <v-listtab :order="orderTwo" :data="readyOrderData" :orderType="orderType" :pagemsg="pagemsg6" :noMsg="noMsgTen" @pageChange="getReadyOrderDataChange"></v-listtab>
-
         </el-tab-pane>
         <el-tab-pane name="orderFour" label="已关闭">
           <!-- <span class="payOff" slot="label">已关闭</span> -->
@@ -24,7 +26,8 @@
         </el-tab-pane>
       </el-tabs>
     </el-card>
-    <v-detail v-else @goBack="goBack" @goTicketBack="goTicketBack" :orderDetail="orderDetail" :bankInfo="bankInfo" :courseList="courseList" :teacherBespokeList="teacherBespokeList" :projectList="projectList" :vipList="vipList" :config="orderType" v-loading="detailMsg"></v-detail>
+    <v-detail v-if="!showOrderList&&!showDelete" @goBack="goBack" @goTicketBack="goTicketBack" :orderDetail="orderDetail" :bankInfo="bankInfo" :courseList="courseList" :teacherBespokeList="teacherBespokeList" :projectList="projectList" :vipList="vipList" :config="orderType" v-loading="detailMsg"></v-detail>
+    <v-delete v-if="showDelete" :allOrderData="allOrderData" :config="orderType" @goBack="goBack"></v-delete>
   </div>
 </template>
 
@@ -34,6 +37,7 @@ import { store as persistStore } from '~/lib/core/store'
 import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 import Detail from '@/pages/profile/components/common/Detail'
 import ListTab from '@/pages/profile/components/common/ListTab.vue'
+import Delete from '@/pages/profile/components/myorder/Delete.vue'
 export default {
   watch: {
     searchDatas (data) {
@@ -43,10 +47,12 @@ export default {
   components: {
     'v-nomsg': NoMsg,
     'v-detail': Detail,
-    'v-listtab': ListTab
+    'v-listtab': ListTab,
+    'v-delete': Delete
   },
   props: [
     'showOrderList',
+    'showDelete',
     'allOrderData',
     'orderType',
     'allOrderLoad',
@@ -87,6 +93,9 @@ export default {
     })
   },
   methods: {
+    goDelete () {
+      this.$emit('goDelete')
+    },
     getUpdateMsg (data) {
       this.$emit('getUpdateMsg', data)
     },

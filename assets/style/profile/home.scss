@@ -65,7 +65,7 @@
 
   .el-tabs__content {
     .el-tabs__item {
-      span {
+      .payCut {
         height: 57px;
         position: relative;
 
@@ -83,6 +83,31 @@
           display: inline-block;
           background-color: #ff5f5f;
         }
+      }
+    }
+  }
+
+  //   订单 订单回收站
+  .orderInfo {
+    position: relative;
+
+    .orderDelete {
+      position: absolute;
+      right: 30px;
+      top: 0;
+      z-index: 3;
+      line-height: 57px;
+      font-size: 16px;
+      color: #222;
+      cursor: pointer;
+
+
+      i {
+        width: 20px;
+        height: 20px;
+        color: #000;
+        vertical-align: baseline;
+        margin-right: 5px;
       }
     }
   }

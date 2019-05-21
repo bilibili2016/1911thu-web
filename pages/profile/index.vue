@@ -3,11 +3,11 @@
     <v-banner :config="bconfig" :isShowUpAvtor="activeTab=='tab-sixth'" :userInfo="userInfo"></v-banner>
     <div class="center-tab center profile bigTab" style="min-height:900px;">
       <el-tabs :tab-position="tabPosition" v-model="activeTab" @tab-click="handleClick" class="profileContent">
-       <el-tab-pane disabled name="study">
+        <el-tab-pane disabled name="study">
           <span slot="label" class="firseLevel">
-           学习中心
+            学习中心
           </span>
-       </el-tab-pane>
+        </el-tab-pane>
         <!-- 最近学习 -->
         <el-tab-pane class="my-home" name="tab-first">
           <span slot="label" class="tabList">
@@ -57,12 +57,12 @@
           </span>
           <v-myexamine :examineListData="examineListData" :examineLoading="examineLoading" :examinePagemsg="examinePagemsg" @examineListChange="examineListChange"></v-myexamine>
         </el-tab-pane>
-         <!-- 我的咨询 -->
+        <!-- 我的咨询 -->
         <el-tab-pane class="my-course" name="tab-twelfth">
           <span slot="label" class="tabList">
             <i class="icon-student"></i>&nbsp;我的咨询
           </span>
-          <v-mystudent :data="teacherData" :teacherPagemsg="teacherPagemsg" @getTeacherData="getTeacherData"  :userInfo="userInfo"></v-mystudent>
+          <v-mystudent :data="teacherData" :teacherPagemsg="teacherPagemsg" @getTeacherData="getTeacherData" :userInfo="userInfo"></v-mystudent>
         </el-tab-pane>
         <!-- 订单管理 -->
         <el-tab-pane disabled name="order">
@@ -73,7 +73,7 @@
           <span slot="label" class="tabList">
             <i class="icon-order"></i> 我的订单
           </span>
-          <v-myorder @goBack="showOrderList = true" @goTicketBack="showTicketList = true" @handleUpdate="handleMyOrderChange" @updateAll="handleMyOrderChange" :allOrderLoadAll="allOrderLoadAll" :orderTotal="orderTotal" :detailMsg="detailMsg" :orderType="orderType" :projectList="projectList" :courseList="courseList" :vipList="vipList" :bankInfo="bankInfo" :orderDetail="orderDetail" :teacherBespokeList="teacherBespokeList" :invalidOrderLoad="invalidOrderLoad" :invalidOrderData="allOrderData7" :readyOrderLoad="readyOrderLoad" :readyOrderData="allOrderData6" :unfinishedOrderData="allOrderData5" :noMsgTen="noMsgTen" :allOrderLoad="allOrderLoad" :allOrderData="allOrderData4" :showOrderList="showOrderList" :pagemsg4="pagemsg4" :pagemsg5="pagemsg5" :pagemsg6="pagemsg6" :pagemsg7="pagemsg7" @getUpdateMsg="handleInitMyOrderData(true)" @closedOrderDataChange="handleMyOrderChange" @getAllOrderDataChange="handleMyOrderChange" @unfinishedOrderDataChange="handleMyOrderChange" @getReadyOrderDataChange="handleMyOrderChange" @invalidOrderDataChange="handleMyOrderChange"></v-myorder>
+          <v-myorder @goDelete="goDelete" @goBack="goBack" @goTicketBack="showTicketList = true" @handleUpdate="handleMyOrderChange" @updateAll="handleMyOrderChange" :allOrderLoadAll="allOrderLoadAll" :orderTotal="orderTotal" :detailMsg="detailMsg" :orderType="orderType" :projectList="projectList" :courseList="courseList" :vipList="vipList" :bankInfo="bankInfo" :orderDetail="orderDetail" :teacherBespokeList="teacherBespokeList" :invalidOrderLoad="invalidOrderLoad" :invalidOrderData="allOrderData7" :readyOrderLoad="readyOrderLoad" :readyOrderData="allOrderData6" :unfinishedOrderData="allOrderData5" :noMsgTen="noMsgTen" :allOrderLoad="allOrderLoad" :allOrderData="allOrderData4" :showOrderList="showOrderList" :showDelete="showDelete" :pagemsg4="pagemsg4" :pagemsg5="pagemsg5" :pagemsg6="pagemsg6" :pagemsg7="pagemsg7" @getUpdateMsg="handleInitMyOrderData(true)" @closedOrderDataChange="handleMyOrderChange" @getAllOrderDataChange="handleMyOrderChange" @unfinishedOrderDataChange="handleMyOrderChange" @getReadyOrderDataChange="handleMyOrderChange" @invalidOrderDataChange="handleMyOrderChange"></v-myorder>
         </el-tab-pane>
         <!-- 发票管理 -->
         <el-tab-pane class="my-course my-ticket" name="tab-eighth">
@@ -102,7 +102,7 @@
           <v-person :userInfo="userInfo" @getUserData="getUserInfo"></v-person>
         </el-tab-pane>
         <!-- 教师入口 -->
-        <el-tab-pane disabled name="teacher"  v-if="userInfo.is_teacher=='1'">
+        <el-tab-pane disabled name="teacher" v-if="userInfo.is_teacher=='1'">
           <span slot="label" class="firseLevel">教师入口</span>
         </el-tab-pane>
         <!-- 预约咨询  -->
@@ -433,6 +433,7 @@ export default {
       orderDetail: {}, //订单详情信息
       bankInfo: {}, //公司打款信息
       showOrderList: true,
+      showDelete: false,
       showTicketList: true,
       isUpdate: false,
       allOrderLoad: true,
@@ -518,6 +519,10 @@ export default {
         page: 1,
         pagesize: 12,
         total: 20
+      },
+      detailConfig: {
+        type: true,
+        id: 1
       }
     };
   },
@@ -539,10 +544,9 @@ export default {
     // 切换tab时保存tab的name 刷新就还是在这个tab
     handleClick (item) {
 
-      if(item.name==undefined){
+      if (item.name == undefined) {
         return false
       }
-      console.log(item);
       if (persistStore.get("token")) {
         switch (item.name) {
           case "tab-first": //最近学习
@@ -593,14 +597,14 @@ export default {
             this.collegeList();
             break;
           case "tab-twelfth": //我的咨询
-          this.$bus.$emit("activeStudent");
+            this.$bus.$emit("activeStudent");
             this.getTeacherData({
               statusType: 1,
               type: 1
             });
             break;
           case "tab-thirteenth": //教师入口
-          this.$bus.$emit("activeTeacher");
+            this.$bus.$emit("activeTeacher");
             this.getTeacherData({
               statusType: 1,
               type: 2
@@ -729,6 +733,32 @@ export default {
       this.myProjectDataArr.map(item => {
         this.handleMyProjectChange(item, 1);
       });
+    },
+    // 订单详情返回我的订单 type=1，回收站返回我的订单 type=1，订单详情返回回收站 type=2
+    goBack (id) {
+      if (id != 0) {
+        this.detailConfig.id = id
+      }
+      // 进入详情的时候保存的id
+      if (this.detailConfig.id == 1) {
+        this.showDelete = false;
+        this.showOrderList = true;
+        this.orderType.type = 'order'
+        // 调全部接口
+        this.handleMyOrderChange(0, 1);
+      } else {
+        this.goDelete()
+      }
+    },
+    // 进入订单回收站
+    goDelete () {
+      this.showDelete = true;
+      this.showOrderList = false;
+      this.detailConfig.id = 2
+      this.orderType.type = 'delete'
+      // 调回收站接口
+      console.log('调回收站接口');
+
     },
     // 我的订单 commonMethods
     handleMyOrderChange (status, pagenum, flag) {
@@ -933,11 +963,12 @@ export default {
             this.bankInfo = response.data.bankInfo;
           }
 
-          if (data == false) {
+          if (data.type == false) {
             this.showTicketList = false;
           } else {
             this.showOrderList = false;
           }
+          this.showDelete = false
         } else if (response.status === 100008) {
           this.responseData.res = response;
           this.$router.push("/");
@@ -1040,6 +1071,7 @@ export default {
       });
       // 展示订单详情
       this.$bus.$on("goOrderDetail", data => {
+        this.detailConfig = data
         this.curriculumPayApply(data);
       });
       // 我的订单 事件搜索
@@ -1164,11 +1196,11 @@ export default {
     this.$bus.$on("changeAppointLIst", data => {
       this.changeAppointLIst(data);
     });
-    this.$bus.$on('getTeacherData',()=>{
-      this.getTeacherData({statusType: 1,type: 2});
+    this.$bus.$on('getTeacherData', () => {
+      this.getTeacherData({ statusType: 1, type: 2 });
     })
-    this.$bus.$on('getStudentData',()=>{
-      this.getTeacherData({statusType: 1,type: 1});
+    this.$bus.$on('getStudentData', () => {
+      this.getTeacherData({ statusType: 1, type: 1 });
     })
 
     this.infoNum = persistStore.get("infoNum");
