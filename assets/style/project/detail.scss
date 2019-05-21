@@ -187,25 +187,29 @@
   .rightBar {
     z-index: 99;
     position: fixed;
-    right: 30px;
+    right: -350px;
     bottom: 200px;
-    width: 0;
-    height: 42px;
-    line-height: 42px;
+    // width: 0;
+    height: 46px;
+    line-height: 46px;
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 6px 20px 0px rgba(39, 0, 77, 0.14);
     border-radius: 21px;
     font-size: 16px;
     overflow: hidden;
-    transition: all 360px;
+    transition: all 1s;
 
     &.hasWidth {
-      width: auto;
+      //   width: auto;
+      right: 30px;
+      transition: all 1s;
     }
 
     span {
+      // width: 160px;
+      text-align: center;
       color: #FD0E19;
-      padding: 0 25px;
+      padding: 0 20px;
     }
 
     div {
@@ -213,6 +217,8 @@
       height: 42px;
       line-height: 42px;
       border-radius: 22px;
+      margin-right: 2px;
+      margin-top: 2px;
       background-color: #773084;
       text-align: center;
       color: #fff;
