@@ -13,8 +13,8 @@
             <div class="content">
               <!-- 发票 -->
               <div class="orderChecked">
-                <input type="checkbox" class="el-checkbox singleCheckbox" ref="checkbox" :id="courseList.id" @change="handleSelectSingle(courseList)">
-                <label :for="courseList.id" class="el-checkbox-label"></label>
+                <input type="checkbox" class="checkbox singleCheckbox" ref="checkbox" :id="courseList.id" @change="handleSelectSingle(courseList)">
+                <label :for="courseList.id" class="checkbox-label"></label>
               </div>
               <div class="course">
                 <!-- 课程列表 -->

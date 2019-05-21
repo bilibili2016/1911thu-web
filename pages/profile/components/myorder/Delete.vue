@@ -1,83 +1,90 @@
 <template>
   <!-- 我的订单，我的发票列表 -->
-  <div>
-    <div class="orderList" v-for="(courseList, index ) in data" :key="index">
-      <div class="topBar clearfix">
-        <span class="fl">订单号：{{courseList.order_sn}}</span>
-        <span class="fr">{{exchangeTime(courseList.create_time)}}</span>
+  <div class="delete">
+    <div class="topBar">
+      <span @click="goBack">我的订单 > </span>
+      <span>订单回收站</span>
+    </div>
+    <div class="listBox">
+      <div class="bottomBar" id="bottomBar" ref="bottomBar">
+        <span class="fl">
+          <el-checkbox v-model="checkMsg" @change="handleSelectAll">全选</el-checkbox>
+          <!-- <input type="checkbox" class="el-checkbox" ref="checkbox" id="allChecked" @change="handleSelectAll">
+          <label for="allChecked" class="el-checkbox-label">全选</label> -->
+        </span>
+        <span class="next " @click="showIoc">批量永久删除</span>
       </div>
-      <div class="list">
-        <div class="content">
-          <div class="course">
-            <!-- 课程列表 -->
-            <div class="courseOne" v-if="courseList.orderCurriculumList.length&& index<3" v-for="(course,index) in courseList.orderCurriculumList" :key="'course'+index">
-              <img @click="goCourseInfo(course)" class="fl" :src="course.picture" alt="">
-              <div class="fl">
-                <h4 @click="goCourseInfo(course)">{{course.title}}</h4>
-                <h6>{{course.curriculum_time}}学时</h6>
-                <!-- <p>导师：{{course.teacher_name}}</p> -->
-              </div>
-            </div>
-            <!-- 项目列表 -->
-            <div class="courseOne" v-if="computedLength(courseList.orderCurriculumList,courseList.orderProjectList,index)" v-for="(project,index) in courseList.orderProjectList" :key="'project'+index">
-              <div class="courseImg">
-                <!-- 项目图标 -->
-                <img v-if="project.project_type==2" class="project-img" src="https://static-image.1911edu.com/p5.png" alt="">
-                <img v-else class="project-img" src="https://static-image.1911edu.com/p4.png" alt="">
-
-                <img @click="goProjrctInfo(project)" class="fl" :src="project.picture" alt="">
-              </div>
-              <div class="fl">
-                <h4 @click="goProjrctInfo(project)">{{project.title}}</h4>
-                <h6>{{project.curriculum_time}}学时</h6>
-              </div>
-            </div>
-            <!-- vip列表 -->
-            <div class="courseOne" v-if="courseList.orderVipList.length" v-for="(vip,index) in courseList.orderVipList" :key="'vip'+index">
-              <img @click="goVipInfo(vip)" class="fl" :src="vip.picture" alt="">
-              <div class="fl">
-                <h4 @click="goVipInfo(vip)">{{vip.title}}</h4>
-              </div>
-            </div>
-            <!-- 预约教师列表 -->
-            <div class="courseOne" v-if="courseList.orderTeacherBespokeList.length" v-for="(teacher,index) in courseList.orderTeacherBespokeList" :key="'teacher'+index">
-              <img @click="goTeacherInfo(teacher)" class="fl" :src="teacher.picture" alt="">
-              <div class="fl">
-                <h4 @click="goTeacherInfo(teacher)">{{teacher.title}}（{{teacher.teacher_name}}）</h4>
-              </div>
-            </div>
-            <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList,config.type)">
-              查看更多>
-            </div>
+      <div class="orderList" v-for="(courseList, index ) in allOrderData" :key="index">
+        <div class="topBar clearfix">
+          <div class="orderChecked fl">
+            <input type="checkbox" class="checkbox singleCheckbox" ref="checkbox" :id="courseList.id" @change="handleSelectSingle(courseList)">
+            <label :for="courseList.id" class="checkbox-label"></label>
           </div>
-          <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length+courseList.orderTeacherBespokeList.length)}">
-            <p>￥{{courseList.order_amount}}</p>
-            <!-- 订单 -->
-            <p v-if="config.type=='order'" class="detail" @click="selectPayApply(courseList,config.type)">订单详情</p>
-          </div>
-          <!-- 订单 -->
-          <div v-show="config.type=='order'" class="status height" :style="{height: computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length+courseList.orderTeacherBespokeList.length)}">
-            <p class="cancelOrder" v-if="courseList.pay_status == '1'" @click="cancelOrder(courseList.id)">取消订单</p>
-            <p class="payReady payed" v-if="courseList.pay_status == '2' || courseList.pay_status == '6'">已支付</p>
-            <p class="cancelOrder" v-if="courseList.pay_status == '5'" style="cursor: inherit">审核中</p>
-            <!-- <p class="cancelOrder" v-if="courseList.pay_status == '6'" style="cursor: inherit">退款中</p> -->
+          <span class="fl">订单号：{{courseList.order_sn}}</span>
+          <span class="fr">{{exchangeTime(courseList.create_time)}}</span>
+        </div>
+        <div class="list">
+          <div class="content">
+            <div class="course">
+              <!-- 课程列表 -->
+              <div class="courseOne" v-if="courseList.orderCurriculumList.length&& index<3" v-for="(course,index) in courseList.orderCurriculumList" :key="'course'+index">
+                <img @click="goCourseInfo(course)" class="fl" :src="course.picture" alt="">
+                <div class="fl">
+                  <h4 @click="goCourseInfo(course)">{{course.title}}</h4>
+                  <h6>{{course.curriculum_time}}学时</h6>
+                  <!-- <p>导师：{{course.teacher_name}}</p> -->
+                </div>
+              </div>
+              <!-- 项目列表 -->
+              <div class="courseOne" v-if="computedLength(courseList.orderCurriculumList,courseList.orderProjectList,index)" v-for="(project,index) in courseList.orderProjectList" :key="'project'+index">
+                <div class="courseImg">
+                  <!-- 项目图标 -->
+                  <img v-if="project.project_type==2" class="project-img" src="https://static-image.1911edu.com/p5.png" alt="">
+                  <img v-else class="project-img" src="https://static-image.1911edu.com/p4.png" alt="">
 
-            <!-- 已完成订单剩余时间 -->
-            <p class="payReady" v-if="courseList.pay_status == '6'&&courseList.expire_day>=1">剩余{{courseList.expire_day}}天</p>
-            <p class="payReady" v-if="(courseList.pay_status == '2'  || courseList.pay_status == '6')&&courseList.expire_day<1">已过期</p>
-            <p class="payClose" v-if="courseList.pay_status == '3'">已关闭</p>
-            <p class="payClose" v-if="courseList.pay_status == '4'">已退款</p>
-            <p class="payClose" v-if="courseList.pay_status == '7'">退款中</p>
-            <p>
-              <span class="pay" v-if="courseList.pay_status == '1'" @click="goPay(courseList.id,courseList)">立即支付</span>
-              <span class="buy" v-if="courseList.pay_status == '3'" @click="goShopping(courseList)">立即购买</span>
-            </p>
+                  <img @click="goProjrctInfo(project)" class="fl" :src="project.picture" alt="">
+                </div>
+                <div class="fl">
+                  <h4 @click="goProjrctInfo(project)">{{project.title}}</h4>
+                  <h6>{{project.curriculum_time}}学时</h6>
+                </div>
+              </div>
+              <!-- vip列表 -->
+              <div class="courseOne" v-if="courseList.orderVipList.length" v-for="(vip,index) in courseList.orderVipList" :key="'vip'+index">
+                <img @click="goVipInfo(vip)" class="fl" :src="vip.picture" alt="">
+                <div class="fl">
+                  <h4 @click="goVipInfo(vip)">{{vip.title}}</h4>
+                </div>
+              </div>
+              <!-- 预约教师列表 -->
+              <div class="courseOne" v-if="courseList.orderTeacherBespokeList.length" v-for="(teacher,index) in courseList.orderTeacherBespokeList" :key="'teacher'+index">
+                <img @click="goTeacherInfo(teacher)" class="fl" :src="teacher.picture" alt="">
+                <div class="fl">
+                  <h4 @click="goTeacherInfo(teacher)">{{teacher.title}}（{{teacher.teacher_name}}）</h4>
+                </div>
+              </div>
+              <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList,config.type)">
+                查看更多>
+              </div>
+            </div>
+            <!-- 订单金额 详情 -->
+            <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length+courseList.orderTeacherBespokeList.length)}">
+              <p>￥{{courseList.order_amount}}</p>
+              <p v-if="config.type=='delete'" class="detail" @click="selectPayApply(courseList,config.type)">订单详情</p>
+            </div>
+            <!-- 操作按钮 状态 -->
+            <div v-show="config.type=='delete'" class="status height" :style="{height: computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length+courseList.orderTeacherBespokeList.length)}">
+              <p class="payDelete">删除</p>
+              <p class="payClose">已关闭</p>
+              <p>
+                <span class="buy" @click="goShopping(courseList)">立即购买</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <v-dialog v-if="showDialog" :dialog="dialogInfo" @closeDialog="closeDialog"></v-dialog>
-
   </div>
 </template>
 
@@ -90,12 +97,13 @@ import { message, open } from "@/lib/util/helper";
 import Dialog from "@/components/common/Dialog.vue";
 
 export default {
-  props: ["data", "config"],
+  props: ["allOrderData", "config"],
   components: {
     "v-dialog": Dialog
   },
   data () {
     return {
+      checkMsg: false,
       showDialog: false,
       dialogInfo: {},
       orderForm: {
@@ -116,12 +124,52 @@ export default {
       },
       detailconfig: {
         type: true,
-        id: 1 //判断是订单列表进入的详情
-      }
+        id: 2 //判断是回收站进入的详情
+      },
+      checkedArr: []
     };
   },
   methods: {
     ...mapActions("auth", ["setGid", "setKid"]),
+    goBack () {
+      this.$emit('goBack', 1)
+    },
+    showIoc () {
+
+    },
+    handleSelectAll (val) {
+      var checkboxList = document.getElementsByClassName("singleCheckbox");
+
+      if (val) {
+        this.checkedArr = [];
+        for (var i = 0; i < checkboxList.length; i++) {
+          checkboxList[i].checked = true;
+          this.checkedArr.push(checkboxList[i].id);
+        }
+      } else {
+        for (var i = 0; i < checkboxList.length; i++) {
+          checkboxList[i].checked = false;
+          this.checkedArr.push(checkboxList[i].id);
+        }
+        this.checkedArr = [];
+        this.checkMsg = false;
+      }
+    },
+    handleSelectSingle (item) {
+      let itemIndex = this.checkedArr.indexOf(item.id)
+      if (itemIndex >= 0) {
+        //已选中变成-未选中
+        this.checkedArr.splice(itemIndex, 1);
+      } else {
+        //未选中变成-选中
+        this.checkedArr.push(item.id);
+      }
+      if (this.checkedArr.length == this.allOrderData.length) {
+        this.checkMsg = true;
+      } else {
+        this.checkMsg = false;
+      }
+    },
     detection () {
       this.$emit("detection");
     },
