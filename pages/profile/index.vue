@@ -756,9 +756,7 @@ export default {
       this.showOrderList = false;
       this.detailConfig.id = 2
       this.orderType.type = 'delete'
-      // 调回收站接口
-      console.log('调回收站接口');
-
+      // 获取回收站订单列表
     },
     // 我的订单 commonMethods
     handleMyOrderChange (status, pagenum, flag) {

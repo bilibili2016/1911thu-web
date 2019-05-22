@@ -238,7 +238,7 @@ export default {
     // 下一题
     nextAnswer () {
       this.closeCountDown();
-      if (JSON.stringify(response.data.questionNext) != "{}" && this.questionNext.id) {
+      if (JSON.stringify(this.questionNext) != "{}" && this.questionNext.id) {
         this.examForm.questionId = this.questionNext.id;
         this.changeToken();
       } else {

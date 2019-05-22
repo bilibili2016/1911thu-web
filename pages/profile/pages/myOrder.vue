@@ -8,13 +8,13 @@
       <el-tabs class="orderCard" v-model="activeName" @tab-click="handleOrder">
         <el-tab-pane name="orderFirst" label="全部">
           <!-- <span class="" slot="label">全部</span> -->
-          <v-listtab :allOrderLoadAll="allOrderLoadAll" :order="orderZero" :data="allOrderData" :orderType="orderType" :pagemsg="pagemsg4" :noMsg="noMsgTen" @pageChange="getAllOrderDataChange" @handleUpdate="handleUpdate()"></v-listtab>
+          <v-listtab :allOrderLoadAll="allOrderLoadAll" :order="orderZero" :data="allOrderData" :orderType="orderType" :pagemsg="pagemsg4" :noMsg="noMsgTen" @pageChange="getAllOrderDataChange" @handleUpdate="handleUpdate" @handleUpdateDelete="handleUpdateDelete"></v-listtab>
         </el-tab-pane>
         <el-tab-pane name="orderSecond">
           <span class="payCut" slot="label">待付款
             <i v-if="unfinishedOrderData && unfinishedOrderData.length>0">{{orderTotal}}</i>
           </span>
-          <v-listtab :order="orderOne" :data="unfinishedOrderData" :orderType="orderType" :pagemsg="pagemsg5" :noMsg="noMsgTen" @pageChange="unfinishedOrderDataChange" @handleUpdate="handleUpdate()"></v-listtab>
+          <v-listtab :order="orderOne" :data="unfinishedOrderData" :orderType="orderType" :pagemsg="pagemsg5" :noMsg="noMsgTen" @pageChange="unfinishedOrderDataChange" @handleUpdate="handleUpdate"></v-listtab>
         </el-tab-pane>
         <el-tab-pane name="orderThird" label="已付款">
           <!-- <span class="payOk" slot="label">已付款</span> -->
@@ -22,12 +22,12 @@
         </el-tab-pane>
         <el-tab-pane name="orderFour" label="已关闭">
           <!-- <span class="payOff" slot="label">已关闭</span> -->
-          <v-listtab :order="orderThree" :data="invalidOrderData" :orderType="orderType" :pagemsg="pagemsg7" :noMsg="noMsgTen" @pageChange="closedOrderDataChange"></v-listtab>
+          <v-listtab :order="orderThree" :data="invalidOrderData" :orderType="orderType" :pagemsg="pagemsg7" :noMsg="noMsgTen" @pageChange="closedOrderDataChange" @handleUpdateDelete="handleUpdateDelete"></v-listtab>
         </el-tab-pane>
       </el-tabs>
     </el-card>
     <v-detail v-if="!showOrderList&&!showDelete" @goBack="goBack" @goTicketBack="goTicketBack" :orderDetail="orderDetail" :bankInfo="bankInfo" :courseList="courseList" :teacherBespokeList="teacherBespokeList" :projectList="projectList" :vipList="vipList" :config="orderType" v-loading="detailMsg"></v-detail>
-    <v-delete v-if="showDelete" :allOrderData="allOrderData" :config="orderType" @goBack="goBack"></v-delete>
+    <v-delete v-if="showDelete" :config="orderType" @goBack="goBack" :noMsg="noMsgTen"></v-delete>
   </div>
 </template>
 
@@ -131,6 +131,13 @@ export default {
       this.$emit('handleUpdate', 0, 1)
       this.$emit('handleUpdate', 1, 1)
       this.$emit('handleUpdate', 3, 1)
+    },
+    handleUpdateDelete () {
+      if (this.activeName == 'orderFirst') {
+        this.$emit('handleUpdate', 0, 1)
+      } else {
+        this.$emit('handleUpdate', 3, 1)
+      }
     },
     handleOrder (item) {
       if (persistStore.get('token')) {
