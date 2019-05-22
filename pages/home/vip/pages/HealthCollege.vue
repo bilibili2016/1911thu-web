@@ -163,7 +163,7 @@
             <div class="clearfix">
               <div class="left fl">
                 <span class="circle"></span>
-                <span class="text">学员参加1911学堂大健康学院在线学院或相关项目学习，考核通过者将获得1911学堂结业证书。</span>
+                <span class="text">学员参加1911学堂大健康学院在线学院或相关项目学习，考核通过者将获得1911学堂认证证书。</span>
               </div>
               <div class="right fr">
                 <img src="https://static-image.1911edu.com/cadreCollege_icon2.png" alt>
