@@ -473,15 +473,39 @@ export default {
     },
     //ie低版本的全屏，退出全屏都这个方法
     iefull () {
-      var el = document.documentElement;
-      var rfs = el.msRequestFullScreen;
+      if (window.navigator.userAgent.indexOf('compatible') != -1) {
+        console.log('360兼容模式');
+      }
+      if (window.navigator.userAgent.indexOf('AppleWebKit') != -1) {
+        console.log('360极速模式');
+      }
       if (typeof window.ActiveXObject != "undefined") {
         //这的方法 模拟f11键，使浏览器全屏
-        var wscript = new ActiveXObject("WScript.Shell");
-        if (wscript != null) {
-          console.log('F11');
-          wscript.SendKeys("{F11}");
-        }
+        // var wscript = new ActiveXObject("WScript.Shell");
+        // if (wscript != null) {
+        //   console.log('F11');
+        //   wscript.SendKeys("{F11}");
+        // }
+
+        // var WsShell = new ActiveXObject('WScript.Shell')
+        // WsShell.SendKeys('{F11}');
+
+        //     var rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen, 
+        //       wscript; 
+        //   if(typeof rfs != "undefined" && rfs) { 
+        //       rfs.call(el); 
+        //       return; 
+        //   } 
+        //   if(typeof window.ActiveXObject != "undefined") { 
+        //       wscript = new ActiveXObject("WScript.Shell"); 
+        //       if(wscript) { 
+        //           wscript.SendKeys("{F11}"); 
+        //       } 
+        //   } 
+
+
+
+        if (element.requestFullscreen) { element.requestFullscreen(); } else if (element.mozRequestFullScreen) { element.mozRequestFullScreen(); } else if (element.webkitRequestFullscreen) { element.webkitRequestFullscreen(); } else if (element.msRequestFullscreen) { element.msRequestFullscreen(); }
       }
     },
     //  播放器进入全屏事件
