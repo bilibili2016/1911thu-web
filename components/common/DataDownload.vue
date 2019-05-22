@@ -3,21 +3,22 @@
     <!-- <a href="https://view.officeapps.live.com/op/view.aspx?src=https://h5-image.1911edu.com/20180720-1911%E5%AD%A6%E5%A0%82%E5%85%9A%E6%94%BF%E5%B9%B2%E9%83%A8%E7%BB%BC%E5%90%88%E8%83%BD%E5%8A%9B%E6%8F%90%E5%8D%87%E5%9C%A8%E7%BA%BF%E9%AB%98%E7%BA%A7%E7%A0%94%E4%BF%AE%E7%8F%AD.docx" target="_blank" rel="nofollow">XDOC</a> -->
     <!-- 项目下载 -->
     <div class="project" v-if="!isConfig">
-      <div class="top clearfix">
+      <!-- <div class="top clearfix">
         <span class="choose">选择</span>
         <span class="left">全选</span>
         <span class="allDownload" @click="downloadMore">全部下载</span>
-      </div>
+      </div> -->
       <el-table
       ref="multipleTable"
       :data="tableData"
       tooltip-effect="dark"
       style="width: 100%"
-      @selection-change="handleSelectionChange">
-      <el-table-column
+      @selection-change="handleSelectionChange"
+      @cell-click="viewWord">
+      <!-- <el-table-column
         type="selection"
         width="100">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="file_name"
         label="资料名称"
@@ -81,7 +82,6 @@
 <script>
 import { coursedetail } from "~/lib/v1_sdk/index";
 import { matchSplits } from "@/lib/util/helper";
-
   export default{
     props:['isConfig','detailInfo'],
     data(){
@@ -109,32 +109,35 @@ import { matchSplits } from "@/lib/util/helper";
         this.downloadMoreFile = val
         console.log(this.downloadMoreFile);
       },
-      handleBatchDownload() {
-        const data = ['各类地址1', '各类地址2'] // 需要下载打包的路径, 可以是本地相对路径, 也可以是跨域的全路径
-        const zip = new JSZip()
-        const cache = {}
-        const promises = []
-        data.forEach(item => {
-        const promise = getFile(item).then(data => { // 下载文件, 并存成ArrayBuffer对象
-        const arr_name = item.split("/")
-        const file_name = arr_name[arr_name.length - 1] // 获取文件名
-        zip.file(file_name, data, { binary: true }) // 逐个添加文件
-        cache[file_name] = data
-        })
-        promises.push(promise)
-        })
-        Promise.all(promises).then(() => {
-        zip.generateAsync({type:"blob"}).then(content => { // 生成二进制流
-        FileSaver.saveAs(content, "打包下载.zip") // 利用file-saver保存文件
-        })
-        })
-      },
+      // handleBatchDownload() {
+      //   const data = ['各类地址1', '各类地址2'] // 需要下载打包的路径, 可以是本地相对路径, 也可以是跨域的全路径
+      //   const zip = new JSZip()
+      //   const cache = {}
+      //   const promises = []
+      //   var FileSaver = require('file-saver');
+      //   this.downloadUrl.forEach(item => {
+      //     const promise = getFile(item).then(data => { // 下载文件, 并存成ArrayBuffer对象
+      //       const arr_name = item.split("/")
+      //       const file_name = arr_name[arr_name.length - 1] // 获取文件名
+      //       zip.file(file_name, data, { binary: true }) // 逐个添加文件
+      //       cache[file_name] = data
+      //     })
+      //     promises.push(item)
+      //   })
+      //   Promise.all(promises).then(() => {
+      //     zip.generateAsync({type:"blob"}).then(content => { // 生成二进制流
+      //     console.log(content);
+      //       FileSaver.saveAs(content, "打包下载.zip") // 利用file-saver保存文件
+      //     })
+      //   })
+      // },
       //下载多个文件
       downloadMore(){
         this.downloadMoreFile.forEach(file => {
           this.downloadUrl.push(file.file_url)
         });
         console.log( this.downloadUrl,'downloadUrl');
+        // this.handleBatchDownload()
         // for(var i =0;i<this.downloadMoreFile.length;i++){  //循环遍历调用downloadFile方法
         //     const url = this.downloadMoreFile[i];
         //      this.downloadFile(url);
