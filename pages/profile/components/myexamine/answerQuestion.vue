@@ -112,7 +112,7 @@ import { message, matchSplits, setTitle } from "@/lib/util/helper";
 import Dialog from "@/components/common/Dialog.vue";
 
 export default {
-  data() {
+  data () {
     return {
       showDialog: false,
       dialogInfo: {},
@@ -159,22 +159,22 @@ export default {
   methods: {
     ...mapActions("auth", ["setGid"]),
     // 选择选项
-    shangeRadio(val) {
+    shangeRadio (val) {
       this.examForm.selectId = [];
       this.examForm.selectId.push(val);
     },
     // 选择选项
-    selectOption(option) {
+    selectOption (option) {
       this.examForm.selectId = this.selectIndex;
     },
     // 切换问题
-    selectQuestion(item) {
+    selectQuestion (item) {
       this.closeCountDown();
       this.examForm.questionId = item.id;
       this.changeToken();
     },
     // 提交当前问题
-    answer() {
+    answer () {
       if (this.examForm.selectId.length == 0) {
         message(this, "error", "请先选择问题答案");
         return false;
@@ -192,7 +192,9 @@ export default {
           if (response.status == 0) {
             this.setAssignment(response);
             if (this.questionCurrent.number < this.questionNum) {
-              this.countDown();
+              if (JSON.stringify(response.data.questionNext) != "{}") {
+                this.countDown();
+              }
             }
           } else {
             message(this, "error", response.msg);
@@ -204,19 +206,19 @@ export default {
       }
     },
     //关闭dialog提示框
-    closeDialog() {
+    closeDialog () {
       this.showDialog = false;
       this.$router.push("/");
     },
     // 倒计时跳转下一题
-    countDown() {
+    countDown () {
       this.isShowTime = true;
       this.timer = setInterval(() => {
         this.showTime < 1 ? this.nextAnswer() : this.showTime--;
       }, 1000);
     },
     // 关闭倒计时
-    closeCountDown() {
+    closeCountDown () {
       if (this.timer) {
         clearInterval(this.timer);
       }
@@ -224,7 +226,7 @@ export default {
       this.showTime = 5;
     },
     // 上一题
-    preAnswer() {
+    preAnswer () {
       this.closeCountDown();
       if (this.questionPre != [] && this.questionPre.id) {
         this.examForm.questionId = this.questionPre.id;
@@ -234,9 +236,9 @@ export default {
       }
     },
     // 下一题
-    nextAnswer() {
+    nextAnswer () {
       this.closeCountDown();
-      if (this.questionNext != [] && this.questionNext.id) {
+      if (JSON.stringify(response.data.questionNext) != "{}" && this.questionNext.id) {
         this.examForm.questionId = this.questionNext.id;
         this.changeToken();
       } else {
@@ -244,7 +246,7 @@ export default {
       }
     },
     // 交卷确认信息
-    commitExam() {
+    commitExam () {
       this.closeCountDown();
       if (
         persistStore.get("token") != "" &&
@@ -264,7 +266,7 @@ export default {
       }
     },
     // 提交考试
-    examination() {
+    examination () {
       clearInterval(this.interval);
       examine.addSubmitTestPaper(this.examForm).then(response => {
         if (response.status == 0) {
@@ -281,11 +283,11 @@ export default {
       });
     },
     // 关闭弹框
-    closeChadow() {
+    closeChadow () {
       this.showShadow = false;
     },
     // 转换时间格式
-    changeTime(time) {
+    changeTime (time) {
       if (time <= 0) {
         clearInterval(this.interval);
         this.commitExam();
@@ -298,8 +300,8 @@ export default {
         this.second > 0
           ? this.second--
           : this.minute > 0
-          ? (this.minute--, (this.second = 59))
-          : (this.minute = 0);
+            ? (this.minute-- , (this.second = 59))
+            : (this.minute = 0);
         if (this.second == 0 && this.minute == 0) {
           clearInterval(this.interval);
           this.commitExam();
@@ -308,7 +310,7 @@ export default {
       }, 1000);
     },
     // 获取试题
-    questionsDetail() {
+    questionsDetail () {
       examine.questionsDetail(this.examForm).then(response => {
         if (response.status == 0) {
           this.setAssignment(response);
@@ -320,13 +322,13 @@ export default {
       });
     },
     // 跳转个人中心
-    goProfile(item) {
+    goProfile (item) {
       this.gidForm.gids = item;
       this.setGid(this.gidForm);
       this.$router.push("/profile");
     },
     // 赋值
-    setAssignment(response) {
+    setAssignment (response) {
       this.title = response.data.exam_name;
       this.questionCurrent = response.data.questionCurrent;
       this.selectArr = response.data.questionCurrent.option;
@@ -355,7 +357,7 @@ export default {
       this.changeTime(response.data.surplus_time);
     },
     // 登录账号被替换
-    changeToken() {
+    changeToken () {
       if (
         persistStore.get("token") != "" &&
         persistStore.get("examToken") === persistStore.get("token")
@@ -367,7 +369,7 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     setTitle("考试中心-1911学堂");
 
     if (window.location.search) {
@@ -386,13 +388,15 @@ export default {
     }
   },
   // 进入路由隐藏header和footer
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     next(vm => {
+      vm.closeCountDown();
       vm.$bus.$emit("headerFooterHide");
     });
   },
   // 出路由显示header和footer
-  beforeRouteLeave(to, from, next) {
+  beforeRouteLeave (to, from, next) {
+    this.closeCountDown();
     this.$bus.$emit("headerFooterShow");
     persistStore.set("examToken", "");
     next();
