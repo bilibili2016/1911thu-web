@@ -21,7 +21,6 @@
     }
 
     .main-crumbs {
-
       .el-breadcrumb__inner,
       .el-breadcrumb__separator {
         color: #fff;
@@ -125,7 +124,7 @@
       margin-right: 40px;
       text-align: right;
 
-      &>div {
+      & > div {
         float: left;
         // display: inline-block;
       }
@@ -201,12 +200,12 @@
 
     &.hasWidth {
       right: 30px;
-      transition: all 1s;
+      transition: all 300ms;
     }
 
     span {
       text-align: center;
-      color: #FD0E19;
+      color: #fd0e19;
       padding: 0 20px;
     }
 

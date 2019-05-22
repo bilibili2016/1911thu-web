@@ -211,7 +211,6 @@ export default {
       } else if (scrollTop < 480) {
         this.showRightBar = false
       }
-      console.log(scrollTop, this.showRightBar);
     }
   }
 };
