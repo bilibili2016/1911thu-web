@@ -276,6 +276,10 @@ export default {
     changeTime (time) {
       return timestampToTime(time)
     }
+  },
+  mounted(){
+     document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }
 }
 </script>
