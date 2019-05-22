@@ -4,6 +4,15 @@ const config = require('./base.conf')
 config.analyze = {
   analyzerMode: 'html'
 };
+(config.head.meta = [{
+    name: 'renderer',
+    content: 'webkit|ie-comp|ie-stand',
+  },
+  {
+    rel: 'stylesheet',
+    href: 'https://g.alicdn.com/de/prismplayer/2.7.2/skins/default/aliplayer-min.css'
+  }
+]),
 (config.head.link = [{
     rel: 'icon',
     type: 'image/x-icon',
