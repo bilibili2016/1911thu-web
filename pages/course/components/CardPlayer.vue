@@ -489,7 +489,7 @@ export default {
 
         // var WsShell = new ActiveXObject('WScript.Shell')
         // WsShell.SendKeys('{F11}');
-
+        var el = document.getElementsByTagName('video')
         var rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen,
           wscript;
         if (typeof rfs != "undefined" && rfs) {
