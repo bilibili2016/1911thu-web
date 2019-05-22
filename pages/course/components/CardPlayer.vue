@@ -490,22 +490,18 @@ export default {
         // var WsShell = new ActiveXObject('WScript.Shell')
         // WsShell.SendKeys('{F11}');
 
-        //     var rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen, 
-        //       wscript; 
-        //   if(typeof rfs != "undefined" && rfs) { 
-        //       rfs.call(el); 
-        //       return; 
-        //   } 
-        //   if(typeof window.ActiveXObject != "undefined") { 
-        //       wscript = new ActiveXObject("WScript.Shell"); 
-        //       if(wscript) { 
-        //           wscript.SendKeys("{F11}"); 
-        //       } 
-        //   } 
-
-
-
-        if (element.requestFullscreen) { element.requestFullscreen(); } else if (element.mozRequestFullScreen) { element.mozRequestFullScreen(); } else if (element.webkitRequestFullscreen) { element.webkitRequestFullscreen(); } else if (element.msRequestFullscreen) { element.msRequestFullscreen(); }
+        var rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen,
+          wscript;
+        if (typeof rfs != "undefined" && rfs) {
+          rfs.call(el);
+          return;
+        }
+        if (typeof window.ActiveXObject != "undefined") {
+          wscript = new ActiveXObject("WScript.Shell");
+          if (wscript) {
+            wscript.SendKeys("{F11}");
+          }
+        }
       }
     },
     //  播放器进入全屏事件
