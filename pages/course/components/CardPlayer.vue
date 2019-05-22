@@ -471,8 +471,22 @@ export default {
         }
       }
     },
+    //ie低版本的全屏，退出全屏都这个方法
+    iefull () {
+      var el = document.documentElement;
+      var rfs = el.msRequestFullScreen;
+      if (typeof window.ActiveXObject != "undefined") {
+        //这的方法 模拟f11键，使浏览器全屏
+        var wscript = new ActiveXObject("WScript.Shell");
+        if (wscript != null) {
+          console.log('F11');
+          wscript.SendKeys("{F11}");
+        }
+      }
+    },
     //  播放器进入全屏事件
     fullScreenTrue () {
+      this.iefull()
       document.getElementsByClassName(
         "prism-big-play-btn"
       )[0].style.visibility = "visible";
