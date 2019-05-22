@@ -5,14 +5,14 @@
       <span @click="goBack">我的订单 > </span>
       <span>订单回收站</span>
     </div>
-    <div class="listBox">
+    <div class="listBox" v-if="allOrderData.length">
       <div class="bottomBar" id="bottomBar" ref="bottomBar">
         <span class="fl">
           <el-checkbox v-model="checkMsg" @change="handleSelectAll">全选</el-checkbox>
           <!-- <input type="checkbox" class="el-checkbox" ref="checkbox" id="allChecked" @change="handleSelectAll">
           <label for="allChecked" class="el-checkbox-label">全选</label> -->
         </span>
-        <span class="next " @click="showIoc">批量永久删除</span>
+        <span class="next " @click="deleteOrderAlter(0)">批量永久删除</span>
       </div>
       <div class="orderList" v-for="(courseList, index ) in allOrderData" :key="index">
         <div class="topBar clearfix">
@@ -74,7 +74,7 @@
             </div>
             <!-- 操作按钮 状态 -->
             <div v-show="config.type=='delete'" class="status height" :style="{height: computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length+courseList.orderTeacherBespokeList.length)}">
-              <p class="payDelete">删除</p>
+              <p class="payDelete" @click="deleteOrderAlter(1,courseList.id)">删除</p>
               <p class="payClose">已关闭</p>
               <p>
                 <span class="buy" @click="goShopping(courseList)">立即购买</span>
@@ -84,11 +84,16 @@
         </div>
       </div>
     </div>
+    <!-- <div class="empty" v-else>
+      <img src="https://static-image.1911edu.com/deleteEmpty.png" alt="">
+    </div> -->
+    <v-nomsg class="noOrder" v-else :config="noMsg"></v-nomsg>
     <v-dialog v-if="showDialog" :dialog="dialogInfo" @closeDialog="closeDialog"></v-dialog>
   </div>
 </template>
 
 <script>
+import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 import { timestampToTime } from "@/lib/util/helper";
 import { order } from "~/lib/v1_sdk/index";
 import { mapActions } from "vuex";
@@ -97,8 +102,9 @@ import { message, open } from "@/lib/util/helper";
 import Dialog from "@/components/common/Dialog.vue";
 
 export default {
-  props: ["allOrderData", "config"],
+  props: ["config", "noMsg"],
   components: {
+    'v-nomsg': NoMsg,
     "v-dialog": Dialog
   },
   data () {
@@ -126,7 +132,11 @@ export default {
         type: true,
         id: 2 //判断是回收站进入的详情
       },
-      checkedArr: []
+      checkedArr: [],
+      allOrderData: '',
+      deleteList: {
+        id: []
+      }
     };
   },
   methods: {
@@ -134,12 +144,43 @@ export default {
     goBack () {
       this.$emit('goBack', 1)
     },
-    showIoc () {
-
+    // 批量永久删除
+    deleteMulti (type, id) {
+      this.deleteList.id = [];
+      if (type == 1) {
+        this.deleteList.id.push(id)
+      } else {
+        this.deleteList.id = this.checkedArr
+      }
+      this.doDeleteOrder()
     },
+    deleteOrderAlter (type, id) {
+      this.$confirm('永久删除后，您将无法再查看该订单，请谨慎操作！', '您确定要永久删除该订单吗？', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.deleteMulti(type, id)
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
+    },
+    // 获取回收站订单列表
+    getOrderTrashList () {
+      order.getOrderTrashList(this.orderForm).then(response => {
+        if (response.status === 0) {
+          this.allOrderData = response.data.orderList
+        } else {
+          message(this, "error", response.msg);
+        }
+      });
+    },
+    // 多选框选择所有
     handleSelectAll (val) {
       var checkboxList = document.getElementsByClassName("singleCheckbox");
-
       if (val) {
         this.checkedArr = [];
         for (var i = 0; i < checkboxList.length; i++) {
@@ -155,6 +196,7 @@ export default {
         this.checkMsg = false;
       }
     },
+    // 多选框选择单个
     handleSelectSingle (item) {
       let itemIndex = this.checkedArr.indexOf(item.id)
       if (itemIndex >= 0) {
@@ -187,13 +229,12 @@ export default {
         return false;
       }
     },
-    //取消订单
-    cancelOrder (id) {
-      this.orderForm.ids = id;
-      order.cancelOrder(this.orderForm).then(response => {
+    //删除订单接口
+    doDeleteOrder () {
+      order.doDeleteOrder(this.deleteList).then(response => {
         if (response.status === 0) {
-          this.$emit("handleUpdate", true);
-          message(this, "success", "订单已取消！");
+          this.handleSelectAll(false)
+          this.getOrderTrashList()
         } else if (response.status === 100008) {
           this.responseData.res = response;
           this.$bus.$emit("reLoginAlertPop", this.responseData);
@@ -202,27 +243,6 @@ export default {
           message(this, "error", response.msg);
         }
       });
-    },
-    //去支付
-    goPay (id, courseList) {
-      if (courseList.orderVipList.length > 0) {
-        this.$router.push({
-          path: "/shop/wepay",
-          query: {
-            order: id,
-            type: 2
-          }
-        });
-        return false;
-      } else {
-        this.$router.push({
-          path: "/shop/wepay",
-          query: {
-            order: id,
-            type: 1
-          }
-        });
-      }
     },
     // 判断购物车数量
     goodsNmber (id) {
@@ -297,15 +317,6 @@ export default {
       this.kidForm.kids = item.id;
       this.courseUrl.kid = item.id;
       open(this.courseUrl);
-
-      // this.$router.push({
-      //   path: '/course/coursedetail',
-      //   query: {
-      //     kid: item.id,
-      //     bid: '',
-      //     page: 0
-      //   }
-      // })
     },
     //项目详情
     goProjrctInfo (item) {
@@ -343,10 +354,11 @@ export default {
     }
   },
   mounted () {
-    if (persistStore.get("orderDetail")) {
-      this.$bus.$emit("goOrderDetail", true);
-      persistStore.set("orderDetail", false);
-    }
+    // if (persistStore.get("orderDetail")) {
+    //   this.$bus.$emit("goOrderDetail", true);
+    //   persistStore.set("orderDetail", false);
+    // }
+    this.getOrderTrashList()
   }
 };
 </script>

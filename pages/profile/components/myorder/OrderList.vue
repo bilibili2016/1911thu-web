@@ -65,8 +65,9 @@
             <!-- 已完成订单剩余时间 -->
             <p class="payReady" v-if="courseList.pay_status == '6'&&courseList.expire_day>=1">剩余{{courseList.expire_day}}天</p>
             <p class="payReady" v-if="(courseList.pay_status == '2'  || courseList.pay_status == '6')&&courseList.expire_day<1">已过期</p>
+            <p class="payDelete" v-if="courseList.pay_status == '3'" @click="deleteOrderAlert(courseList.id)">删除</p>
             <p class="payClose" v-if="courseList.pay_status == '3'">已关闭</p>
-            <p class="payClose" v-if="courseList.pay_status == '4'">已退款</p>
+            <p class="payRefund" v-if="courseList.pay_status == '4'">已退款</p>
             <p class="payClose" v-if="courseList.pay_status == '7'">退款中</p>
             <p>
               <span class="pay" v-if="courseList.pay_status == '1'" @click="goPay(courseList.id,courseList)">立即支付</span>
@@ -114,6 +115,9 @@ export default {
         bid: "",
         page: 0
       },
+      deleteOrderList: {
+        id: ""
+      },
       detailconfig: {
         type: true,
         id: 1 //判断是订单列表进入的详情
@@ -138,6 +142,36 @@ export default {
       } else {
         return false;
       }
+    },
+    deleteOrderAlert (id) {
+      this.$confirm('删除后，您可在订单回收站找回，或永久删除。', '您确定要删除订单吗？', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.deleteOrder(id)
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
+    },
+    //取消订单
+    deleteOrder (id) {
+      this.deleteOrderList.id = id;
+      order.doOrderTrash(this.deleteOrderList).then(response => {
+        if (response.status === 0) {
+          this.$emit("handleUpdateDelete");
+          message(this, "success", "订单已删除！");
+        } else if (response.status === 100008) {
+          this.responseData.res = response;
+          this.$bus.$emit("reLoginAlertPop", this.responseData);
+          return false;
+        } else {
+          message(this, "error", response.msg);
+        }
+      });
     },
     //取消订单
     cancelOrder (id) {

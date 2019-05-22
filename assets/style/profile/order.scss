@@ -197,8 +197,18 @@
             }
           }
 
-          &.payClose {
+          &.payRefund {
             color: #332a51;
+          }
+
+          &.payDelete {
+            color: #6D687A;
+            cursor: pointer;
+          }
+
+          &.payClose {
+            color: #AAA;
+            margin: 6px 0 0;
           }
 
           span {
