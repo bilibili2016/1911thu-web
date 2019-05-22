@@ -121,19 +121,19 @@ export default {
     },
     // 2. 找到播放器预览
     creatAliplayer () {
-      console.log("准备创建推流播放器");
+      //   console.log("准备创建推流播放器");
 
       this.aliWebrtc.startPreview(this.$refs.pushVideo).then((obj) => {
-        console.log("创建推流播放器成功");
+        // console.log("创建推流播放器成功");
         // 3. 加入房间
         this.aliWebrtc.joinChannel(this.authInfo, this.userName).then((obj) => {
-          console.log("推流播放器---加入房间");
+          //   console.log("推流播放器---加入房间");
           // 入会成功
           this.aliWebrtc.muteLocalMic(false)
           this.aliWebrtc.muteLocalCamera(false)
           this.publishLocalStreams()
         }).catch((error) => {
-          console.log(error, '入会失败，这里console下error内容，可以看到失败原因');
+          //   console.log(error, '入会失败，这里console下error内容，可以看到失败原因');
           // 入会失败，这里console下error内容，可以看到失败原因
           message(this, "error", error.message);
           this.stopPlay()
@@ -149,7 +149,7 @@ export default {
     // 4. 发布本地流
     publishLocalStreams () {
       this.aliWebrtc.publish().then((res) => {
-        console.log(res, '-----发布本地流成功-----');
+        // console.log(res, '-----发布本地流成功-----');
         if (this.begin) {
           this.begin = false
         }
@@ -167,20 +167,20 @@ export default {
       });
       // 完成连接建立时会触发
       this.aliWebrtc.on('OnConnected', (data) => {
-        console.log(data.displayName + " 连接已经建立");
+        // console.log(data.displayName + " 连接已经建立");
       });
       this.aliWebrtc.on('onPublisher', (publisher) => {
         this.hvuex.publisherList.push(publisher);
         this.receivePublish(publisher);
         //远程发布者ID
-        console.log(publisher, '完成连接建立时会触发');
+        // console.log(publisher, '完成连接建立时会触发');
       });
       //订阅remote流成功后，显示remote流
       this.aliWebrtc.on('onMediaStream', (subscriber, stream) => {
-        console.log("订阅remote流成功后，显示remote流");
+        // console.log("订阅remote流成功后，显示remote流");
 
         if (subscriber.publishId != subscriber.subscribeId) {
-          console.log("进入视频判断");
+          //   console.log("进入视频判断");
 
           let publisher = this.hvuex.publisherList.filter(item => {
             return item.publisherId === subscriber.publishId;
@@ -188,9 +188,9 @@ export default {
           publisher.length > 0 ? publisher[0].subscribeId = subscriber.subscribeId : '';
           let video = this.getDisplayRemoteVideo(subscriber.publishId, subscriber.subscribeId, subscriber
             .displayName);
-          console.log("插入视频之前");
+          //   console.log("插入视频之前");
           this.aliWebrtc.setDisplayRemoteVideo(subscriber, video, stream)
-          console.log("插入视频之后");
+          //   console.log("插入视频之后");
         }
         if (this.begin) {
           this.begin = false
@@ -199,7 +199,7 @@ export default {
       //   当频道里的其他人取消发布本地流时时触发
       this.aliWebrtc.on('onUnPublisher', (publisher) => {
         this.stopPlay()
-        console.log("频道里的其他人取消发布本地流-----将会重新发布本地流");
+        // console.log("频道里的其他人取消发布本地流-----将会重新发布本地流");
         this.$alert("您当前的网络状况太差，导致视频中断，请点击继续直播重新建立连接。", "温馨提示", {
           confirmButtonText: "继续直播",
           callback: action => {
