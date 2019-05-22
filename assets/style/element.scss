@@ -2328,7 +2328,7 @@ input::-webkit-credentials-auto-fill-button {
   }
 }
 
-.dataDownload .project {
+.dataDownload {
   .el-table {
     overflow: inherit;
   }
@@ -2355,13 +2355,15 @@ input::-webkit-credentials-auto-fill-button {
 
   .el-table__header {
     th {
-      height: 75px;
-      line-height: 45px;
+      height: 50px;
+      // line-height: 45px;
       font-size: 18px;
       color: #222;
       font-weight: 400;
-      border-color: #DDDDDD;
+      // border-color: #DDDDDD;
+      border: none;
       text-align: center;
+      background-color: #F7F9FB;
 
       .el-checkbox__input.is-indeterminate .el-checkbox__inner::before {
         display: none;
@@ -2387,6 +2389,10 @@ input::-webkit-credentials-auto-fill-button {
       &:hover {
         td {
           background-color: #fff;
+
+          &:first-child {
+            color: #7A3181;
+          }
         }
       }
     }
@@ -2397,6 +2403,11 @@ input::-webkit-credentials-auto-fill-button {
       font-size: 14px;
       color: #222;
       text-align: center;
+
+      &:first-child {
+        // text-align: left;
+        cursor: pointer;
+      }
 
       .cell {
         .el-button {
@@ -2431,72 +2442,72 @@ input::-webkit-credentials-auto-fill-button {
   }
 }
 
-.dataDownload .course {
-  .el-table::before {
-    display: none;
-  }
+// .dataDownload .course {
+//   .el-table::before {
+//     display: none;
+//   }
 
-  .el-table__header {
-    th {
-      height: 50px;
-      font-size: 16px;
-      color: #222;
-      font-weight: 400;
-      text-align: center;
-      background-color: #F7F9FB;
-      border: none;
+//   .el-table__header {
+//     th {
+//       height: 50px;
+//       font-size: 16px;
+//       color: #222;
+//       font-weight: 400;
+//       text-align: center;
+//       background-color: #F7F9FB;
+//       border: none;
 
-      &:first-child {
-        text-align: left;
-        padding-left: 20px;
-      }
-    }
-  }
+//       &:first-child {
+//         text-align: left;
+//         padding-left: 20px;
+//       }
+//     }
+//   }
 
-  .el-table__body {
-    tr {
-      &.current-row {
-        td {
-          background-color: #fff;
-        }
-      }
+//   .el-table__body {
+//     tr {
+//       &.current-row {
+//         td {
+//           background-color: #fff;
+//         }
+//       }
 
-      &:hover {
-        td {
-          background-color: #fff;
+//       &:hover {
+//         td {
+//           background-color: #fff;
 
-          &:first-child {
-            color: #7A3181;
-          }
-        }
-      }
-    }
+//           &:first-child {
+//             color: #7A3181;
+//           }
+//         }
+//       }
+//     }
 
-    tr {
-      td {
-        height: 70px;
-        border-color: #ddd;
-        font-size: 14px;
-        color: #222;
-        text-align: center;
+//     tr {
+//       td {
+//         height: 70px;
+//         border-color: #ddd;
+//         font-size: 14px;
+//         color: #222;
+//         text-align: center;
 
-        &:first-child {
-          text-align: left;
-          cursor: pointer;
-        }
+//         &:first-child {
+//           text-align: left;
+//           cursor: pointer;
+//         }
 
-        .cell {
-          .el-button {
-            color: #7A3181;
-            border-color: #7A3181;
-            border-radius: 15px;
-          }
+//         .cell {
+//           .el-button {
+//             color: #7A3181;
+//             border-color: #7A3181;
+//             border-radius: 15px;
+//           }
 
-          .el-button--mini {
-            padding: 8px 27px;
-          }
-        }
-      }
-    }
-  }
-}
+//           .el-button--mini {
+//             padding: 8px 27px;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
