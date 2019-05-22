@@ -2333,6 +2333,10 @@ input::-webkit-credentials-auto-fill-button {
     overflow: inherit;
   }
 
+  .el-table::before {
+    display: none;
+  }
+
   .el-table__header-wrapper {
     overflow: inherit;
 
