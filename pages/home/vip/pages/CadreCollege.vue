@@ -60,7 +60,7 @@
           <div class="attestation clearfix">
             <div class="left">
               <span class="circle"></span>
-              <span class="text">学员参加1911学堂干部学院在线学院或相关项目学习，考核通过者将获得1911学堂结业证书。</span>
+              <span class="text">学员参加1911学堂干部学院在线学院或相关项目学习，考核通过者将获得1911学堂认证证书。</span>
             </div>
             <div class="right">
               <img src="https://static-image.1911edu.com/cadreCollege_icon2.png" alt>
