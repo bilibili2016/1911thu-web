@@ -155,6 +155,10 @@ export default {
       this.doDeleteOrder()
     },
     deleteOrderAlter (type, id) {
+      if (type == 0 && this.checkedArr.length == 0) {
+        message(this, 'error', '请先选择您要删除的订单！');
+        return false
+      }
       this.$confirm('永久删除后，您将无法再查看该订单，请谨慎操作！', '您确定要永久删除该订单吗？', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
