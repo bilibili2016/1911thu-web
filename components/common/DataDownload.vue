@@ -158,6 +158,9 @@ import { matchSplits } from "@/lib/util/helper";
       //预览文件
       viewWord(row, column, cell, event){
         if(column.property=="file_name"){
+          // if(row.file_type=='ppt'){
+          //   return false
+          // }
           window.open('https://view.officeapps.live.com/op/view.aspx?src='+row.file_url)
         }
       },
