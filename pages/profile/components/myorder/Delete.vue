@@ -87,7 +87,7 @@
     <!-- <div class="empty" v-else>
       <img src="https://static-image.1911edu.com/deleteEmpty.png" alt="">
     </div> -->
-    <v-nomsg class="noOrder" v-else :config="noMsg"></v-nomsg>
+    <v-nomsg v-else :config="noMsg"></v-nomsg>
     <v-dialog v-if="showDialog" :dialog="dialogInfo" @closeDialog="closeDialog"></v-dialog>
   </div>
 </template>

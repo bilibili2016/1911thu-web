@@ -59,7 +59,6 @@
               <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)}">
                 <p>￥{{courseList.order_amount}}</p>
               </div>
-
             </div>
           </div>
         </div>
@@ -79,7 +78,7 @@
           <span class="next " @click="showIoc">下一步</span>
         </div>
       </div>
-      <v-nomsg class="noOrder " v-else :config="noMsgTwl"></v-nomsg>
+      <v-nomsg v-else :config="noMsgTwl"></v-nomsg>
       <!-- 发票弹框 第一步：填写发票信息-->
       <v-ticketinfo v-if="showInvoice" @handleClose="close" @closeForm="closeFirst"></v-ticketinfo>
       <!-- 发票弹框 第二步：确认发票信息并提交-->
