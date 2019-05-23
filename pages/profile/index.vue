@@ -567,6 +567,8 @@ export default {
           case "tab-fourth": //我的订单
             this.myOrderDataArr = [0, 1];
             this.showOrderList = true;
+            this.showDelete = false;
+            this.orderType.type = 'order'
             this.orderForm.orderSn = "";
             this.$bus.$emit("activeOrder");
             this.handleInitMyOrderData(true);
