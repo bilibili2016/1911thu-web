@@ -7,7 +7,7 @@
     <div class="pagination" v-show="pagemsg.total>19 && data.length != 0">
       <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="pageChange"></el-pagination>
     </div>
-    <v-nomsg class="noOrder" v-if="data.length == 0&&!allOrderLoadAll" :config="noMsg"></v-nomsg>
+    <v-nomsg v-if="data.length == 0&&!allOrderLoadAll" :config="noMsg"></v-nomsg>
   </div>
 </template>
 
