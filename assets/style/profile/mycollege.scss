@@ -25,11 +25,7 @@
 				height: 160px;
 				border-bottom: 1px solid #eeeeee;
 				padding: 30px 0;
-
-				// &:first-child {
-				//   border: none;
-				// }
-
+                position:relative;
 				.item_left {
 					float: left;
 					height: 100px;
@@ -82,8 +78,9 @@
 				}
 
 				.item_right {
-					float: right;
-					height: 100px;
+                    position:absolute;
+                    right:0;
+                    top:40px;
 
 					.btn {
 						width: 110px;
@@ -96,7 +93,6 @@
 						border-radius: 4px;
 						cursor: pointer;
 						margin-left: 20px;
-						margin-top: 70px;
 						&:hover {
 							background-color: #5f068d;
 						}
