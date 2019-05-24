@@ -1,104 +1,104 @@
 .college {
-	.top-con {
-		height: 60px;
-		line-height: 60px;
-		border-bottom: 1px solid #e8d6f7;
-		padding-left: 30px;
-		font-size: 16px;
-		color: #222;
-	}
+  .top-con {
+    height: 60px;
+    line-height: 60px;
+    border-bottom: 1px solid #e8d6f7;
+    padding-left: 30px;
+    font-size: 16px;
+    color: #222;
+  }
 
-	.listParent {
-		// height: 600px;
-		// overflow: hidden;
-	}
+  .listParent {
+    // height: 600px;
+    // overflow: hidden;
+  }
 
-	.collegeList {
-		font-size: 16px;
-		color: #222;
+  .collegeList {
+    font-size: 16px;
+    color: #222;
 
-		.collegeLists {
-			padding: 0 30px;
+    .collegeLists {
+      padding: 0 30px;
 
-			.item {
-				width: 100%;
-				height: 160px;
-				border-bottom: 1px solid #eeeeee;
-				padding: 30px 0;
-                position:relative;
-				.item_left {
-					float: left;
-					height: 100px;
+      .item {
+        width: 100%;
+        height: 160px;
+        border-bottom: 1px solid #eeeeee;
+        padding: 30px 0;
+        position: relative;
+        .item_left {
+          float: left;
+          height: 100px;
 
-					img {
-						display: inline-block;
-						width: 160px;
-						height: 100px;
-						vertical-align: middle;
-						cursor: pointer;
-					}
+          img {
+            display: inline-block;
+            width: 160px;
+            height: 100px;
+            vertical-align: middle;
+            cursor: pointer;
+          }
 
-					.proflie-college {
-						margin-left: 20px;
-						height: 100px;
-						line-height: 50px;
-						display: inline-block;
-						vertical-align: middle;
+          .proflie-college {
+            margin-left: 20px;
+            height: 100px;
+            line-height: 50px;
+            display: inline-block;
+            vertical-align: middle;
 
-						p {
-							width: 100%;
+            p {
+              width: 100%;
 
-							&.title {
-								cursor: pointer;
-							}
+              &.title {
+                cursor: pointer;
+              }
 
-							span {
-								color: #222222;
-								font-size: 14px;
-								margin-right: 25px;
+              span {
+                color: #222222;
+                font-size: 14px;
+                margin-right: 25px;
 
-								&.college-study {
-									height: 18px;
-									background-color: #e4e4ef;
-									border-radius: 9px;
-									font-size: 12px;
-									line-height: 18px;
-									padding-right: 10px;
-								}
+                &.college-study {
+                  height: 18px;
+                  background-color: #e4e4ef;
+                  border-radius: 9px;
+                  font-size: 12px;
+                  line-height: 18px;
+                  padding-right: 10px;
+                }
 
-								i {
-									color: #b4b4c8;
-									font-size: 20px;
-									margin: -1px 0 0 -1px;
-									vertical-align: middle;
-								}
-							}
-						}
-					}
-				}
+                i {
+                  color: #b4b4c8;
+                  font-size: 20px;
+                  margin: -1px 0 0 -1px;
+                  vertical-align: middle;
+                }
+              }
+            }
+          }
+        }
 
-				.item_right {
-                    position:absolute;
-                    right:0;
-                    top:40px;
+        .item_right {
+          position: absolute;
+          right: 0;
+          top: 40px;
 
-					.btn {
-						width: 110px;
-						height: 30px;
-						text-align: center;
-						line-height: 30px;
-						color: #fff;
-						font-size: 14px;
-						background-color: #773084;
-						border-radius: 4px;
-						cursor: pointer;
-						margin-left: 20px;
-						&:hover {
-							background-color: #5f068d;
-						}
-					}
-				}
-			}
-		}
-	}
+          .btn {
+            width: 110px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            color: #fff;
+            font-size: 14px;
+            background-color: #773084;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 20px;
+            &:hover {
+              background-color: #5f068d;
+            }
+          }
+        }
+      }
+    }
+  }
 }
