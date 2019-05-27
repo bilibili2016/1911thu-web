@@ -215,7 +215,6 @@ export default {
         this.rest.minute = parseInt(this.restSecond / 60)
         this.rest.second = this.restSecond % 60
         // console.log(this.rest);
-
       }, 1000);
     },
     refreshCode () {
@@ -279,8 +278,14 @@ export default {
     this.getStatus()
     this.getCode()
     clearInterval(this.interval)
-    clearInterval(this.countDown)
-
+    let that = this
+    // 网页标签切换到其它标签了，定时器会变慢的bug
+    window.onfocus = function () {
+      that.$nextTick(() => {
+        clearInterval(that.interval);
+        that.getCode()
+      })
+    }
   }
 }
 </script>

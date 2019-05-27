@@ -60,7 +60,7 @@
           <div class="three-text clearfix">
             <div class="three-left">
               <span class="circle"></span>
-              <span class="text">学员参加1911学堂教育学院在线学院或相关项目学习考核通过者将获得1911学堂结业证书。</span>
+              <span class="text">学员参加1911学堂教育学院在线学院或相关项目学习考核通过者将获得1911学堂认证证书。</span>
             </div>
             <div class="three-right">
               <img src="https://static-image.1911edu.com/college-pic13.png" alt>

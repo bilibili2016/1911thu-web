@@ -114,7 +114,7 @@ export default {
         "/profile",
         "/shop/wepay"
       ],
-      subPagesData: [
+      subPagesData1: [
         {
           link: "tab-first",
           text: "最近学习"
@@ -164,6 +164,24 @@ export default {
           link: "tab-twelfth",
           text: "我的咨询"
         },
+        // {
+        //   link: "tab-thirteenth",
+        //   text: "导师入口"
+        // }
+      ],
+      subPagesData: [
+        {
+          link: "tab-first",
+          text: "学习中心"
+        },
+        {
+          link: "tab-fourth",
+          text: "订单管理"
+        },
+        {
+          link: "tab-fifth",
+          text: "个人中心"
+        }
         // {
         //   link: "tab-thirteenth",
         //   text: "导师入口"
