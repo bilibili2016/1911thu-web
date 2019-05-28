@@ -15,7 +15,7 @@
       <div class="back-to-ceiling hasColor customStyleOne" v-show="visible">
         <span></span>
         <div class="showCode">
-          <img src="https://static-image.1911edu.com/attentionWechat2.jpg" alt="">
+          <img src="https://static-image.1911edu.com/attentionWechat2.png" alt="">
           <h4>1911学堂官方微信</h4>
           <p>公众号：XUETANG_1911</p>
         </div>

@@ -46,7 +46,7 @@
         </div>
         <div class="focus">
           <p>关注1911学堂公众号，第一时间获得1911学堂资讯！</p>
-          <img src="https://static-image.1911edu.com/attentionWechat2.jpg" alt="">
+          <img src="https://static-image.1911edu.com/attentionWechat2.png" alt="">
           <p></p>
         </div>
         <div class="goodsBtn">

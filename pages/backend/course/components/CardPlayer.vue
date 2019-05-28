@@ -151,7 +151,7 @@ export default {
 
       this.playerForm.curriculumId = matchSplits("kid");
       if (this.playerForm.catalogId == '') {
-        message(this, "error", "抱歉，您暂无此课程权限！");
+        message(this, "error", "抱歉，此课程暂未上传视频，请上传后观看！");
         return false
       }
       previewapi.getPlayerInfo(this.playerForm).then(res => {

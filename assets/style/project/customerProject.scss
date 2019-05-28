@@ -689,8 +689,8 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    width: 420px;
-    height: 265px;
+    width: 600px;
+    height: 460px;
     background-color: #fff;
     border-radius: 4px;
     border: 1px solid #ebeef5;
@@ -700,15 +700,23 @@
     .pop-title {
       padding: 30px 15px 10px 15px;
       color: #303133;
-      // text-align: center;
     }
 
     .con {
       padding: 10px 27px;
       color: #606266;
       font-size: 14px;
-      text-align: left;
+      text-align: center;
       line-height: 24px;
+
+      p {
+        text-align: left;
+      }
+
+      img {
+        width: 160px;
+        height: 160px;
+      }
     }
 
     .btn {
