@@ -132,7 +132,6 @@
               </i>
             </span>
           </div>
-
           <div class="pull-down-text" v-if="isShowDaySelect">
             <ul>
               <li v-for="(item,index) in maxDays" :key="index" @click.stop="chooseDay(item)">{{item}}</li>
@@ -156,9 +155,9 @@
                     <div>
                       <ul>
                         <li v-for="(item,index) in CategoryListData " :key="index " class="clearfix">
-                          <div class="liChecked" @click.stop="chooseSearch(item) ">
-                            <input type="checkbox" v-model="item.checked" class="item-checkbox" ref="checkbox " :id="item.id " @click.stop="chooseSearchInput ">
-                            <label :for="item.id " class="item-checkbox-label">{{item.title}}</label>
+                          <div class="liChecked">
+                            <input type="checkbox" v-model="item.checked" class="item-checkbox" ref="checkbox" :id="item.id">
+                            <label :for="item.id " class="item-checkbox-label"  @click="chooseSearchInput(item) ">{{item.title}}</label>
                           </div>
                         </li>
                       </ul>
@@ -167,9 +166,9 @@
                 </div>
               </div>
             </div>
-            <div class="item">
-              <span class="add" :class="{active:chooseCourseData.length}" @click="addChooseCourse ">确认添加</span>
-            </div>
+            <!-- <div class="item">
+              <span class="add" :class="{active:checkedCourseData.length}" @click="addChooseCourse ">确认添加</span>
+            </div> -->
           </div>
         </div>
         <div class="deatil-item clearfix" v-if="checkedCourseData.length !=0 ">
@@ -520,6 +519,9 @@ export default {
       home.vipGoodsList().then(response => {
         if (response.status == 0) {
           this.CategoryListData = response.data.vipGoodsList;
+          this.CategoryListData.forEach((item, index) => {
+            item.checked = false
+          });
         }
       });
     },
@@ -528,7 +530,6 @@ export default {
       this.chooseCourseData.forEach((item, index) => {
         this.checkedCourseData.push(item);
       });
-
       //数组去重
       let obj = {};
       this.checkedCourseData = this.checkedCourseData.reduce((cur, next) => {
@@ -537,13 +538,18 @@ export default {
       }, []); //设置cur默认类型为数组，并且初始值为空的数组
       this.projectForm.onlineTime = 0;
       this.projectForm.onlinePrice = 0;
-
       //重新计算去重后数组
       this.courseComputed();
     },
     //删除已选课程
     deleteChooseCourse (index) {
+      let indexItem = this.checkedCourseData[index]
       this.checkedCourseData.splice(index, 1);
+      this.CategoryListData.forEach((item, index) => {
+        if(item.id == indexItem.id){
+          this.CategoryListData[index].checked = false;
+        }
+      });
       this.computedPrice();
     },
     //课程结算
@@ -555,6 +561,14 @@ export default {
         this.projectForm.onlineTime += Number(n.study_time);
         this.projectForm.onlinePrice += Number(n.present_price);
       });
+
+      //重新计算线上课程价钱
+       let price = 0;
+      this.checkedCourseData.forEach((item, index) => {
+        price += item.present_price * this.projectForm.trainNum;
+      });
+      this.projectForm.onlineTotalPrice = price;
+
     },
     handleFocus () {
       this.isShowSearchSelect = true;
@@ -598,14 +612,13 @@ export default {
       this.isShowDaySelect = false;
       this.isShowCollegeSelect = false;
       this.isShowCourseSelect = false;
-
-      this.searchCourseData.forEach((item, index) => {
-        this.chooseCourseData.forEach(course => {
-          if (course.id == item.id) {
-            this.searchCourseData[index].checked = true;
-          }
-        });
-      });
+      // this.searchCourseData.forEach((item, index) => {
+      //   this.chooseCourseData.forEach(course => {
+      //     if (course.id == item.id) {
+      //       this.searchCourseData[index].checked = true;
+      //     }
+      //   });
+      // });
     },
     //选择培训人数
     chooseNum (val) {
@@ -653,19 +666,33 @@ export default {
           arrIndex = index;
         }
       });
-
       this.isShowSearchSelect = true;
-      if (arrIndex >= 0) {
+      if (item.checked) {
+        item.checked = false
         //未选中
         this.chooseCourseData.splice(arrIndex, 1);
       } else {
+        item.checked = true
         //选中
         this.chooseCourseData.push(item);
       }
     },
-    //选择按课程搜索，阻止点击li时，label触发两次
-    chooseSearchInput (e) {
-      e.stopPropagation();
+    //选择学院
+    chooseSearchInput (item) {
+      if(!item.checked){
+        item.checked = true
+        this.checkedCourseData.push(item);
+        this.courseComputed();
+      }else{
+        item.checked = false
+        for(var j=0;j<this.checkedCourseData.length;j++){
+          if(this.checkedCourseData[j]['id'] == item.id){
+                this.checkedCourseData.splice(j,1);
+                break;
+          }
+       }
+        this.computedPrice();
+      }
     },
     //获取编辑状态信息
     getCustomerProjectInfo () {
@@ -680,7 +707,6 @@ export default {
             this.checkedCourseData = data.curriculumList; //已选课程
             this.projectForm.trainDay =
               parseFloat(data.offline_days) == 0 ? "" : data.offline_days; //线下培训天数
-
             this.projectForm.trainNum = Number(data.study_persion_number); //培训人数
             this.projectForm.objRadio = data.study_object; //培训对象
             this.courseComputed();
@@ -746,7 +772,7 @@ export default {
     this.init();
   },
   watch: {
-    chooseCourseData (val) {
+    checkedCourseData (val) {
       this.projectForm.trainSearch = "";
       if (val.length == 1) {
         val.forEach((n, index) => {
