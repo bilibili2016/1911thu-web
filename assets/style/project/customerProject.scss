@@ -444,6 +444,7 @@
               white-space: nowrap;
               text-overflow: ellipsis;
               padding-right: 30px;
+              cursor: pointer;
             }
 
             .item-checkbox-label:after {
@@ -466,6 +467,18 @@
               background-image: url('~assets/images/icon-checked.png');
               background-size: 100%;
               border: none;
+            }
+
+            &.OtherChecked {
+
+              .item-checkbox-label {
+                color: #888;
+                cursor: no-drop;
+
+                &:after {
+                  border-color: #ccc;
+                }
+              }
             }
           }
 

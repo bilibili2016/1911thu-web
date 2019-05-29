@@ -155,9 +155,13 @@
                     <div>
                       <ul>
                         <li v-for="(item,index) in CategoryListData " :key="index " class="clearfix">
-                          <div class="liChecked">
+                          <div class="liChecked" v-if="item.is_pay=='1'">
                             <input type="checkbox" v-model="item.checked" class="item-checkbox" ref="checkbox" :id="item.id">
-                            <label :for="item.id " class="item-checkbox-label"  @click="chooseSearchInput(item) ">{{item.title}}</label>
+                            <label :for="item.id " class="item-checkbox-label" @click="chooseSearchInput(item)">{{item.title}}</label>
+                          </div>
+                          <div class="liChecked OtherChecked" v-else>
+                            <input type="checkbox" v-model="item.checked" disabled class="item-checkbox" ref="checkbox" :id="item.id">
+                            <label :for="item.id " class="item-checkbox-label" @click.stop="chooseOtherSearchInput">{{item.title}}</label>
                           </div>
                         </li>
                       </ul>
@@ -546,7 +550,7 @@ export default {
       let indexItem = this.checkedCourseData[index]
       this.checkedCourseData.splice(index, 1);
       this.CategoryListData.forEach((item, index) => {
-        if(item.id == indexItem.id){
+        if (item.id == indexItem.id) {
           this.CategoryListData[index].checked = false;
         }
       });
@@ -563,7 +567,7 @@ export default {
       });
 
       //重新计算线上课程价钱
-       let price = 0;
+      let price = 0;
       this.checkedCourseData.forEach((item, index) => {
         price += item.present_price * this.projectForm.trainNum;
       });
@@ -677,20 +681,22 @@ export default {
         this.chooseCourseData.push(item);
       }
     },
+    chooseOtherSearchInput () {
+    },
     //选择学院
     chooseSearchInput (item) {
-      if(!item.checked){
+      if (!item.checked) {
         item.checked = true
         this.checkedCourseData.push(item);
         this.courseComputed();
-      }else{
+      } else {
         item.checked = false
-        for(var j=0;j<this.checkedCourseData.length;j++){
-          if(this.checkedCourseData[j]['id'] == item.id){
-                this.checkedCourseData.splice(j,1);
-                break;
+        for (var j = 0; j < this.checkedCourseData.length; j++) {
+          if (this.checkedCourseData[j]['id'] == item.id) {
+            this.checkedCourseData.splice(j, 1);
+            break;
           }
-       }
+        }
         this.computedPrice();
       }
     },
