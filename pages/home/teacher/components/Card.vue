@@ -5,7 +5,7 @@
       <div class="list-con">
         <img :src="teacher.head_img" alt="" class="teacherImg">
         <p class="name">{{teacher.teacher_name}}</p>
-        <p class="position">{{teacher.graduate}}</p>
+        <p class="position" :class="{'ellipsis':teacher.graduate.length>25}">{{teacher.graduate}}</p>
         <p class="operate">
           <span class="btn" @click="handleLinkTeacherInfo(teacher)">查看导师详情</span>
         </p>
