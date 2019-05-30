@@ -37,7 +37,7 @@
           <v-proproblems v-loading="problemLoad" :projectDetail="projectDetail" ></v-proproblems>
         </el-tab-pane>
         <el-tab-pane label="资料下载" name="fiveth">
-          <v-download :isConfig="isConfig"></v-download>
+          <v-download :isConfig="isConfig" :privileMsg="projectDetail.curriculumProjectPrivilege"></v-download>
         </el-tab-pane>
       </el-tabs>
     </div>
