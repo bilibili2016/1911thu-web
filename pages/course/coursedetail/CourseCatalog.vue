@@ -11,7 +11,7 @@
         <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentator="commentator" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" :pagemsg="pagemsg" @pagechange="pagechange"></v-userevaluate>
       </el-tab-pane>
       <el-tab-pane label="资料下载" name="four">
-        <v-download :isConfig="isConfig" :detailInfo="courseList"></v-download>
+        <v-download :isConfig="isConfig"  :privileMsg="privileMsg"  :detailInfo="courseList"></v-download>
       </el-tab-pane>
     </el-tabs>
   </div>
