@@ -58,7 +58,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.courseList);
     this.activeNames = this.activeName
   }
 }

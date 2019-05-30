@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import { store as persistStore } from "~/lib/core/store";
 import { coursedetail } from "~/lib/v1_sdk/index";
 import { matchSplits,message } from "@/lib/util/helper";
 export default {
@@ -131,34 +132,42 @@ export default {
             this.fileForm.id.push(row.id)
             this.fileForm.type = 1
             // console.log(row);
-            this.downloadNum(2)
+            this.downloadNum(2,row)
         },
         //下载量
-        downloadNum(flag) {
-          if(!this.privileMsg){
-            if(this.isConfig){
-              message(this,'error','请先购买课程')
-              return false
-            }else{
-              message(this,'error','请先购买项目')
+        downloadNum(flag,row) {
+          if (persistStore.get("token")) {
+            if(!this.privileMsg){
+              if(this.isConfig){
+                message(this,'error','请先购买课程')
+              }else{
+                message(this,'error','请先购买项目')
+              }
               return false
             }
+          }else{
+            this.$bus.$emit("loginShow", true);
+            return false
           }
-
           coursedetail.resourceDownloadNum(this.fileForm).then(res => {
               if (res.status === 0) {
                   // this.tableData = res.data.curriculumResourceList
                   if(this.privileMsg){
                     if(flag==1){
                       //预览
-                      window.open('https://view.officeapps.live.com/op/view.aspx?src=' + res.data.resourceDownloadList[0])
+                      if(row.file_type=='pdf'){
+                        window.open(res.data.resourceDownloadList[0])
+                      }else{
+                         window.open('https://view.officeapps.live.com/op/view.aspx?src=' + res.data.resourceDownloadList[0])
+                      }
+
                     }else if(flag==2){
                       //下载
                       window.location.href = res.data.resourceDownloadList[0]
                       this.courseDownloadList()
                     }
                   }
-              }else if(res.status==100007){
+              }else if(res.status==100007 || res.status==100008){
                 this.$bus.$emit("loginShow", true);
               }else{
                 message(this,'error',res.msg)
@@ -174,7 +183,7 @@ export default {
               this.fileForm.id = []
               this.fileForm.id.push(row.id)
               this.fileForm.type = ''
-              this.downloadNum(1)
+              this.downloadNum(1,row)
             }
         },
         // 课程下载列表
