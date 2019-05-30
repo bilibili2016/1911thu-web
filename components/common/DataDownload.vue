@@ -135,31 +135,35 @@ export default {
         },
         //下载量
         downloadNum(flag) {
-            coursedetail.resourceDownloadNum(this.fileForm).then(res => {
-                if (res.status === 0) {
-                    // this.tableData = res.data.curriculumResourceList
-                    if(this.privileMsg){
-                      if(flag==1){
-                        //预览
-                        window.open('https://view.officeapps.live.com/op/view.aspx?src=' + res.data.resourceDownloadList[0])
-                      }else if(flag==2){
-                        //下载
-                        window.location.href = res.data.resourceDownloadList[0]
-                        this.courseDownloadList()
-                      }
-                    }else{
-                      if(this.isConfig){
-                        message(this,'error','请先购买课程')
-                      }else{
-                        message(this,'error','请先购买项目')
-                      }
+          if(!this.privileMsg){
+            if(this.isConfig){
+              message(this,'error','请先购买课程')
+              return false
+            }else{
+              message(this,'error','请先购买项目')
+              return false
+            }
+          }
+
+          coursedetail.resourceDownloadNum(this.fileForm).then(res => {
+              if (res.status === 0) {
+                  // this.tableData = res.data.curriculumResourceList
+                  if(this.privileMsg){
+                    if(flag==1){
+                      //预览
+                      window.open('https://view.officeapps.live.com/op/view.aspx?src=' + res.data.resourceDownloadList[0])
+                    }else if(flag==2){
+                      //下载
+                      window.location.href = res.data.resourceDownloadList[0]
+                      this.courseDownloadList()
                     }
-                }else if(res.status==100007){
-                  this.$bus.$emit("loginShow", true);
-                }else{
-                  message(this,'error',res.msg)
-                }
-            });
+                  }
+              }else if(res.status==100007){
+                this.$bus.$emit("loginShow", true);
+              }else{
+                message(this,'error',res.msg)
+              }
+          });
         },
         //预览文件
         viewWord(row, column, cell, event) {
@@ -167,6 +171,8 @@ export default {
                 // if(row.file_type=='ppt'){
                 //   return false
                 // }
+              this.fileForm.id = []
+              this.fileForm.id.push(row.id)
               this.fileForm.type = ''
               this.downloadNum(1)
             }
