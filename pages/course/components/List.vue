@@ -1,60 +1,60 @@
 <template>
-  <div>
-    <div class="banner">
-      <div class="center category-style">
-        <!-- 课程分类 -->
-        <div class="courseCategory" v-if="cp == 0">
-          <div class="firstLevel">
-            <div v-if="vid!=-1 && vid!=''">
-              <ul class="courseCollege">
-                <li v-if="cid == item.id" v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid === item.id ? true : false }">
-                  <span class="name" @click="handleCollegeLink(item)">{{item.category_name}}</span> > <span class="nameRight">课程列表</span>
-                </li>
-              </ul>
-            </div>
-            <div v-else>
-              <li class="title firstTitle">学院分类：</li>
-              <ul class="courseCollege courseLists">
-                <li v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid == item.id ? true : false }">
-                  <el-button @click="selectCid(item,index)">{{changeName(item.category_name)}}</el-button>
-                </li>
-              </ul>
-            </div>
+  <div class="banner" @click="showAll">
+    <div class="center category-style">
+      <!-- 课程分类 -->
+      <div class="courseCategory" v-if="cp == 0">
+        <div class="firstLevel">
+          <div v-if="vid!=-1 && vid!=''">
+            <ul class="courseCollege">
+              <li v-if="cid == item.id" v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid === item.id ? true : false }">
+                <span class="name" @click="handleCollegeLink(item)">{{item.category_name}}</span> > <span class="nameRight">课程列表</span>
+              </li>
+            </ul>
           </div>
-          <div class="secondLevel courseArea">
-            <!-- <div class="secondLevel"> -->
-            <div :class="['inner',{'addClass':hasclass}]" @click="showAll">
-              <li class="title">课程领域：</li>
-              <ul>
-                <li v-for="(items,index) in pidData.childList" :index="index" :key="index" :class="{btnBg: pid == items.id ? true : false }">
-                  <el-button @click="selectPid(items,index)">{{items.category_name}}</el-button>
-                </li>
-              </ul>
-            </div>
+          <div v-else>
+            <li class="title firstTitle">学院分类：</li>
+            <ul class="courseCollege courseLists">
+              <li v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid == item.id ? true : false }">
+                <el-button @click="selectCid(item,index)">{{changeName(item.category_name)}}</el-button>
+              </li>
+            </ul>
           </div>
         </div>
-        <!-- 项目分类 -->
-        <div class="projectCategory" v-if="cp == 1">
-          <div class="firstLevel">
-            <li class="title">学院分类：</li>
-            <ul class="projrctCollege">
-              <li v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid == item.id ? true : false }">
-                <el-button @click="selectCid(item,index)">{{item.category_name}}</el-button>
-              </li>
-            </ul>
-          </div>
-          <div class="secondLevel">
-            <li class="title">项目分类：</li>
+        <div class="secondLevel courseArea">
+          <!-- <div class="secondLevel"> -->
+          <!-- <div :class="['inner',{'addClass':hasclass}]" @click="showAll"> -->
+          <div class="inner">
+            <li class="title">课程领域：</li>
             <ul>
-              <li v-for="(items,index) in projectCategory" :index="index" :key="index" :class="{btnBg: pid == items.id ? true : false }">
-                <el-button @click="selectPid(items,index)">{{items.title}}</el-button>
+              <li v-for="(items,index) in pidData.childList" :index="index" :key="index" :class="{btnBg: pid == items.id ? true : false }">
+                <el-button @click="selectPid(items,index)">{{items.category_name}}</el-button>
               </li>
             </ul>
-            <div class="projectRight" @click="handleProjectRight">前往自定制项目</div>
           </div>
         </div>
       </div>
+      <!-- 项目分类 -->
+      <div class="projectCategory" v-if="cp == 1">
+        <div class="firstLevel">
+          <li class="title">学院分类：</li>
+          <ul class="projrctCollege">
+            <li v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid == item.id ? true : false }">
+              <el-button @click="selectCid(item,index)">{{item.category_name}}</el-button>
+            </li>
+          </ul>
+        </div>
+        <div class="secondLevel">
+          <li class="title">项目分类：</li>
+          <ul>
+            <li v-for="(items,index) in projectCategory" :index="index" :key="index" :class="{btnBg: pid == items.id ? true : false }">
+              <el-button @click="selectPid(items,index)">{{items.title}}</el-button>
+            </li>
+          </ul>
+          <div class="projectRight" @click="handleProjectRight">前往自定制项目</div>
+        </div>
+      </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -114,18 +114,19 @@ export default {
     // 小类 单个
     selectPid (items, index) {
       if (isMobileTerminal()) {
-        this.hasclass = true
+        // this.hasclass = true
+        this.showAll()
       }
       this.$emit("selectPid", items, index);
     },
     showAll () {
-      if (isMobileTerminal()) {
-        if (this.hasclass) {
-          this.hasclass = false
-        } else {
-          this.hasclass = true
-        }
-      }
+      //   if (isMobileTerminal()) {
+      //     if (this.hasclass) {
+      //       this.hasclass = false
+      //     } else {
+      //       this.hasclass = true
+      //     }
+      //   }
     },
     handleProjectRight () {
       this.$router.push("/project/customerProject?sid=&edit=1");
