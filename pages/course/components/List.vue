@@ -1,5 +1,5 @@
 <template>
-  <div class="banner" @click="showAll">
+  <div class="banner">
     <div class="center category-style">
       <!-- 课程分类 -->
       <div class="courseCategory" v-if="cp == 0">
@@ -20,9 +20,8 @@
             </ul>
           </div>
         </div>
-        <div class="secondLevel courseArea" ref="secondLevel">
+        <div class="secondLevel courseArea">
           <!-- <div class="secondLevel"> -->
-          <!-- <div :class="['inner',{'addClass':hasclass}]" @click="showAll"> -->
           <div class="inner">
             <li class="title">课程领域：</li>
             <ul>
@@ -72,7 +71,7 @@ export default {
       vid: "",
       cindex: null,
       cg: null,
-      hasclass: false,
+      mouse: false,
       projectCategory: [
         {
           id: 0,
@@ -113,22 +112,7 @@ export default {
     },
     // 小类 单个
     selectPid (items, index) {
-      if (isMobileTerminal()) {
-        // this.hasclass = true
-        this.$refs.secondLevel.classList.remove('courseArea')
-        this.$refs.secondLevel.classList.add('courseArea')
-        // this.showAll()
-      }
       this.$emit("selectPid", items, index);
-    },
-    showAll () {
-      //   if (isMobileTerminal()) {
-      //     if (this.hasclass) {
-      //       this.hasclass = false
-      //     } else {
-      //       this.hasclass = true
-      //     }
-      //   }
     },
     handleProjectRight () {
       this.$router.push("/project/customerProject?sid=&edit=1");
