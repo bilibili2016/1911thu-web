@@ -21,9 +21,9 @@
               </ul>
             </div>
           </div>
-          <div class="secondLevel courseArea" ref="courseArea">
+          <div class="secondLevel courseArea">
             <!-- <div class="secondLevel"> -->
-            <div class="inner" @click="showAll">
+            <div :class="['inner',{'addClass':hasclass}]" @click="showAll">
               <li class="title">课程领域：</li>
               <ul>
                 <li v-for="(items,index) in pidData.childList" :index="index" :key="index" :class="{btnBg: pid == items.id ? true : false }">
@@ -114,19 +114,16 @@ export default {
     // 小类 单个
     selectPid (items, index) {
       if (isMobileTerminal()) {
-        this.$refs.courseArea.classList.remove("addClass")
-        this.addClass = false
+        this.hasclass = true
       }
       this.$emit("selectPid", items, index);
     },
     showAll () {
       if (isMobileTerminal()) {
         if (this.hasclass) {
-          this.addClass = false
-          this.$refs.courseArea.classList.remove("addClass")
+          this.hasclass = false
         } else {
-          this.addClass = true
-          this.$refs.courseArea.classList.add("addClass")
+          this.hasclass = true
         }
       }
     },
