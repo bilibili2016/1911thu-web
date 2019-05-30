@@ -20,7 +20,7 @@
             </ul>
           </div>
         </div>
-        <div class="secondLevel courseArea">
+        <div class="secondLevel courseArea" ref="secondLevel">
           <!-- <div class="secondLevel"> -->
           <!-- <div :class="['inner',{'addClass':hasclass}]" @click="showAll"> -->
           <div class="inner">
@@ -115,7 +115,9 @@ export default {
     selectPid (items, index) {
       if (isMobileTerminal()) {
         // this.hasclass = true
-        this.showAll()
+        this.$refs.secondLevel.classList.remove('courseArea')
+        this.$refs.secondLevel.classList.add('courseArea')
+        // this.showAll()
       }
       this.$emit("selectPid", items, index);
     },
