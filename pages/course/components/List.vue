@@ -21,9 +21,9 @@
               </ul>
             </div>
           </div>
-          <div class="secondLevel courseArea">
-          <!-- <div class="secondLevel"> -->
-            <div class="inner">
+          <div class="secondLevel courseArea" ref="courseArea">
+            <!-- <div class="secondLevel"> -->
+            <div class="inner" @click="showAll">
               <li class="title">课程领域：</li>
               <ul>
                 <li v-for="(items,index) in pidData.childList" :index="index" :key="index" :class="{btnBg: pid == items.id ? true : false }">
@@ -60,11 +60,11 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import { matchSplits } from "@/lib/util/helper";
+import { matchSplits, isMobileTerminal } from "@/lib/util/helper";
 
 export default {
   props: ["cidData", "pidData", "cidBg", "pidBg", "loadList"],
-  data() {
+  data () {
     return {
       cid: null,
       pid: "0",
@@ -72,6 +72,7 @@ export default {
       vid: "",
       cindex: null,
       cg: null,
+      hasclass: false,
       projectCategory: [
         {
           id: 0,
@@ -89,10 +90,10 @@ export default {
     };
   },
   methods: {
-    changeName(name) {
+    changeName (name) {
       return name.replace("在线", "");
     },
-    handleCollegeLink(item) {
+    handleCollegeLink (item) {
       this.$router.push({
         path: "/home/vip/collegeDetail",
         query: {
@@ -107,18 +108,33 @@ export default {
       // );
     },
     // 大类 单个
-    selectCid(item, index) {
+    selectCid (item, index) {
       this.$emit("selectCid", item, index);
     },
     // 小类 单个
-    selectPid(items, index) {
+    selectPid (items, index) {
+      if (isMobileTerminal()) {
+        this.$refs.courseArea.classList.remove("addClass")
+        this.addClass = false
+      }
       this.$emit("selectPid", items, index);
     },
-    handleProjectRight() {
+    showAll () {
+      if (isMobileTerminal()) {
+        if (this.hasclass) {
+          this.addClass = false
+          this.$refs.courseArea.classList.remove("addClass")
+        } else {
+          this.addClass = true
+          this.$refs.courseArea.classList.add("addClass")
+        }
+      }
+    },
+    handleProjectRight () {
       this.$router.push("/project/customerProject?sid=&edit=1");
     }
   },
-  mounted() {
+  mounted () {
     this.cid = matchSplits("cid");
     this.pid = matchSplits("pids");
     this.cp = matchSplits("cp");

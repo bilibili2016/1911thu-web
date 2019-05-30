@@ -29,7 +29,7 @@
 <script>
 import { setPagesHeight, matchSplits } from "~/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
-import { getQueryString } from "@/lib/util/helper";
+import { isMobileTerminal } from "@/lib/util/helper";
 import { auth, header, home } from "~/lib/v1_sdk/index";
 import { mapState, mapActions, mapGetters } from "vuex";
 import { validateSearch } from "~/lib/util/validate";
@@ -551,27 +551,9 @@ export default {
         this.judegExplorer = false;
       }
     },
-    // 判断浏览器是否是移动端
+    // 判断浏览器是否是移动端  
     browserRedirect () {
-      var sUserAgent = window.navigator.userAgent.toLowerCase();
-      var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
-      var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
-      var bIsMidp = sUserAgent.match(/midp/i) == "midp";
-      var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
-      var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
-      var bIsAndroid = sUserAgent.match(/android/i) == "android";
-      var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
-      var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
-      if (
-        bIsIpad ||
-        bIsIphoneOs ||
-        bIsMidp ||
-        bIsUc7 ||
-        bIsUc ||
-        bIsAndroid ||
-        bIsCE ||
-        bIsWM
-      ) {
+      if (isMobileTerminal()) {
         //跳转移动端页面
         document.body.classList.add("mobile");
       } else {
