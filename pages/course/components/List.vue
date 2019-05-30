@@ -23,7 +23,7 @@
           </div>
           <div class="secondLevel courseArea" ref="courseArea">
             <!-- <div class="secondLevel"> -->
-            <div class="inner">
+            <div class="inner" @click="showAll">
               <li class="title">课程领域：</li>
               <ul>
                 <li v-for="(items,index) in pidData.childList" :index="index" :key="index" :class="{btnBg: pid == items.id ? true : false }">
@@ -72,6 +72,7 @@ export default {
       vid: "",
       cindex: null,
       cg: null,
+      hasclass: false,
       projectCategory: [
         {
           id: 0,
@@ -113,9 +114,21 @@ export default {
     // 小类 单个
     selectPid (items, index) {
       if (isMobileTerminal()) {
-        this.$refs.courseArea.classList.add("addClass")
+        this.$refs.courseArea.classList.remove("addClass")
+        this.addClass = false
       }
       this.$emit("selectPid", items, index);
+    },
+    showAll () {
+      if (isMobileTerminal()) {
+        if (this.hasclass) {
+          this.addClass = false
+          this.$refs.courseArea.classList.remove("addClass")
+        } else {
+          this.addClass = true
+          this.$refs.courseArea.classList.add("addClass")
+        }
+      }
     },
     handleProjectRight () {
       this.$router.push("/project/customerProject?sid=&edit=1");
