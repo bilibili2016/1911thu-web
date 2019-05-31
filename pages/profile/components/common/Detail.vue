@@ -224,7 +224,7 @@
           <div class="tableFooter" v-if="orderDetail.order_type === '1'">
             <p>
               <span class="table_lf">商品数量：</span>
-              <span class="table_lr">{{courseList.length+projectList.length+vipList.length}}</span>
+              <span class="table_lr" v-if="courseList&&projectList&&vipList">{{courseList.length+projectList.length+vipList.length}}</span>
             </p>
             <p>
               <span class="table_lf">学习人数：</span>
@@ -277,9 +277,11 @@ export default {
       return timestampToTime(time)
     }
   },
-  mounted(){
+  mounted () {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+    console.log(this.vipList, '111111');
+
   }
 }
 </script>
