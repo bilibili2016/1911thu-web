@@ -371,15 +371,14 @@ export default {
         if (valid) {
           profileHome.editTeacherRecruit(this.teacherForm).then(res => {
             if (res.status == 0) {
+              this.isClick = true;
               this.teacherRecruitDetail()
               this.$alert("您的信息已提交成功，1911学堂后台管理人员审核通过后会将您的信息发布到网页展示，请耐心等待。", res.msg, {
                 confirmButtonText: "确定",
                 callback: action => {
                   document.body.scrollTop = document.documentElement.scrollTop = 0;
-                  this.isClick = true;
                 }
               });
-
             } else {
               message(this, "error", res.msg);
               this.isClick = true;
