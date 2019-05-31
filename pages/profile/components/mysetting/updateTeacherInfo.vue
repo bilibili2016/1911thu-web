@@ -358,8 +358,6 @@ export default {
     },
     // 提交个 人信息表单
     onSubmit (formName) {
-
-
       let dIndex = this.direction.indexOf('-1')
       let SIndex = this.teacherForm.service.indexOf('-1')
       if (dIndex >= 0) {
