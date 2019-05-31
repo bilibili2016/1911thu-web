@@ -261,10 +261,12 @@ export default {
     //删除上传个人照片
     deleteImg () {
       this.isShowImg = true;
+      this.teacherForm.photo = ""
     },
     //删除上传学生证
     deleteCardImg () {
       this.isShowCardImg = true;
+      this.teacherForm.studentCard = ""
     },
     //处理图片上传
     handleImgUpload (event, param, show, size) {
@@ -356,10 +358,10 @@ export default {
     },
     // 提交个 人信息表单
     onSubmit (formName) {
-      this.isClick = false;
+
+
       let dIndex = this.direction.indexOf('-1')
       let SIndex = this.teacherForm.service.indexOf('-1')
-
       if (dIndex >= 0) {
         this.direction.splice(dIndex, 1)
       }
@@ -367,6 +369,7 @@ export default {
         this.teacherForm.service.splice(dIndex, 1)
       }
       this.teacherForm.directionArr = this.direction;
+      this.isClick = false;
       this.$refs[formName].validate(valid => {
         if (valid) {
           profileHome.editTeacherRecruit(this.teacherForm).then(res => {
@@ -385,6 +388,9 @@ export default {
               this.isClick = true;
             }
           });
+        } else {
+          this.isClick = true;
+          message(this, "error", "信息不完整，请补充信息后重新提交！");
         }
       });
     },
