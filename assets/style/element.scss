@@ -1076,14 +1076,68 @@ html {
     height: 60px;
     font-size: 16px;
     line-height: 60px;
+
+
   }
 
+
   .el-tabs__item.is-left {
+    color: #222;
+    height: 55px;
+    font-size: 14px;
+    line-height: 55px;
+
+    span.firseLevel {
+      position: relative;
+      font-size: 18px;
+      font-weight: bold;
+      padding-left: 30px !important;
+      vertical-align: middle;
+
+      .line {
+        position: absolute;
+        top: 0px;
+        left: 0;
+        width: 2px;
+        height: 57px;
+        background-color: #773084;
+      }
+    }
+
     &:hover {
       background-color: #773084;
       color: #fff;
     }
   }
+
+  #tab-study.is-left,
+  #tab-order.is-left,
+  #tab-profile.is-left,
+  #tab-teacher.is-left {
+    padding: 0;
+    margin-top: 10px;
+
+    &:hover {
+      background-color: #fff;
+      color: #222;
+    }
+  }
+
+  #tab-study.is-left {
+    margin-top: 0;
+  }
+
+  // .el-tabs__item {
+  //   .firseLevel {
+  //     font-size: 18px;
+  //     font-weight: bold;
+
+  //     &:hover {
+  //       background: #fff;
+  //       color: #222
+  //     }
+  //   }
+  // }
 
   .el-tabs__item.is-top {
     &:hover {
@@ -1106,7 +1160,7 @@ html {
   }
 
   .el-tabs--left .el-tabs__nav-wrap.is-left {
-    border-radius: 6px;
+    border-radius: 0 0 6px 6px;
   }
 
   .el-tabs--left .el-tabs__nav-wrap.is-left::after {
@@ -2273,3 +2327,187 @@ input::-webkit-credentials-auto-fill-button {
     padding-top: 1px;
   }
 }
+
+.dataDownload {
+  .el-table {
+    overflow: inherit;
+  }
+
+  .el-table::before {
+    display: none;
+  }
+
+  .el-table__header-wrapper {
+    overflow: inherit;
+
+    th {
+      overflow: inherit;
+
+      &.el-table-column--selection {
+        .cell {
+          position: absolute !important;
+          top: -40px;
+          left: 0;
+        }
+      }
+    }
+  }
+
+  .el-table__header {
+    th {
+      height: 50px;
+      // line-height: 45px;
+      font-size: 18px;
+      color: #222;
+      font-weight: 400;
+      // border-color: #DDDDDD;
+      border: none;
+      text-align: center;
+      background-color: #F7F9FB;
+
+      .el-checkbox__input.is-indeterminate .el-checkbox__inner::before {
+        display: none;
+      }
+
+      .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+        background-color: #fff;
+        border-color: #641CA1;
+      }
+
+
+    }
+  }
+
+  .el-table__body {
+    tr {
+      &.current-row {
+        td {
+          background-color: #fff;
+        }
+      }
+
+      &:hover {
+        td {
+          background-color: #fff;
+
+          &:first-child {
+            color: #7A3181;
+          }
+        }
+      }
+    }
+
+    td {
+      height: 65px;
+      border-color: #ddd;
+      font-size: 14px;
+      color: #222;
+      text-align: center;
+
+      &:first-child {
+        // text-align: left;
+        cursor: pointer;
+      }
+
+      .cell {
+        .el-button {
+          color: #7A3181;
+          border-color: #7A3181;
+          border-radius: 15px;
+        }
+
+        .el-button--mini {
+          padding: 8px 27px;
+        }
+      }
+    }
+  }
+
+  .el-checkbox__inner {
+    width: 18px;
+    height: 18px;
+    border-color: #641CA1;
+    border-radius: 4px;
+
+  }
+
+  .el-checkbox__input.is-checked .el-checkbox__inner::after {
+    width: 4px;
+    height: 8px;
+    border: none;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    left: 5px;
+    top: 1px;
+  }
+}
+
+// .dataDownload .course {
+//   .el-table::before {
+//     display: none;
+//   }
+
+//   .el-table__header {
+//     th {
+//       height: 50px;
+//       font-size: 16px;
+//       color: #222;
+//       font-weight: 400;
+//       text-align: center;
+//       background-color: #F7F9FB;
+//       border: none;
+
+//       &:first-child {
+//         text-align: left;
+//         padding-left: 20px;
+//       }
+//     }
+//   }
+
+//   .el-table__body {
+//     tr {
+//       &.current-row {
+//         td {
+//           background-color: #fff;
+//         }
+//       }
+
+//       &:hover {
+//         td {
+//           background-color: #fff;
+
+//           &:first-child {
+//             color: #7A3181;
+//           }
+//         }
+//       }
+//     }
+
+//     tr {
+//       td {
+//         height: 70px;
+//         border-color: #ddd;
+//         font-size: 14px;
+//         color: #222;
+//         text-align: center;
+
+//         &:first-child {
+//           text-align: left;
+//           cursor: pointer;
+//         }
+
+//         .cell {
+//           .el-button {
+//             color: #7A3181;
+//             border-color: #7A3181;
+//             border-radius: 15px;
+//           }
+
+//           .el-button--mini {
+//             padding: 8px 27px;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }

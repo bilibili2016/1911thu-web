@@ -2,17 +2,10 @@
   <!-- 考试记录 -->
   <div class="examineRecord">
     <div class="examine-top clearfix">
-      <span
-        class="goBack"
-        @click="handleBack"
-      >
+      <span class="goBack" @click="handleBack">
         <i class=" el-icon-arrow-left icon"></i>考试记录
       </span>
-      <span
-        v-if="restExamineTime!=0 && isApplyExam==0 && examPrivilege"
-        class="goExamine"
-        @click="gotoExamine"
-      >去考试（剩余{{restExamineTime}}次）></span>
+      <span v-if="restExamineTime!=0 && isApplyExam==0 && examPrivilege" class="goExamine" @click="gotoExamine">去考试（剩余{{restExamineTime}}次）></span>
     </div>
     <div class="bottom">
       <div class="tables">
@@ -24,20 +17,13 @@
             <th>成绩</th>
             <th>等级</th>
           </tr>
-          <tr
-            class="tr_body"
-            v-for="(record,index) in recordData"
-            :key="index"
-          >
+          <tr class="tr_body" v-for="(record,index) in recordData" :key="index">
             <td v-if="record.type=='1'">正式</td>
             <td v-else>模拟</td>
             <td>{{record.exam_name}}</td>
             <td>{{exchangeTime(record.create_time)}}</td>
             <td>{{record.total_score}}</td>
-            <td v-if="record.total_score>=85">优秀</td>
-            <td v-if="record.total_score<85 && record.total_score>=75">良好</td>
-            <td v-if="record.total_score<75 && record.total_score>=60">及格</td>
-            <td v-if="record.total_score<60">不及格</td>
+            <td>{{record.score_rank?record.score_rank:""}}</td>
           </tr>
         </table>
       </div>
@@ -51,7 +37,7 @@ import { timestampToYMD } from "@/lib/util/helper";
 
 export default {
   props: ["vipID"],
-  data() {
+  data () {
     return {
       recordData: [],
       restExamineTime: "",
@@ -73,12 +59,12 @@ export default {
     };
   },
   methods: {
-    handleBack() {
+    handleBack () {
       this.pageData.name = "list";
       this.$bus.$emit("whichShow", this.pageData);
     },
     //考试记录列表
-    examRecordLog() {
+    examRecordLog () {
       this.logForm.vipID = this.vipID;
       examine.examRecordLog(this.logForm).then(res => {
         if (res.status == 0) {
@@ -94,17 +80,17 @@ export default {
       });
     },
     //去考试
-    gotoExamine() {
+    gotoExamine () {
       this.pageData.id = this.vipID;
       this.pageData.name = "intro";
       this.$bus.$emit("whichShow", this.pageData);
     },
     // 时间戳转日期格式
-    exchangeTime(time) {
+    exchangeTime (time) {
       return timestampToYMD(time);
     }
   },
-  mounted() {
+  mounted () {
     this.examRecordLog();
 
     this.$bus.$on("examineRecord", () => {

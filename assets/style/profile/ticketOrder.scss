@@ -1,5 +1,6 @@
 .ticketOrder {
   background-color: #fff;
+  padding-bottom: 30px;
 
   .orderList {
     .list {
@@ -8,33 +9,53 @@
           width: 110px;
           text-align: center;
 
-          .el-checkbox {
+          .checkbox {
             display: none;
           }
 
-          .el-checkbox-label:before {
-            content: '';
-            display: inline-block;
-            vertical-align: middle;
+          .checkbox-label {
             width: 18px;
             height: 18px;
+            display: inline-block;
             border: 1px solid #773084;
             border-radius: 4px;
+            vertical-align: middle;
+            position: relative;
           }
 
-          .el-checkbox:checked+.el-checkbox-label:before {
-            background-image: url('~assets/images/icon-checked.png');
-            background-size: 100%;
-            border: none;
+          .checkbox-label:before {
+            content: '';
+            width: 3px;
+            height: 9px;
+            display: inline-block;
+            box-sizing: content-box;
+            border: 1px solid transparent;
+            background-color: transparent;
+            border-left: 0;
+            border-top: 0;
+            transform: rotate(45deg) scaleY(1);
+            position: absolute;
+            left: 6px;
+            top: 2px;
+            cursor: pointer;
+            transition: all 300ms;
+          }
+
+          .checkbox:checked+.checkbox-label {
+            background-color: #773084;
+          }
+
+          .checkbox:checked+.checkbox-label:before {
+            border-color: #FFF;
           }
         }
 
         .course {
-          width: 670px;
+          width: 600px;
           border-right: 1px solid #e8d6f7;
 
           .courseOne {
-            width: 670px;
+            width: 600px;
             padding-left: 0;
           }
         }
@@ -443,7 +464,7 @@
   }
 
   .el-checkbox {
-    padding-left: 41px;
+    padding-left: 30px;
     color: #222;
     font-size: 16px;
 

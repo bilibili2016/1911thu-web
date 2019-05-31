@@ -6,8 +6,9 @@
         <span class="goBack" @click="goBack(config.type)">
           <i class="el-icon-arrow-left icon"></i>
         </span>
+        <span @click="goBack(config.type)" v-if="config.type==='delete'" class="detailText">订单回收站</span>
         <span @click="goBack(config.type)" v-if="config.type==='order'" class="detailText">订单详情</span>
-        <span @click="goBack(config.type)" class="detailText" v-else>发票详情</span>
+        <span @click="goBack(config.type)" v-if="config.type==='ticket'" class="detailText">发票详情</span>
       </div>
       <div class="tableBody">
         <div v-if="config.type==='order'">
@@ -264,8 +265,10 @@ export default {
   },
   methods: {
     goBack (type) {
-      if (type === 'order') {
-        this.$emit('goBack', true)
+      if (type == 'delete') {
+        this.$emit('goBack', 2)
+      } else if (type == 'order') {
+        this.$emit('goBack', 1)
       } else {
         this.$emit('goTicketBack', true)
       }
@@ -273,6 +276,10 @@ export default {
     changeTime (time) {
       return timestampToTime(time)
     }
+  },
+  mounted(){
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }
 }
 </script>

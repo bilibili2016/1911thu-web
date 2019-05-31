@@ -14,32 +14,13 @@
         </div>
         <!-- 顶部的card -->
         <div class="main-header" v-loading="loadMsg">
-          <v-card
-            :courseList="courseList"
-            :config="config"
-            @refreshData="refreshData"
-            @changePlayImg="changePlayImg"
-          ></v-card>
+          <v-card :courseList="courseList" :config="config" @refreshData="refreshData" @changePlayImg="changePlayImg"></v-card>
         </div>
       </div>
       <div class="bottomCard">
         <!-- 左侧的课程目录和介绍和评论 -->
         <div class="content fl">
-          <v-coursecatelog
-            :activeName="activeName"
-            :courseList="courseList"
-            :loadMsg="loadMsg"
-            :catalogs="catalogs"
-            :config="config"
-            :changeImg="changeImg"
-            :totalEvaluateInfo="totalEvaluateInfo"
-            :commentator="commentator"
-            :loadEvaluate="loadEvaluate"
-            :pageCount="pageCount"
-            :sumUserStart="sumUserStart"
-            :pagemsg="pagemsg"
-            @pagechange="handleCurrentChange"
-          ></v-coursecatelog>
+          <v-coursecatelog :activeName="activeName" :courseList="courseList" :loadMsg="loadMsg" :catalogs="catalogs" :config="config" :changeImg="changeImg" :totalEvaluateInfo="totalEvaluateInfo" :commentator="commentator" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" :pagemsg="pagemsg" @pagechange="handleCurrentChange"></v-coursecatelog>
         </div>
         <div style="width:345px" class="fr">
           <!-- 讲师介绍 -->

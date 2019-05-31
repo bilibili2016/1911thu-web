@@ -53,6 +53,16 @@
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
+      position: relative;
+
+      &.ellipsis:after {
+        content: "...";
+        position: absolute;
+        bottom: 0;
+        right: 20px;
+        background: #FFF;
+        padding-left: 10px;
+      }
     }
 
     .operate {
