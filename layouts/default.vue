@@ -55,6 +55,9 @@ export default {
         //路由改变消除掉直播的播放器
         this.$bus.$emit("stopPlay");
       }
+      if (pathName.indexOf('english') >= 0) {
+        this.HFShow = false;
+      }
     },
     addHandler (element, type, handler) {
       if (element.addEventListener) {

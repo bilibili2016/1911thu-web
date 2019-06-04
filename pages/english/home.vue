@@ -1,6 +1,10 @@
 <template>
   <div class="home">
     <v-welcome></v-welcome>
+    <div class="welcome">
+      <h3></h3>
+      <h6></h6>
+    </div>
 
   </div>
 </template>
@@ -16,16 +20,7 @@ export default {
 
     }
   },
-  //  销毁之前展示头部 底部
-  destroyed () {
-    this.$bus.$emit("headerFooterShow");
-  },
-  //   进入页面的的时候
-  beforeRouteEnter (to, from, next) {
-    next(vm => {
-      vm.$bus.$emit("headerFooterHide");
-    });
-  },
+
 }
 </script>
 
