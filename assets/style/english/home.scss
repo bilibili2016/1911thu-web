@@ -1,5 +1,6 @@
 .home {
   position: relative;
+  overflow: hidden;
 
   .banner {
     position: relative;
@@ -134,16 +135,11 @@
       display: flex;
       justify-content: space-around;
 
-      div {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
       img {
+        display: block;
         width: 100px;
         height: 100px;
+        margin: 0 auto;
       }
 
       p {

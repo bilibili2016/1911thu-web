@@ -1,4 +1,6 @@
 .thinkTank {
+  overflow: hidden;
+
   .banner {
     position: relative;
     width: 100%;
@@ -33,7 +35,7 @@
   }
 
   .content {
-    width: 1100px;
+    width: 1180px;
     height: 691px;
     margin: 0 auto;
     margin-top: 100px;
@@ -127,12 +129,13 @@
     }
 
     p {
-      width: 1100px;
+      width: 1180px;
       margin: 0 auto;
-      padding: 3% 170px 3%;
+      padding: 3% 11% 3%;
       font-size: 20px;
       color: #555;
       line-height: 36px;
+      text-align: center;
       box-sizing: border-box;
       position: absolute;
       top: 0;
