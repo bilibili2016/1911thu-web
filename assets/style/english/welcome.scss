@@ -1,0 +1,37 @@
+.welcome {
+  width: 1180px;
+  margin: 0 auto;
+  height: 102px;
+  border-bottom: 1px solid #fff;
+
+  .logo {
+    width: 40px;
+    padding-top: 31px;
+
+    img {
+      width: 160px;
+      height: 40px;
+    }
+  }
+
+  .btn {
+    padding-top: 37px;
+    font-size: 0;
+
+    span {
+      height: 28px;
+      line-height: 28px;
+      background-color: transparent;
+      border-radius: 14px;
+      font-size: 16px;
+      color: #fff;
+      padding: 0 15px;
+      margin-left: 30px;
+      cursor: pointer;
+
+      &.select {
+        background-color: #FD9C3D;
+      }
+    }
+  }
+}
