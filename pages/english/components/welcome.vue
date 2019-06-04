@@ -21,8 +21,6 @@ export default {
   },
   mounted () {
     this.select = location.pathname.split("/")[2]
-    console.log(this.select);
-
     document.body.style.paddingTop = 0
   },
 }
