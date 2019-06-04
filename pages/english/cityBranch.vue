@@ -19,19 +19,6 @@ import Welcome from "@/pages/english/components/Welcome";
 export default {
    components: {
     "v-welcome": Welcome,
-  },
-  data () {
-    return {};
-  },
-  //  销毁之前展示头部 底部
-  // destroyed () {
-  //   this.$bus.$emit("headerFooterShow");
-  // },
-  //   进入页面的的时候
-  beforeRouteEnter (to, from, next) {
-    next(vm => {
-      vm.$bus.$emit("headerFooterHide");
-    });
   }
 };
 </script>
