@@ -280,8 +280,6 @@ export default {
   mounted () {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
-    console.log(this.vipList, '111111');
-
   }
 }
 </script>

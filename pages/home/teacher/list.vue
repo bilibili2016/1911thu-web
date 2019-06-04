@@ -232,7 +232,7 @@ export default {
       list.teacherTagsList().then(res => {
         if (res.status == 0) {
           this.tagsList = res.data.teacherTagsList;
-          this.tagsList.unshift({id:0,tag_name:'全部'})
+          this.tagsList.unshift({ id: 0, tag_name: '全部' })
           this.bannerList = res.data.teacherBannerList;
           //设置banner溢出居中显示
           this.$nextTick(() => {
@@ -263,7 +263,6 @@ export default {
           this.handleData(this.allData, res);
           this.loadList = false;
           if (persistStore.get("cid") >= 0) {
-            console.log(this.categoryListData);
             let CID = persistStore.get("cid");
             for (var i = 0; i < this.categoryListData.length; i++) {
               if (this.categoryListData[i].id == CID) {

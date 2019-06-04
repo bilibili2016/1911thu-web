@@ -11,6 +11,9 @@
         <v-homeselect :projectArr="projectArr" :categoryArr="categoryArr" @addEcg="handleAddEcg"></v-homeselect>
       </div>
       <div class="header-fr clearfix" :class="{big:isBig}">
+        <div class="english">
+          <span>En</span>
+        </div>
         <!-- 搜索 -->
         <v-search @handleSearch="handleSearch"></v-search>
         <!-- 兑换码、单位入口 -->
