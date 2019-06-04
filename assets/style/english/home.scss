@@ -1,4 +1,12 @@
 .home {
   height: 500px;
   background-color: #222222;
+
+  .welcome {
+    width: 100%;
+    height: 790px;
+    background: url('https://static-image.1911edu.com/english-home-banner.png') no-repeat;
+    background-size: 1920px 790px;
+    background-position: 50% 0;
+  }
 }
