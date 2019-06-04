@@ -24,7 +24,6 @@ export default {
   },
 }
 </script>
-
-<style scoped lang="scss">
+<style lang="scss">
 @import "~assets/style/english/welcome.scss";
 </style>
