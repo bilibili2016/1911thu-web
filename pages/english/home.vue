@@ -2,9 +2,12 @@
   <div class="home">
     <v-welcome></v-welcome>
     <div class="banner">
-      <h3>Welcome to 1911 Academy</h3>
-      <h6>1911 Academy is a lifelong education platform jointly initiated by senior professors and alumni from Tsinghua University,</h6>
-      <h6>Peking University and other famous universities in China.</h6>
+      <img src="https://static-image.1911edu.com/english-home-banner.png" alt="">
+      <div class="bannerCon">
+        <h3>Welcome to 1911 Academy</h3>
+        <h6>1911 Academy is a lifelong education platform jointly initiated by senior professors and alumni from Tsinghua University,</h6>
+        <h6>Peking University and other famous universities in China.</h6>
+      </div>
     </div>
     <div class="slogan">
       <div class="marks">
@@ -28,15 +31,15 @@
       <h4>1911 Academy’s three product forms</h4>
       <div class="list">
         <div>
-          <img class="icon2" src="https://static-image.1911edu.com/english-home-icon2.png" alt="">
+          <img src="https://static-image.1911edu.com/english-home-icon2.png" alt="">
           <p>Online schools</p>
         </div>
         <div>
-          <img class="icon3" src="https://static-image.1911edu.com/english-home-icon3.png" alt="">
+          <img src="https://static-image.1911edu.com/english-home-icon3.png" alt="">
           <p>Blended customized learning projects</p>
         </div>
         <div>
-          <img class="icon4" src="https://static-image.1911edu.com/english-home-icon4.png" alt="">
+          <img src="https://static-image.1911edu.com/english-home-icon4.png" alt="">
           <p>Degree programs</p>
         </div>
       </div>
