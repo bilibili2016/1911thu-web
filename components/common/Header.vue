@@ -201,7 +201,7 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setGid", "setProductsNum", "signOut"]),
-    handleToggle(){
+    handleToggle () {
       this.$router.push('/english/home')
     },
     closeBanner () {
@@ -566,6 +566,7 @@ export default {
         //跳转pc端页面
         document.body.classList.remove("mobile");
       }
+      document.body.classList.remove("englishMobile");
     },
     resize () {
       let wWidth = window.innerWidth;
