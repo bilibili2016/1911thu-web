@@ -114,9 +114,9 @@ export default {
     };
   },
   //  销毁之前展示头部 底部
-  destroyed () {
-    this.$bus.$emit("headerFooterShow");
-  },
+  // destroyed () {
+  //   this.$bus.$emit("headerFooterShow");
+  // },
   //   进入页面的的时候
   beforeRouteEnter (to, from, next) {
     next(vm => {
