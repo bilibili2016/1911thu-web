@@ -1,6 +1,6 @@
 <template>
   <div class="thinkTank">
-    <v-welcome></v-welcome>
+    <v-nav></v-nav>
     <div class="banner">
       <img src="https://static-image.1911edu.com/thinkTank-banner.png" alt="">
       <div class="bannerCon">
@@ -52,10 +52,10 @@
   </div>
 </template>
 <script>
-import welcome from "@/pages/english/components/Welcome.vue";
+import Nav from "@/pages/english/components/Nav.vue";
 export default {
   components: {
-    "v-welcome": welcome,
+    "v-nav": Nav,
   },
 }
 </script>
