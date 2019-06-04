@@ -2,7 +2,7 @@
   <!-- 商学院 -->
   <div class="businessSchool">
     <div class="commer-banner">
-      <v-welcome></v-welcome>
+      <v-nav></v-nav>
       <img src="https://static-image.1911edu.com/business-banner.png" alt="">
       <div class="bannerCon">
         <h1>Welcome to 1911 Academy</h1>
@@ -73,11 +73,11 @@
   </div>
 </template>
 <script>
-import Welcome from "@/pages/english/components/Welcome";
+import Nav from "@/pages/english/components/Nav";
 
 export default {
    components: {
-    "v-welcome": Welcome,
+    "v-nav": Nav,
   },
   data () {
     return {
@@ -113,16 +113,6 @@ export default {
       ]
     };
   },
-  //  销毁之前展示头部 底部
-  destroyed () {
-    this.$bus.$emit("headerFooterShow");
-  },
-  //   进入页面的的时候
-  beforeRouteEnter (to, from, next) {
-    next(vm => {
-      vm.$bus.$emit("headerFooterHide");
-    });
-  }
 };
 </script>
 <style scoped lang="scss">

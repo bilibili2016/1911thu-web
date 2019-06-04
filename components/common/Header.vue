@@ -11,7 +11,7 @@
         <v-homeselect :projectArr="projectArr" :categoryArr="categoryArr" @addEcg="handleAddEcg"></v-homeselect>
       </div>
       <div class="header-fr clearfix" :class="{big:isBig}">
-        <div class="english">
+        <div class="english" @click="handleToggle">
           <span>En</span>
         </div>
         <!-- 搜索 -->
@@ -201,6 +201,9 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setGid", "setProductsNum", "signOut"]),
+    handleToggle(){
+      this.$router.push('/english/home')
+    },
     closeBanner () {
       this.bannerMsg = false;
     },
@@ -554,7 +557,7 @@ export default {
         this.judegExplorer = false;
       }
     },
-    // 判断浏览器是否是移动端  
+    // 判断浏览器是否是移动端
     browserRedirect () {
       if (isMobileTerminal()) {
         //跳转移动端页面
