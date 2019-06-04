@@ -14,7 +14,6 @@
         </div>
     </div>
 </template>
-
 <script>
 export default {
     data() {
@@ -45,6 +44,6 @@ export default {
     },
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import "~assets/style/english/welcome.scss";
 </style>

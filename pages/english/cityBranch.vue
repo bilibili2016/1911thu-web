@@ -2,7 +2,7 @@
   <!-- 城市分校 -->
   <div class="cityBranch">
     <div class="commer-banner">
-      <v-welcome></v-welcome>
+      <v-nav></v-nav>
       <img src="https://static-image.1911edu.com/cityBranch-banner.png" alt="">
       <div class="bannerCon">
         <h1>The city branch plan </h1>
@@ -14,11 +14,11 @@
   </div>
 </template>
 <script>
-import Welcome from "@/pages/english/components/Welcome";
+import Nav from "@/pages/english/components/Nav";
 
 export default {
    components: {
-    "v-welcome": Welcome,
+    "v-nav": Nav,
   }
 };
 </script>

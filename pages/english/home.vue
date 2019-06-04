@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <v-welcome></v-welcome>
+    <v-nav></v-nav>
     <div class="banner">
       <h3>Welcome to 1911 Academy</h3>
       <h6>1911 Academy is a lifelong education platform jointly initiated by senior professors and alumni from Tsinghua University,</h6>
@@ -49,10 +49,10 @@
 </template>
 
 <script>
-import welcome from "@/pages/english/components/Welcome.vue";
+import Nav from "@/pages/english/components/Nav.vue";
 export default {
   components: {
-    "v-welcome": welcome,
+    "v-nav": Nav,
   },
   data () {
     return {
