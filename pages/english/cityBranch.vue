@@ -5,7 +5,7 @@
       <v-nav></v-nav>
       <img src="https://static-image.1911edu.com/cityBranch-banner.png" alt="">
       <div class="bannerCon">
-        <h1>The City Branch Plan</h1>
+        <h3>The City Branch Plan</h3>
       </div>
     </div>
     <div class="commer-con">
