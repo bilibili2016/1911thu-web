@@ -45,9 +45,7 @@
         <h4 class="commer-title">
           <span>Training Objectives</span>
         </h4>
-        <p class="pCss">The training objective of the 1911 Academy, School of Business is to cultivate learning-oriented business managers with an international vision, innovative spirit, and the ability to adapt to changes in today's business environment. The qualified manager should have a sound knowledge structure and the ability to solve the actual managerial problems, which can withstand the wind and waves in
-          today's competition, promote the supply-side structural reform, and realize the high
-          speed development of the enterprises.</p>
+        <p class="pCss">The training objective of the Business School 1911 Academy is to cultivate learning-oriented business managers with an international vision, innovative spirit, and the ability to adapt to changes in today’s business environment. The qualified manager should have a sound knowledge structure and the ability to solve the actual managerial problems, which can withstand the wind and waves in today’s competition, promote the supply-side structural reform, and realize the high speed development of the enterprises.</p>
       </div>
       <div class="commer-two">
         <h5>
@@ -88,7 +86,7 @@ export default {
         },
         {
           src: "https://static-image.1911edu.com/production-icon1.png",
-          text: "Blended standard projects"
+          text: "Blended projects"
         },
         {
           src: "https://static-image.1911edu.com/production-icon2.png",

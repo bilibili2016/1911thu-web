@@ -22,18 +22,19 @@
       <div class="bottom">
         <div class="fr">
           <div>
-            <img src="https://static-image.1911edu.com/thinkTank-icon1.png" alt="">
-            <p>secondary school</p>
-            <p>students</p>
+            <img src="https://static-image.1911edu.com/thinkTank-icon3.png" alt="">
+            <p>professionals from</p>
+            <p>different industries</p>
           </div>
           <div>
             <img src="https://static-image.1911edu.com/thinkTank-icon2.png" alt="">
             <p>college students</p>
           </div>
+
           <div>
-            <img src="https://static-image.1911edu.com/thinkTank-icon3.png" alt="">
-            <p>professionals from</p>
-            <p>different industries</p>
+            <img src="https://static-image.1911edu.com/thinkTank-icon1.png" alt="">
+            <p>primary and</p>
+            <p>secondary school students</p>
           </div>
         </div>
       </div>

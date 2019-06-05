@@ -5,7 +5,7 @@
       <v-nav></v-nav>
       <img src="https://static-image.1911edu.com/cityBranch-banner.png" alt="">
       <div class="bannerCon">
-        <h1>The city branch plan </h1>
+        <h1>The City Branch Plan</h1>
       </div>
     </div>
     <div class="commer-con">
@@ -17,7 +17,7 @@
 import Nav from "@/pages/english/components/Nav";
 
 export default {
-   components: {
+  components: {
     "v-nav": Nav,
   }
 };
