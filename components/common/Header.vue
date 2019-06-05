@@ -11,9 +11,6 @@
         <v-homeselect :projectArr="projectArr" :categoryArr="categoryArr" @addEcg="handleAddEcg"></v-homeselect>
       </div>
       <div class="header-fr clearfix" :class="{big:isBig}">
-        <div class="english" @click="handleToggle">
-          <span>En</span>
-        </div>
         <!-- 搜索 -->
         <v-search @handleSearch="handleSearch"></v-search>
         <!-- 兑换码、单位入口 -->
@@ -22,6 +19,10 @@
         <v-lrbtn v-if="!isShowLRBtn" @login="login" @register="register"></v-lrbtn>
         <!-- 头像 已登录状态 -->
         <v-headerimg v-else :data="user" :subPagesData="subPagesData" :isShowLRBtn="isShowLRBtn" @handleLink="handleLink" @handleLinkProfile="handleLinkProfile" @handleSignOut="handleSignOut"></v-headerimg>
+        <div class="english" @click="handleToggle">
+          <span class="iconfont icon-quanqiu"></span>
+          <span class="eng">English</span>
+        </div>
       </div>
       <v-code v-show="bindForm.isBind" :bindForm="bindForm" @detection="handleDetection" @closeEcg="handleCloseEcg"></v-code>
       <v-login></v-login>

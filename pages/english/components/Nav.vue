@@ -6,7 +6,10 @@
     <div class="btn fr">
       <span v-for="(item,index) in selectList" :key="index" :class="{'select':select==item.url,'items':true}" @click="handleClick(item.url)">
         {{item.title}}</span>
-      <span class="toggle" @click="handleToggle">中</span>
+      <span class="toggle" @click="handleToggle">
+        <span class="iconfont icon-quanqiu"></span>
+        <span class="eng">中文</span>
+      </span>
     </div>
   </div>
 </template>
