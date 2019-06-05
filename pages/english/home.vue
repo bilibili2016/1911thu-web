@@ -16,7 +16,7 @@
         <div class="word">
           <h4>Our Goal</h4>
           <p>As a practitioner of China Education Modernization 2035,</p>
-          <p>we are aiming to build a lifelong education system</p>
+          <p>we are aiming to build a lifelong education system.</p>
         </div>
       </div>
       <div class="bottom clearfix">

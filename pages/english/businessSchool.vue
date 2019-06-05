@@ -6,7 +6,7 @@
       <img src="https://static-image.1911edu.com/business-banner.png" alt="">
       <div class="bannerCon">
         <h1>Welcome to 1911 Academy</h1>
-        <p>As a practitioner of China Education Modernization 2035,we are aiming to build a lifelong education system</p>
+        <p>As a practitioner of China Education Modernization 2035,we are aiming to build a lifelong education system.</p>
       </div>
     </div>
     <div class="commer-con">
