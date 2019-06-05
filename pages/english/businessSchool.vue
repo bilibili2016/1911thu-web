@@ -15,11 +15,11 @@
           <div class=" one-top">
             <p class="pCss">Corporate management plays a vital role in the development of Chinese enterprises and the development of China's economy. For the middle and senior managers of enterprises, the importance of having the advanced professional business education is undoubted, because in today's era a qualified manager needs to understand not only business function, but also management techniques.</p>
             <p class="pCss next">1911 Academy has teamed up with dozens of experts, scholars and think tanks from Tsinghua
- University, Peking University, the National Development and Reform Commission, the State-owned Assets Supervision and Administration Commission, and other experts and professors with deep
- theoretical foundations in economics, finance, corporate management, as well as other various industry sectors. The industry leaders with rich practical experience have jointly developed a targeted and
- practical curriculum system for the 1911 Academy, School of Business, which helps the middle and senior managers of the company to achieve personalized and step-by-step growth, to cultivate an
- international vision, to be good at innovation, and to be able to become a learning enterprise
- manager who could adapt to changes in the environment.</p>
+              University, Peking University, the National Development and Reform Commission, the State-owned Assets Supervision and Administration Commission, and other experts and professors with deep
+              theoretical foundations in economics, finance, corporate management, as well as other various industry sectors. The industry leaders with rich practical experience have jointly developed a targeted and
+              practical curriculum system for the 1911 Academy, School of Business, which helps the middle and senior managers of the company to achieve personalized and step-by-step growth, to cultivate an
+              international vision, to be good at innovation, and to be able to become a learning enterprise
+              manager who could adapt to changes in the environment.</p>
           </div>
           <div class="one-center">
             <span class="left">Target Audience</span>
@@ -36,7 +36,7 @@
               </div>
             </div>
             <div class="centerBar">
-              <p>The business school of 1911 Academy could customize the personalized, targeted enterprise training program according to companies’ specific demand.</p>
+              <p>The business school of 1911 Academy could customize the personalized, targeted enterprise training program according to companies' specific demand.</p>
             </div>
           </div>
         </div>
@@ -45,9 +45,9 @@
         <h4 class="commer-title">
           <span>Training Objectives</span>
         </h4>
-        <p class="pCss">The training objective of the 1911 Academy, School of Business is to cultivate learning-oriented business managers with an international vision, innovative spirit, and the ability to adapt to changes in today’s business environment. The qualified manager should have a sound knowledge structure and the ability to solve the actual managerial problems, which can withstand the wind and waves in
- today’s competition, promote the supply-side structural reform, and realize the high
- speed development of the enterprises.</p>
+        <p class="pCss">The training objective of the 1911 Academy, School of Business is to cultivate learning-oriented business managers with an international vision, innovative spirit, and the ability to adapt to changes in today's business environment. The qualified manager should have a sound knowledge structure and the ability to solve the actual managerial problems, which can withstand the wind and waves in
+          today's competition, promote the supply-side structural reform, and realize the high
+          speed development of the enterprises.</p>
       </div>
       <div class="commer-two">
         <h5>
@@ -76,7 +76,7 @@
 import Nav from "@/pages/english/components/Nav";
 
 export default {
-   components: {
+  components: {
     "v-nav": Nav,
   },
   data () {

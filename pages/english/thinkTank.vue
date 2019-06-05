@@ -12,10 +12,10 @@
     <div class="content">
       <img class="ftImg" src="https://static-image.1911edu.com/thinkTank-icon4.png" alt="">
       <div class="word">
-        1911 Academy’s think tank has assembled hundreds of experts and scholars with profound academic knowledge, rich teaching experience and international vision, as well as college students with excellent academic performance and comprehensive development, which could provide lifelong education and consulting services for primary.
+        1911 Academy's think tank has assembled hundreds of experts and scholars with profound academic knowledge, rich teaching experience and international vision, as well as college students with excellent academic performance and comprehensive development, which could provide lifelong education and consulting services for primary.
       </div>
       <div class="title">
-        <div>1911 Academy’s</div>
+        <div>1911 Academy's</div>
         <div>think tank</div>
         <p></p>
       </div>

@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="icons">
-      <h4>1911 Academy’s three product forms</h4>
+      <h4>1911 Academy's three product forms</h4>
       <div class="list">
         <div>
           <img src="https://static-image.1911edu.com/english-home-icon2.png" alt="">
@@ -45,7 +45,7 @@
       </div>
     </div>
     <div class="tips">
-      <p>We have established 8 schools such as Business School, Cadre School and so on. We have also established academic committee in each school. We invited about 200 professors form Tsinghua University, School of Economics and Management, Peking University and Schwartzman College. Tsinghua University is our Business School’s academic committee. We provide high-quality, diverse educational programs for enterprise executives, managers, government cadres, and school students.</p>
+      <p>We have established 8 schools such as Business School, Cadre School and so on. We have also established academic committee in each school. We invited about 200 professors form Tsinghua University, School of Economics and Management, Peking University and Schwartzman College. Tsinghua University is our Business School's academic committee. We provide high-quality, diverse educational programs for enterprise executives, managers, government cadres, and school students.</p>
     </div>
 
   </div>
