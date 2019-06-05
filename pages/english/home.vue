@@ -23,7 +23,7 @@
         <img class="fl" src="https://static-image.1911edu.com/english-home-icon1.png" alt="">
         <div class="word fr">
           <h4>Our Aim</h4>
-          <p>With the mission of developing a learning society, we are committed to building a global education community that provides an “online and offline” blended-educational services for people of different stages, so that they can enjoy the best education in the world.</p>
+          <p>With the mission of developing a learning society, we are committed to building a global education community that provides an "online and offline" blended-educational services for people of different stages, so that they can enjoy the best education in the world.</p>
         </div>
       </div>
     </div>

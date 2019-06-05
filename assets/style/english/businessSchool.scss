@@ -28,7 +28,10 @@
         font-size: 20px;
         color: #fff;
         line-height: 36px;
-        margin-top: 30px;
+
+        &.topP {
+          margin-top: 30px;
+        }
       }
 
     }
@@ -123,7 +126,7 @@
           text-align: center;
 
           div {
-            width: 250px;
+            width: 300px;
             margin: 0 30px;
             color: #555;
           }

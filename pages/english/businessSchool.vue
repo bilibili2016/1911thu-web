@@ -5,8 +5,10 @@
       <v-nav></v-nav>
       <img src="https://static-image.1911edu.com/business-banner.png" alt="">
       <div class="bannerCon">
-        <h3>Welcome to 1911 Academy</h3>
-        <p>As a practitioner of China Education Modernization 2035,we are aiming to build a lifelong education system.</p>
+        <h3>Welcome to</h3>
+        <h3>1911 Academy</h3>
+        <p class="topP">As a practitioner of China Education Modernization 2035,</p>
+        <p>we are aiming to build a lifelong education system.</p>
       </div>
     </div>
     <div class="commer-con">
