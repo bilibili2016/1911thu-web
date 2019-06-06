@@ -181,6 +181,25 @@ body {
 
       &:hover {
         color: #773084;
+
+        .globe:before {
+          background: url("https://static-image.1911edu.com/earth-purple.png") no-repeat;
+          background-size: contain;
+        }
+      }
+
+      .globe {
+        vertical-align: middle;
+
+        &:before {
+          content: '';
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          transition: all 300ms;
+          background: url("https://static-image.1911edu.com/earth-black.png") no-repeat;
+          background-size: contain;
+        }
       }
 
       .eng {

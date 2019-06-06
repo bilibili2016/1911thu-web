@@ -20,7 +20,7 @@
         <!-- 头像 已登录状态 -->
         <v-headerimg v-else :data="user" :subPagesData="subPagesData" :isShowLRBtn="isShowLRBtn" @handleLink="handleLink" @handleLinkProfile="handleLinkProfile" @handleSignOut="handleSignOut"></v-headerimg>
         <div class="english" @click="handleToggle">
-          <span class="iconfont icon-quanqiu"></span>
+          <span class="globe"></span>
           <span class="eng">English</span>
         </div>
       </div>

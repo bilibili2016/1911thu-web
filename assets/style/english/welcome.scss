@@ -45,7 +45,7 @@
       }
     }
 
-    span.toggle {
+    .english {
       position: relative;
       margin-left: 20px;
       vertical-align: middle;
@@ -54,6 +54,25 @@
 
       &:hover {
         color: #FD9C3D;
+
+        .globe:before {
+          background: url("https://static-image.1911edu.com/earth-yellow.png") no-repeat;
+          background-size: contain;
+        }
+      }
+
+      span {
+        vertical-align: middle;
+      }
+
+      .globe:before {
+        content: '';
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        transition: all 300ms;
+        background: url("https://static-image.1911edu.com/earth-white.png") no-repeat;
+        background-size: contain;
       }
 
       .eng {
