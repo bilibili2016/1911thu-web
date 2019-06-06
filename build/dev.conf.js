@@ -21,10 +21,6 @@ config.analyze = {
   {
     rel: 'stylesheet',
     href: 'https://g.alicdn.com/de/prismplayer/2.7.2/skins/default/aliplayer-min.css'
-  },
-  {
-    rel: 'stylesheet',
-    href: 'https://js.1911edu.com/iconfont.css'
   }
 ]),
 (config.head.script = [{
