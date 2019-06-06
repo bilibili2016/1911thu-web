@@ -64,7 +64,7 @@
         <h4 class="commer-title">
           <span>Professor Pool</span>
         </h4>
-        <p>The professors of the 1911 Academy come from, but not limited to the following universities:</p>
+        <p>The professors of the 1911 Academy come from, but not limited to the following institutions:</p>
         <div class="collegeList">
           <img class="oneImg" v-for="(li,index) in collegeList" :key="index" :src="li" alt="">
         </div>
