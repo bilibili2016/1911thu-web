@@ -36,7 +36,7 @@
         </div>
         <div>
           <img src="https://static-image.1911edu.com/english-home-icon3.png" alt="">
-          <p>Blended customized learning projects</p>
+          <p>Blended customized programs</p>
         </div>
         <div>
           <img src="https://static-image.1911edu.com/english-home-icon4.png" alt="">

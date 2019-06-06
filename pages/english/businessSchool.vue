@@ -88,7 +88,7 @@ export default {
         },
         {
           src: "https://static-image.1911edu.com/production-icon1.png",
-          text: "Blended projects"
+          text: "Blended programs"
         },
         {
           src: "https://static-image.1911edu.com/production-icon2.png",
