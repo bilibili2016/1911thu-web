@@ -57,6 +57,8 @@ export default {
       }
       if (pathName.indexOf('english') >= 0) {
         this.HFShow = false;
+      } else {
+        this.HFShow = true;
       }
     },
     addHandler (element, type, handler) {
