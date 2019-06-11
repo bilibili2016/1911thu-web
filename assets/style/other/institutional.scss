@@ -624,6 +624,15 @@
 }
 
 .dateTime {
+  .el-input__suffix .el-input__icon {
+    transition: none;
+
+  }
+
+  .el-icon-circle-close {
+    margin-right: 40px;
+  }
+
   .el-input--suffix .el-input__inner {
     padding-left: 15px;
   }
