@@ -126,19 +126,7 @@ export default {
       this.aliWebrtc.startPreview(this.$refs.pushVideo).then((obj) => {
         // console.log("创建推流播放器成功");
         // 3. 加入房间
-        this.aliWebrtc.joinChannel(this.authInfo, this.userName).then((obj) => {
-          //   console.log("推流播放器---加入房间");
-          // 入会成功
-          this.aliWebrtc.muteLocalMic(false)
-          this.aliWebrtc.muteLocalCamera(false)
-          this.publishLocalStreams()
-        }).catch((error) => {
-          //   console.log(error, '入会失败，这里console下error内容，可以看到失败原因');
-          // 入会失败，这里console下error内容，可以看到失败原因
-          message(this, "error", error.message);
-          this.stopPlay()
-          this.begin = true
-        })
+        this.joinRoom()
       }).catch((error) => {
         // 预览失败
         message(this, "error", error.message);
@@ -146,6 +134,27 @@ export default {
         this.begin = true
       });
     },
+
+    joinRoom () {
+      // 3. 加入房间
+      this.aliWebrtc.joinChannel(this.authInfo, this.userName).then((obj) => {
+        //   console.log("推流播放器---加入房间");
+        // 入会成功
+        this.aliWebrtc.muteLocalMic(false)
+        this.aliWebrtc.muteLocalCamera(false)
+        this.publishLocalStreams()
+      }).catch((error) => {
+        //   console.log(error, '入会失败，这里console下error内容，可以看到失败原因');
+        // 入会失败，这里console下error内容，可以看到失败原因
+        message(this, "error", error.message);
+        this.stopPlay()
+        this.begin = true
+      })
+    },
+
+
+
+
     // 4. 发布本地流
     publishLocalStreams () {
       this.aliWebrtc.publish().then((res) => {
@@ -198,9 +207,17 @@ export default {
       });
       //   当频道里的其他人取消发布本地流时时触发
       this.aliWebrtc.on('onUnPublisher', (publisher) => {
-        // this.stopPlay()
         console.log("频道里的其他人取消发布本地流-----将会重新发布本地流");
-        this.startPlay()
+        // this.stopPlay()
+
+
+
+        // 3. 加入房间
+        this.joinRoom()
+
+
+
+
         console.log("推流断后重连");
         // this.$alert("您当前的网络状况太差，导致视频中断，请点击继续直播重新建立连接。", "温馨提示", {
         //   confirmButtonText: "继续直播",
