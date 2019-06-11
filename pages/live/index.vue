@@ -198,14 +198,14 @@ export default {
       });
       //   当频道里的其他人取消发布本地流时时触发
       this.aliWebrtc.on('onUnPublisher', (publisher) => {
-        this.stopPlay()
-        // console.log("频道里的其他人取消发布本地流-----将会重新发布本地流");
-        this.$alert("您当前的网络状况太差，导致视频中断，请点击继续直播重新建立连接。", "温馨提示", {
-          confirmButtonText: "继续直播",
-          callback: action => {
-            this.startPlay()
-          }
-        });
+        // this.stopPlay()
+        console.log("频道里的其他人取消发布本地流-----将会重新发布本地流");
+        // this.$alert("您当前的网络状况太差，导致视频中断，请点击继续直播重新建立连接。", "温馨提示", {
+        //   confirmButtonText: "继续直播",
+        //   callback: action => {
+        //     this.startPlay()
+        //   }
+        // });
       });
       //   当其他用户离开频道时触发
       this.aliWebrtc.on('onLeave', (data) => {
