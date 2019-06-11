@@ -85,6 +85,7 @@ export default {
         gids: "tab-twelfth"
       },
       time: "",
+      again: "",
       againLinkNum: 4
     };
   },
@@ -202,7 +203,7 @@ export default {
       this.aliWebrtc.on('onUnPublisher', (publisher) => {
         this.stopPlay()
         console.log("频道里的其他人取消发布本地流-----将会重新发布本地流");
-        var again = setInterval(() => {
+        this.again = setInterval(() => {
           if (this.againLinkNum <= 0) {
             this.againLinkNum = 4
             clearInterval(this.again)
