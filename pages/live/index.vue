@@ -200,6 +200,8 @@ export default {
       this.aliWebrtc.on('onUnPublisher', (publisher) => {
         // this.stopPlay()
         console.log("频道里的其他人取消发布本地流-----将会重新发布本地流");
+        this.startPlay()
+        console.log("推流断后重连");
         // this.$alert("您当前的网络状况太差，导致视频中断，请点击继续直播重新建立连接。", "温馨提示", {
         //   confirmButtonText: "继续直播",
         //   callback: action => {
@@ -213,6 +215,7 @@ export default {
       });
       //  当有错误发生时触发
       this.aliWebrtc.on('onError', (error) => {
+        console.log(error, 'error-error-error-error');
         let msg = error && error.message ? error.message : error;
         if (msg && msg.indexOf('no session') > 0) {
           error = "请重新登录：" + msg;
