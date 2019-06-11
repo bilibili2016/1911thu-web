@@ -79,7 +79,7 @@
                 <el-form-item label prop="person">
                   <el-input v-model="company.person" placeholder="请输入联系人姓名"></el-input>
                 </el-form-item>
-                <el-form-item label prop="date">
+                <el-form-item label prop="date" class="dateTime">
                   <el-date-picker v-model="company.date" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" placeholder="请选择回访日期"></el-date-picker>
                 </el-form-item>
                 <el-form-item label prop="time" class="timeLabel clearfix">
