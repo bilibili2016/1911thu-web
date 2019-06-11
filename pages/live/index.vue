@@ -10,6 +10,7 @@
         </div>
         <div class="time" v-if="showTime==1">直播将在{{min}}分{{second}}秒后开始</div>
         <div class="time" v-if="showTime==2">直播倒计时：{{min}}分{{second}}秒</div>
+        <div class="tips" v-if="showTips">您当前的网络状况太差，导致视频中断，直播将在 {{againLinkNum}}S 后重新建立连接。</div>
       </div>
       <div class="right" ref="right">
         <div class="problemBox">
@@ -86,7 +87,8 @@ export default {
       },
       time: "",
       again: "",
-      againLinkNum: 4
+      againLinkNum: 5,
+      showTips: false
     };
   },
   methods: {
@@ -137,13 +139,13 @@ export default {
         }).catch((error) => {
           //   console.log(error, '入会失败，这里console下error内容，可以看到失败原因');
           // 入会失败，这里console下error内容，可以看到失败原因
-          message(this, "error", error.message + '--3');
+          message(this, "error", error.message);
           this.stopPlay()
           this.begin = true
         })
       }).catch((error) => {
         // 预览失败
-        message(this, "error", error.message + '--2');
+        message(this, "error", error.message);
         this.stopPlay()
         this.begin = true
       });
@@ -156,7 +158,7 @@ export default {
           this.begin = false
         }
       }, (error) => {
-        message(this, "error", error.message + '--1');
+        message(this, "error", error.message);
         this.stopPlay()
         this.begin = true
       });
@@ -218,6 +220,9 @@ export default {
         console.log(error, 'error-error-error');
 
         let msg = error && error.message ? error.message : error;
+        if (msg == 'ICE connection disconnected,please check network or try to stop publish, then publish again') {
+          return false
+        }
         if (msg && msg.indexOf('no session') > 0) {
           error = "请重新登录：" + msg;
         }
@@ -230,12 +235,13 @@ export default {
       console.log("频道里的其他人取消发布本地流-----将会重新发布本地流");
       this.again = setInterval(() => {
         if (this.againLinkNum <= 0) {
-          this.againLinkNum = 4
+          this.againLinkNum = 5
           clearInterval(this.again)
           this.startPlay()
+          this.showTips = false
         } else {
           this.againLinkNum--
-          message(this, "info", `您当前的网络状况太差，导致视频中断，直播将在${this.againLinkNum}S后重新建立连接。`);
+          this.showTips = true
         }
       }, 1000)
     },
