@@ -105,11 +105,11 @@ export default {
       ],
       collegeList: [
         "https://static-image.1911edu.com/college_QH.png",
-        "https://static-image.1911edu.com/college_BD.png",
-        "https://static-image.1911edu.com/college_GYZC.png",
-        "https://static-image.1911edu.com/college_RSYJY.png",
-        "https://static-image.1911edu.com/college_ZKY.png",
-        "https://static-image.1911edu.com/college_GJFGW.png"
+        "https://static-image.1911edu.com/academy_BD.png",
+        "https://static-image.1911edu.com/academy_GYZC.png",
+        "https://static-image.1911edu.com/academy_RSKXY.png",
+        "https://static-image.1911edu.com/academy_ZKY.png",
+        "https://static-image.1911edu.com/academy_GJFGW.png"
       ]
     };
   },

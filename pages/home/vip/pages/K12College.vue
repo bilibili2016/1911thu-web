@@ -41,11 +41,7 @@
         </div>
         <!-- <p class="teacherText">本学院授课师资来自以下及其他相关单位</p> -->
         <div class="school">
-          <img src="https://static-image.1911edu.com/college_QH.png" alt="">
-          <img src="https://static-image.1911edu.com/college_BD.png" alt="">
-          <img src="https://static-image.1911edu.com/college_JYKY.png" alt="">
-          <img src="https://static-image.1911edu.com/college_BSD.png" alt="">
-          <img src="https://static-image.1911edu.com/college_QHFZ.png" alt="">
+          <img v-for="(li,index) in collegeList" :key="index" :src="li" alt="">
         </div>
         <div class="target k12Width">
           <div class="k12-title">
@@ -110,6 +106,13 @@ export default {
         "中国传统文化素养",
         "法律素养与社会常识",
         "大语文与核心素养"
+      ],
+      collegeList: [
+        "https://static-image.1911edu.com/academy_QH.png",
+        "https://static-image.1911edu.com/academy_BD.png",
+        "https://static-image.1911edu.com/academy_KY.png",
+        "https://static-image.1911edu.com/academy_BSD.png",
+        "https://static-image.1911edu.com/college_QHFZ.png"
       ]
     };
   }

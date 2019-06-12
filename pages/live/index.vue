@@ -308,6 +308,7 @@ export default {
       if (parseInt(this.time.end_time) > this.time.service_time && parseInt(this.time.start_time) < this.time.service_time) {
         this.begin = true
       }
+      clearInterval(this.again)
     },
     // 关闭即将结束
     closeNearend () {

@@ -53,8 +53,8 @@
             <h2>师资来源</h2>
             <p>本学院授课师资来自以下及其他相关单位</p>
             <div class="collegeList">
-              <!-- <img class="oneImg" v-for="(li,index) in collegeList" :key="index" :src="li" alt=""> -->
-              <span class="item" v-for="(item,index) in collegeText" :key="index" >{{item}}</span>
+              <img class="oneImg" v-for="(li,index) in collegeList" :key="index" :src="li" alt="">
+              <!-- <span class="item" v-for="(item,index) in collegeText" :key="index" >{{item}}</span> -->
             </div>
           </div>
           <h2>考核认证</h2>
@@ -103,14 +103,14 @@ export default {
         "提升党政管理的人文素养"
       ],
       collegeList: [
-        "https://static-image.1911edu.com/college_QH.png",
-        "https://static-image.1911edu.com/college_BD.png",
-        "https://static-image.1911edu.com/college_RD.png",
+        "https://static-image.1911edu.com/academy_QH.png",
+        "https://static-image.1911edu.com/academy_BD.png",
+        "https://static-image.1911edu.com/academy_RD.png",
         "https://static-image.1911edu.com/college_SKY.png",
-        "https://static-image.1911edu.com/college_ZKY.png",
-        "https://static-image.1911edu.com/college_ZGDX.png"
+        "https://static-image.1911edu.com/academy_ZKY.png",
+        "https://static-image.1911edu.com/academy_ZGDX.png"
       ],
-      collegeText:['清华大学','北京大学','中国人民大学','中国社会科学院','中国科学院','中共中央党校（国家行政学院）']
+      collegeText: ['清华大学', '北京大学', '中国人民大学', '中国社会科学院', '中国科学院', '中共中央党校（国家行政学院）']
     };
   }
 };
