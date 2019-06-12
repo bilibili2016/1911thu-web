@@ -126,7 +126,7 @@ export default {
         "体育干部领导力提升"
       ],
       collegeList: [
-        "https://static-image.1911edu.com/college_QH.png",
+        "https://static-image.1911edu.com/academy_QH.png",
         "https://static-image.1911edu.com/academy_BD.png",
         "https://static-image.1911edu.com/academy_GLBY.png",
         "https://static-image.1911edu.com/academy_STY.png",

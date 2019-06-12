@@ -104,7 +104,7 @@ export default {
         "Improve the humanism accomplishment of corporate leaders"
       ],
       collegeList: [
-        "https://static-image.1911edu.com/college_QH.png",
+        "https://static-image.1911edu.com/academy_QH.png",
         "https://static-image.1911edu.com/academy_BD.png",
         "https://static-image.1911edu.com/academy_GYZC.png",
         "https://static-image.1911edu.com/academy_RSKXY.png",
