@@ -3,7 +3,7 @@
     <div class="banner" v-if="config.carousel==='home'">
       <div class="carousel homeCarousel">
         <el-carousel :interval="5000" class="lbt indexBanner" ref="elCarousel">
-          <el-carousel-item class="elCarouselItem" v-for="(img,index) in items" :key="index">
+          <el-carousel-item class="elCarouselItem" v-for="(img,index) in items" :key="index" :class="{'marginLeft':marginLeft}">
             <div class="videoDiv" v-if="img.jump_type==5" @click="playVideo(img.jump_url)">
               <img id="innerImg" class="bannerImg" :src="img.picture">
               <img class="playImg" src="https://static-image.1911edu.com/videoPlay.png" alt="">
@@ -53,11 +53,12 @@
 
 <script>
 import { mapActions } from "vuex";
+import { isMobileTerminal } from "@/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
 import { open, checkURL } from "@/lib/util/helper";
 export default {
   props: ["items", "config", "swiperData", "coreData", "teacherBanner"],
-  data() {
+  data () {
     return {
       timer: null,
       showShadow: false,
@@ -72,12 +73,13 @@ export default {
         kid: 0,
         bid: "",
         page: 0
-      }
+      },
+      marginLeft: false
     };
   },
   methods: {
     ...mapActions("auth", ["setKid"]),
-    setActiveItem(index) {
+    setActiveItem (index) {
       // if (this.$refs.coreCarousel.$el.style.display == "none") {
       //   return false;
       // }
@@ -88,7 +90,7 @@ export default {
         // this.$refs.elCarousel.setActiveItem(index);
       });
     },
-    handleLink(img) {
+    handleLink (img) {
       // jump_type = 0  普通跳转 根据jump_url地址跳转
       // jump_type = 1  跳转至课程详情 jump_id 课程id
       // jump_type = 2  跳转至项目详情 jump_id 项目id
@@ -109,10 +111,10 @@ export default {
         });
       }
     },
-    goDetail(news) {
+    goDetail (news) {
       this.$router.push("/home/news/" + news.id);
     },
-    setWidth() {
+    setWidth () {
       let Dwidth = document.body.clientWidth;
       if (document.getElementsByClassName("el-carousel").length != 0) {
         if (Dwidth > 1920) {
@@ -124,7 +126,7 @@ export default {
         }
       }
     },
-    playVideo(url) {
+    playVideo (url) {
       this.player.url = url;
       this.showShadow = true;
       this.$nextTick(() => {
@@ -132,12 +134,12 @@ export default {
       });
     },
     //暂停
-    pauseVideo() {
+    pauseVideo () {
       this.showShadow = false;
       this.$refs.video.pause();
     }
   },
-  mounted() {
+  mounted () {
     this.setWidth();
     window.onresize = () => {
       return (() => {
@@ -159,6 +161,11 @@ export default {
         }
       })();
     };
+    if (isMobileTerminal()) {
+      this.marginLeft = true
+    } else {
+      this.marginLeft = false
+    }
   }
 };
 </script>

@@ -22,7 +22,13 @@
 
   .el-carousel__item {
     width: 1920px;
+    display: block;
+    margin: 0 auto;
+
     // margin-left: -300px;
+    &.marginLeft {
+      margin-left: -390px !important;
+    }
   }
 
   .el-carousel__item .bannerImg {
