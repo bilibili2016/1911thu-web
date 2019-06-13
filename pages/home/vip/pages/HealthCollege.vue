@@ -141,14 +141,7 @@
             <h2>师资来源</h2>
             <p class="teacherText">本学院授课师资来自以下及其他相关单位</p>
             <div class="school">
-              <img src="https://static-image.1911edu.com/college_QH.png" alt="">
-              <img src="https://static-image.1911edu.com/college_BD.png" alt="">
-              <img src="https://static-image.1911edu.com/college_ZKY.png" alt="">
-              <img src="https://static-image.1911edu.com/college_JFJYY.png" alt="">
-              <img src="https://static-image.1911edu.com/college_ZGYYXH.png" alt="">
-              <img src="https://static-image.1911edu.com/college_JBZX.png" alt="">
-              <img src="https://static-image.1911edu.com/college_YKY.png" alt="">
-              <img src="https://static-image.1911edu.com/college_WSYJZX.png" alt="">
+              <img v-for="(li,index) in collegeList" :key="index" :src="li" alt="">
             </div>
             <!-- <h2>学习收获</h2>
             <div class="harvest clearfix">
@@ -180,7 +173,22 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data () {
+    return {
+      collegeList: [
+        "https://static-image.1911edu.com/academy_QH.png",
+        "https://static-image.1911edu.com/academy_BD.png",
+        "https://static-image.1911edu.com/academy_ZKY.png",
+        "https://static-image.1911edu.com/academy_JFJYY.png",
+        "https://static-image.1911edu.com/academy_YXH.png",
+        "https://static-image.1911edu.com/academy_ZGJB.png",
+        "https://static-image.1911edu.com/college_YKY.png",
+        "https://static-image.1911edu.com/college_WSYJZX.png",
+      ]
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">

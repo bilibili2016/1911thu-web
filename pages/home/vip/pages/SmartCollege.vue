@@ -108,11 +108,7 @@
           <h2>师资来源</h2>
           <p class="teacherText">本学院授课师资来自以下及其他相关单位</p>
           <div class="school">
-            <img src="https://static-image.1911edu.com/college_QH.png" alt="">
-            <img src="https://static-image.1911edu.com/college_BD.png" alt="">
-            <img src="https://static-image.1911edu.com/college_ZKY.png" alt="">
-            <img src="https://static-image.1911edu.com/college_XXYJY.png" alt="">
-            <img src="https://static-image.1911edu.com/college_GYXX.png" alt="">
+            <img v-for="(li,index) in collegeList" :key="index" :src="li" alt="">
           </div>
         </div>
         <div class="attestation">
@@ -139,7 +135,19 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data () {
+    return {
+      collegeList: [
+        "https://static-image.1911edu.com/academy_QH.png",
+        "https://static-image.1911edu.com/academy_BD.png",
+        "https://static-image.1911edu.com/academy_ZKY.png",
+        "https://static-image.1911edu.com/college_XXYJY.png",
+        "https://static-image.1911edu.com/college_GYXX.png",
+      ]
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">

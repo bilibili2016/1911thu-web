@@ -10,6 +10,7 @@
         </div>
         <div class="time" v-if="showTime==1">直播将在{{min}}分{{second}}秒后开始</div>
         <div class="time" v-if="showTime==2">直播倒计时：{{min}}分{{second}}秒</div>
+        <div class="tips" v-if="showTips">您当前的网络状况太差，导致视频中断，直播将在 {{againLinkNum}}S 后重新建立连接。</div>
       </div>
       <div class="right" ref="right">
         <div class="problemBox">
@@ -85,6 +86,9 @@ export default {
         gids: "tab-twelfth"
       },
       time: "",
+      again: "",
+      againLinkNum: 5,
+      showTips: false
     };
   },
   methods: {
@@ -109,6 +113,7 @@ export default {
     },
     // 开始直播
     startPlay () {
+      clearInterval(this.again)
       this.begin = false
       live.getPlayAuthInfo(this.aliPlayer).then(res => {
         if (res.status == 0) {
@@ -122,7 +127,6 @@ export default {
     // 2. 找到播放器预览
     creatAliplayer () {
       //   console.log("准备创建推流播放器");
-
       this.aliWebrtc.startPreview(this.$refs.pushVideo).then((obj) => {
         // console.log("创建推流播放器成功");
         // 3. 加入房间
@@ -199,13 +203,13 @@ export default {
       //   当频道里的其他人取消发布本地流时时触发
       this.aliWebrtc.on('onUnPublisher', (publisher) => {
         this.stopPlay()
-        // console.log("频道里的其他人取消发布本地流-----将会重新发布本地流");
-        this.$alert("您当前的网络状况太差，导致视频中断，请点击继续直播重新建立连接。", "温馨提示", {
-          confirmButtonText: "继续直播",
-          callback: action => {
-            this.startPlay()
-          }
-        });
+        this.reLink()
+        // this.$alert("您当前的网络状况太差，导致视频中断，请点击继续直播重新建立连接。", "温馨提示", {
+        //   confirmButtonText: "继续直播",
+        //   callback: action => {
+        //     this.startPlay()
+        //   }
+        // });
       });
       //   当其他用户离开频道时触发
       this.aliWebrtc.on('onLeave', (data) => {
@@ -213,7 +217,12 @@ export default {
       });
       //  当有错误发生时触发
       this.aliWebrtc.on('onError', (error) => {
+        console.log(error, 'error-error-error');
+
         let msg = error && error.message ? error.message : error;
+        if (msg == 'ICE connection disconnected,please check network or try to stop publish, then publish again') {
+          return false
+        }
         if (msg && msg.indexOf('no session') > 0) {
           error = "请重新登录：" + msg;
         }
@@ -221,6 +230,20 @@ export default {
         this.stopPlay()
         this.begin = true
       });
+    },
+    reLink () {
+      console.log("频道里的其他人取消发布本地流-----将会重新发布本地流");
+      this.again = setInterval(() => {
+        if (this.againLinkNum <= 0) {
+          this.againLinkNum = 5
+          clearInterval(this.again)
+          this.startPlay()
+          this.showTips = false
+        } else {
+          this.againLinkNum--
+          this.showTips = true
+        }
+      }, 1000)
     },
     receivePublish (publisher) {
       var publisherId = publisher.publisherId,
@@ -285,6 +308,7 @@ export default {
       if (parseInt(this.time.end_time) > this.time.service_time && parseInt(this.time.start_time) < this.time.service_time) {
         this.begin = true
       }
+      clearInterval(this.again)
     },
     // 关闭即将结束
     closeNearend () {

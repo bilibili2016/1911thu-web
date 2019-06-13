@@ -77,7 +77,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       contentList: [
         "教育政策与宏观分析",
@@ -131,10 +131,10 @@ export default {
         // }
       ],
       collegeList: [
-        "https://static-image.1911edu.com/college_QH.png",
-        "https://static-image.1911edu.com/college_BSD.png",
-        "https://static-image.1911edu.com/college_JYKY.png",
-        "https://static-image.1911edu.com/college_JYXH.png",
+        "https://static-image.1911edu.com/academy_QH.png",
+        "https://static-image.1911edu.com/academy_BSD.png",
+        "https://static-image.1911edu.com/academy_KY.png",
+        "https://static-image.1911edu.com/academy_JYXH.png",
         // "https://static-image.1911edu.com/college_HDWYH.png"
       ]
     };

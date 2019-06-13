@@ -52,6 +52,21 @@
         font-size: 14px;
         z-index: 40;
       }
+
+      .tips {
+        position: absolute;
+        bottom: 50px;
+        left: 50%;
+        width: 480px;
+        background-color: rgba(0, 0, 0, .8);
+        text-align: center;
+        margin-left: -240px;
+        border-radius: 5px;
+        padding: 10px 15px;
+        color: #fff;
+        font-size: 14px;
+        z-index: 40;
+      }
     }
 
     .right {

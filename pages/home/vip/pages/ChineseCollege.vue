@@ -75,12 +75,7 @@
         <div class="chinese-title teacher"></div>
         <p class="teacherText">本学院授课师资来自以下及其他相关单位</p>
         <div class="school">
-          <img src="https://static-image.1911edu.com/college_BD.png" alt="">
-          <img src="https://static-image.1911edu.com/college_BSD.png" alt="">
-          <img src="https://static-image.1911edu.com/college_RD.png" alt="">
-          <img src="https://static-image.1911edu.com/college_ZGDX.png" alt="">
-          <img src="https://static-image.1911edu.com/college_ZGYYXY.png" alt="">
-
+          <img v-for="(li,index) in collegeList" :key="index" :src="li" alt="">
         </div>
         <!-- 考核认证 -->
         <div class="chinese-title test"></div>
@@ -117,6 +112,13 @@ export default {
         "中医养生",
         "民俗文化与民间信仰",
         "传统文化艺术鉴赏"
+      ],
+      collegeList: [
+        "https://static-image.1911edu.com/college_BD.png",
+        "https://static-image.1911edu.com/college_BSD.png",
+        "https://static-image.1911edu.com/college_RD.png",
+        "https://static-image.1911edu.com/college_ZGDX.png",
+        "https://static-image.1911edu.com/college_ZGYYXY.png"
       ]
     };
   }
