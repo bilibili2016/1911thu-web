@@ -128,9 +128,9 @@ export default {
       collegeList: [
         "https://static-image.1911edu.com/academy_QH.png",
         "https://static-image.1911edu.com/academy_BD.png",
-        "https://static-image.1911edu.com/academy_GLBY.png",
         "https://static-image.1911edu.com/academy_STY.png",
         "https://static-image.1911edu.com/academy_NYU.png",
+        "https://static-image.1911edu.com/academy_GLBY.png",
       ]
     };
   }
