@@ -4,6 +4,10 @@ body {
   &.mobile {
     zoom: 0.85 !important;
   }
+
+  &.englishMobile {
+    zoom: 0.8 !important;
+  }
 }
 
 .headerBox {
@@ -67,12 +71,12 @@ body {
       right: 0;
       top: 0;
       white-space: nowrap;
-      width: 180px;
+      width: 225px;
       height: 100%;
 
-      &.big {
-        width: 180px;
-      }
+      //   &.big {
+      //     width: 220px;
+      //   }
     }
 
     .headerLogo {
@@ -168,12 +172,51 @@ body {
       }
     }
 
+    .english {
+      position: relative;
+      float: right;
+      margin-top: 27px;
+      transition: all 300ms;
+
+      &:hover {
+        color: #773084;
+
+        .globe:before {
+          background: url("https://static-image.1911edu.com/earth-purple.png") no-repeat;
+          background-size: contain;
+        }
+      }
+
+      .globe {
+        vertical-align: middle;
+
+        &:before {
+          content: '';
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          transition: all 300ms;
+          background: url("https://static-image.1911edu.com/earth-black.png") no-repeat;
+          background-size: contain;
+        }
+      }
+
+      .eng {
+        height: 26px;
+        font-size: 16px;
+        text-align: center;
+        line-height: 26px;
+        cursor: pointer;
+        margin-left: 5px;
+      }
+    }
+
     .search {
       position: relative;
       float: left;
       width: 25px;
       height: 25px;
-      margin-top: 27px;
+      margin-top: 26px;
       line-height: 32px;
 
       img {
@@ -345,7 +388,7 @@ body {
     .lrBtn {
       float: left;
       margin-left: 20px;
-      margin-top: 33px;
+      margin-top: 31px;
 
       span {
         font-size: 16px;

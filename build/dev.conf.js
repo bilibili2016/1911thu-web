@@ -4,6 +4,15 @@ const config = require('./base.conf')
 config.analyze = {
   analyzerMode: 'html'
 };
+(config.head.meta = [{
+    name: 'renderer',
+    content: 'webkit|ie-comp|ie-stand',
+  },
+  {
+    rel: 'stylesheet',
+    href: 'https://g.alicdn.com/de/prismplayer/2.7.2/skins/default/aliplayer-min.css'
+  }
+]),
 (config.head.link = [{
     rel: 'icon',
     type: 'image/x-icon',
@@ -36,11 +45,7 @@ config.analyze = {
     async: true
   },
   {
-    src: 'https://js.1911edu.com/swfobject.js',
-    async: true
-  },
-  {
-    src: 'https://js.1911edu.com/aliyun-webrtc-sdk-1.6.0.min.js',
+    src: 'https://js.1911edu.com/aliyun-webrtc-sdk-1.7.0.min.js',
     async: true
   },
   {

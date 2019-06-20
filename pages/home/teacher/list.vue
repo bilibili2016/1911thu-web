@@ -65,7 +65,7 @@ export default {
       },
       introduce: "",
       initIntro:
-        '<p class="indent" style="text-indent:2em">1911学堂名师智库目前集结了数百位学术造诣深厚、教学经验丰富、具有国际视野的专家学者，以及学习成绩优质、各方面全面发展的高校学生，为中小学生、大学生及各界职场人士提供终身教育及导师咨询服务</p>' +
+        '<p class="indent" style="text-indent:2em">1911学堂名师智库目前集结了数百位学术造诣深厚、教学经验丰富、具有国际视野的专家学者，以及学习成绩优异、各方面全面发展的高校学生，为中小学生、大学生及各界职场人士提供终身教育及导师咨询服务。</p>' +
         '<p class="indent" style="text-indent:2em">1911学堂未来将建立由数千名全球知名专家教授、世界500强企业高管、业界翘楚行业精英、政策智囊以及优秀高校学子共同组成的高端专家导师库，为各单位组织及学员带来权威、前沿、高端的学习体验和咨询服务。</p>' +
         '<p class="indent" style="text-indent:2em">各单位组织及学员可以可根据自己的实际需求，从1911学堂海量的名师智库中筛选并预约相应的导师，邀请导师到真实的场景中授课，或者预约导师一对一咨询学业困惑或职业发展问题。</p>',
       fixedTop: 0,
@@ -93,7 +93,7 @@ export default {
         pid: 0,
         uid: 0,
         kid: "",
-        identity: []
+        identity: 0
       },
       pagemsg: {
         page: 1,
@@ -232,6 +232,7 @@ export default {
       list.teacherTagsList().then(res => {
         if (res.status == 0) {
           this.tagsList = res.data.teacherTagsList;
+          this.tagsList.unshift({ id: 0, tag_name: '全部' })
           this.bannerList = res.data.teacherBannerList;
           //设置banner溢出居中显示
           this.$nextTick(() => {
@@ -262,7 +263,6 @@ export default {
           this.handleData(this.allData, res);
           this.loadList = false;
           if (persistStore.get("cid") >= 0) {
-            console.log(this.categoryListData);
             let CID = persistStore.get("cid");
             for (var i = 0; i < this.categoryListData.length; i++) {
               if (this.categoryListData[i].id == CID) {

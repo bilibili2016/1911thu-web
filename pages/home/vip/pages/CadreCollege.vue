@@ -4,8 +4,8 @@
     <div class="vipBanner"></div>
     <div class="container">
       <div class="intro">
-        <p>1911学堂携手清华大学社会科学学院院长彭凯平教授成立科研课题，聘任彭凯平教授担任专家组组长，并邀请30多位社会科学及公共管理领域的专家教授组成1911学堂干部学院专家组，共同研发干部学院课程体系。</p>
-        <p>干部教育培训是干部队伍建设的先导性、基础性、战略性工程，在推进伟大事业、实现伟大梦想中具有不可替代的重要地位和作用。1911学堂干部学院，结合国家公共管理领域的发展方向，有针对性的研发系统化的课程体系，为各级党政机关与事业单位干部提供优质的课程资源，旨在培养新时代忠诚担当、底蕴深厚的高素质复合型干部人才，使之知识储备又博又专，既能科学决策又能统筹协调，既能把握大局又能勇于开拓。</p>
+        <p>1911学堂与清华大学社会科学学院成立科研课题，并聘请清华大学社会科学学院院长、心理学系系主任彭凯平教授担任专家组组长，并邀请30多位社会科学及公共管理领域的专家教授组成1911学堂干部学院专家组，共同研发干部学院课程体系。</p>
+        <p>干部教育培训是干部队伍建设的先导性、基础性、战略性工程，在推进伟大事业、实现伟大梦想中具有不可替代的重要地位和作用。1911学堂干部学院，结合国家公共管理领域的发展方向，有针对性地研发系统化的课程体系，为各级党政机关与事业单位干部提供优质的课程资源，旨在培养新时代忠诚担当、底蕴深厚的高素质复合型干部人才，使之知识储备又博又专，既能科学决策又能统筹协调，既能把握大局又能勇于开拓。</p>
       </div>
 
       <div class="studyInfo">
@@ -54,13 +54,14 @@
             <p>本学院授课师资来自以下及其他相关单位</p>
             <div class="collegeList">
               <img class="oneImg" v-for="(li,index) in collegeList" :key="index" :src="li" alt="">
+              <!-- <span class="item" v-for="(item,index) in collegeText" :key="index" >{{item}}</span> -->
             </div>
           </div>
           <h2>考核认证</h2>
           <div class="attestation clearfix">
             <div class="left">
               <span class="circle"></span>
-              <span class="text">学员参加1911学堂干部学院在线学院或相关项目学习，考核通过者将获得1911学堂结业证书。</span>
+              <span class="text">学员参加1911学堂干部学院在线学院或相关项目学习，考核通过者将获得1911学堂认证证书。</span>
             </div>
             <div class="right">
               <img src="https://static-image.1911edu.com/cadreCollege_icon2.png" alt>
@@ -102,13 +103,14 @@ export default {
         "提升党政管理的人文素养"
       ],
       collegeList: [
-        "https://static-image.1911edu.com/college_QH.png",
-        "https://static-image.1911edu.com/college_BD.png",
-        "https://static-image.1911edu.com/college_RD.png",
+        "https://static-image.1911edu.com/academy_QH.png",
+        "https://static-image.1911edu.com/academy_BD.png",
+        "https://static-image.1911edu.com/academy_RD.png",
         "https://static-image.1911edu.com/college_SKY.png",
-        "https://static-image.1911edu.com/college_ZKY.png",
-        "https://static-image.1911edu.com/college_ZGDX.png"
-      ]
+        "https://static-image.1911edu.com/academy_ZKY.png",
+        "https://static-image.1911edu.com/academy_ZGDX.png"
+      ],
+      collegeText: ['清华大学', '北京大学', '中国人民大学', '中国社会科学院', '中国科学院', '中共中央党校（国家行政学院）']
     };
   }
 };

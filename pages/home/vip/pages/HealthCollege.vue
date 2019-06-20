@@ -4,7 +4,7 @@
     <div class="vipBanner"></div>
     <div class="container">
       <div class="intro">
-        <p>1911学堂携手清华大学药学院王钊教授成立科研课题，聘任王钊教授担任专家组组长，专家组组长邀请30名左右大健康领域专家组成1911学堂大健康学院专家组，共同研发大健康学院课程体系。学院专家组对大健康学院的课程体系、授课师资、培养目标、技术平台、学习模式、测评体系、考试系统等进行了充分论证与整体评估，并出具了课程认证与鉴定意见。</p>
+        <p>1911学堂与清华大学药学院成立科研课题，并聘请清华大学药学院王钊教授担任专家组组长，专家组组长邀请30名左右大健康领域专家组成1911学堂大健康学院专家组，共同研发大健康学院课程体系。学院专家组对大健康学院的课程体系、授课师资、培养目标、技术平台、学习模式、测评体系、考试系统等进行了充分论证与整体评估，并出具了课程认证与鉴定意见。</p>
         <p>随着大健康时代的到来，医药卫生事业正在实现由“以治病为中心”向“以健康为中心”的转变，高端养生保健人才缺口大，各细分的医疗健康产业都急需相应的人才。</p>
         <p>1911学堂集聚一批在医疗大数据、医疗人工智能、智慧健康、移动医疗、生物信息技术等领域的行业专家，面向大健康产业相关的党政机关与企事业单位人员提供系统性的教育培训解决方案，以培养覆盖全产业链条的大健康产业人才，包括政策制定及解读人才、机构管理型人才、企业经营型人才、产品推广型人才及健康管理人才等。</p>
       </div>
@@ -141,14 +141,7 @@
             <h2>师资来源</h2>
             <p class="teacherText">本学院授课师资来自以下及其他相关单位</p>
             <div class="school">
-              <img src="https://static-image.1911edu.com/college_QH.png" alt="">
-              <img src="https://static-image.1911edu.com/college_BD.png" alt="">
-              <img src="https://static-image.1911edu.com/college_ZKY.png" alt="">
-              <img src="https://static-image.1911edu.com/college_JFJYY.png" alt="">
-              <img src="https://static-image.1911edu.com/college_ZGYYXH.png" alt="">
-              <img src="https://static-image.1911edu.com/college_JBZX.png" alt="">
-              <img src="https://static-image.1911edu.com/college_YKY.png" alt="">
-              <img src="https://static-image.1911edu.com/college_WSYJZX.png" alt="">
+              <img v-for="(li,index) in collegeList" :key="index" :src="li" alt="">
             </div>
             <!-- <h2>学习收获</h2>
             <div class="harvest clearfix">
@@ -163,7 +156,7 @@
             <div class="clearfix">
               <div class="left fl">
                 <span class="circle"></span>
-                <span class="text">学员参加1911学堂大健康学院在线学院或相关项目学习，考核通过者将获得1911学堂结业证书。</span>
+                <span class="text">学员参加1911学堂大健康学院在线学院或相关项目学习，考核通过者将获得1911学堂认证证书。</span>
               </div>
               <div class="right fr">
                 <img src="https://static-image.1911edu.com/cadreCollege_icon2.png" alt>
@@ -180,7 +173,22 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data () {
+    return {
+      collegeList: [
+        "https://static-image.1911edu.com/academy_QH.png",
+        "https://static-image.1911edu.com/academy_BD.png",
+        "https://static-image.1911edu.com/academy_ZKY.png",
+        "https://static-image.1911edu.com/academy_JFJYY.png",
+        "https://static-image.1911edu.com/academy_YXH.png",
+        "https://static-image.1911edu.com/academy_ZGJB.png",
+        "https://static-image.1911edu.com/college_YKY.png",
+        "https://static-image.1911edu.com/college_WSYJZX.png",
+      ]
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">

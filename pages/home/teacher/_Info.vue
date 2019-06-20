@@ -55,8 +55,16 @@
         <v-nodata v-else :pageType="pageType"></v-nodata>
       </div>
     </div>
-    <v-appointment v-if="showAppointment" @closeForm="closeForm" :teacherInfo="teacherData" @goPay="goPay" :userInfo="userInfo"></v-appointment>
-    <v-pay v-if="showPay" @closePayed="closePayed" :userInfo="userInfo" :teacherInfo="teacherData" :orderId="orderId"></v-pay>
+    <!-- 未支付提醒弹框 -->
+    <div class="unPayDiv" v-if="isShowProfile">
+      <div class="inner-con">
+        <i class="el-icon-close" @click="closeProfile"></i>
+        <p class="text">您还有未支付的预约，请您到“个人中心-我的咨询”完成支付</p>
+        <span class="btn" @click="handleGoto">前往个人中心</span>
+      </div>
+    </div>
+    <v-appointment v-if="showAppointment" @closeForm="closeForm" :teacherInfo="teacherData" @goPay="goPay" :userInfo="userInfo" @unPay="unPay"></v-appointment>
+    <v-pay v-if="showPay" @closePayed="closePayed" :userInfo="userInfo" :teacherInfo="teacherData" :orderInfo="orderInfo" :config="'teacherDetail'"></v-pay>
   </div>
 </template>
 
@@ -78,9 +86,13 @@ export default {
   },
   data () {
     return {
+      isShowProfile: false,
       showAppointment: false,
       showPay: false,
-      orderId: "",
+      orderInfo: {
+        id: '',
+        time: ''
+      },
       userInfo: "",
       pageType: {
         page: "teacher/_info",
@@ -100,6 +112,9 @@ export default {
       tidForm: {
         tids: null
       },
+      gidForm: {
+        gids: ""
+      },
       teacherBg: "https://static-image.1911edu.com/teacher_bannerBG.png",
       loading: false,
       topicList: [
@@ -114,9 +129,24 @@ export default {
     };
   },
   methods: {
-    goPay (id) {
+    ...mapActions("auth", ["setGid"]),
+    closeProfile () {
+      this.isShowProfile = false
+    },
+    handleGoto () {
+      this.gidForm.gids = "tab-twelfth";
+      this.setGid(this.gidForm);
+      this.$router.push("/profile");
+      this.$bus.$emit("selectProfileIndex", 'tab-twelfth');
+    },
+    unPay () {
+      this.showAppointment = false
+      this.isShowProfile = true
+    },
+    goPay (data) {
       this.showPay = true;
-      this.orderId = id;
+      this.orderInfo.id = data.id;
+      this.orderInfo.time = data.update_time;
     },
     closeForm () {
       this.showAppointment = !this.showAppointment;

@@ -15,7 +15,7 @@
         <div class="btn-con">
           <span class="button" @click="lookProject">混合式项目</span>
           <!-- <span class="button"  @click="goVipDetail">在线学院</span> -->
-          <span class="button" v-if="title!='chineseCollege'"  @click="goVipDetail">在线学院</span>
+          <span class="button" v-if="title!='chineseCollege'" @click="goVipDetail">在线学院</span>
           <span class="button" v-if="title!='chineseCollege'" @click="goLink('/project/degreeProject')">学位项目</span>
         </div>
       </div>
@@ -34,7 +34,7 @@ import {
   matchSplits,
   setTitle,
   message,
-  browserRedirect
+  isMobileTerminal
 } from "@/lib/util/helper";
 import { mapState, mapActions, mapGetters } from "vuex";
 import CadreCollege from "@/pages/home/vip/pages/CadreCollege";
@@ -125,7 +125,7 @@ export default {
         this.noCollege = true;
       }
       // 手机端动态设置margin 手动缩放zoom比例
-      if (browserRedirect()) {
+      if (isMobileTerminal()) {
         this.width = ((1920 - document.documentElement.clientWidth) / 2) * 0.81;
       } else {
         this.width = (1920 - document.documentElement.clientWidth) / 2;

@@ -7,10 +7,10 @@
         我们将会在此时间段通过视频直播的方式为您提供一对一的咨询服务！</p>
       <el-form :model="teacherForm" :rules="rules" ref="teacherForm" class="teacherForm">
         <el-form-item label="您的联系方式：" prop="tel">
-          <el-input v-model="teacherForm.tel" :disabled="teacherForm.hasTel"></el-input>
+          <el-input v-model="teacherForm.tel" :disabled="teacherForm.hasTel" placeholder="请填写您的联系方式"></el-input>
         </el-form-item>
         <el-form-item label="真实姓名：" prop="name">
-          <el-input v-model="teacherForm.name" :disabled="teacherForm.hasName" placeholder="请填写您的联系方式"></el-input>
+          <el-input v-model="teacherForm.name" :disabled="teacherForm.hasName" placeholder="请填写您的真实姓名"></el-input>
         </el-form-item>
         <el-form-item label="预约咨询的导师：" prop="teacherName">
           <el-input v-model="teacherForm.teacherName" disabled></el-input>
@@ -53,7 +53,7 @@
         </el-form-item>
 
         <el-form-item size="large" class="submit">
-          <el-button type="primary" class="submitAble" @click="appointmentTeacher('teacherForm')" round>提交</el-button>
+          <el-button type="primary" class="submitAble" @click="appointmentTeacher('teacherForm')" round>提交预约</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -130,8 +130,10 @@ export default {
             //不需要验证是否登录
             if (response.status === 0) {
               this.closeForm();
-              this.$emit("goPay", response.data.id);
-            } else {
+              this.$emit("goPay", response.data);
+            } else if(response.status === 100300){  //有未支付的预约
+              this.$emit('unPay')
+            }else {
               message(this, "error", response.msg);
             }
           });

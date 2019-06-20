@@ -102,6 +102,9 @@
                             background-color: #F5A623;
                             color: #fff;
                         }
+                        &.studentWait {
+                            cursor: inherit;
+                        }
                         &.efficacy {
                             background-color: #844490;
                             color: #fff;
@@ -109,6 +112,11 @@
                         &.end {
                             border: 1px solid #87868B;
                             color: #87868B;
+                        }
+                        &.waitPay {
+                            cursor: pointer;
+                            border: 1px solid #844490;
+                            color: #844490;
                         }
                     }
                 }

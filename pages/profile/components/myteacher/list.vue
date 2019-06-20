@@ -2,8 +2,8 @@
   <!-- 教师入口 -->
   <el-card class="changeNav teacherList">
     <el-tabs v-model="activeName" @tab-click="handleActive">
-      <!-- 学习中 -->
-      <el-tab-pane label="未开始" name="first" value="1">
+      <!-- 进行中 -->
+      <el-tab-pane label="进行中" name="first" value="1">
         <v-part :teacherData="data" :teacherPagemsg="teacherPagemsg" :config="config" :isOver='false'></v-part>
         <div class="pagination" v-if="teacherPagemsg && teacherPagemsg.total>12">
           <el-pagination background layout="prev, pager, next" :page-size="teacherPagemsg.pagesize" :pager-count="5" :page-count="teacherPagemsg.pagesize" :current-page="teacherPagemsg.page" :total="teacherPagemsg.total" @current-change="teacherListChange"></el-pagination>

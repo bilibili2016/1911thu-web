@@ -15,7 +15,7 @@
       <div class="back-to-ceiling hasColor customStyleOne" v-show="visible">
         <span></span>
         <div class="showCode">
-          <img src="https://static-image.1911edu.com/attentionWechat2.jpg" alt="">
+          <img src="https://static-image.1911edu.com/attentionWechat2.png" alt="">
           <h4>1911学堂官方微信</h4>
           <p>公众号：XUETANG_1911</p>
         </div>
@@ -35,8 +35,9 @@
     <transition :name="transitionName">
       <div class="back-to-ceiling hasColor customStyleTwo" v-show="visible">
         <span></span>
-        <div class="telShow">
-          <p>咨询电话：18516821911</p>
+        <div class="telShow consult">
+          <p>客服热线：010-62701911-628，</p>
+          <p>工作时间：工作日 9:00-18:00。</p>
         </div>
       </div>
     </transition>

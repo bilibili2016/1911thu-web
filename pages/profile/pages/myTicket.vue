@@ -1,7 +1,7 @@
 <template>
   <!-- 发票 -->
   <el-card v-if="showTicketList">
-    <el-tabs v-model="activeName" @tab-click="handleTicket">
+    <el-tabs class="orderCard ticketCard" v-model="activeName" @tab-click="handleTicket">
       <el-tab-pane label="按订单开发票" name="ticketFirst" value="1">
         <div v-loading="allTicket" :class="{ minheight : allTicket}">
           <v-tkorder v-if="unTicketData  && unTicketData.length>0" :orderData="unTicketData" @handleUpdate="getUpdateMsg" @goTicketDetail="goTicketDetail" @chengeItem="chengeItem" v-loading="readyOrderLoad"></v-tkorder>
@@ -9,14 +9,14 @@
         <div class="pagination" v-if="unTicketData && unTicketData.length>19">
           <el-pagination background layout="prev, pager, next" :page-size="pagemsg8.pagesize" :pager-count="5" :page-count="pagemsg8.pagesize" :current-page="pagemsg8.page" :total="pagemsg8.total" @current-change="unTicketDataChange"></el-pagination>
         </div>
-        <v-nomsg class="noOrder" v-if="unTicketData.length==0 && !allTicket" :config="noMsgTwl"></v-nomsg>
+        <v-nomsg v-if="unTicketData.length==0 && !allTicket" :config="noMsgTwl"></v-nomsg>
       </el-tab-pane>
       <el-tab-pane name="ticketSecond" label="开票历史" value="2">
         <v-tkhistory v-if="historyOrderData && historyOrderData.length>0" :orderData="historyOrderData" @handleUpdate="getUpdateMsg" v-loading="unfinishedOrderLoad"></v-tkhistory>
         <div class="pagination" v-if="historyOrderData && historyOrderData.length>19">
           <el-pagination background layout="prev, pager, next" :page-size="pagemsg9.pagesize" :pager-count="5" :page-count="pagemsg9.pagesize" :current-page="pagemsg9.page" :total="pagemsg9.total" @current-change="historyOrderDataChange"></el-pagination>
         </div>
-        <v-nomsg class="noOrder" v-if="historyOrderData.length == 0" :config="noMsgThi"></v-nomsg>
+        <v-nomsg v-if="historyOrderData.length == 0" :config="noMsgThi"></v-nomsg>
       </el-tab-pane>
       <el-tab-pane name="ticketThird" value="3">
         <span class="payOk" slot="label">开票规则
@@ -60,18 +60,18 @@ export default {
     'v-nomsg': NoMsg,
     'v-detail': ticketDetail
   },
-  data() {
+  data () {
     return {
       activeName: 'ticketFirst'
     }
   },
-  mounted() {
+  mounted () {
     this.$bus.$on('activeTicket', data => {
       this.activeName = 'ticketFirst'
     })
   },
   methods: {
-    handleTicket(item) {
+    handleTicket (item) {
       if (persistStore.get('token')) {
         this.$emit('handleTicket', item.$attrs.value)
       } else {
@@ -79,23 +79,23 @@ export default {
         this.$bus.$emit('loginShow', true)
       }
     },
-    getUpdateMsg() {
+    getUpdateMsg () {
       this.$emit('getUpdateMsg')
     },
-    chengeItem() {
+    chengeItem () {
       this.activeName = 'ticketSecond'
       document.documentElement.scrollTop = 0
     },
-    goTicketDetail() {
+    goTicketDetail () {
       this.$emit('goTicketDetail')
     },
-    goTicketBack(val) {
+    goTicketBack (val) {
       this.$emit('goTicketBack', val)
     },
-    unTicketDataChange(val) {
+    unTicketDataChange (val) {
       this.$emit('unTicketDataChange', val)
     },
-    historyOrderDataChange(val) {
+    historyOrderDataChange (val) {
       this.$emit('historyOrderDataChange', val)
     }
   }

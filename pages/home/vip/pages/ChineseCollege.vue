@@ -75,19 +75,14 @@
         <div class="chinese-title teacher"></div>
         <p class="teacherText">本学院授课师资来自以下及其他相关单位</p>
         <div class="school">
-          <img src="https://static-image.1911edu.com/college_BD.png" alt="">
-          <img src="https://static-image.1911edu.com/college_BSD.png" alt="">
-          <img src="https://static-image.1911edu.com/college_RD.png" alt="">
-          <img src="https://static-image.1911edu.com/college_ZGDX.png" alt="">
-          <img src="https://static-image.1911edu.com/college_ZGYYXY.png" alt="">
-
+          <img v-for="(li,index) in collegeList" :key="index" :src="li" alt="">
         </div>
         <!-- 考核认证 -->
         <div class="chinese-title test"></div>
         <div class="four-text clearfix">
           <div class="four-left">
             <span class="circle"></span>
-            <span class="text">学员参加1911学堂国学院在线学院或相关项目学习，考核通过者将获得1911学堂结业证书。</span>
+            <span class="text">学员参加1911学堂国学院在线学院或相关项目学习，考核通过者将获得1911学堂认证证书。</span>
           </div>
           <div class="four-right">
             <img src="https://static-image.1911edu.com/chinese-pic5.png" alt>
@@ -117,6 +112,13 @@ export default {
         "中医养生",
         "民俗文化与民间信仰",
         "传统文化艺术鉴赏"
+      ],
+      collegeList: [
+        "https://static-image.1911edu.com/college_BD.png",
+        "https://static-image.1911edu.com/college_BSD.png",
+        "https://static-image.1911edu.com/college_RD.png",
+        "https://static-image.1911edu.com/college_ZGDX.png",
+        "https://static-image.1911edu.com/college_ZGYYXY.png"
       ]
     };
   }

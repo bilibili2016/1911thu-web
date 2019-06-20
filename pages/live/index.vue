@@ -2,24 +2,15 @@
   <div class="live">
     <div class="liveCon" ref="playerBox">
       <div class="left" ref="left">
-        <div :class="[isShow?'playInner':'playInner index']" ref="playInner">
-          <div id="mediaPlayer" ref="mediaPlayer" class="mediaCon"></div>
-        </div>
         <div :class="[isShow?'index self':'self']">
-          <div ref="tbliveDiv" class="tbliveDiv">
-            <div class="tblive" id="tblive" ref="tblive"></div>
-          </div>
-          <embed v-show="showEmbedDiv" ref="embedDiv" class="embedDiv" src="/images/zhansi.swf" quality="high" pluginspage="https://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="580" height="430" style="background-color:#626262">
+          <video class="mediaCon" ref="pushVideo" autoplay></video>
         </div>
-        <div class="time" v-if="showTime==1">{{min}}分{{second}}秒后开始直播</div>
+        <div :class="[isShow?'playInner':'playInner index']" ref="playInner">
+          <!-- <video class="pullVideo" autoplay ref="pullVideo"></video> -->
+        </div>
+        <div class="time" v-if="showTime==1">直播将在{{min}}分{{second}}秒后开始</div>
         <div class="time" v-if="showTime==2">直播倒计时：{{min}}分{{second}}秒</div>
-        <!-- <div class="topBar"></div>
-        <img src="https://static-image.1911edu.com/live-bg1.png" alt="">
-        <div class="bottomBar clearfix">
-          <span class="time fl">直播倒计时：20分15秒</span>
-          <span class="btn nearBtn fr">结束直播</span>
-          <span class="btn endBtn fr">结束直播</span>
-        </div> -->
+        <div class="tips" v-if="showTips">您当前的网络状况太差，导致视频中断，直播将在 {{againLinkNum}}S 后重新建立连接。</div>
       </div>
       <div class="right" ref="right">
         <div class="problemBox">
@@ -29,21 +20,11 @@
           </ul>
         </div>
         <div class="liveBtn clearfix">
-          <span v-if="begin" class="fl" @click="start_play">开始直播</span>
+          <span v-if="begin" class="fl" @click="startPlay">开始直播</span>
           <span v-else class="fl begin">开始直播</span>
-          <span v-if="end" class="fr" @click="stop_play">结束直播</span>
+          <span v-if="end" class="fr" @click="stopPlay">结束直播</span>
           <span v-else class="fr end">结束直播</span>
         </div>
-      </div>
-      <!-- 即将结束 -->
-      <div class="pop nearEnd" v-if="nearEnd">
-        <i class="el-icon-close" @click="closeNearend"></i>
-        <p>尊敬的学员您好，本次的咨询时间即将结束，请您合理分配时间！</p>
-      </div>
-      <!-- 已结束 -->
-      <div class="pop over" v-if="isOver">
-        <p>本次一对一视频直播咨询服务已结束。</p>
-        <span class="btn" @click="goProfile">返回个人中心</span>
       </div>
     </div>
     <!-- 即将结束 -->
@@ -76,6 +57,12 @@ import { store as persistStore } from "~/lib/core/store";
 export default {
   data () {
     return {
+      aliWebrtc: "",
+      userName: "1911学堂在线咨询",
+      authInfo: {},
+      hvuex: {
+        publisherList: []
+      },
       objLength: "",
       isShow: true,
       isOver: false,
@@ -87,43 +74,207 @@ export default {
         appointId: "",
         type: ""
       },
-      jsFile:
-        "//g.alicdn.com/aliyun/aliyun-assets/0.0.3/swfobject/swfobject.js",
-      url: {
-        pushUrl: "",
-        pullUrl: ""
+      aliPlayer: {
+        room: "123"
       },
-      pullPlay: "",
-      pullaliPlayer: {
-        id: "mediaPlayer", //播放器id
-        source: "",
-        width: "100%",
-        height: "100%",
-        autoplay: true,
-        isLive: true,
-        rePlay: false,
-        playsinline: true,
-        preload: true,
-        controlBarVisibility: "hover",
-        useH5Prism: true,
-        useFlashPrism: true
-      },
-      node: "",
       timer: "",
       variable: 0,
       min: 10000,
       second: 10000,
       showTime: 3,
-      showEmbedDiv: true,
       gidForm: {
         gids: "tab-twelfth"
       },
-      loadTime: "",
-      time: ""
+      time: "",
+      again: "",
+      againLinkNum: 5,
+      showTips: false
     };
   },
   methods: {
     ...mapActions("auth", ["setGid"]),
+    // 获取数据  直播房间号  详情
+    teacherBespokeInfo () {
+      live.teacherBespokeInfo(this.teacherLiveInfo).then(response => {
+        if (response.status == 0) {
+          this.aliPlayer.room = response.data.room_number
+          this.time = response.data.teacherBespokeInfo;
+          this.questionList = response.data.teacherBespokeInfo.ask_question;
+          this.justTime();
+          // 1.创建视频播放 房间号
+          this.aliWebrtc = new AliRtcEngine();
+          this.addevent()
+        } else {
+          this.begin = false;
+          this.end = false;
+          message(this, "error", response.msg);
+        }
+      });
+    },
+    // 开始直播
+    startPlay () {
+      clearInterval(this.again)
+      this.begin = false
+      live.getPlayAuthInfo(this.aliPlayer).then(res => {
+        if (res.status == 0) {
+          this.authInfo = res.data.data
+          this.creatAliplayer()
+        } else {
+          message(this, "error", res.msg);
+        }
+      });
+    },
+    // 2. 找到播放器预览
+    creatAliplayer () {
+      //   console.log("准备创建推流播放器");
+      this.aliWebrtc.startPreview(this.$refs.pushVideo).then((obj) => {
+        // console.log("创建推流播放器成功");
+        // 3. 加入房间
+        this.aliWebrtc.joinChannel(this.authInfo, this.userName).then((obj) => {
+          //   console.log("推流播放器---加入房间");
+          // 入会成功
+          this.aliWebrtc.muteLocalMic(false)
+          this.aliWebrtc.muteLocalCamera(false)
+          this.publishLocalStreams()
+        }).catch((error) => {
+          //   console.log(error, '入会失败，这里console下error内容，可以看到失败原因');
+          // 入会失败，这里console下error内容，可以看到失败原因
+          message(this, "error", error.message);
+          this.stopPlay()
+          this.begin = true
+        })
+      }).catch((error) => {
+        // 预览失败
+        message(this, "error", error.message);
+        this.stopPlay()
+        this.begin = true
+      });
+    },
+    // 4. 发布本地流
+    publishLocalStreams () {
+      this.aliWebrtc.publish().then((res) => {
+        // console.log(res, '-----发布本地流成功-----');
+        if (this.begin) {
+          this.begin = false
+        }
+      }, (error) => {
+        message(this, "error", error.message);
+        this.stopPlay()
+        this.begin = true
+      });
+    },
+    // 事件监听
+    addevent () {
+      // 远程连接正在建立中时触发
+      this.aliWebrtc.on('OnConnecting', (data) => {
+        // console.log(data.displayName + " 正在建立连接中...");
+      });
+      // 完成连接建立时会触发
+      this.aliWebrtc.on('OnConnected', (data) => {
+        // console.log(data.displayName + " 连接已经建立");
+      });
+      this.aliWebrtc.on('onPublisher', (publisher) => {
+        this.hvuex.publisherList.push(publisher);
+        this.receivePublish(publisher);
+        //远程发布者ID
+        // console.log(publisher, '完成连接建立时会触发');
+      });
+      //订阅remote流成功后，显示remote流
+      this.aliWebrtc.on('onMediaStream', (subscriber, stream) => {
+        // console.log("订阅remote流成功后，显示remote流");
+
+        if (subscriber.publishId != subscriber.subscribeId) {
+          //   console.log("进入视频判断");
+
+          let publisher = this.hvuex.publisherList.filter(item => {
+            return item.publisherId === subscriber.publishId;
+          });
+          publisher.length > 0 ? publisher[0].subscribeId = subscriber.subscribeId : '';
+          let video = this.getDisplayRemoteVideo(subscriber.publishId, subscriber.subscribeId, subscriber
+            .displayName);
+          //   console.log("插入视频之前");
+          this.aliWebrtc.setDisplayRemoteVideo(subscriber, video, stream)
+          //   console.log("插入视频之后");
+        }
+        if (this.begin) {
+          this.begin = false
+        }
+      });
+      //   当频道里的其他人取消发布本地流时时触发
+      this.aliWebrtc.on('onUnPublisher', (publisher) => {
+        this.stopPlay()
+        this.reLink()
+        // this.$alert("您当前的网络状况太差，导致视频中断，请点击继续直播重新建立连接。", "温馨提示", {
+        //   confirmButtonText: "继续直播",
+        //   callback: action => {
+        //     this.startPlay()
+        //   }
+        // });
+      });
+      //   当其他用户离开频道时触发
+      this.aliWebrtc.on('onLeave', (data) => {
+        message(this, "info", "对方离开了频道");
+      });
+      //  当有错误发生时触发
+      this.aliWebrtc.on('onError', (error) => {
+        console.log(error, 'error-error-error');
+
+        let msg = error && error.message ? error.message : error;
+        if (msg == 'ICE connection disconnected,please check network or try to stop publish, then publish again') {
+          return false
+        }
+        if (msg && msg.indexOf('no session') > 0) {
+          error = "请重新登录：" + msg;
+        }
+        message(this, "error", "错误：" + msg);
+        this.stopPlay()
+        this.begin = true
+      });
+    },
+    reLink () {
+      console.log("频道里的其他人取消发布本地流-----将会重新发布本地流");
+      this.again = setInterval(() => {
+        if (this.againLinkNum <= 0) {
+          this.againLinkNum = 5
+          clearInterval(this.again)
+          this.startPlay()
+          this.showTips = false
+        } else {
+          this.againLinkNum--
+          this.showTips = true
+        }
+      }, 1000)
+    },
+    receivePublish (publisher) {
+      var publisherId = publisher.publisherId,
+        displayName = publisher.displayName;
+      //5.订阅remote流
+      this.aliWebrtc.subscribe(publisherId).then((subscribeCallId) => {
+        this.begin = false
+
+      }, (error) => {
+        message(this, "error", error.message);
+        this.stopPlay()
+        this.begin = true
+      });
+    },
+    // 获取显示远程视频
+    getDisplayRemoteVideo (publisherId, subscribeCallId, displayName) {
+      //   this.$refs.playInner.innerHTML = ''
+      //   let div = document.createElement('div')
+      //   div.innerHTML = '<video class="pullVideo" autoplay ref="pullVideo"></video>'
+      //   this.$refs.playInner.appendChild(div)
+      //   return this.$refs.pullVideo;
+      $('.playInner').html('')
+      var id = subscribeCallId + '_' + publisherId;
+      var videoWrapper = $('#' + id);
+      if (videoWrapper.length == 0) {
+        videoWrapper = $('<div class="pullVideo" id=' + id +
+          ' style="width:100%;height:100%;"> <video autoplay="" style="width:100%;height:100%;"></video><div class="display-name"></div></div>');
+        $('.playInner').append(videoWrapper);
+      }
+      return videoWrapper.find('video')[0];
+    },
     // 改变屏幕宽度重置播放器大小
     resize () {
       if (document.body.clientHeight) {
@@ -140,6 +291,26 @@ export default {
         });
       }
     },
+    stopPlay () {
+      if (this.aliWebrtc) {
+        // 离开房间，服务端会自动断流
+        this.aliWebrtc.unPublish()
+        this.aliWebrtc.leaveChannel()
+        this.aliWebrtc.dispose()
+        this.aliWebrtc.muteLocalMic(true)
+        this.aliWebrtc.muteLocalCamera(true)
+        this.aliWebrtc.stopPreview()
+      }
+      // 直播已经结束
+      if (parseInt(this.time.end_time) < this.time.service_time) {
+        this.isOver = true;
+      }
+      if (parseInt(this.time.end_time) > this.time.service_time && parseInt(this.time.start_time) < this.time.service_time) {
+        this.begin = true
+      }
+      clearInterval(this.again)
+    },
+    // 关闭即将结束
     closeNearend () {
       this.nearEnd = false;
     },
@@ -153,24 +324,9 @@ export default {
       this.setGid(this.gidForm);
       this.$router.push("/profile");
     },
+    // 切换显示隐藏我自己的视频
     handleClick () {
       this.isShow = !this.isShow;
-    },
-    // 获取数据  播放地址  详情
-    teacherBespokeInfo () {
-      live.teacherBespokeInfo(this.teacherLiveInfo).then(response => {
-        if (response.status == 0) {
-          this.url = response.data;
-          this.time = response.data.teacherBespokeInfo;
-          this.questionList = response.data.teacherBespokeInfo.ask_question;
-          this.justTime();
-        } else {
-          this.begin = false;
-          this.end = false;
-          message(this, "error", response.msg);
-        }
-        // this.$bus.$emit("headerFooterHide");
-      });
     },
     // 判断当前时间：开始前预备时间——或——直播已经开始
     justTime () {
@@ -183,6 +339,8 @@ export default {
         if (this.timer) {
           clearInterval(this.timer);
         }
+        this.begin = false
+        this.end = false
         this.countdown(1);
       } else {
         this.begin = true;
@@ -198,6 +356,10 @@ export default {
           clearInterval(this.timer);
         }
         this.countdown(2);
+      }
+      //   已经结束
+      if (parseInt(this.time.end_time) < this.time.service_time) {
+        this.isOver = true;
       }
     },
     // 进入页面后 触发的倒计时
@@ -221,7 +383,7 @@ export default {
           }
           //   直播结束
           if (this.showTime == 2) {
-            this.stop_play();
+            this.stopPlay();
             this.begin = false;
             this.end = false;
             this.isOver = true;
@@ -230,102 +392,6 @@ export default {
         }
       }, 1000);
     },
-    //开始直播
-    start_play () {
-      if (swfobject) {
-        swfobject.getObjectById("tblive").Start(this.url.pushUrl);
-        //   创建拉流播放器
-        this.creatPlayer(this.url);
-      } else {
-        // 调用之前还没创建的话就再创建一下
-        this.newPlayer();
-      }
-    },
-    //结束直播
-    stop_play () {
-      swfobject.getObjectById("tblive").Stop();
-      if (this.pullPlay) {
-        this.pullPlay.pause();
-        this.pullPlay.dispose();
-        this.$refs.mediaPlayer.innerHTML = "";
-        this.$refs.playInner.appendChild(this.node);
-      }
-    },
-    // 创建播放器并传入参数
-    newPlayer () {
-      swfobject.embedSWF(
-        "//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf",
-        "tblive",
-        580,
-        430,
-        "9.0",
-        "//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf?",
-        {},
-        {
-          quality: "high",
-          allowFullScreen: "true",
-          wmode: "transparent",
-          menu: "true",
-          allowScriptAccess: "always"
-        }
-      );
-      //   this.objLength = document.getElementById("tblive").children.length;
-      //   if (this.objLength == 0) {
-      //     this.$refs.embedDiv.style.zIndex = 10;
-      //   } else {
-      //     this.$refs.embedDiv.style.zIndex = 1;
-      //   }
-      //   推流播放器样式改写
-      //   document.getElementsByTagName("object")[0].style.background = "#626262"
-    },
-    // 刚进入页面的时候加载完flash播放器 轮询检测播放器是否创建成功
-    load () {
-      this.loadtime = setInterval(() => {
-        if (document.getElementById("tblive")) {
-          this.objLength = document.getElementById("tblive").children.length;
-          if (this.objLength > 0) {
-            if (!!window.ActiveXObject || "ActiveXObject" in window) {
-              this.showEmbedDiv = false;
-            } else {
-              this.$refs.embedDiv.style.zIndex = 1;
-            }
-            clearInterval(this.loadtime);
-          }
-        }
-      }, 1000);
-    },
-    creatPlayer (url) {
-      this.pullaliPlayer.source = url.pullUrl;
-      // 不存在 直接创建播放器
-      this.pullPlay = new Aliplayer(this.pullaliPlayer);
-      this.pullPlay.on("ready", this.readyPlay);
-      this.pullPlay.on("play", this.playerPlay);
-      this.pullPlay.on("ended", this.playerEnded);
-      this.pullPlay.on("error", this.playerError);
-      document.getElementsByClassName("prism-ErrorMessage")[0].style.display =
-        "none";
-    },
-    // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
-    playerLoad () {
-      if (document.getElementsByClassName("prism-hide")[0]) {
-        document.getElementsByClassName("prism-hide")[0].className =
-          "prism-loading";
-      }
-    },
-    // 视频准备好之后执行
-    readyPlay () {
-      //   console.log("ready");
-    },
-    // 播放开始--启动计时器
-    playerPlay () {
-      //   console.log("playerPlay");
-    },
-    playerEnded () {
-      //   console.log("playerEnded");
-    },
-    playerError (error) {
-      //   console.log(error, 'error');
-    }
   },
   mounted () {
     if (!persistStore.get("token")) {
@@ -334,35 +400,38 @@ export default {
       this.$bus.$emit("headerFooterShow");
       return false;
     }
-    this.node = this.$refs.mediaPlayer;
     this.teacherLiveInfo.appointId = matchSplits("id");
     this.teacherLiveInfo.type = matchSplits("type");
     this.resize();
     window.addEventListener("resize", this.resize);
-
+    window.onbeforeunload = function (e) {
+      //   console.log("window.onbeforeunload,window.onbeforeunload,window.onbeforeunload");
+      //   this.stopPlay();
+    };
     this.teacherBespokeInfo();
-    if (this.loadtime) {
-      clearInterval(this.loadtime);
-    }
     if (this.timer) {
       clearInterval(this.timer);
     }
-    //   创建推流播放器
-    this.newPlayer();
-    this.load();
+    this.$bus.$on("stopPlay", () => {
+      this.stopPlay();
+    });
+
   },
   //  销毁之前展示头部 底部
   destroyed () {
     this.$bus.$emit("headerFooterShow");
+    this.stopPlay();
   },
   //   进入页面的的时候
   beforeRouteEnter (to, from, next) {
     next(vm => {
       vm.$bus.$emit("headerFooterHide");
+      vm.stopPlay();
     });
   },
   beforeRouteLeave (to, from, next) {
     // this.$bus.$emit("headerFooterShow");
+    this.stopPlay();
     next();
   }
 };

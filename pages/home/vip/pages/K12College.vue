@@ -15,7 +15,7 @@
           K12，即kindergarten through twelfth grade的简写，是国际上对国家基础教育的统称。“十八大”以来，我国陆续在K12教育领域进行了核心素养评价改革、新高考改革、中小学生减负行动等一系列改革举措，旨在突破教育改革“深水区”，推进教育内涵式发展，真正实现素质教育，以人为本、因材施教，促进学生的全面发展。
         </p>
         <p class="pCss">
-          1911学堂K12学院，紧跟国家K12教育领域的改革方向，积极响应国家素质教育发展要求，融汇K12教育的国际经验，有针对性的研发具有一系列特色项目，旨在通过“线上+线下”混合式教学模式、提供多样化的课程体系，使K12学生感受高尚文化氛围，全面增强实践素养，提升适应社会能力，形成正确的世界观、人生观和价值观，实现学生全面提升综合素质与能力。
+          1911学堂K12学院，紧跟国家K12教育领域的改革方向，积极响应国家素质教育发展要求，融汇K12教育的国际经验，有针对性地研发系列特色项目，旨在通过“线上+线下”混合式教学模式、提供多样化的课程体系，使K12学生感受高尚文化氛围，全面增强实践素养，提升适应社会能力，形成正确的世界观、人生观和价值观，实现学生全面提升综合素质与能力。
         </p>
 
       </div>
@@ -41,11 +41,7 @@
         </div>
         <!-- <p class="teacherText">本学院授课师资来自以下及其他相关单位</p> -->
         <div class="school">
-          <img src="https://static-image.1911edu.com/college_QH.png" alt="">
-          <img src="https://static-image.1911edu.com/college_BD.png" alt="">
-          <img src="https://static-image.1911edu.com/college_JYKY.png" alt="">
-          <img src="https://static-image.1911edu.com/college_BSD.png" alt="">
-          <img src="https://static-image.1911edu.com/college_QHFZ.png" alt="">
+          <img v-for="(li,index) in collegeList" :key="index" :src="li" alt="">
         </div>
         <div class="target k12Width">
           <div class="k12-title">
@@ -110,6 +106,13 @@ export default {
         "中国传统文化素养",
         "法律素养与社会常识",
         "大语文与核心素养"
+      ],
+      collegeList: [
+        "https://static-image.1911edu.com/academy_QH.png",
+        "https://static-image.1911edu.com/academy_BD.png",
+        "https://static-image.1911edu.com/academy_KY.png",
+        "https://static-image.1911edu.com/academy_BSD.png",
+        "https://static-image.1911edu.com/college_QHFZ.png"
       ]
     };
   }

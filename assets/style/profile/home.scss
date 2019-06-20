@@ -1,528 +1,654 @@
 .bigTab {
-    width: 1140px;
-    &>div>div.el-tabs__content {
-        width: 926px;
-        padding: 15px;
-        margin-top: -15px;
-        box-shadow: none;
-        .changeNav {
-            position: relative;
-            .el-select {
-                position: absolute;
-                right: 0;
-                top: 9px;
-                z-index: 5;
-                .el-input__inner {
-                    border: none;
-                    padding: 0;
-                    text-align: center;
-                }
-            }
+  width: 1140px;
+
+  &>div>div.el-tabs__content {
+    width: 926px;
+    padding: 15px;
+    margin-top: -15px;
+    box-shadow: none;
+
+    .changeNav {
+      position: relative;
+
+      .el-select {
+        position: absolute;
+        right: 0;
+        top: 9px;
+        z-index: 5;
+
+        .el-input__inner {
+          border: none;
+          padding: 0;
+          text-align: center;
         }
-        .my-ticket {
-            padding-bottom: 30px;
-        }
+      }
     }
-    &.profile .my-course.my-order {
-        overflow: initial;
+
+    .my-ticket {
+      padding-bottom: 30px;
     }
-    &.profile .my-course#pane-tab-fourth .el-tabs__content {
-        overflow: initial;
-    }
-    &.profile .my-course#pane-tab-eighth .el-tabs__content {
-        // position: static !important;
-        // 兼容ie11 发票弹框显示一部分
-        overflow: visible !important;
-    }
-    &.profile .my-course .el-tabs__header {
-        border-top-left-radius: 6px;
-        border-top-right-radius: 6px;
-    }
-    #pane-tab-fourth .el-tabs__header,
-    #pane-tab-eighth .el-tabs__header {
-        box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
-    }
-    #pane-tab-sixth {
-        box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
-        border-radius: 6px;
-        overflow: initial;
-        .el-tabs__content {
-            overflow-y: auto;
-        }
-    }
+  }
+
+  &.profile .my-course.my-order {
+    overflow: initial;
+  }
+
+  &.profile .my-course#pane-tab-fourth .el-tabs__content {
+    overflow: initial;
+  }
+
+  &.profile .my-course#pane-tab-eighth .el-tabs__content {
+    // position: static !important;
+    // 兼容ie11 发票弹框显示一部分
+    overflow: visible !important;
+  }
+
+  &.profile .my-course .el-tabs__header {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+
+  #pane-tab-fourth .el-tabs__header,
+  #pane-tab-eighth .el-tabs__header {
+    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+  }
+
+  #pane-tab-sixth {
+    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+    border-radius: 6px;
+    overflow: initial;
+
     .el-tabs__content {
-        .el-tabs__item {
-            span {
-                height: 57px;
+      overflow-y: auto;
+    }
+  }
+
+  .el-tabs__content {
+    .el-tabs__item {
+      .payCut {
+        height: 57px;
+        position: relative;
+
+        i {
+          position: absolute;
+          top: 5px;
+          right: -16px;
+          width: 18px;
+          height: 18px;
+          line-height: 18px;
+          text-align: center;
+          border-radius: 50%;
+          font-size: 12px;
+          color: #fff;
+          display: inline-block;
+          background-color: #ff5f5f;
+        }
+      }
+    }
+  }
+
+  //   订单 订单回收站
+  .orderInfo {
+    position: relative;
+
+    .orderDelete {
+      position: absolute;
+      right: 30px;
+      top: 0;
+      z-index: 3;
+      line-height: 57px;
+      font-size: 16px;
+      color: #222;
+      cursor: pointer;
+
+
+      i {
+        width: 20px;
+        height: 20px;
+        color: #000;
+        vertical-align: baseline;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .orderListDetail {
+    //订单列表详情
+    width: 100%;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 6px;
+    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+
+    .table {
+      .tableHeader {
+        height: 55px;
+        line-height: 55px;
+        background-color: #fff;
+        // color: #222;
+        border-bottom: 1px solid #e8d6f7;
+
+        span {
+          vertical-align: middle;
+        }
+
+        .goBack {
+          width: 20px;
+          font-size: 18px;
+          font-weight: 800;
+          margin-left: 30px;
+          color: #773084;
+          cursor: pointer;
+        }
+
+        .detailText {
+          cursor: pointer;
+        }
+      }
+
+      .tableBody {
+        padding: 20px 30px 40px 30px;
+
+        .bodyItem {
+          border: 1px solid #e8d6f7;
+          margin-bottom: 20px;
+
+          .top {
+            height: 60px;
+            line-height: 60px;
+            background-color: #ebe7ed;
+            color: #773084;
+            font-size: 16px;
+            padding-left: 30px;
+          }
+
+          .bottom {
+            background-color: #fafafa;
+            padding: 0 50px 0 30px;
+
+            .info {
+              height: 50px;
+              line-height: 50px;
+              font-size: 14px;
+
+              // color: #222;
+              .info-fr,
+              .info-fl {
+                width: 50%;
+                float: left;
+              }
+            }
+          }
+        }
+
+        .goods {
+          .top {
+            padding-right: 50px;
+
+            .lf {
+              width: 80%;
+            }
+
+            .lm {
+              width: 10%;
+              text-align: center;
+            }
+
+            .lr {
+              width: 10%;
+              text-align: right;
+            }
+          }
+
+          .customerProject {
+            padding-right: 0;
+
+            .topLeft {
+              float: left;
+              width: 140px;
+            }
+
+            .topRight {
+              float: right;
+              width: 664px;
+              overflow: hidden;
+              text-align: center;
+
+              span {
+                width: 16%;
+                text-align: center;
+
+                &:last-child {
+                  width: 144px;
+                }
+
+                &.totalPrice {
+                  width: 20%;
+                }
+              }
+            }
+          }
+
+          .bottom {
+            padding: 0;
+
+            .bottom-item {
+              border-bottom: 1px solid #e8d6f7;
+              padding: 0 50px 0 30px;
+            }
+
+            .courseInfo {
+              float: left;
+              width: 80%;
+              margin-top: 20px;
+
+              img {
+                width: 160px;
+                height: 100px;
+                margin-right: 20px;
+              }
+
+              .bottomImg {
+                width: 160px;
                 position: relative;
-                i {
-                    position: absolute;
-                    top: 5px;
-                    right: -16px;
-                    width: 18px;
-                    height: 18px;
-                    line-height: 18px;
-                    text-align: center;
-                    border-radius: 50%;
-                    font-size: 12px;
-                    color: #fff;
-                    display: inline-block;
-                    background-color: #ff5f5f;
+                float: left;
+                margin-right: 20px;
+
+                .project-img {
+                  width: 70px;
+                  height: 30px;
+                  position: absolute;
+                  top: 0;
+                  left: 0;
                 }
+              }
+
+              .fl {
+                float: left;
+                width: 420px;
+              }
+
+              h4 {
+                // width: 440px;
+                height: 42px;
+                font-size: 16px;
+                color: #332a51;
+                overflow: hidden;
+                padding: 9px 0 0;
+                margin-bottom: 15px;
+              }
+
+              h6 {
+                color: #6d687f;
+                font-size: 12px;
+                padding-bottom: 9px;
+              }
+
+              p {
+                font-size: 14px;
+                color: #6d687f;
+              }
             }
+
+            .projectInfo {
+              width: 160px;
+              float: left;
+              margin-top: 20px;
+
+              img {
+                width: 160px;
+                height: 100px;
+                // margin-right: 20px;
+              }
+
+              .bottomImg {
+                position: relative;
+
+                .project-img {
+                  width: 70px;
+                  height: 30px;
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                }
+              }
+
+              h4 {
+                width: 160px;
+                height: 63px;
+                font-size: 16px;
+                color: #332a51;
+                overflow: hidden;
+                padding: 9px 0 0;
+                margin-bottom: 15px;
+              }
+
+              h6 {
+                color: #6d687f;
+                font-size: 12px;
+                padding-bottom: 9px;
+              }
+
+              p {
+                font-size: 14px;
+                color: #6d687f;
+              }
+            }
+
+            .infoRight {
+              float: left;
+              width: 664px;
+            }
+
+            .coursePrice {
+              float: left;
+              width: 10%;
+              height: 140px;
+              line-height: 140px;
+              text-align: center;
+              color: #ff5f5f;
+              font-size: 16px;
+            }
+
+            .courseOperation {
+              float: left;
+              width: 10%;
+              height: 140px;
+              line-height: 140px;
+              text-align: right;
+              font-size: 16px;
+              color: #332a51;
+
+              i {
+                font-size: 12px;
+              }
+            }
+
+            .customerProjectDetail {
+              padding-right: 0;
+              padding-left: 10px;
+
+              .item {
+                float: left;
+                width: 16%;
+                text-align: center;
+                margin-top: 20px;
+                line-height: 100px;
+                font-size: 14px;
+                color: #332a51;
+
+                &:last-child {
+                  width: 144px;
+                }
+
+                &.price {
+                  width: 20%;
+                  color: #ff5f5f;
+                  font-size: 16px;
+                }
+              }
+            }
+          }
+
+          .tableFooter {
+            background-color: #fafafa;
+            padding: 20px 50px 20px 0;
+            text-align: right;
+
+            p {
+              font-size: 14px;
+              text-align: right;
+              line-height: 30px;
+            }
+
+            h4 {
+              font-size: 20px;
+              color: #ff5f5f;
+              margin-top: 20px;
+            }
+
+            .table_lf {
+              width: 100px;
+            }
+
+            .table_lr {
+              width: 100px;
+            }
+          }
         }
+      }
     }
-    .orderListDetail {
-        //订单列表详情
-        width: 100%;
-        background: rgba(255, 255, 255, 1);
-        border-radius: 6px;
-        box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
-        .table {
-            .tableHeader {
-                height: 55px;
-                line-height: 55px;
-                background-color: #fff;
-                // color: #222;
-                border-bottom: 1px solid #e8d6f7;
-                span {
-                    vertical-align: middle;
-                }
-                .goBack {
-                    width: 20px;
-                    font-size: 18px;
-                    font-weight: 800;
-                    margin-left: 30px;
-                    color: #773084;
-                    cursor: pointer;
-                }
-                .detailText {
-                    cursor: pointer;
-                }
-            }
-            .tableBody {
-                padding: 20px 30px 40px 30px;
-                .bodyItem {
-                    border: 1px solid #e8d6f7;
-                    margin-bottom: 20px;
-                    .top {
-                        height: 60px;
-                        line-height: 60px;
-                        background-color: #ebe7ed;
-                        color: #773084;
-                        font-size: 16px;
-                        padding-left: 30px;
-                    }
-                    .bottom {
-                        background-color: #fafafa;
-                        padding: 0 50px 0 30px;
-                        .info {
-                            height: 50px;
-                            line-height: 50px;
-                            font-size: 14px;
-                            // color: #222;
-                            .info-fr,
-                            .info-fl {
-                                width: 50%;
-                                float: left;
-                            }
-                        }
-                    }
-                }
-                .goods {
-                    .top {
-                        padding-right: 50px;
-                        .lf {
-                            width: 80%;
-                        }
-                        .lm {
-                            width: 10%;
-                            text-align: center;
-                        }
-                        .lr {
-                            width: 10%;
-                            text-align: right;
-                        }
-                    }
-                    .customerProject {
-                        padding-right: 0;
-                        .topLeft {
-                            float: left;
-                            width: 140px;
-                        }
-                        .topRight {
-                            float: right;
-                            width: 664px;
-                            overflow: hidden;
-                            text-align: center;
-                            span {
-                                width: 16%;
-                                text-align: center;
-                                &:last-child {
-                                    width: 144px;
-                                }
-                                &.totalPrice {
-                                    width: 20%;
-                                }
-                            }
-                        }
-                    }
-                    .bottom {
-                        padding: 0;
-                        .bottom-item {
-                            border-bottom: 1px solid #e8d6f7;
-                            padding: 0 50px 0 30px;
-                        }
-                        .courseInfo {
-                            float: left;
-                            width: 80%;
-                            margin-top: 20px;
-                            img {
-                                width: 160px;
-                                height: 100px;
-                                margin-right: 20px;
-                            }
-                            .bottomImg {
-                                width: 160px;
-                                position: relative;
-                                float: left;
-                                margin-right: 20px;
-                                .project-img {
-                                    width: 70px;
-                                    height: 30px;
-                                    position: absolute;
-                                    top: 0;
-                                    left: 0;
-                                }
-                            }
-                            .fl {
-                                float: left;
-                                width: 420px;
-                            }
-                            h4 {
-                                // width: 440px;
-                                height: 42px;
-                                font-size: 16px;
-                                color: #332a51;
-                                overflow: hidden;
-                                padding: 9px 0 0;
-                                margin-bottom: 15px;
-                            }
-                            h6 {
-                                color: #6d687f;
-                                font-size: 12px;
-                                padding-bottom: 9px;
-                            }
-                            p {
-                                font-size: 14px;
-                                color: #6d687f;
-                            }
-                        }
-                        .projectInfo {
-                            width: 160px;
-                            float: left;
-                            margin-top: 20px;
-                            img {
-                                width: 160px;
-                                height: 100px;
-                                // margin-right: 20px;
-                            }
-                            .bottomImg {
-                                position: relative;
-                                .project-img {
-                                    width: 70px;
-                                    height: 30px;
-                                    position: absolute;
-                                    top: 0;
-                                    left: 0;
-                                }
-                            }
-                            h4 {
-                                width: 160px;
-                                height: 63px;
-                                font-size: 16px;
-                                color: #332a51;
-                                overflow: hidden;
-                                padding: 9px 0 0;
-                                margin-bottom: 15px;
-                            }
-                            h6 {
-                                color: #6d687f;
-                                font-size: 12px;
-                                padding-bottom: 9px;
-                            }
-                            p {
-                                font-size: 14px;
-                                color: #6d687f;
-                            }
-                        }
-                        .infoRight {
-                            float: left;
-                            width: 664px;
-                        }
-                        .coursePrice {
-                            float: left;
-                            width: 10%;
-                            height: 140px;
-                            line-height: 140px;
-                            text-align: center;
-                            color: #ff5f5f;
-                            font-size: 16px;
-                        }
-                        .courseOperation {
-                            float: left;
-                            width: 10%;
-                            height: 140px;
-                            line-height: 140px;
-                            text-align: right;
-                            font-size: 16px;
-                            color: #332a51;
-                            i {
-                                font-size: 12px;
-                            }
-                        }
-                        .customerProjectDetail {
-                            padding-right: 0;
-                            padding-left: 10px;
-                            .item {
-                                float: left;
-                                width: 16%;
-                                text-align: center;
-                                margin-top: 20px;
-                                line-height: 100px;
-                                font-size: 14px;
-                                color: #332a51;
-                                &:last-child {
-                                    width: 144px;
-                                }
-                                &.price {
-                                    width: 20%;
-                                    color: #ff5f5f;
-                                    font-size: 16px;
-                                }
-                            }
-                        }
-                    }
-                    .tableFooter {
-                        background-color: #fafafa;
-                        padding: 20px 50px 20px 0;
-                        text-align: right;
-                        p {
-                            font-size: 14px;
-                            text-align: right;
-                            line-height: 30px;
-                        }
-                        h4 {
-                            font-size: 20px;
-                            color: #ff5f5f;
-                            margin-top: 20px;
-                        }
-                        .table_lf {
-                            width: 100px;
-                        }
-                        .table_lr {
-                            width: 100px;
-                        }
-                    }
-                }
-            }
-        }
-    }
+  }
 }
 
 .profile {
-    .content.noOrder {
-        box-shadow: 0px 3px 9px rgba(198, 194, 210, 0.36);
-        width: 896px;
+  .content .noCourse {
+    width: 100%;
+    height: 600px;
+    background-color: #fff;
+    text-align: center;
+
+    &.fillTop {
+      margin-top: -50px;
     }
-    .content .noCourse {
-        width: 100%;
-        height: 600px;
-        background-color: #fff;
-        text-align: center;
-        &.fillTop {
-            margin-top: -50px;
-        }
-        img {
-            width: 260px;
-            // height: 274px;
-            margin-top: 100px;
-        }
-        h4 {
-            height: 70px;
-            line-height: 70px;
-            text-align: center;
-            color: #999;
-            font-size: 18px;
-        }
-        p {
-            width: 140px;
-            height: 36px;
-            line-height: 36px;
-            margin: 0 auto;
-            border-radius: 18px;
-            background: #773084;
-            color: #fff;
-            transition: all 300ms;
-            font-size: 14px;
-            &:hover {
-                background-color: #5f068d;
-            }
-        }
-        .link {
-            cursor: pointer;
-            height: 52px;
-            border-bottom: 2px solid;
-            &:hover {
-                color: #773084;
-            }
-        }
+
+    img {
+      width: 260px;
+      // height: 274px;
+      margin-top: 100px;
     }
-    .tabList {
-        i {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin-bottom: -4px;
-            &.icon-home {
-                background: url('~assets/images/icon_index1.png') no-repeat center;
-                background-size: contain;
-            }
-            &.icon-course {
-                background: url('~assets/images/icon_course1.png') no-repeat center;
-                background-size: contain;
-            }
-            &.icon-project {
-                background: url('~assets/images/icon_project1.png') no-repeat center;
-                background-size: contain;
-            }
-            &.icon-order {
-                background: url('~assets/images/icon_order1.png') no-repeat center;
-                background-size: contain;
-            }
-            &.icon-message {
-                background: url('~assets/images/icon_message1.png') no-repeat center;
-                background-size: contain;
-            }
-            &.icon-set {
-                background: url('~assets/images/icon_set1.png') no-repeat center;
-                background-size: contain;
-            }
-            &.icon-code {
-                background: url('~assets/images/icon_code1.png') no-repeat center;
-                background-size: contain;
-            }
-            &.icon-ticket {
-                background: url('~assets/images/icon_ticket1.png') no-repeat center;
-                background-size: contain;
-            }
-            &.icon-cusProject {
-                background: url('~assets/images/icon_cusProject1.png') no-repeat center;
-                background-size: contain;
-            }
-            &.icon-examine {
-                background: url('~assets/images/icon_examine1.png') no-repeat center;
-                background-size: contain;
-            }
-            &.icon-college {
-                background: url('~assets/images/icon_college1.png') no-repeat center;
-                background-size: contain;
-            }
-            &.icon-teacher {
-                background: url('~assets/images/icon_teacher1.png') no-repeat center;
-                background-size: contain;
-            }
-            &.icon-student {
-                background: url('~assets/images/icon_student1.png') no-repeat center;
-                background-size: contain;
-            }
-        }
+
+    h4 {
+      height: 70px;
+      line-height: 70px;
+      text-align: center;
+      color: #999;
+      font-size: 18px;
     }
-    .el-tabs__item.is-active i,
-    .el-tabs__item:hover i {
-        &.icon-home {
-            background: url('~assets/images/icon_index2.png') no-repeat center;
-            background-size: contain;
-        }
-        &.icon-course {
-            background: url('~assets/images/icon_course2.png') no-repeat center;
-            background-size: contain;
-        }
-        &.icon-project {
-            background: url('~assets/images/icon_project2.png') no-repeat center;
-            background-size: contain;
-        }
-        &.icon-order {
-            background: url('~assets/images/icon_order2.png') no-repeat center;
-            background-size: contain;
-        }
-        &.icon-message {
-            background: url('~assets/images/icon_message2.png') no-repeat center;
-            background-size: contain;
-        }
-        &.icon-set {
-            background: url('~assets/images/icon_set2.png') no-repeat center;
-            background-size: contain;
-        }
-        &.icon-code {
-            background: url('~assets/images/icon_code2.png') no-repeat center;
-            background-size: contain;
-        }
-        &.icon-ticket {
-            background: url('~assets/images/icon_ticket2.png') no-repeat center;
-            background-size: contain;
-        }
-        &.icon-cusProject {
-            background: url('~assets/images/icon_cusProject2.png') no-repeat center;
-            background-size: contain;
-        }
-        &.icon-examine {
-            background: url('~assets/images/icon_examine2.png') no-repeat center;
-            background-size: contain;
-        }
-        &.icon-college {
-            background: url('~assets/images/icon_college2.png') no-repeat center;
-            background-size: contain;
-        }
-        &.icon-teacher {
-            background: url('~assets/images/icon_teacher2.png') no-repeat center;
-            background-size: contain;
-        }
-        &.icon-student {
-            background: url('~assets/images/icon_student2.png') no-repeat center;
-            background-size: contain;
-        }
+
+    p {
+      width: 140px;
+      height: 36px;
+      line-height: 36px;
+      margin: 0 auto;
+      border-radius: 18px;
+      background: #773084;
+      color: #fff;
+      transition: all 300ms;
+      font-size: 14px;
+
+      &:hover {
+        background-color: #5f068d;
+      }
     }
-    .infoList {
-        position: relative;
-        i.infoAlert {
-            display: block;
-            position: absolute;
-            top: 10px;
-            left: 20px;
-            background-color: #ff5f5f;
-            color: #fff;
-            font-size: 12px;
-            overflow: hidden;
-            line-height: 20px;
-            min-height: 20px;
-            min-width: 20px;
-            vertical-align: middle;
-            text-align: center;
-            display: inline-block;
-            padding: 0px 3px;
-            border-radius: 0.75rem;
-        }
+
+    .link {
+      cursor: pointer;
+      height: 52px;
+      border-bottom: 2px solid;
+
+      &:hover {
+        color: #773084;
+      }
     }
+  }
+
+  .tabList {
+    i {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin-bottom: -2px;
+
+      &.icon-home {
+        background: url('~assets/images/icon_index1.png') no-repeat center;
+        background-size: contain;
+      }
+
+      &.icon-course {
+        background: url('~assets/images/icon_course1.png') no-repeat center;
+        background-size: contain;
+      }
+
+      &.icon-project {
+        background: url('~assets/images/icon_project1.png') no-repeat center;
+        background-size: contain;
+      }
+
+      &.icon-order {
+        background: url('~assets/images/icon_order1.png') no-repeat center;
+        background-size: contain;
+      }
+
+      &.icon-message {
+        background: url('~assets/images/icon_message1.png') no-repeat center;
+        background-size: contain;
+      }
+
+      &.icon-set {
+        background: url('~assets/images/icon_set1.png') no-repeat center;
+        background-size: contain;
+      }
+
+      &.icon-code {
+        background: url('~assets/images/icon_code1.png') no-repeat center;
+        background-size: contain;
+      }
+
+      &.icon-ticket {
+        background: url('~assets/images/icon_ticket1.png') no-repeat center;
+        background-size: contain;
+      }
+
+      &.icon-cusProject {
+        background: url('~assets/images/icon_cusProject1.png') no-repeat center;
+        background-size: contain;
+      }
+
+      &.icon-examine {
+        background: url('~assets/images/icon_examine1.png') no-repeat center;
+        background-size: contain;
+      }
+
+      &.icon-college {
+        background: url('~assets/images/icon_college1.png') no-repeat center;
+        background-size: contain;
+      }
+
+      &.icon-teacher {
+        background: url('~assets/images/icon_teacher1.png') no-repeat center;
+        background-size: contain;
+      }
+
+      &.icon-student {
+        background: url('~assets/images/icon_student1.png') no-repeat center;
+        background-size: contain;
+      }
+    }
+  }
+
+  .el-tabs__item.is-active:hover {
+    color: #fff !important;
+  }
+
+  .el-tabs__item.is-active i {
+
+    &.icon-home {
+      background: url('~assets/images/icon_index2.png') no-repeat center;
+      background-size: contain;
+    }
+
+    &.icon-course {
+      background: url('~assets/images/icon_course2.png') no-repeat center;
+      background-size: contain;
+    }
+
+    &.icon-project {
+      background: url('~assets/images/icon_project2.png') no-repeat center;
+      background-size: contain;
+    }
+
+    &.icon-order {
+      background: url('~assets/images/icon_order2.png') no-repeat center;
+      background-size: contain;
+    }
+
+    &.icon-message {
+      background: url('~assets/images/icon_message2.png') no-repeat center;
+      background-size: contain;
+    }
+
+    &.icon-set {
+      background: url('~assets/images/icon_set2.png') no-repeat center;
+      background-size: contain;
+    }
+
+    &.icon-code {
+      background: url('~assets/images/icon_code2.png') no-repeat center;
+      background-size: contain;
+    }
+
+    &.icon-ticket {
+      background: url('~assets/images/icon_ticket2.png') no-repeat center;
+      background-size: contain;
+    }
+
+    &.icon-cusProject {
+      background: url('~assets/images/icon_cusProject2.png') no-repeat center;
+      background-size: contain;
+    }
+
+    &.icon-examine {
+      background: url('~assets/images/icon_examine2.png') no-repeat center;
+      background-size: contain;
+    }
+
+    &.icon-college {
+      background: url('~assets/images/icon_college2.png') no-repeat center;
+      background-size: contain;
+    }
+
+    &.icon-teacher {
+      background: url('~assets/images/icon_teacher2.png') no-repeat center;
+      background-size: contain;
+    }
+
+    &.icon-student {
+      background: url('~assets/images/icon_student2.png') no-repeat center;
+      background-size: contain;
+    }
+  }
+
+  .infoList {
+    position: relative;
+
+    i.infoAlert {
+      display: block;
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      background-color: #ff5f5f;
+      color: #fff;
+      font-size: 12px;
+      overflow: hidden;
+      line-height: 20px;
+      min-height: 20px;
+      min-width: 20px;
+      vertical-align: middle;
+      text-align: center;
+      display: inline-block;
+      padding: 0px 3px;
+      border-radius: 0.75rem;
+    }
+  }
 }
 
 .profile .tabList i.redInfo {
-    display: block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: red;
-    position: absolute;
-    left: 27px;
-    top: 17px;
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: red;
+  position: absolute;
+  left: 27px;
+  top: 17px;
 }

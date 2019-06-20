@@ -1,0 +1,332 @@
+.delete {
+
+  box-shadow: 0px 0px 14px rgba(198, 194, 210, .36);
+
+  .topBar {
+    height: 57px;
+    line-height: 57px;
+    border-bottom: 1px solid #E8D6F7;
+    padding-left: 38px;
+
+    span {
+      font-size: 16px;
+      color: #8F4ACB;
+
+      &:first-child {
+        margin-right: 5px;
+        cursor: pointer;
+        color: #222;
+      }
+    }
+  }
+
+  .listBox {
+    padding: 0 30px 30px;
+
+    .bottomBar {
+      height: 60px;
+      line-height: 60px;
+      background-color: #EBE7ED;
+      text-align: right;
+      font-size: 16px;
+      margin: 20px 0;
+      padding: 0 30px;
+      color: #222;
+      position: relative;
+
+      span.fl {
+        font-size: 14px;
+
+        .el-checkbox-label:before {
+          margin-right: 20px;
+        }
+
+        .el-checkbox .el-checkbox__inner {
+          border-color: #773084;
+          width: 18px;
+          height: 18px;
+          border-radius: 4px;
+          background-color: transparent;
+        }
+
+        .el-checkbox .el-checkbox__input.is-checked .el-checkbox__inner {
+          border-color: #773084;
+          background-color: #773084;
+        }
+
+        .el-checkbox .el-checkbox__inner:after {
+          height: 9px;
+          left: 6px;
+          top: 2px;
+        }
+
+      }
+
+      .next {
+        color: #222;
+        cursor: pointer;
+
+        &:hover {
+          color: #5f068d;
+        }
+      }
+    }
+
+    .orderList {
+      width: 100%;
+      margin: 0 auto;
+      margin-top: 30px;
+      overflow: hidden;
+      border: 1px solid #e8d6f7;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      .topBar {
+        height: 60px;
+        line-height: 60px;
+        background-color: #ebe7ed;
+        padding: 0 30px;
+
+        .orderChecked {
+          text-align: center;
+          margin-right: 20px;
+
+          .checkbox {
+            display: none;
+          }
+
+          .checkbox-label {
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+            border: 1px solid #773084;
+            border-radius: 4px;
+            vertical-align: middle;
+            position: relative;
+          }
+
+          .checkbox-label:before {
+            content: '';
+            width: 3px;
+            height: 9px;
+            display: inline-block;
+            box-sizing: content-box;
+            border: 1px solid transparent;
+            background-color: transparent;
+            border-left: 0;
+            border-top: 0;
+            transform: rotate(45deg) scaleY(1);
+            position: absolute;
+            left: 6px;
+            top: 2px;
+            cursor: pointer;
+            transition: all 300ms;
+          }
+
+          .checkbox:checked+.checkbox-label {
+            background-color: #773084;
+          }
+
+          .checkbox:checked+.checkbox-label:before {
+            border-color: #FFF;
+          }
+        }
+
+        span.fl {
+          color: #332a51;
+          font-size: 16px;
+        }
+
+        span.fr {
+          color: #888;
+          font-size: 14px;
+        }
+      }
+
+      .list {
+        width: 100%;
+
+        .content {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #fff;
+
+          .course {
+            width: 600px;
+
+            .courseOne {
+              width: 600px;
+              height: 140px;
+              border-top: 1px solid #e8d6f7;
+              padding: 20px 0 20px 32px;
+
+              &:first-child {
+                border-top: none;
+              }
+
+              .courseImg {
+                position: relative;
+              }
+
+              .project-img {
+                width: 60px;
+                height: 28px;
+                position: absolute;
+                left: 0;
+                top: 0;
+              }
+
+              img {
+                width: 160px;
+                height: 100px;
+                margin-right: 20px;
+                cursor: pointer;
+              }
+
+              h4 {
+                width: 380px;
+                height: 54px;
+                color: #332a51;
+                font-size: 16px;
+                padding-top: 9px;
+                cursor: pointer;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+              }
+
+              h6 {
+                color: #6d687f;
+                font-size: 12px;
+                margin-bottom: 9px;
+              }
+
+              p {
+                color: #6d687f;
+                font-size: 14px;
+              }
+
+              .coursePrice {
+                display: inline-block;
+                width: 100px;
+                height: 140px;
+                text-align: center;
+                color: #ff5f5f;
+                font-size: 16px;
+                line-height: 78px;
+                margin-left: 158px;
+              }
+
+              .courseNumber {
+                display: inline-block;
+                width: 39px;
+                height: 140px;
+                text-align: center;
+                color: #332a51;
+                font-size: 16px;
+                line-height: 78px;
+                margin-left: 70px;
+              }
+            }
+
+            .more {
+              height: 60px;
+              line-height: 60px;
+              text-align: center;
+              color: #773084;
+              margin: 0 auto;
+              border-top: 1px solid #e8d6f7;
+              cursor: pointer;
+            }
+          }
+
+          .height {
+            height: auto;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+          }
+
+          .price {
+            width: 124px;
+            color: #ff5f5f;
+            border-left: 1px solid #e8d6f7;
+            border-right: 1px solid #e8d6f7;
+
+            .detail {
+              margin-top: 15px;
+              color: #773084;
+              cursor: pointer;
+            }
+          }
+
+          .status {
+            width: 110px;
+            color: #332a51;
+
+            p {
+              width: 110px;
+              text-align: center;
+
+              &.payDelete {
+                color: #6D687A;
+                cursor: pointer;
+              }
+
+              &.payClose {
+                color: #AAA;
+                margin: 6px 0 0;
+              }
+
+              span {
+                width: 90px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                border-radius: 15px;
+                margin-top: 10px;
+                font-size: 14px;
+                color: #fff;
+                cursor: pointer;
+                transition: all 300ms;
+
+                &.pay {
+                  background-color: #ee9014;
+
+                  &:hover {
+                    background-color: #ffae5f;
+                  }
+                }
+
+                &.buy {
+                  background-color: #773084;
+
+                  &:hover {
+                    background-color: #5f068d;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .empty {
+    width: 100%;
+    height: 600px;
+    background-color: #fff;
+    text-align: center;
+
+    img {
+      width: 260px;
+      margin-top: 100px;
+    }
+  }
+}

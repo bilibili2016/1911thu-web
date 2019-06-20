@@ -220,7 +220,6 @@
     position: absolute;
     top: 0;
     right: -1000px;
-    height: 54px;
     width: 205px;
     line-height: 54px;
     font-size: 14px;
@@ -230,6 +229,12 @@
     background-color: #fff;
     box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
     transition: opacity 300ms;
+
+    &.consult {
+      width: 305px;
+      line-height: 40px;
+      padding: 10px 0;
+    }
   }
 }
 

@@ -5,7 +5,7 @@
     <div class="container">
       <div class="main">
         <div class="intro">
-          <p>1911学堂携手清华大学体育部教授成立科研课题，聘任体育部教授担任专家组组长，专家组组长邀请30名左右体育领域专家组成1911学堂体育学院专家组，共同研发体育学院课程体系。</p>
+          <p>1911学堂与清华大学体育部成立科研课题，并聘请体育部教授担任专家组组长，专家组组长邀请30名左右体育领域专家组成1911学堂体育学院专家组，共同研发体育学院课程体系。</p>
           <p>国务院“46号文”开启了中国体育产业的黄金时代，预计到2020年，我国体育产业产值将达到3万亿，2025年将达到5万亿，然而体育产业从业人员却存在数百万级的缺口。种种现象表明，我国急需既懂体育、又懂经营管理的复合型人才。</p>
           <p>1911学堂体育学院，面向运动员、体育系统干部、体育产业经营管理人员三类人群，提供系统性的教育培训解决方案，旨在培养具有较高专业成绩、文化水平、社会适应能力及综合素质的人才；勤政廉政、奋发有为、善于推动体育事业科学发展的高素质党政人才；熟悉体育产业工作规律，具备市场运作、经营开发和产业管理能力的体育产业人才。</p>
         </div>
@@ -86,19 +86,14 @@
         <h2>师资来源</h2>
         <p class="teacherText">本学院授课师资来自以下及其他相关单位</p>
         <div class="school">
-          <img src="https://static-image.1911edu.com/college_QH.png" alt="">
-          <img src="https://static-image.1911edu.com/college_BD.png" alt="">
-          <img src="https://static-image.1911edu.com/college_CU.png" alt="">
-          <img src="https://static-image.1911edu.com/college_TY.png" alt="">
-          <img src="https://static-image.1911edu.com/college_NYU.png" alt="">
-
+          <img v-for="(li,index) in collegeList" :key="index" :src="li" alt="">
         </div>
         <h2>考核认证</h2>
         <div class="attestation">
           <div class="clearfix">
             <div class="left fl">
               <span class="circle"></span>
-              <span class="text">学员参加1911学堂体育学院在线学院或相关项目学习，考核通过者将获得1911学堂结业证书。</span>
+              <span class="text">学员参加1911学堂体育学院在线学院或相关项目学习，考核通过者将获得1911学堂认证证书。</span>
             </div>
             <div class="right fr">
               <img src="https://static-image.1911edu.com/cadreCollege_icon2.png" alt>
@@ -129,6 +124,13 @@ export default {
         "运动与健康",
         "运动员职业转型",
         "体育干部领导力提升"
+      ],
+      collegeList: [
+        "https://static-image.1911edu.com/academy_QH.png",
+        "https://static-image.1911edu.com/academy_BD.png",
+        "https://static-image.1911edu.com/academy_GLBY.png",
+        "https://static-image.1911edu.com/academy_STY.png",
+        "https://static-image.1911edu.com/academy_NYU.png",
       ]
     };
   }

@@ -66,11 +66,11 @@
             </div>
           </div>
           <div class="word">
-            <p class="word-desc1">期待为您创造更好的教育体验！</p>
+            <p class="word-desc1">期待为您创造更好的学习体验！</p>
             <p class="word-desc2">
               <i class="el-icon-phone-outline"></i>
-              您也可以拨打咨询电话：010-62701911</p>
-            <p class="word-desc3">如果您希望对1911学堂课程及培训项目了解更多，请填写以下信息，我们会在90分钟内与您联系，</p>
+              您可拨打咨询电话：010-62701911-628</p>
+            <p class="word-desc3">如您希望了解更多1911学堂课程及培训项目，请填写以下信息，我们将尽快与您联系。</p>
             <div>
               <el-form :model="company" :rules="rules" ref="ruleForm" class="demo-ruleForm">
                 <el-form-item label prop="companyname">
@@ -79,7 +79,7 @@
                 <el-form-item label prop="person">
                   <el-input v-model="company.person" placeholder="请输入联系人姓名"></el-input>
                 </el-form-item>
-                <el-form-item label prop="date">
+                <el-form-item label prop="date" class="dateTime">
                   <el-date-picker v-model="company.date" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" placeholder="请选择回访日期"></el-date-picker>
                 </el-form-item>
                 <el-form-item label prop="time" class="timeLabel clearfix">

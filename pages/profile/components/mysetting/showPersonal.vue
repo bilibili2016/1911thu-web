@@ -6,10 +6,10 @@
         <span>真实姓名：</span>
         <span>{{psnForm.real_name}}</span>
       </li>
-      <li>
+      <!-- <li>
         <span>学号：</span>
         <span>{{psnForm.student_number}}</span>
-      </li>
+      </li> -->
       <li>
         <span>昵称：</span>
         <span>{{psnForm.nick_name}}</span>
