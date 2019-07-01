@@ -83,7 +83,7 @@ export default {
       productList: [
         {
           src: 'https://static-image.1911edu.com/production-news.png',
-          text: '线新闻传播学院'
+          text: '在线新闻传播学院'
         },
         {
           src: 'https://static-image.1911edu.com/production-icon1.png',
