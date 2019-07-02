@@ -2,7 +2,7 @@
   <div class="goodCourse">
     <div class="courseLi clearfix" v-for="(course,index) in data" :key="index" @click="handleLink(course)">
       <div class="fl">
-        <img class="teacherImg" :src="course.teacher_picture" alt="">
+        <img class="teacherImg" :src="course.picture" alt="">
       </div>
       <div class="fr courseInfo">
         <h4 :title="course.title">{{course.title}}</h4>

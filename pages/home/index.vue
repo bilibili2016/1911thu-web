@@ -1,8 +1,12 @@
 <template>
   <div>
-    <el-main class="home" style="padding-bottom:20px;">
+    <el-main class="home" >
       <!-- 头部导航 -->
       <v-carousel class="topCarousel" :items="bannerData" v-loading="bannerLoading" :config="configCarousel"></v-carousel>
+      <!-- 数字信息 -->
+      <v-num></v-num>
+      <!-- 导师列表 -->
+      <v-teacher :title="teacherTitle" :link="teacherLink" :teacherData="teacherData" class="bgf8f8fd"></v-teacher>
       <!-- 干部网络学院 -->
       <!-- <v-course :config="configOne" :data="cadreCourseList" :title="cadreCollegeTitle" :link="cadreCollegeMore" class="index-course bgfff" v-if="cadreCourseList.length>0"></v-course> -->
       <!-- 在线商学院 -->
@@ -12,7 +16,7 @@
       <!-- 免费专区 -->
       <!-- <v-course :config="configZero" :data="freeData" :title="freecoursetitle" :link="linkfreecourse" class="index-free bgfff" v-if="freeData.length>0"></v-course> -->
       <!-- 精品好课 -->
-      <!-- <v-course :config="classicConfig" :data="classicData" :title="classiccoursetitle" :link="linkclassiccourse" class="index-goodcourse bgfff"></v-course> -->
+      <v-course :config="classicConfig" :data="classicData" :title="classiccoursetitle" :link="linkclassiccourse" class="index-goodcourse bgfff"></v-course>
       <!-- 互动式项目 -->
       <!-- <v-course v-if="projectData.length>0" :config="projectConfig" v-loading="projectLoading" :data="projectData" :title="newprojecttitle" :link="linknewproject" class="index-project bgf8f8fd"></v-course> -->
       <!-- <v-free :config="configZero" :freeData="freeData" :title="freecoursetitle" :link="linkfreecourse"></v-free> -->
@@ -21,14 +25,14 @@
       <!-- 名师大咖秀 -->
       <!-- <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous> -->
       <!-- 学堂资讯 -->
-      <v-info v-if="newsListData.length" v-loading="infoLoading" :newsListData="newsListData" :outNewData="outNewData" :infoTwo="infoTwo" :infoOne="infoOne" :title="infotitle" :link="linkinfo" class="index-new bgfff"></v-info>
+      <v-info v-if="newsListData.length" v-loading="infoLoading" :newsListData="newsListData" :outNewData="outNewData" :infoTwo="infoTwo" :infoOne="infoOne" :title="infotitle" :link="linkinfo" class="index-new bgf8f8fd"></v-info>
       <!-- 核心优势 -->
       <!-- <v-core></v-core> -->
       <!-- 专家组组长 -->
-      <v-leader v-if="groupLeader.length>0" :groupLeader="groupLeader" :teacherListLoading="teacherListLoading" :title="groupTitle" :link="groupLink"></v-leader>
+      <!-- <v-leader v-if="groupLeader.length>0" :groupLeader="groupLeader" :teacherListLoading="teacherListLoading" :title="groupTitle" :link="groupLink"></v-leader> -->
 
       <!-- 媒体报道 -->
-      <v-outnews v-if="outNewsListData.length" v-loading="outNewsLoading" :outNewsListData="outNewsListData" :title="outNewsTitle" :link="outNewsLink" class="index-outNews bgf8f8fd"></v-outnews>
+      <v-outnews v-if="outNewsListData.length" v-loading="outNewsLoading" :outNewsListData="outNewsListData" :title="outNewsTitle" :link="outNewsLink" class="index-outNews bgfff"></v-outnews>
       <v-backtotop :data="showCheckedCourse"></v-backtotop>
     </el-main>
   </div>
@@ -44,6 +48,10 @@ import Leader from "@/pages/home/teacher/components/GroupLeader.vue";
 
 import BackToTop from "@/components/common/BackToTop.vue";
 import HomeCourse from "@/pages/home/components/homecourse.vue";
+import Num from "@/pages/home/components/number.vue";
+import Teacher from "@/pages/home/teacher/homeList.vue";
+
+
 import { mapState, mapActions } from "vuex";
 import { home, news } from "~/lib/v1_sdk/index";
 export default {
@@ -56,6 +64,8 @@ export default {
     "v-outnews": outNews,
     "v-core": Core,
     "v-leader": Leader,
+    "v-num":Num,
+    "v-teacher":Teacher
   },
   data () {
     return {
@@ -81,10 +91,12 @@ export default {
       famoustitle: "名师智库",
       infotitle: "学堂资讯",
       groupTitle: '学堂专家',
-      groupLink: '/home/teacher/list',
+      groupLink: '/home/teacher/teacherIndex',
       linkinfo: "/home/news/list",
       outNewsTitle: "媒体报道",
       outNewsLink: "/home/news/outNewsList",
+      teacherTitle:"30位导师等你来约",
+      teacherLink:'/home/teacher/list',
       freeData: [],
       newData: [],
       classicData: [],
@@ -109,7 +121,7 @@ export default {
       },
       classicConfig: {
         card_type: "classic",
-        home_type: "cardthree"
+        home_type: "cardone"
       },
       projectConfig: {
         card_type: "project",
@@ -128,7 +140,7 @@ export default {
         limits: 10
       },
       teacherResource: [],
-      teachers: [],
+      teacherData: [],
       evaluateData: [],
       newsListData: [],
       outNewData: [],
@@ -166,7 +178,7 @@ export default {
       },
       classicForm: {
         pages: 0,
-        limits: "6",
+        limits: 8,
         evaluateLimit: 0,
         isEvaluate: 0
       },
@@ -196,6 +208,10 @@ export default {
         limits: 8,
         type: 2,
         isRecommend: 1
+      },
+      teacherForm:{
+        page:1,
+        limit:8
       }
     };
   },
@@ -211,7 +227,7 @@ export default {
       //   免费课程列表
       //   this.getFreeCourseList();
 
-      // this.getClassicCourseList()
+      this.getClassicCourseList()
       // this.getEvaluateList(),
       this.getNewsInfoList();
       // this.getPartnerList(),
@@ -219,7 +235,9 @@ export default {
       //   项目列表
       //   this.getProjectList();
       this.getOutNewsList();
-      this.teacherExpertList()
+      // this.teacherExpertList()
+      this.getTeacherData()
+      // this.getNewCourseList()
       // this.$bus.$emit('getClassifyList')
     },
     // 获取banner
@@ -335,6 +353,12 @@ export default {
       home.getPointList().then(response => {
         this.dingData = response.data.pointList;
       });
+    },
+    //导师列表
+    getTeacherData(){
+       home.getTeacherData(this.teacherForm).then(res => {
+        this.teacherData = res.data.teacherList;
+      });
     }
   },
   mounted () {
@@ -357,10 +381,6 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.home {
-  background: url("https://static-image.1911edu.com/home-bottom.png") no-repeat
-    center bottom;
-  background-size: 100% 564px;
-}
+
 </style>
 

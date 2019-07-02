@@ -35,42 +35,42 @@ export default {
           id: "index",
           link: "/"
         },
+          {
+          title: "课程",
+          id: "courseCenter",
+          link: "/course/category?cid=0&cp=0&pids=0&xid=0&vid=-1"
+        },
+          {
+          title: "师资",
+          id: "teacher",
+          link: "/home/teacher/teacherIndex"
+        },
         {
-          title: "全部学院",
+          title: "学院",
           id: "onlineCollege",
-          link: "",
-          childList: []
+          link: "/home/vip/collegeIndex"
         },
-        {
-          title: "单位内训",
-          id: "unit",
-          link: "/other/activePages/Institutional"
-        },
-        {
-          title: "学位项目",
-          id: "project",
-          link: "/project/degreeProject"
-        },
+        // {
+        //   title: "单位内训",
+        //   id: "unit",
+        //   link: "/other/activePages/Institutional"
+        // },
+        // {
+        //   title: "学位项目",
+        //   id: "project",
+        //   link: "/project/degreeProject"
+        // },
         {
           title: "测评体系",
           id: "system",
           link: "/home/core/pages/personEval"
         },
-        {
-          title: "名师智库",
-          id: "teacher",
-          link: "/home/teacher/list"
-        },
-        {
-          title: "课程中心",
-          id: "courseCenter",
-          link: "/course/category?cid=0&cp=0&pids=0&xid=0&vid=-1"
-        },
-        {
-          title: "城市分校",
-          id: "school",
-          link: "/home/citySchool/schoolIntro"
-        },
+
+        // {
+        //   title: "城市分校",
+        //   id: "school",
+        //   link: "/home/citySchool/schoolIntro"
+        // },
         {
           title: "服务支持",
           id: "service",
@@ -123,16 +123,17 @@ export default {
         return false;
       }
       //学院
-      if (item.id == "onlineCollege") {
-        this.$router.push({
-          path: "/home/vip/collegeInfo",
-          query: {
-            id: child.id,
-            cid: child.category_id,
-            title: child.en_title
-          }
-        });
-      } else if (item.id == "service") {
+      // if (item.id == "onlineCollege") {
+      //   this.$router.push({
+      //     path: "/home/vip/collegeInfo",
+      //     query: {
+      //       id: child.id,
+      //       cid: child.category_id,
+      //       title: child.en_title
+      //     }
+      //   });
+      // } else
+      if (item.id == "service") {
         //服务支持
         if (child.id == "code") {
           //兑换码
@@ -153,8 +154,7 @@ export default {
       let pathName = window.location.pathname;
       //初始化名师智库默认选中学院分类
       if (
-        pathName == "/home/teacher/list" ||
-        pathName == "/home/teacher/list/"
+        pathName == "/home/teacher/teacherIndex"
       ) {
       } else {
         persistStore.set("cid", -1);
@@ -170,7 +170,7 @@ export default {
           this.changeActive = "adoutUs";
           break;
         //在线学院
-        case "/home/vip/collegeInfo":
+        case "/home/vip/collegeIndex":
           this.changeActive = "onlineCollege";
 
           break;
@@ -196,6 +196,7 @@ export default {
           this.changeActive = "project";
           break;
         //名师智库
+        case "/home/teacher/teacherIndex":
         case "/home/teacher/list":
         case "/home/teacher/orderTeacher":
         case "/home/teacher/beTeacher":
@@ -220,21 +221,10 @@ export default {
           break;
       }
     },
-    // 学院列表
-    vipGoodsList () {
-      home.vipGoodsList().then(response => {
-        if (response.status === 0) {
-          for (const key in this.navList) {
-            if (this.navList[key].id == "onlineCollege") {
-              this.navList[key].childList = response.data.vipGoodsList;
-            }
-          }
-        }
-      });
-    }
+
   },
   mounted () {
-    this.vipGoodsList();
+    // this.vipGoodsList();
     this.changeHeaderActive();
     if (getNetwork()) {
       this.downloadAppURL = this.downloadAppURL_test;

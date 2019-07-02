@@ -172,7 +172,7 @@ export default {
       });
     },
     handleTeacher () {
-      this.$router.push("/home/teacher/list");
+      this.$router.push("/home/teacher/teacherIndex");
     },
     goLive (teacher) {
       this.$router.push(`/live?id=${teacher.id}&type=${this.type}`);

@@ -4,6 +4,7 @@
       <h1 class="clearfix">
         <span class="title">{{title}}
         </span>
+        <span class="teacher" v-if="isTeacher">导师指路 · 少走弯路</span>
         <span class="fr moredata" @click="handleLinkMore">查看更多></span>
       </h1>
     </el-row>
@@ -12,7 +13,7 @@
 
 <script>
 export default {
-  props: ["title", "link"],
+  props: ["title", "link",'isTeacher'],
   methods: {
     handleLinkMore() {
       this.$router.push(this.link);

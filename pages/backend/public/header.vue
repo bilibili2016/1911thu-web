@@ -90,7 +90,7 @@ export default {
         {
           title: "名师智库",
           id: "teacher",
-          link: "/home/teacher/list"
+          link: "/home/teacher/teacherIndex"
         },
         {
           title: "城市分校",
