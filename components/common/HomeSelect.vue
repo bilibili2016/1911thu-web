@@ -171,8 +171,9 @@ export default {
           break;
         //在线学院
         case "/home/vip/collegeIndex":
-          this.changeActive = "onlineCollege";
+        case "/home/vip/collegeInfo":
 
+          this.changeActive = "onlineCollege";
           break;
         case "/course/category":
           if (matchSplits("cp") == 0 && matchSplits("vid") != -1) {
