@@ -31,9 +31,9 @@
       <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" @cell-click="viewWord">
         <el-table-column prop="file_name" label="资料名称" width="400">
         </el-table-column>
-        <el-table-column prop="download_number" label="下载量" width="200">
+        <el-table-column prop="download_number" label="下载量" width="180">
         </el-table-column>
-        <el-table-column label="操作" width="120">
+        <el-table-column label="操作" width="100">
           <template slot-scope="scope">
             <el-button size="mini" @click="handleDownload(scope.$index, scope.row)">
               下载</el-button>

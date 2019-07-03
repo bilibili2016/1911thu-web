@@ -1,0 +1,151 @@
+.playInner {
+  width: 720px;
+  height: 468px;
+
+  .isTrySee {
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border-radius: 12px;
+    font-size: 13px;
+    color: #fff;
+    background-color: #333333;
+    position: absolute;
+    left: 10px;
+    bottom: 62px;
+    padding: 0 25px 0 15px;
+
+    span {
+      color: #ff7c33;
+
+      &.gobuy {
+        cursor: pointer;
+      }
+    }
+
+    i.el-icon-error {
+      position: absolute;
+      right: 9px;
+      top: 5px;
+      cursor: pointer;
+    }
+  }
+
+  .playVideo {
+    background: url('https://static-image.1911edu.com/bigplay.png') no-repeat;
+    background-size: contain;
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -32px;
+    margin-top: -32px;
+    z-index: 100;
+  }
+
+  .prism-big-play-btn {
+    visibility: hidden;
+    left: 50% !important;
+    top: 50%;
+    margin-left: -32px;
+    margin-top: -32px;
+    z-index: 99;
+  }
+
+  .fullScreen .prism-big-play-btn {
+    visibility: visible;
+  }
+
+  .prism-player .prism-volume-control {
+    left: auto !important;
+    right: 125px;
+  }
+
+  .prism-player .prism-fullscreen-btn {
+    margin-top: 15px !important;
+    width: 24px;
+    height: 24px;
+  }
+
+  .prism-player .prism-thumbnail {
+    border: none;
+  }
+
+  .prism-player .prism-play-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .player-olympic-player-next {
+    width: 24px;
+    height: 28px;
+  }
+
+  .prism-volume {
+    margin-top: 14px !important;
+    margin-right: 12px !important;
+  }
+
+  .prism-player .prism-volume .volume-icon {
+    width: 27px;
+    height: 26px;
+    background-repeat: no-repeat;
+  }
+
+  .prism-player .prism-volume .volume-icon .short-horizontal {
+    width: 2px;
+    height: 7px;
+  }
+
+  .prism-player .prism-volume .volume-icon .long-horizontal {
+    width: 2px;
+    height: 13px;
+  }
+
+  .prism-player .prism-volume .volume-icon.mute .short-horizontal {
+    height: 13px;
+    top: 7px;
+  }
+
+  .prism-player .prism-volume .volume-icon.mute .long-horizontal {
+    top: 7px;
+    height: 13px;
+  }
+
+  .prism-player .prism-setting-btn {
+    width: 20px;
+    height: 22px;
+    margin-top: 15px !important;
+    margin-right: 16px !important;
+  }
+
+  .prism-time-display {
+    margin-top: 4px !important;
+    margin-left: 20px !important;
+  }
+
+  // 隐藏设置中的字母和音轨
+  .prism-player .prism-setting-list .prism-setting-cc,
+  .prism-player .prism-setting-list .prism-setting-audio {
+    display: none;
+  }
+
+  // 隐藏阿里自带报错信息
+  .prism-player .prism-ErrorMessage {
+    display: none !important;
+  }
+
+  // 隐藏字幕
+  .prism-player .prism-cc-btn {
+    display: none;
+    height: 24px;
+    width: 20px;
+    margin-top: 14px !important;
+    margin-right: 22px !important;
+  }
+
+  .prism-player .prism-play-animation {
+    display: none;
+  }
+}

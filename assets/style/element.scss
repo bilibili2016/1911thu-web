@@ -505,9 +505,18 @@ html {
 }
 
 // 课程详情
-.container {
+.container,
+.content {
+  .el-tabs__nav-scroll {
+    padding: 0 20px;
+  }
+
   .el-tabs__active-bar.is-top {
     display: none;
+  }
+
+  .el-tabs__content {
+    padding: 0 20px;
   }
 
   .el-tabs__item {
@@ -1427,8 +1436,6 @@ html {
   }
 
   .submit {
-    margin: 41px auto 20px;
-    width: 160px;
 
     .el-button {
       font-size: 14px;

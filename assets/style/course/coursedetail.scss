@@ -1,43 +1,23 @@
 .bag {
   color: #773084 !important;
 }
+
 .course-style {
   margin-top: 80px;
-}
-
-.detail-btngrounp {
-  // max-width: 155px;
-  width: 140px;
-  height: 26px;
-  line-height: 26px;
-  text-align: center;
-  float: left;
-  font-size: 12px;
-  border-radius: 4px;
-  margin: 0 10px 10px 0px;
-  -webkit-transition: all 300ms;
-  transition: all 300ms;
-  white-space: nowrap;
-  cursor: pointer;
-  background: #fff;
-  border: 1px solid #dcdfe6;
-  border-color: #dcdfe6;
-  color: #606266;
-}
-.detail-btngrounp:nth-child(2n) {
-  margin-right: 0;
 }
 
 .borderColor {
   border-color: #773084 !important;
   color: #773084 !important;
 }
+
 .detailWord {
   span {
     display: inline !important;
     line-height: 40px;
   }
 }
+
 .container {
   .shareIcons {
     .social-share {
@@ -49,6 +29,7 @@
       border-radius: 4px;
       box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
     }
+
     .social-share .social-share-icon {
       margin-right: 20px !important;
     }
@@ -57,11 +38,14 @@
 
 .dialog-line {
   border-bottom: none !important;
+
   .evaluate-tag .el-dialog {
     min-height: 508px !important;
   }
+
   .commentator {
     border-bottom: 1px solid #e8d6f7;
+
     .fr {
       float: none !important;
     }
@@ -74,6 +58,7 @@
   bottom: 50px;
   right: 0;
   cursor: pointer;
+
   img {
     width: 100%;
     height: 100%;

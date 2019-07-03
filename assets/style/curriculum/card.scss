@@ -1,0 +1,328 @@
+.curriculumCard {
+  width: 720px;
+  color: #222222;
+
+  .topCard {
+    width: 720px;
+    height: 468px;
+    font-size: 0;
+    position: relative;
+    border: none;
+
+    .goodplay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 80;
+
+      .img-con {
+        width: 720px;
+        height: 468px;
+      }
+
+      .image {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 720px;
+        height: 468px;
+        background: rgba(100, 23, 166, 1);
+        opacity: 0.5;
+      }
+
+      .playBtn-detail {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        width: 76px;
+        height: 76px;
+
+        img {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .particularss {
+    width: 720px;
+    background-color: #fff;
+    overflow: hidden;
+
+    .currentclum {
+      font-size: 16px;
+      line-height: 0px;
+
+      h4 {
+        width: 100%;
+        padding: 0 20px;
+        font-size: 20px;
+        height: 60px;
+        line-height: 60px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .clum {
+        height: 25px;
+
+        .coursenum {
+          padding: 0;
+        }
+      }
+
+      .coursenum {
+        width: auto;
+        line-height: 20px;
+        border-radius: 10px;
+        margin-right: 20px;
+        padding-right: 10px;
+        background-color: #e4e4ef;
+      }
+
+      .coins {
+        float: right;
+        color: #ff5f5f;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 25px;
+      }
+
+      .rate {
+        vertical-align: top;
+        line-height: 20px;
+        font-size: 12px;
+
+        .el-rate {
+          padding-top: 2px;
+          display: inline-block;
+          vertical-align: top;
+        }
+      }
+
+      span {
+        font-size: 14px;
+        color: #888888;
+
+        img {
+          width: 20px;
+          height: 20px;
+          margin-right: 6px;
+          border-radius: 50%;
+          background-color: #b4b4c8;
+          vertical-align: top;
+        }
+      }
+
+      .itemBox-info {
+        font-size: 14px;
+        line-height: 0px;
+
+        .itemBox-num {
+          font-size: 12px;
+          color: rgba(176, 174, 184, 1);
+          line-height: 0px;
+          padding-left: 8px;
+          width: 160px;
+
+          img {
+            width: 12px;
+            height: 12px;
+            margin: 0px 5px;
+          }
+
+          .itemBox-rate {
+            font-size: 12px;
+            line-height: 13px;
+            float: right;
+          }
+        }
+      }
+    }
+
+    .comment {
+      height: 134px;
+      margin-top: 40px;
+      padding: 0 40px 10px;
+      background-color: #fafafa;
+      color: #888;
+
+      h5 {
+        line-height: 40px;
+
+        .itemBox-rate {
+          display: inline-block;
+          height: 40px;
+          line-height: 40px;
+          margin-left: 20px;
+          vertical-align: middle;
+        }
+      }
+
+      p {
+        font-size: 14px;
+        color: #888888;
+        line-height: 30px;
+      }
+    }
+
+    .study {
+      padding: 0 0 20px;
+
+      p {
+        padding: 0 20px;
+        margin-bottom: 25px;
+        font-size: 14px;
+        line-height: 25px;
+        max-height: 123px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+      }
+
+      .studyInfo {
+        padding: 0 20px;
+        line-height: 35px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .common-button {
+        margin-top: 20px;
+        padding: 0 20px;
+      }
+
+      h4 {
+        float: left;
+
+        p {
+          margin: 0;
+
+          &:first-child {
+            font-size: 20px;
+          }
+
+          &:last-child {
+            font-size: 14px;
+          }
+        }
+      }
+
+      .common-button .is-plain {
+        border-radius: 20px;
+        border-color: #773084;
+        color: #773084;
+        font-weight: 400;
+        transition: all 300ms;
+        background: transparent;
+        position: relative;
+
+        &.studentFree:after {
+          content: ' ';
+          display: inline-block;
+          width: 63px;
+          height: 21px;
+          background: url('~assets/images/studentFree.png') no-repeat;
+          background-size: contain;
+          position: absolute;
+          right: -16px;
+          top: -25px;
+        }
+
+        span {
+          color: #773084;
+        }
+
+        &:hover {
+          span {
+            color: #fff;
+          }
+
+          border-color: #773084;
+          background: #773084;
+        }
+
+        &.leftBtn {
+          background: #773084;
+          color: #fff;
+
+          span {
+            color: #fff;
+          }
+
+          &:hover {
+            background: #5f068d;
+          }
+        }
+      }
+
+      &.bought {
+        .lineProgress {
+          clear: both;
+          width: 242px;
+          display: inline-block;
+
+          h5 {
+            width: 100%;
+            line-height: 30px;
+            color: #666;
+
+            .fl.fr {
+              font-size: 12px;
+            }
+
+            .fl {
+              color: #773084;
+            }
+          }
+
+          .el-progress-bar {
+            .el-progress-bar__outer {
+              height: 14px;
+              background-color: #e4e4ef;
+            }
+
+            .el-progress-bar__inner {
+              background-color: #773084;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.btn-bg {
+  width: 76px;
+  height: 76px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+
+  .el-button {
+    width: 174px;
+    height: 56px;
+    line-height: 56px;
+    border-radius: 28px;
+    color: #773084;
+    padding: 0;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+}
