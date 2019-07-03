@@ -1,4 +1,7 @@
 .k12College {
+  background: url('https://static-image.1911edu.com/k12College-botomBG.png') no-repeat;
+  background-position: center bottom;
+
   .k12-banner {
     height: 660px;
     background: url('https://static-image.1911edu.com/k12-banner.png') no-repeat;
@@ -100,7 +103,7 @@
         vertical-align: middle;
         font-size: 24px;
         color: #222;
-        text-align: left;
+        text-align: center;
 
         .index {
           display: inline-block;

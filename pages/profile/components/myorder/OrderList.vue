@@ -46,6 +46,22 @@
                 <h4 @click="goTeacherInfo(teacher)">{{teacher.title}}（{{teacher.teacher_name}}）</h4>
               </div>
             </div>
+
+            <!-- 咨询次数列表 -->
+            <div class="courseOne" v-if="courseList.orderConsultGoodsList.length" v-for="(consult,index) in courseList.orderConsultGoodsList" :key="'consult'+index">
+              <img  class="fl" :src="consult.picture" alt="">
+              <div class="fl">
+                <h4>{{consult.title}}</h4>
+              </div>
+            </div>
+             <!-- 线下预约列表（小程序） -->
+            <div class="courseOne" v-if="courseList.orderOfflineBespokeList.length" v-for="(offline,index) in courseList.orderOfflineBespokeList" :key="'offline'+index">
+              <img class="fl" :src="offline.picture" alt="">
+              <div class="fl">
+                <h4>{{offline.title}}</h4>
+              </div>
+            </div>
+
             <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList,config.type)">
               查看更多>
             </div>
