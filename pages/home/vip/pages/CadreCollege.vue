@@ -30,9 +30,9 @@
                   <p>{{item.text}}</p>
                 </div>
               </div>
-              <div class="centerBar">
+              <!-- <div class="centerBar">
                 <p>1911学堂干部学院依据各单位提出的具体学习需求，形成定制式、个性化、针对性的党政系统单位内训项目。</p>
-              </div>
+              </div> -->
             </div>
           </div>
           <h2>培养目标</h2>
@@ -83,16 +83,20 @@ export default {
     return {
       productList: [
         {
-          src: "https://static-image.1911edu.com/production-cadre.png",
-          text: "在线干部学院"
+          src: "https://static-image.1911edu.com/cadre-proIcon1.png",
+          text: "学习与职业测评"
         },
         {
-          src: "https://static-image.1911edu.com/production-icon1.png",
-          text: "混合式标准项目"
+          src: "https://static-image.1911edu.com/cadre-proIcon2.png",
+          text: "线上精品课程与专题项目"
         },
         {
-          src: "https://static-image.1911edu.com/production-icon2.png",
-          text: "公共管理硕士(MPA)"
+          src: "https://static-image.1911edu.com/cadre-proIcon3.png",
+          text: "单位委托定制内训项目"
+        },
+        {
+          src: "https://static-image.1911edu.com/cadre-proIcon5.png",
+          text: "国际认证系列项目"
         }
       ],
       studyList: [
