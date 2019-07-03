@@ -1,6 +1,8 @@
 .bigTab {
   width: 1140px;
 
+
+
   &>div>div.el-tabs__content {
     width: 926px;
     padding: 15px;
@@ -473,6 +475,10 @@
   }
 
   .tabList {
+    .down {
+      margin-left: 15px;
+    }
+
     i {
       display: inline-block;
       width: 16px;
@@ -546,7 +552,7 @@
     }
   }
 
-  .el-tabs__item.is-active:hover {
+  .is-left .el-tabs__item.is-active:hover {
     color: #fff !important;
   }
 

@@ -27,7 +27,7 @@ export default {
     data() {
         return {
             teacherNum: 0,
-            userNum: 0,
+            userNum: 1,
             courseNum: 0,
             serviceNum: 0,
             timer1: '',
@@ -47,8 +47,8 @@ export default {
                 }
             }, 1);
             this.timer2 = setInterval(() => {
-                this.userNum += 10
-                if (this.userNum >= 100000) {
+                this.userNum = parseInt( this.userNum)+100
+                if (this.userNum >= 1000) {
                     this.userNum = '100,000'
                     clearInterval(this.time2)
                 }

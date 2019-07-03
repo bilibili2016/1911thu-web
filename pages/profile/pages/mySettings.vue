@@ -180,9 +180,11 @@ export default {
     }
   },
   mounted () {
+
     this.$bus.$on('activeSet', () => {
       this.activeName = 'first'
     })
+     this.handleClick({name:'first'})
   }
 }
 </script>

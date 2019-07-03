@@ -1,0 +1,215 @@
+.RProjectDetail {
+  background-color: #f5f5f5;
+
+  .top {
+    background-color: #fff;
+
+    .topCon {
+      padding-bottom: 50px;
+
+      .left,
+      .right {
+        float: left;
+      }
+
+      .left {
+        width: 535px;
+        height: 270px;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .right {
+        width: 530px;
+        margin-left: 30px;
+
+        .RP-title {
+          line-height: 30px;
+          font-size: 24px;
+          color: #222;
+          font-weight: 500;
+          margin-bottom: 15px;
+
+          .tag {
+            width: 66px;
+            height: 28px;
+            margin-right: 10px;
+            margin-bottom: -5px;
+          }
+        }
+
+        .desc {
+          font-size: 14px;
+          color: #93999F;
+        }
+
+        .num {
+          border-top: 1px dashed #ccc;
+          padding-top: 30px;
+          font-size: 14px;
+          color: #222;
+          margin-top: 60px;
+
+          .num-left {
+            font-weight: 600;
+          }
+        }
+
+        .price {
+          font-size: 14px;
+          margin-top: 20px;
+
+          .text {
+            color: #222;
+            font-weight: 600;
+          }
+
+          .pri-num {
+            font-size: 30px;
+            color: #F01414;
+          }
+
+          .ori {
+            color: #999;
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .bottom {
+    width: 1100px;
+    margin: 0 auto;
+
+    .left,
+    .right {
+      float: left;
+    }
+
+    .left {
+      width: 720px;
+      height: 160px;
+      margin-top: 13px;
+      margin-right: 40px;
+
+      .left-list {
+        .item {
+          background-color: #fff;
+          height: 160px;
+
+          .itemLeft,
+          .itemRight {
+            float: left;
+          }
+
+          .itemLeft {
+            width: 250px;
+            height: 160px;
+
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+
+          .itemRight {
+            width: 420px;
+            margin-left: 30px;
+            padding: 20px 0;
+            box-sizing: border-box;
+
+            .right-title {
+              font-size: 16px;
+              color: #222;
+              font-weight: 500;
+            }
+
+            .desc {
+              font-size: 12px;
+              color: #93999F;
+              margin: 10px 0;
+            }
+
+            .time {
+              font-size: 12px;
+              color: #93999F;
+
+              .people {
+                margin-left: 20px;
+              }
+            }
+
+            .rate {
+              margin: 10px 0;
+            }
+
+            .price {
+              font-size: 14px;
+              color: #F01414;
+            }
+          }
+        }
+      }
+
+
+    }
+
+    .right {
+      width: 340px;
+      padding: 0 24px;
+      background-color: #fff;
+      margin-top: 40px;
+
+      .rightText {
+        line-height: 46px;
+        font-size: 14px;
+        color: #222;
+        border-bottom: 1px solid #DDDDDD;
+      }
+
+      .right-teachers {
+        padding-top: 20px;
+
+        .item {
+          margin-bottom: 30px;
+
+          .left,
+          .right {
+            float: left;
+          }
+
+          .left {
+            width: 70px;
+            height: 70px;
+
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+
+          .right {
+            width: 200px;
+            margin-left: 10px;
+
+            .name {
+              font-size: 16px;
+              color: #222;
+            }
+
+            .desc {
+              font-size: 12px;
+              color: #222;
+              margin-top: 10px;
+              line-height: 18px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
