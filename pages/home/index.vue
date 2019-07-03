@@ -32,7 +32,9 @@
       <!-- <v-leader v-if="groupLeader.length>0" :groupLeader="groupLeader" :teacherListLoading="teacherListLoading" :title="groupTitle" :link="groupLink"></v-leader> -->
 
       <!-- 媒体报道 -->
-      <v-outnews v-if="outNewsListData.length" v-loading="outNewsLoading" :outNewsListData="outNewsListData" :title="outNewsTitle" :link="outNewsLink" class="index-outNews bgfff"></v-outnews>
+      <v-outnews v-if="outNewsListData.length" v-loading="outNewsLoading" :outNewsListData="outNewsListData" :title="outNewsTitle" :link="outNewsLink" class="index-outNews"></v-outnews>
+      <!-- 所获荣誉 -->
+      <v-honor></v-honor>
       <v-backtotop :data="showCheckedCourse"></v-backtotop>
     </el-main>
   </div>
@@ -50,7 +52,7 @@ import BackToTop from "@/components/common/BackToTop.vue";
 import HomeCourse from "@/pages/home/components/homecourse.vue";
 import Num from "@/pages/home/components/number.vue";
 import Teacher from "@/pages/home/teacher/homeList.vue";
-
+import Honor from "@/pages/home/honor/index.vue";
 
 import { mapState, mapActions } from "vuex";
 import { home, news } from "~/lib/v1_sdk/index";
@@ -65,7 +67,8 @@ export default {
     "v-core": Core,
     "v-leader": Leader,
     "v-num":Num,
-    "v-teacher":Teacher
+    "v-teacher":Teacher,
+    "v-honor":Honor
   },
   data () {
     return {
@@ -381,6 +384,10 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-
+.home{
+  background: url('https://static-image.1911edu.com/home-bottom.png') no-repeat;
+  background-size: 100% 564px;
+  background-position: center bottom;
+}
 </style>
 

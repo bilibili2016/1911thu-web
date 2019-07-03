@@ -1,7 +1,6 @@
 <template>
   <!-- 学堂资讯 -->
   <div class="home-info bg-none">
-    <div class="line"></div>
     <el-row class="info-center center">
       <v-title :title="title" :link="link"></v-title>
 

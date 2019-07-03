@@ -1,48 +1,23 @@
 <template>
     <div>
-        <div class="headerBox headerDiv" :class="{headerBoxHidden:isHidden,headerBoxShow:!isHidden}">
+        <!-- <div class="headerBox headerDiv" :class="{headerBoxHidden:isHidden,headerBoxShow:!isHidden}"> -->
+        <div class="headerBox headerDiv">
             <!-- 测试 123 -->
             <!-- 优惠主题入口 -->
             <v-discount v-if="bannerMsg" @closeBanner="closeBanner"></v-discount>
-            <div class="main">
-                <div class="header-fl clearfix" :class="{big:isBig}">
+            <div class="main" :class="{widthMain:isHidden}">
+                <div class="header-fl clearfix">
                     <!-- logo -->
                     <v-logo @handleLink="handleLink"></v-logo>
                     <!-- 头部导航 -->
-                    <v-homeselect :projectArr="projectArr" :categoryArr="categoryArr" @addEcg="handleAddEcg"></v-homeselect>
+                    <v-homeselect v-if="isHidden" :projectArr="projectArr" :categoryArr="categoryArr" @addEcg="handleAddEcg"></v-homeselect>
                 </div>
-                <div class="header-fr clearfix" :class="{big:isBig}">
-                    <!-- 搜索 -->
-                    <v-search @handleSearch="handleSearch"></v-search>
-                    <div class="fuli">
-                        <img src="https://static-image.1911edu.com/fuliIcon.png" alt="" class="icon">关注领福利
-                        <div class="welf">
-                            <img src="https://static-image.1911edu.com/attentionWechat2.png" alt="">
-                            <p class="text">关注1911学堂官方微信号</p>
-                            <p class="desc">领取免费福利，超值学习经验分享</p>
-                        </div>
-                    </div>
-                    <div class="english" @click="handleToggle">
-                        <span class="globe"></span>
-                        <span class="eng">English</span>
-                    </div>
-                    <!-- 兑换码、单位入口 -->
-                    <!-- <v-enter class="HREntry" :isShowLRBtn="isShowLRBtn" @handleLink="handleLink" @addEcg="handleAddEcg"></v-enter> -->
+                <div class="header-fr clearfix">
                     <!-- 登录、注册 未登录状态-->
                     <v-lrbtn v-if="!isShowLRBtn" @login="login" @register="register"></v-lrbtn>
                     <!-- 头像 已登录状态 -->
                     <v-headerimg v-else :data="user" :subPagesData="subPagesData" :isShowLRBtn="isShowLRBtn" @handleLink="handleLink" @handleLinkProfile="handleLinkProfile" @handleSignOut="handleSignOut"></v-headerimg>
-
-                </div>
-                <v-code v-show="bindForm.isBind" :bindForm="bindForm" @detection="handleDetection" @closeEcg="handleCloseEcg"></v-code>
-                <v-login></v-login>
-            </div>
-            <!-- <div class="headerBottom">
-                <div class="headerInner">
-                    <div class="header-fl">
-                        <v-homeselect :projectArr="projectArr" :categoryArr="categoryArr" @addEcg="handleAddEcg"></v-homeselect>
-                    </div>
-                    <div class="header-fr">
+                    <div v-if="isHidden" class="fr-con">
                         <div class="fuli">
                             <img src="https://static-image.1911edu.com/fuliIcon.png" alt="" class="icon">关注领福利
                             <div class="welf">
@@ -56,10 +31,38 @@
                             <span class="eng">English</span>
                         </div>
                     </div>
+                    <!-- 搜索 -->
+                    <v-search class="searchDiv" @handleSearch="handleSearch"></v-search>
+                    <!-- 兑换码、单位入口 -->
+                    <!-- <v-enter class="HREntry" :isShowLRBtn="isShowLRBtn" @handleLink="handleLink" @addEcg="handleAddEcg"></v-enter> -->
+                </div>
+                <v-code v-show="bindForm.isBind" :bindForm="bindForm" @detection="handleDetection" @closeEcg="handleCloseEcg"></v-code>
+                <v-login></v-login>
+            </div>
+            <div class="headerBottom" :class="{headerBoxHidden:isHidden,headerBoxShow:!isHidden}">
+                <div class="headerInner">
+                    <div class="header-fl">
+                        <v-homeselect :projectArr="projectArr" :categoryArr="categoryArr" @addEcg="handleAddEcg"></v-homeselect>
+                    </div>
+                    <div class="header-fr">
+                        <div class="english" @click="handleToggle">
+                            <span class="globe"></span>
+                            <span class="eng">English</span>
+                        </div>
+                        <div class="fuli">
+                            <img src="https://static-image.1911edu.com/fuliIcon.png" alt="" class="icon">关注领福利
+                            <div class="welf">
+                                <img src="https://static-image.1911edu.com/attentionWechat2.png" alt="">
+                                <p class="text">关注1911学堂官方微信号</p>
+                                <p class="desc">领取免费福利，超值学习经验分享</p>
+                            </div>
+                        </div>
+
+                    </div>
 
                 </div>
 
-            </div> -->
+            </div>
         </div>
     </div>
 </template>
@@ -112,7 +115,6 @@ export default {
             isHidden: false,
             scrollBottom: "",
             scrollTop: "",
-            isBig: false,
             // 顶部列表
             curruntForm: {
                 pages: 1,
@@ -563,10 +565,6 @@ export default {
             }
             document.body.classList.remove("englishMobile");
         },
-        resize() {
-            let wWidth = window.innerWidth;
-            this.isBig = wWidth < 1420 ? false : true;
-        },
         scroll() {
             this.scrollBottom =
                 document.documentElement.scrollTop || document.body.scrollTop;
@@ -574,12 +572,15 @@ export default {
                 //下滑
                 if (this.scrollTop > 80) {
                     this.isHidden = true;
+                    document.body.style.paddingTop = '80px'
                 } else {
                     this.isHidden = false;
+                    document.body.style.paddingTop = '130px'
                 }
             } else {
                 //上滑
                 this.isHidden = false;
+                 document.body.style.paddingTop = '130px'
             }
 
             setTimeout(() => {
@@ -591,6 +592,8 @@ export default {
         this.$bus.$off("getUserInfo");
     },
     mounted() {
+        document.body.style.paddingTop = '130px'
+
         let pathName = window.location.pathname;
         if (
             pathName != "/backend/news/newsInfo" &&
@@ -602,8 +605,6 @@ export default {
             this.getUserInfo();
         }
 
-        this.resize();
-        window.addEventListener("resize", this.resize);
         // 当前浏览器是否是移动端
         this.browserRedirect();
         this.onBusEvent();

@@ -1,5 +1,5 @@
 body {
-  padding-top: 80px;
+  // padding-top: 130px;
 
   &.mobile {
     zoom: 0.85 !important;
@@ -12,7 +12,7 @@ body {
 
 .headerBox {
   position: fixed;
-  // top: 0;
+  top: 0;
   left: 0;
   width: 100%;
   background-color: #fff;
@@ -33,7 +33,7 @@ body {
   }
 
   .main {
-    width: 95%;
+    width: 1100px;
     min-width: 1100px;
     height: 80px;
     box-sizing: border-box;
@@ -43,571 +43,582 @@ body {
     white-space: nowrap;
     position: relative;
 
+    // transition: all 500ms;
+    &.widthMain {
+      width: 95%;
+    }
   }
-.header-fl {
-  white-space: nowrap;
-  //   width: 880px;
-  height: 80px;
-  position: absolute;
-  left: 0;
-  top: 0;
 
-  &.big {
+  .header-fl {
+    white-space: nowrap;
+    width: 50%;
+    height: 80px;
+    position: absolute;
+    left: 0;
+    top: 0;
 
-    // width: 1055px;
-    .headerPage {
-      .nav {
-        margin-right: 25px;
+    // &.big {
 
-        &:first-child {
-          margin-left: 40px;
+    //   // width: 1055px;
+    //   .headerPage {
+    //     .nav {
+    //       margin-right: 25px;
+
+    //       &:first-child {
+    //         margin-left: 40px;
+    //       }
+    //     }
+    //   }
+    // }
+  }
+
+  .header-fr {
+    position: absolute;
+    right: 0;
+    top: 0;
+    white-space: nowrap;
+    width: 50%;
+    height: 100%;
+
+    //   &.big {
+    //     width: 220px;
+    //   }
+  }
+
+  .headerLogo {
+    width: 146px;
+    height: 56px;
+    cursor: pointer;
+    margin-top: 12px;
+
+    img {
+      width: 146px;
+      height: 42px;
+      margin-top: 7px;
+    }
+  }
+
+
+  .headerClass {
+    font-size: 16px;
+    color: #222;
+  }
+
+  .headerPage {
+    display: flex;
+
+    .nav {
+      position: relative;
+      float: left;
+      cursor: pointer;
+      font-size: 16px;
+      height: 80px;
+      line-height: 80px;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      margin-right: 25px;
+
+      &:first-child {
+        margin-left: 25px;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      .navInner {
+        line-height: 56px;
+        margin-top: 12px;
+        position: relative;
+      }
+
+      .navInner:after {
+        content: '';
+        height: 2px;
+        width: 0%;
+        background-color: #773084;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transition: all .2s;
+        opacity: 0.2;
+      }
+
+      &:hover {
+        .navInner {
+          color: #773084;
+        }
+
+        .navInner:after {
+          width: 100%;
+          left: 0%;
+          opacity: 1;
+        }
+
+        .subPages {
+          max-height: 500px;
+          z-index: 200;
+
+          li {
+            opacity: 1;
+            height: 40px;
+            line-height: 40px;
+            color: #332a51;
+          }
+        }
+      }
+
+      &.active {
+        .navInner {
+          border-bottom: 2px solid #773084;
+          color: #773084;
         }
       }
     }
   }
-}
 
-.header-fr {
-  position: absolute;
-  right: 0;
-  top: 0;
-  white-space: nowrap;
-  width: 640px;
-  height: 100%;
-
-  //   &.big {
-  //     width: 220px;
-  //   }
-}
-
-.headerLogo {
-  width: 146px;
-  height: 56px;
-  cursor: pointer;
-  margin-top: 12px;
-
-  img {
-    width: 146px;
-    height: 42px;
-    margin-top: 7px;
-  }
-}
-
-
-.headerClass {
-  font-size: 16px;
-  color: #222;
-}
-
-.headerPage {
-  display: flex;
-
-  .nav {
+  .fuli {
     position: relative;
     float: left;
-    cursor: pointer;
     font-size: 16px;
-    height: 80px;
     line-height: 80px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    margin-right: 15px;
+    margin: 0 20px;
 
-    &:first-child {
-      margin-left: 25px;
-    }
-
-    &:last-child {
-      margin-right: 0;
-    }
-
-    .navInner {
-      line-height: 56px;
-      margin-top: 12px;
-      position: relative;
-    }
-
-    .navInner:after {
-      content: '';
-      height: 2px;
-      width: 0%;
-      background-color: #773084;
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transition: all .2s;
-      opacity: 0.2;
+    .icon {
+      width: 16px;
+      margin-right: 5px;
     }
 
     &:hover {
-      .navInner {
+      .welf {
+        display: block;
+      }
+    }
+
+    .welf {
+      display: none;
+      position: absolute;
+      left: -40px;
+      top: 90px;
+      background-color: #fff;
+      width: 214px;
+      height: 250px;
+      padding-top: 25px;
+      box-sizing: border-box;
+      border-radius: 4px;
+
+      img {
+        display: block;
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+      }
+
+      p.text {
+        font-size: 14px;
+        color: #222;
+        margin-top: 10px;
+        text-align: center;
+        line-height: 28px;
+      }
+
+      p.desc {
+        font-size: 12px;
+        color: #999;
+        text-align: center;
+        line-height: 28px;
+
+
+      }
+    }
+
+  }
+
+  .english {
+    position: relative;
+    float: left;
+    margin-top: 27px;
+    transition: all 300ms;
+
+    &:hover {
+      color: #773084;
+
+      .globe:before {
+        background: url("https://static-image.1911edu.com/earth-purple.png") no-repeat;
+        background-size: contain;
+      }
+    }
+
+    .globe {
+      vertical-align: middle;
+
+      &:before {
+        content: '';
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        transition: all 300ms;
+        background: url("https://static-image.1911edu.com/earth-black.png") no-repeat;
+        background-size: contain;
+      }
+    }
+
+    .eng {
+      height: 26px;
+      font-size: 16px;
+      text-align: center;
+      line-height: 26px;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+  }
+
+  .search {
+    position: relative;
+    float: right;
+    width: 320px;
+    height: 40px;
+    margin-top: 20px;
+    line-height: 40px;
+    box-sizing: border-box;
+
+    img {
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      top: 6px;
+      right: 18px;
+      cursor: pointer;
+    }
+
+    .out-icon {
+      display: inline-block;
+      // width: 25px;
+      // height: 25px;
+      position: absolute;
+      top: 5px;
+      right: 0;
+      font-size: 20px;
+      font-weight: 700;
+      color: #666666;
+      cursor: pointer;
+
+      &:hover {
         color: #773084;
       }
+    }
 
-      .navInner:after {
-        width: 100%;
-        left: 0%;
-        opacity: 1;
+    .searchInput {
+      overflow: hidden;
+      box-shadow: 0px 3px 12px rgba(0, 0, 0, .1);
+      color: #aaa;
+      background-color: #fff;
+      // padding: 0 10px;
+      border: 1px solid #773084;
+
+      .innerIcon {
+        // position: absolute;
+        // right: 0;
+        // top: 0;
+        width: 80px;
+        height: 40px;
+        text-align: center;
+        color: #fff;
+        background-color: #773084;
+        cursor: pointer;
       }
 
-      .subPages {
-        max-height: 500px;
-        z-index: 200;
+      .inner-icon {
+        font-size: 18px;
+        color: #fff;
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 12px;
+        font-weight: 600;
+      }
 
+      input {
+        width: 240px;
+        height: 100%;
+        line-height: 40px;
+        font-size: 14px;
+        color: #222;
+        text-indent: 0.5em;
+        background-color: #fff;
+        z-index: 10;
+        padding-left: 10px;
+      }
+
+      input::-webkit-input-placeholder {
+        color: #aaa;
+      }
+
+      input:-moz-placeholder {
+        color: #aaa;
+      }
+
+      input::-moz-placeholder {
+        color: #aaa;
+      }
+
+      input:-ms-input-placeholder {
+        color: #aaa;
+      }
+    }
+  }
+
+  .HREntry {
+    float: left;
+    font-size: 16px;
+    margin-top: 33px;
+
+    span {
+      color: #222;
+      float: left;
+      cursor: pointer;
+      transition: all 300ms;
+
+      &.topCenter {
+        // margin-top: 17px;
+      }
+
+      &.topCode {
+        margin: 0 15px 0 30px;
+      }
+
+      &.hrin {
+        width: 100px;
+        height: 17px;
+        text-align: center;
+        position: relative;
+        border-left: 1px solid #222;
+        border-right: 1px solid #222;
+
+        i {
+          // display: inline-block;
+          display: none;
+          width: 45px;
+          height: 27px;
+          background: url('https://static-image.1911edu.com/preferential.png') no-repeat;
+          background-size: contain;
+          position: absolute;
+          top: -26px;
+          right: 3px;
+        }
+
+        &.active {
+          color: #773084;
+        }
+      }
+    }
+
+    span:hover {
+      color: #773084;
+    }
+
+    .downLoad {
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+      height: 43px;
+      width: 30px;
+      text-align: right;
+
+      .phone {
+        display: inline-block;
+        width: 14px;
+        height: 20px;
+        margin-top: -2px;
+        cursor: pointer;
+        background: url('https://static-image.1911edu.com/phone.png') no-repeat;
+        background-size: contain;
+        transition: all 300ms;
+
+        &:hover {
+          background: url('https://static-image.1911edu.com/phone2.png') no-repeat;
+          background-size: contain;
+        }
+      }
+    }
+  }
+
+  .lrBtn {
+    float: left;
+    margin-left: 20px;
+    margin-top: 31px;
+
+    span {
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 300ms;
+
+      &:hover {
+        color: #773084;
+      }
+    }
+  }
+
+  .downApp {
+    opacity: 0;
+    display: none;
+    transition: all 300ms;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 4px;
+    box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
+    text-align: center;
+    position: absolute;
+    left: 120px;
+    top: -40px;
+    z-index: -1;
+    // width: 140px;
+    // height: 140px;
+    padding: 15px;
+    padding-bottom: 0;
+
+    .changeType {
+      width: 150px;
+      text-align: center;
+      margin-top: -20px;
+
+      span {
+        display: inline-block;
+        width: 100%;
+        padding: 0 0 0 15px;
+        color: #050223;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .subHidden {
+    display: none;
+  }
+
+  .subPages {
+    width: 120px;
+    position: absolute;
+    right: 0;
+    top: 80px;
+    z-index: -1;
+    max-height: 0;
+    transition: all 300ms;
+    background-color: #fff;
+    box-shadow: 0px 5px 12px rgba(198, 194, 210, 0.28);
+
+    li {
+      position: relative;
+      opacity: 0;
+      height: 0;
+      line-height: 40px;
+      text-align: center;
+      font-size: 14px;
+      overflow: hidden;
+      color: transparent;
+      cursor: pointer;
+      transition: all 300ms;
+
+      &:hover {
+        background-color: #eee;
+        color: #773084;
+        overflow: initial;
+      }
+
+      span.redInfo {
+        top: 8px;
+        right: 24px;
+      }
+    }
+
+    li.scanCode {
+      &:hover .downApp {
+        opacity: 1;
+        display: block;
+        z-index: 200;
+      }
+    }
+  }
+
+  .nav .subPages {
+    right: -18px;
+  }
+
+  // .nav .subPages.college {
+  //   width: 120px;
+  //   right: -35px;
+  // }
+  .fr-con {
+    float: right;
+  }
+
+  .rightContent {
+    float: right;
+
+    .shoppingCart {
+      float: left;
+      padding: 0;
+      width: 20px;
+      position: relative;
+      cursor: pointer;
+      margin: 30px 20px 0 20px;
+
+      span {
+        width: 20px;
+        height: 20px;
+        background: url('https://static-image.1911edu.com/cartIcon.png') no-repeat;
+        background-size: 20px 20px;
+        transition: all 300ms;
+
+        &:hover {
+          background: url('https://static-image.1911edu.com/cartIconHover.png') no-repeat;
+          background-size: 20px 20px;
+        }
+      }
+
+      i {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        height: 16px;
+        line-height: 16px;
+        padding: 0 5px;
+        text-align: center;
+        border-radius: 8px;
+        background-color: #ff5f5f;
+        color: #fff;
+        font-size: 12px;
+        overflow: hidden;
+      }
+    }
+
+    .headImg {
+      position: relative;
+      height: 80px;
+      line-height: 80px;
+      position: relative;
+      cursor: pointer;
+      float: left;
+
+      &:hover .subPages {
         li {
           opacity: 1;
           height: 40px;
           line-height: 40px;
           color: #332a51;
         }
-      }
-    }
 
-    &.active {
-      .navInner {
-        border-bottom: 2px solid #773084;
-        color: #773084;
-      }
-    }
-  }
-}
-
-.fuli {
-  position: relative;
-  float: left;
-  font-size: 16px;
-  line-height: 80px;
-  margin: 0 20px;
-
-  .icon {
-    width: 16px;
-    margin-right: 5px;
-  }
-
-  &:hover {
-    .welf {
-      display: block;
-    }
-  }
-
-  .welf {
-    display: none;
-    position: absolute;
-    left: -40px;
-    top: 90px;
-    background-color: #fff;
-    width: 214px;
-    height: 250px;
-    padding-top: 25px;
-    box-sizing: border-box;
-    border-radius: 4px;
-
-    img {
-      display: block;
-      width: 150px;
-      height: 150px;
-      margin: 0 auto;
-    }
-
-    p.text {
-      font-size: 14px;
-      color: #222;
-      margin-top: 10px;
-      text-align: center;
-      line-height: 28px;
-    }
-
-    p.desc {
-      font-size: 12px;
-      color: #999;
-      text-align: center;
-      line-height: 28px;
-
-
-    }
-  }
-
-}
-
-.english {
-  position: relative;
-  float: left;
-  margin-top: 27px;
-  transition: all 300ms;
-
-  &:hover {
-    color: #773084;
-
-    .globe:before {
-      background: url("https://static-image.1911edu.com/earth-purple.png") no-repeat;
-      background-size: contain;
-    }
-  }
-
-  .globe {
-    vertical-align: middle;
-
-    &:before {
-      content: '';
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      transition: all 300ms;
-      background: url("https://static-image.1911edu.com/earth-black.png") no-repeat;
-      background-size: contain;
-    }
-  }
-
-  .eng {
-    height: 26px;
-    font-size: 16px;
-    text-align: center;
-    line-height: 26px;
-    cursor: pointer;
-    margin-left: 5px;
-  }
-}
-
-.search {
-  position: relative;
-  float: left;
-  width: 320px;
-  height: 40px;
-  margin-top: 20px;
-  line-height: 40px;
-  box-sizing: border-box;
-
-  img {
-    width: 16px;
-    height: 16px;
-    position: absolute;
-    top: 6px;
-    right: 18px;
-    cursor: pointer;
-  }
-
-  .out-icon {
-    display: inline-block;
-    // width: 25px;
-    // height: 25px;
-    position: absolute;
-    top: 5px;
-    right: 0;
-    font-size: 20px;
-    font-weight: 700;
-    color: #666666;
-    cursor: pointer;
-
-    &:hover {
-      color: #773084;
-    }
-  }
-
-  .searchInput {
-    overflow: hidden;
-    box-shadow: 0px 3px 12px rgba(0, 0, 0, .1);
-    color: #aaa;
-    background-color: #fff;
-    // padding: 0 10px;
-    border: 1px solid #773084;
-
-    .innerIcon {
-      // position: absolute;
-      // right: 0;
-      // top: 0;
-      width: 80px;
-      height: 40px;
-      text-align: center;
-      color: #fff;
-      background-color: #773084;
-      cursor: pointer;
-    }
-
-    .inner-icon {
-      font-size: 18px;
-      color: #fff;
-      cursor: pointer;
-      position: absolute;
-      right: 10px;
-      top: 12px;
-      font-weight: 600;
-    }
-
-    input {
-      width: 240px;
-      height: 100%;
-      line-height: 40px;
-      font-size: 14px;
-      color: #222;
-      text-indent: 0.5em;
-      background-color: #fff;
-      z-index: 10;
-      padding-left: 10px;
-    }
-
-    input::-webkit-input-placeholder {
-      color: #aaa;
-    }
-
-    input:-moz-placeholder {
-      color: #aaa;
-    }
-
-    input::-moz-placeholder {
-      color: #aaa;
-    }
-
-    input:-ms-input-placeholder {
-      color: #aaa;
-    }
-  }
-}
-
-.HREntry {
-  float: left;
-  font-size: 16px;
-  margin-top: 33px;
-
-  span {
-    color: #222;
-    float: left;
-    cursor: pointer;
-    transition: all 300ms;
-
-    &.topCenter {
-      // margin-top: 17px;
-    }
-
-    &.topCode {
-      margin: 0 15px 0 30px;
-    }
-
-    &.hrin {
-      width: 100px;
-      height: 17px;
-      text-align: center;
-      position: relative;
-      border-left: 1px solid #222;
-      border-right: 1px solid #222;
-
-      i {
-        // display: inline-block;
-        display: none;
-        width: 45px;
-        height: 27px;
-        background: url('https://static-image.1911edu.com/preferential.png') no-repeat;
-        background-size: contain;
-        position: absolute;
-        top: -26px;
-        right: 3px;
+        z-index: 200;
+        max-height: 580px;
       }
 
-      &.active {
-        color: #773084;
+      img {
+        width: 34px;
+        height: 34px;
+        border-radius: 20px;
+        vertical-align: middle;
       }
     }
   }
-
-  span:hover {
-    color: #773084;
-  }
-
-  .downLoad {
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-    height: 43px;
-    width: 30px;
-    text-align: right;
-
-    .phone {
-      display: inline-block;
-      width: 14px;
-      height: 20px;
-      margin-top: -2px;
-      cursor: pointer;
-      background: url('https://static-image.1911edu.com/phone.png') no-repeat;
-      background-size: contain;
-      transition: all 300ms;
-
-      &:hover {
-        background: url('https://static-image.1911edu.com/phone2.png') no-repeat;
-        background-size: contain;
-      }
-    }
-  }
-}
-
-.lrBtn {
-  float: left;
-  margin-left: 20px;
-  margin-top: 31px;
-
-  span {
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 300ms;
-
-    &:hover {
-      color: #773084;
-    }
-  }
-}
-
-.downApp {
-  opacity: 0;
-  display: none;
-  transition: all 300ms;
-  background: rgba(255, 255, 255, 1);
-  border-radius: 4px;
-  box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
-  text-align: center;
-  position: absolute;
-  left: 120px;
-  top: -40px;
-  z-index: -1;
-  // width: 140px;
-  // height: 140px;
-  padding: 15px;
-  padding-bottom: 0;
-
-  .changeType {
-    width: 150px;
-    text-align: center;
-    margin-top: -20px;
-
-    span {
-      display: inline-block;
-      width: 100%;
-      padding: 0 0 0 15px;
-      color: #050223;
-      font-size: 14px;
-    }
-  }
-}
-
-.subHidden {
-  display: none;
-}
-
-.subPages {
-  width: 120px;
-  position: absolute;
-  right: 0;
-  top: 80px;
-  z-index: -1;
-  max-height: 0;
-  transition: all 300ms;
-  background-color: #fff;
-  box-shadow: 0px 5px 12px rgba(198, 194, 210, 0.28);
-
-  li {
-    position: relative;
-    opacity: 0;
-    height: 0;
-    line-height: 40px;
-    text-align: center;
-    font-size: 14px;
-    overflow: hidden;
-    color: transparent;
-    cursor: pointer;
-    transition: all 300ms;
-
-    &:hover {
-      background-color: #eee;
-      color: #773084;
-      overflow: initial;
-    }
-
-    span.redInfo {
-      top: 8px;
-      right: 24px;
-    }
-  }
-
-  li.scanCode {
-    &:hover .downApp {
-      opacity: 1;
-      display: block;
-      z-index: 200;
-    }
-  }
-}
-
-.nav .subPages {
-  right: -18px;
-}
-
-// .nav .subPages.college {
-//   width: 120px;
-//   right: -35px;
-// }
-.rightContent {
-  .shoppingCart {
-    float: left;
-    padding: 0;
-    width: 20px;
-    position: relative;
-    cursor: pointer;
-    margin: 30px 20px 0 20px;
-
-    span {
-      width: 20px;
-      height: 20px;
-      background: url('https://static-image.1911edu.com/cartIcon.png') no-repeat;
-      background-size: 20px 20px;
-      transition: all 300ms;
-
-      &:hover {
-        background: url('https://static-image.1911edu.com/cartIconHover.png') no-repeat;
-        background-size: 20px 20px;
-      }
-    }
-
-    i {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      height: 16px;
-      line-height: 16px;
-      padding: 0 5px;
-      text-align: center;
-      border-radius: 8px;
-      background-color: #ff5f5f;
-      color: #fff;
-      font-size: 12px;
-      overflow: hidden;
-    }
-  }
-
-  .headImg {
-    position: relative;
-    height: 80px;
-    line-height: 80px;
-    position: relative;
-    cursor: pointer;
-    float: left;
-
-    &:hover .subPages {
-      li {
-        opacity: 1;
-        height: 40px;
-        line-height: 40px;
-        color: #332a51;
-      }
-
-      z-index: 200;
-      max-height: 580px;
-    }
-
-    img {
-      width: 34px;
-      height: 34px;
-      border-radius: 20px;
-      vertical-align: middle;
-    }
-  }
-}
 
   .start {
     width: 100%;
@@ -852,25 +863,77 @@ body {
 }
 
 .headerBottom {
+  // position: absolute;
+  // left: 0;
   width: 100%;
-  height: 20px;
-  line-height: 20px;
+  height: 50px;
+  line-height: 50px;
+  transition: all 400ms;
   background-color: #fff;
   border-top: 1px solid #F7F9FB;
 
   .headerInner {
-    width: 95%;
+    position: relative;
+    width: 1100px;
     margin: 0 auto;
 
+    .header-fl {
+      position: inherit;
+      width: 50%;
+      height: 50px;
+      line-height: 50px;
+
+      .headerPage {
+        .nav {
+          height: 50px;
+          line-height: 50px;
+
+          .navInner {
+            margin-top: 0;
+            line-height: 40px;
+            margin-top: 4px;
+          }
+        }
+
+        .nav:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+
+    .header-fr {
+      width: 50%;
+
+      .fuli {
+        float: right;
+        height: 50px;
+        line-height: 50px;
+      }
+
+      .english {
+        float: right;
+
+        margin-top: 0;
+
+        .globe:before {
+          margin-bottom: -2px;
+        }
+      }
+    }
   }
 }
 
 .headerBoxShow {
-  top: 0;
+  // top: 80px;
+  display: block;
+
+  // height: 50px;
 }
 
 .headerBoxHidden {
-  top: -80px;
+  display: none;
+  // top: 0;
+  // height: 0;
 }
 
 .mobile .headerBox .main .headerPage .nav {
