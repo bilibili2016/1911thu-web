@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="main clearfix">
-      <div class="bigBlock fl" v-if="courseList.length>0">
+      <div class="bigBlock fl" v-if="JSON.stringify(courseList.length)!='{}'">
         <!-- 课程详情card -->
         <div class="main-header" v-loading="loadMsg">
           <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList"></v-card>
@@ -41,7 +41,7 @@
         <div class="chatType" v-loading="loadMsg">
           <h4 class="title">选择约聊方式</h4>
           <div class="clearfix">
-            <div class="fl" @click="showCode">
+            <div :class="isOrder?'fl':'fl order'" @click="showCode">
               <h4>线上问答</h4>
               <h5>1对1在线交流</h5>
             </div>
