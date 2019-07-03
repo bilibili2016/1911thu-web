@@ -69,7 +69,7 @@ export default {
   computed: {
     ...mapGetters("auth", ["isAuthenticated"])
   },
-  data() {
+  data () {
     return {
       showDialog: false,
       dialogInfo: {},
@@ -84,19 +84,13 @@ export default {
         curriculumType: 1,
         autoplay: true
       },
-      courseUrl: {
-        base: "/course/coursedetail",
-        kid: 0,
-        bid: "",
-        page: 0
-      }
     };
   },
   methods: {
-    goLink(item) {
+    goLink (item) {
       // this.$router.push(item)
     },
-    goBuy(item, index) {
+    goBuy (item, index) {
       if (persistStore.get("token")) {
         this.curriculumcartids.cartid = item.curriculum_id;
         this.goodsNmber();
@@ -105,7 +99,7 @@ export default {
       }
     },
     // 判断购物车数量
-    goodsNmber() {
+    goodsNmber () {
       if (persistStore.get("productsNum") < 70) {
         this.addShopCart();
       } else {
@@ -113,16 +107,16 @@ export default {
         this.dialogInfo.info = "您的购物车已满，建议您先去结算或清理";
       }
     },
-    closeDialog() {
+    closeDialog () {
       this.showDialog = false;
       this.$router.push("/shop/shoppingcart");
     },
-    addShopCart() {
+    addShopCart () {
       line.addShopCart(this.curriculumcartids).then(response => {
         this.$router.push("/shop/shoppingcart");
       });
     },
-    handleCatalog(index, item) {
+    handleCatalog (index, item) {
       // 是否为项目下的课程
       if (this.config.card_type === "project") {
         return false;
@@ -149,7 +143,7 @@ export default {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
       }
     },
-    buyMask() {
+    buyMask () {
       this.$bus.$emit("loginShow", true);
     }
   }

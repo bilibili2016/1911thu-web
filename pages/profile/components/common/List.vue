@@ -141,10 +141,9 @@ export default {
       },
       cidNumber: "",
       courseUrl: {
-        base: "/course/coursedetail",
+        base: "/curriculum/detail",
         kid: 0,
-        bid: "",
-        page: 0
+        tid: 0
       }
     };
   },
@@ -159,9 +158,9 @@ export default {
       //从个人中心-我的课程-继续学习跳转到课程详情页默认播放
       window.open(
         window.location.origin +
-        "/course/coursedetail?kid=" +
+        "/curriculum/detail?kid=" +
         item.id +
-        "&page=0&paly="
+        "&tid=0&paly"
       );
     },
     openDetail (item) {
@@ -171,7 +170,8 @@ export default {
     },
     goTeacherInfo (id) {
       this.tidForm.tids = id * 1;
-      this.$router.push("/home/teacher/" + this.tidForm.tids);
+      this.courseUrl.tid = id;
+      open(this.courseUrl);
     },
     // 判断购物车数量
     goodsNmber () {

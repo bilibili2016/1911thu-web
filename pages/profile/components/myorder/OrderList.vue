@@ -110,10 +110,9 @@ export default {
       },
       responseData: { type: true, res: "" },
       courseUrl: {
-        base: "/course/coursedetail",
+        base: "/curriculum/detail",
         kid: 0,
-        bid: "",
-        page: 0
+        tid: 0
       },
       deleteOrderList: {
         id: ""
@@ -283,15 +282,6 @@ export default {
       this.kidForm.kids = item.id;
       this.courseUrl.kid = item.id;
       open(this.courseUrl);
-
-      // this.$router.push({
-      //   path: '/course/coursedetail',
-      //   query: {
-      //     kid: item.id,
-      //     bid: '',
-      //     page: 0
-      //   }
-      // })
     },
     //项目详情
     goProjrctInfo (item) {

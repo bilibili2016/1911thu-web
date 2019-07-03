@@ -3,7 +3,7 @@
   <div class="teachers">
     <v-title :title="famoustitle" :link="linkfamouscourse"></v-title>
     <div class="cardList ">
-      <div class="item" v-for="(teacher,index) in teachers" :key="index" @click="goTeacherInfo(teacher,index)">
+      <div class="item" v-for="(teacher,index) in teachers" :key="index" @click="goTeacherInfo(teacher.id)">
         <div class="item-img">
           <img :src="teacher.head_img" alt="">
         </div>
@@ -20,7 +20,7 @@
 import { home } from '~/lib/v1_sdk/index'
 import CustomTitle from '@/components/common/Title.vue'
 export default {
-  data() {
+  data () {
     return {
       tidForm: {
         tids: null
@@ -39,23 +39,24 @@ export default {
     'v-title': CustomTitle
   },
   methods: {
-    goLink(item) {
+    goLink (item) {
       this.$router.push(item)
     },
-    goTeacherInfo(item, index) {
-      this.$router.push('/home/teacher/' + this.tidForm.tids)
+    goTeacherInfo (item) {
+      this.courseUrl.tid = item;
+      open(this.courseUrl);
     },
-    getMore(item) {
+    getMore (item) {
       window.open(window.location.origin + item)
     },
-    getTeacherList() {
+    getTeacherList () {
       home.getTeacherList(this.teacherForm).then(response => {
         this.teachers = response.data.teacherList
         // this.teacherResource = response.data.teacherList
       })
     }
   },
-  mounted() {
+  mounted () {
     this.getTeacherList()
   }
 }

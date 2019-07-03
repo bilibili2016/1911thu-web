@@ -10,7 +10,7 @@
           <!-- 登录 表单-->
           <!-- 账号密码登录-->
           <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm" @keyup.enter.native="signIns('loginData')" v-if="mobileloginmsg === false">
-            <v-passwordlogin :loginData="loginData" :mobileloginmsg="mobileloginmsg" :isloginClick="isloginClick" @changePwd="changePwd" @forget="forget" @mobilelogin="mobilelogin" @signIns="signIns"  @phonesChange="phonesChange"></v-passwordlogin>
+            <v-passwordlogin :loginData="loginData" :mobileloginmsg="mobileloginmsg" :isloginClick="isloginClick" @changePwd="changePwd" @forget="forget" @mobilelogin="mobilelogin" @signIns="signIns" @phonesChange="phonesChange"></v-passwordlogin>
           </el-form>
           <!-- 手机验证码登录-->
           <el-form :model="registerMobileData" status-icon :rules="loginDXRules" ref="loginDatamobile" class="demo-ruleForm telLogin" v-if="mobileloginmsg === true">
@@ -69,7 +69,7 @@ export default {
     "v-codelogin": CodeLogin,
     "v-passwordlogin": PasswordLogin
   },
-  data() {
+  data () {
     var validatePass = (rule, value, callback) => {
       if (!/^[A-Za-z0-9]+$/.test(value)) {
         callback(new Error("密码只能输入数字、字母"));
@@ -367,14 +367,14 @@ export default {
       "setToken",
       "setPwd"
     ]),
-    phonesChange(val){
+    phonesChange (val) {
       this.registerMobileData.phones = val
-       this.loginData.phonenum=val
-       this.registerData.phones=val
+      this.loginData.phonenum = val
+      this.registerData.phones = val
 
     },
     //清除计时操作
-    clearTime() {
+    clearTime () {
       clearInterval(this.codeInterval);
       this.bindTelData.getCode = "获取验证码";
       this.bindTelData.seconds = 30;
@@ -382,7 +382,7 @@ export default {
       this.codeClick = false;
     },
     // 验证手机登录还是账号密码登录
-    mobilelogin() {
+    mobilelogin () {
       //切换时清除计时器
       this.clearTime();
       this.mobileloginmsg = !this.mobileloginmsg;
@@ -390,7 +390,7 @@ export default {
       this.emptyForm();
     },
     // 登录显示card
-    async loginCardShow() {
+    async loginCardShow () {
       this.closeWechat();
       this.start = true;
       this.lrFrame = this.start;
@@ -399,7 +399,7 @@ export default {
       this.mobileloginmsg = false;
     },
     // 注册显示card
-    rigisterCardShow() {
+    rigisterCardShow () {
       this.closeWechat();
       this.start = true;
       this.lrFrame = true;
@@ -411,7 +411,7 @@ export default {
       }
     },
     //微信登录
-    wechatLogined() {
+    wechatLogined () {
       this.lrFrame = false;
       this.wechatLogin = true;
       this.scanCodeShow = true; //微信扫码
@@ -425,7 +425,7 @@ export default {
     },
 
     // 注册时候获取验证码 this.registerData
-    async handleGetCode(data) {
+    async handleGetCode (data) {
       if (this.bindTelData.seconds === 30) {
         if (
           this.bindTelData.captchaDisable === false &&
@@ -457,7 +457,7 @@ export default {
       }
     },
     // 手机验证码 登录时候
-    async handleMobileGetCode() {
+    async handleMobileGetCode () {
       if (
         !/^[1][2,3,4,5,6,7,8,9][0-9]{9}$/.test(this.registerMobileData.phones)
       ) {
@@ -492,7 +492,7 @@ export default {
       }
     },
     // 验证手机号是否存在
-    verifyRgTel() {
+    verifyRgTel () {
       this.codeClick = true;
       if (this.errorTel.tel === this.registerData.phones) {
         message(this, "error", this.errorTel.msg);
@@ -519,7 +519,7 @@ export default {
       }
     },
     // 验证手机号是否已经绑定了微信
-    verifyRgTelWX() {
+    verifyRgTelWX () {
       if (this.bindTelData.seconds === 30) {
         if (!/^[1][2,3,4,5,6,7,8,9][0-9]{9}$/.test(this.bindTelData.phones)) {
           message(this, "error", "请输入正确的手机号！");
@@ -537,7 +537,7 @@ export default {
       }
     },
     // 验证绑定学号的手机号是否存在
-    validationTel() {
+    validationTel () {
       if (this.bindTelData.bindType == 1) {
         this.bindTelData.types = 1;
       } else {
@@ -559,7 +559,7 @@ export default {
       }
     },
     // 注册完登录 请求
-    alreadySignin(formName) {
+    alreadySignin (formName) {
       this.loginData.phonenum = this.registerData.phones;
       this.loginData.password = this.registerData.passwords;
       this.loginData.ectpwd = encryption(this.registerData.passwords);
@@ -577,7 +577,7 @@ export default {
       });
     },
     // 注册 请求
-    signUp(formName) {
+    signUp (formName) {
       this.isloading = true;
       this.isClick = true;
       this.registerData.ectpwd = encryption(this.registerData.passwords);
@@ -610,7 +610,7 @@ export default {
       });
     },
     // 账号密码 登录 请求
-    signIns(formName) {
+    signIns (formName) {
       this.isloginClick = true;
       this.isloading = false;
       this.loginData.ectpwd = encryption(this.loginData.password);
@@ -640,7 +640,7 @@ export default {
       this.move();
     },
     // 手机验证码 登录
-    signInsMobile(formName) {
+    signInsMobile (formName) {
       this.isloginClick = true;
       this.isloading = false;
       this.$refs[formName].validate(valid => {
@@ -669,7 +669,7 @@ export default {
       this.move();
     },
     // 从微信拉取二维码
-    async wxLogin() {
+    async wxLogin () {
       var link = window.location.origin;
       if (link === "https://www.1911edu.com") {
         link = "https://api.1911edu.com/Wapi/Index/wxBack";
@@ -689,7 +689,7 @@ export default {
       }, 1000);
     },
     // 微信绑定手机号 + 学号绑定手机号
-    async loginWechat() {
+    async loginWechat () {
       this.loadLogin = true;
       try {
         if (this.bindTelData.phones === "") {
@@ -736,7 +736,7 @@ export default {
       }
     },
     //获取微信登录是否已经绑定
-    getWXAccredit() {
+    getWXAccredit () {
       // 判断当前网址是否已经变更
       if (this.$route.path !== this.currentURL) {
         this.closeWechat();
@@ -773,12 +773,12 @@ export default {
       });
     },
     // 忘记密码
-    forget() {
+    forget () {
       this.$router.push("/auth/forgotpassword");
       this.close();
     },
     // 改变密码显示隐藏
-    changePwd() {
+    changePwd () {
       if (this.loginData.showPwd) {
         this.loginData.showPwd = false;
         this.loginData.pwdType = "password";
@@ -788,12 +788,12 @@ export default {
       }
     },
     // 微信扫码返回上一步
-    back() {
+    back () {
       this.close();
       this.loginCardShow();
     },
     // 关闭登录注册
-    close() {
+    close () {
       this.move();
       this.start = false;
       this.lrFrame = false;
@@ -806,7 +806,7 @@ export default {
       clearInterval(this.getwxtime);
     },
     // 关闭微信绑定
-    closeWechat() {
+    closeWechat () {
       this.move();
       this.start = false;
       this.lrFrame = false;
@@ -817,7 +817,7 @@ export default {
       this.emptyWechatForm();
     },
     // 清空表单
-    emptyForm() {
+    emptyForm () {
       // 账号密码登陆
       // this.loginData.phonenum = "";
       this.loginData.password = "";
@@ -841,7 +841,7 @@ export default {
       this.registerMobileData.companyCodes = "";
     },
     // 清空微信表单
-    emptyWechatForm() {
+    emptyWechatForm () {
       (this.bindTelData.phones = ""),
         (this.bindTelData.codes = ""),
         (this.bindTelData.seconds = 30),
@@ -852,37 +852,37 @@ export default {
         (this.bindTelData.checked = false);
     },
     // 切换登录注册清空表单
-    handleClick(tab, event) {
+    handleClick (tab, event) {
       this.emptyForm();
     },
     // 登陆成功获取用户信息
-    getUserInfo() {
+    getUserInfo () {
       this.$bus.$emit("getUserInfo");
     },
     // 禁止页面滑动
-    stop() {
-      var mo = function(e) {
+    stop () {
+      var mo = function (e) {
         e.preventDefault();
       };
       document.body.style.overflow = "hidden";
       document.addEventListener("touchmove", mo, false); //禁止页面滑动
     },
     /***取消滑动限制***/
-    move() {
-      var mo = function(e) {
+    move () {
+      var mo = function (e) {
         e.preventDefault();
       };
       document.body.style.overflow = "auto"; //出现滚动条
       document.removeEventListener("touchmove", mo, false);
     },
     // 打开用户注册协议
-    userProtocol() {
+    userProtocol () {
       window.open(window.location.origin + "/other/activePages/userProtocol");
     },
     // 判断当前页面路由-是否登录后刷新当前页面
-    refresh() {
+    refresh () {
       let pathName = window.location.pathname;
-      if (pathName === "/course/coursedetail") {
+      if (pathName === "/curriculum/detail") {
         this.$bus.$emit("reCourseData");
       } else if (pathName === "/project/projectdetail") {
         this.$bus.$emit("reProjectData");
@@ -894,7 +894,7 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     let me = this;
     this.$bus.$on("loginShow", data => {
       this.loginCardShow();
@@ -917,10 +917,10 @@ export default {
   },
   watch: {
     // 监测登陆注册切换时清除注册获取验证码定时器
-    activeName() {
+    activeName () {
       this.clearTime();
     },
-    "registerData.checked"(val, oldVal) {
+    "registerData.checked" (val, oldVal) {
       if (val) {
         this.isClick = false;
         this.isHasClass = false;

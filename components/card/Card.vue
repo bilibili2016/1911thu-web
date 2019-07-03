@@ -114,10 +114,9 @@ export default {
       newTag: "https://static-image.1911edu.com/new.png",
       numSrc: require("@/assets/images/home_num.png"),
       courseUrl: {
-        base: "/course/coursedetail",
+        base: "/curriculum/detail",
         kid: 0,
-        bid: "",
-        page: 0
+        tid: 0,
       }
     };
   },

@@ -262,10 +262,9 @@ export default {
         curriculumcartid: []
       },
       courseUrl: {
-        base: "/course/coursedetail",
+        base: "/curriculum/detail",
         kid: 0,
-        bid: "",
-        page: 0
+        tid: 0
       }
     };
   },

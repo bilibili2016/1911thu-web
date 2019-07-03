@@ -123,10 +123,9 @@ export default {
       },
       responseData: { type: true, res: "" },
       courseUrl: {
-        base: "/course/coursedetail",
+        base: "/curriculum/detail",
         kid: 0,
-        bid: "",
-        page: 0
+        tid: 0
       },
       detailconfig: {
         type: true,

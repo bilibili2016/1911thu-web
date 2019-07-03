@@ -132,10 +132,9 @@ export default {
         kids: ""
       },
       courseUrl: {
-        base: "/course/coursedetail",
+        base: "/curriculum/detail",
         kid: 0,
-        bid: "",
-        page: 0
+        tid: 0
       }
     };
   },
@@ -270,7 +269,6 @@ export default {
 
       this.courseUrl.kid = item.id;
       open(this.courseUrl);
-      // this.$router.push(`/course/coursedetail?kid=${item.id}&bid=&page=0`)
     },
     //项目详情
     goProjrctInfo (item) {

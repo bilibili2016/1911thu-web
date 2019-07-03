@@ -4,12 +4,7 @@
     <div class="chapter" v-for="(catalog,index) in catalogs" :key="index">
       <h4>{{catalog.title}}</h4>
       <!-- 遍历小节 -->
-      <div
-        class="bar clearfix"
-        v-for="(bar,index) in catalog.childList"
-        :key="index"
-        @click="handleCatalog(index,catalog)"
-      >
+      <div class="bar clearfix" v-for="(bar,index) in catalog.childList" :key="index" @click="handleCatalog(index,catalog)">
         <span class="fl playIcon" v-show="changeImg.id == bar.id?false:true">
           <i class="el-icon-caret-right"></i>
         </span>
@@ -23,15 +18,7 @@
           </span>
         </p>
         <span>
-          <el-progress
-            v-if="catalog.isLogin == true && bar.isFree == false && bar.percentage>0"
-            class="fr"
-            :text-inside="true"
-            :stroke-width="8"
-            :percentage="bar.percentage"
-            :show-text="false"
-            color="#773084"
-          ></el-progress>
+          <el-progress v-if="catalog.isLogin == true && bar.isFree == false && bar.percentage>0" class="fr" :text-inside="true" :stroke-width="8" :percentage="bar.percentage" :show-text="false" color="#773084"></el-progress>
         </span>
       </div>
     </div>
@@ -58,12 +45,6 @@ export default {
         curriculumType: 1,
         autoplay: true
       },
-      courseUrl: {
-        base: '/course/coursedetail',
-        kid: 0,
-        bid: '',
-        page: 0
-      }
     }
   },
   methods: {
