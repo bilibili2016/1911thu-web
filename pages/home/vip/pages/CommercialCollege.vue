@@ -30,9 +30,9 @@
                 <p>{{item.text}}</p>
               </div>
             </div>
-            <div class="centerBar">
+            <!-- <div class="centerBar">
               <p>1911学堂商学院依据各单位提出的具体学习需求，形成定制式、个性化、针对性的企业单位内训项目。</p>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -88,17 +88,29 @@ export default {
   data () {
     return {
       productList: [
-        {
-          src: "https://static-image.1911edu.com/production-commer.png",
-          text: "在线商学院"
+         {
+          src: "https://static-image.1911edu.com/cadre-proIcon1.png",
+          text: "学习与职业测评"
         },
         {
-          src: "https://static-image.1911edu.com/production-icon1.png",
-          text: "混合式标准项目"
+          src: "https://static-image.1911edu.com/cadre-proIcon2.png",
+          text: "线上精品课程与专题项目"
+        },
+         {
+          src: "https://static-image.1911edu.com/cadre-proIcon4.png",
+          text: "公开招生混合式项目"
         },
         {
-          src: "https://static-image.1911edu.com/production-icon2.png",
-          text: "工商管理硕士(MBA)"
+          src: "https://static-image.1911edu.com/cadre-proIcon3.png",
+          text: "单位委托定制内训项目"
+        },
+        {
+          src: "https://static-image.1911edu.com/cadre-proIcon5.png",
+          text: "国际认证系列项目"
+        },
+        {
+          src: "https://static-image.1911edu.com/cadre-proIcon6.png",
+          text: "线上或线下咨询项目"
         }
       ],
       studyList: [

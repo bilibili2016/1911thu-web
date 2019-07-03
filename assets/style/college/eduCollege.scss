@@ -1,6 +1,7 @@
 .eduCollege {
   background: url('https://static-image.1911edu.com/edu-bg5.png') no-repeat;
   background-size: 100% 100%;
+  background-position: 0 200px;
 
   .edu-banner {
     height: 660px;
@@ -59,9 +60,39 @@
     }
 
     .edu-one {
-      width: 980px;
+      width: 1100px;
       margin: 0 auto;
       padding: 60px 0;
+
+      .pCss {
+        width: 980px;
+        margin: 0 auto;
+      }
+
+      .object {
+        width: 1100px;
+        height: 90px;
+        line-height: 90px;
+        margin-top: 55px;
+        background: url("https://static-image.1911edu.com/cadreCollege_object.png") no-repeat;
+        background-size: cover;
+
+        .left {
+          width: 365px;
+          text-align: center;
+          vertical-align: middle;
+          color: #fff;
+          font-size: 34px;
+          font-weight: bold;
+        }
+
+        .right {
+          width: 540px;
+          font-size: 24px;
+          vertical-align: middle;
+          margin-left: 80px;
+        }
+      }
     }
 
     .edu-two {
@@ -75,11 +106,25 @@
 
         h4.edu-title {
           margin-top: 0;
-          padding-top: 100px;
+          padding-top: 50px;
 
           span {
             color: #fff;
           }
+        }
+      }
+
+      .proText {
+        width: 870px;
+        margin: 0 auto;
+        font-size: 18px;
+        color: #fff;
+        line-height: 48px;
+
+        em {
+          font-size: 30px;
+          font-weight: bold;
+          margin-right: 10px;
         }
       }
 
@@ -89,6 +134,8 @@
         display: flex;
         justify-content: space-around;
         justify-content: center;
+
+
 
         .item {
           margin-right: 80px;
