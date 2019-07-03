@@ -1,5 +1,5 @@
 <template>
-  <el-tabs class="content" v-model="activeNames" @tab-click="selectActiveTab">
+  <el-tabs class="courseCatalog" v-model="activeNames" @tab-click="selectActiveTab">
     <el-tab-pane label="课程简介" name="first">
       <div class="detailWord descript" v-html="courseList.content" v-loading="loadMsg"></div>
     </el-tab-pane>

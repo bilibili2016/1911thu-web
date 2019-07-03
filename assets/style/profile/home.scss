@@ -506,7 +506,7 @@
       }
 
       &.icon-project {
-        background: url('~assets/images/icon_project1.png') no-repeat center;
+        background: url('https://static-image.1911edu.com/icon-program.png') no-repeat center;
         background-size: contain;
       }
 
@@ -521,7 +521,7 @@
       }
 
       &.icon-set {
-        background: url('~assets/images/icon_set1.png') no-repeat center;
+        background: url('https://static-image.1911edu.com/icon-set.png') no-repeat center;
         background-size: contain;
       }
 
@@ -531,12 +531,12 @@
       }
 
       &.icon-ticket {
-        background: url('~assets/images/icon_ticket1.png') no-repeat center;
+        background: url('https://static-image.1911edu.com/icon-ticket.png') no-repeat center;
         background-size: contain;
       }
 
       &.icon-cusProject {
-        background: url('~assets/images/icon_cusProject1.png') no-repeat center;
+        background: url('https://static-image.1911edu.com/icon-self.png') no-repeat center;
         background-size: contain;
       }
 
@@ -546,7 +546,7 @@
       }
 
       &.icon-college {
-        background: url('~assets/images/icon_college1.png') no-repeat center;
+        background: url('https://static-image.1911edu.com/icon-college.png') no-repeat center;
         background-size: contain;
       }
 
@@ -603,7 +603,7 @@
     }
 
     &.icon-project {
-      background: url('~assets/images/icon_project2.png') no-repeat center;
+      background: url('https://static-image.1911edu.com/icon-programChecked.png') no-repeat center;
       background-size: contain;
     }
 
@@ -618,7 +618,7 @@
     }
 
     &.icon-set {
-      background: url('~assets/images/icon_set2.png') no-repeat center;
+      background: url('https://static-image.1911edu.com/icon-setChecked.png') no-repeat center;
       background-size: contain;
     }
 
@@ -628,12 +628,12 @@
     }
 
     &.icon-ticket {
-      background: url('~assets/images/icon_ticket2.png') no-repeat center;
+      background: url('https://static-image.1911edu.com/icon-ticketChecked.png') no-repeat center;
       background-size: contain;
     }
 
     &.icon-cusProject {
-      background: url('~assets/images/icon_cusProject2.png') no-repeat center;
+      background: url('https://static-image.1911edu.com/icon-selfChecked.png') no-repeat center;
       background-size: contain;
     }
 
@@ -643,7 +643,7 @@
     }
 
     &.icon-college {
-      background: url('~assets/images/icon_college2.png') no-repeat center;
+      background: url('https://static-image.1911edu.com/icon-collegeChecked.png') no-repeat center;
       background-size: contain;
     }
 
@@ -710,5 +710,23 @@
 
 .personalCenter {
   padding-top: 80px;
-  background: url('https://static-image.1911edu.com/profile-bg.jpg');
+  background: url('https://static-image.1911edu.com/profile-bg.jpg') repeat;
+  background-size: 60px auto;
+}
+
+.el-tab-pane.my-invitation,
+.el-tab-pane.my-order,
+.el-tab-pane.my-ticket {
+  background-color: #fff;
+}
+
+.el-tab-pane.my-ticket {
+  .orderCard {
+    box-shadow: none !important;
+  }
+}
+
+
+.bigTab.profile .my-course#pane-tab-fourth .el-tabs__content {
+  padding-bottom: 50px;
 }
