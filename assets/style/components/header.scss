@@ -105,7 +105,15 @@ body {
   }
 
   .headerPage {
+    width: auto;
     display: flex;
+    transition: all 400ms;
+
+    &.noWidth {
+      width: 0;
+      overflow: hidden;
+      color: #fff;
+    }
 
     .nav {
       position: relative;
@@ -276,7 +284,7 @@ body {
   .search {
     position: relative;
     float: right;
-    width: 320px;
+    width: 290px;
     height: 40px;
     margin-top: 20px;
     line-height: 40px;
@@ -293,8 +301,6 @@ body {
 
     .out-icon {
       display: inline-block;
-      // width: 25px;
-      // height: 25px;
       position: absolute;
       top: 5px;
       right: 0;
@@ -313,14 +319,10 @@ body {
       box-shadow: 0px 3px 12px rgba(0, 0, 0, .1);
       color: #aaa;
       background-color: #fff;
-      // padding: 0 10px;
       border: 1px solid #773084;
 
       .innerIcon {
-        // position: absolute;
-        // right: 0;
-        // top: 0;
-        width: 80px;
+        width: 70px;
         height: 40px;
         text-align: center;
         color: #fff;
@@ -339,7 +341,7 @@ body {
       }
 
       input {
-        width: 240px;
+        width: 220px;
         height: 100%;
         line-height: 40px;
         font-size: 14px;
@@ -549,6 +551,13 @@ body {
   // }
   .fr-con {
     float: right;
+    width: auto;
+    transition: all 600ms;
+
+    &.noWidth {
+      width: 0;
+      overflow: hidden;
+    }
   }
 
   .rightContent {
@@ -863,11 +872,10 @@ body {
 }
 
 .headerBottom {
-  // position: absolute;
-  // left: 0;
   width: 100%;
   height: 50px;
   line-height: 50px;
+  overflow: hidden;
   transition: all 400ms;
   background-color: #fff;
   border-top: 1px solid #F7F9FB;
@@ -923,17 +931,8 @@ body {
   }
 }
 
-.headerBoxShow {
-  // top: 80px;
-  display: block;
-
-  // height: 50px;
-}
-
 .headerBoxHidden {
-  display: none;
-  // top: 0;
-  // height: 0;
+  height: 0;
 }
 
 .mobile .headerBox .main .headerPage .nav {
