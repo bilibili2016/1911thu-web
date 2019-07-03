@@ -7,7 +7,7 @@
                 <div class="text">国内知名专家</div>
             </div>
             <div class="item">
-                <div class="num">{{userNum}}+</div>
+                <div class="num">{{registerNum}}+</div>
                 <div class="text">注册用户</div>
             </div>
             <div class="item">
@@ -27,7 +27,7 @@ export default {
     data() {
         return {
             teacherNum: 0,
-            userNum: 1,
+            registerNum: 1,
             courseNum: 0,
             serviceNum: 0,
             timer1: '',
@@ -40,21 +40,21 @@ export default {
     methods: {
         computedNum() {
             this.timer1 = setInterval(() => {
-                this.teacherNum += 5
+                this.teacherNum += 2
                 if (this.teacherNum >= 1000) {
                     this.teacherNum = '1,000'
                     clearInterval(this.timer1)
                 }
             }, 1);
             this.timer2 = setInterval(() => {
-                this.userNum = parseInt( this.userNum)+100
-                if (this.userNum >= 1000) {
-                    this.userNum = '100,000'
-                    clearInterval(this.time2)
+                this.registerNum += 150
+                if (this.registerNum >= 100000) {
+                    this.registerNum = '100,000'
+                    clearInterval(this.timer2)
                 }
             }, 1);
             this.timer3 = setInterval(() => {
-                this.courseNum += 5
+                this.courseNum += 10
                 if (this.courseNum >= 5000) {
                     this.courseNum = '5,000'
                     clearInterval(this.timer3)
@@ -71,7 +71,11 @@ export default {
         }
     },
     mounted() {
-        // this.computedNum()
+        clearInterval(this.timer1)
+        clearInterval(this.timer2)
+        clearInterval(this.timer3)
+        clearInterval(this.timer4)
+        this.computedNum()
     }
 }
 </script>
