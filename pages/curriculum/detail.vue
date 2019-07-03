@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="main clearfix">
-      <div class="bigBlock fl">
+      <div class="bigBlock fl" v-if="courseList.length>0">
         <!-- 课程详情card -->
         <div class="main-header" v-loading="loadMsg">
           <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList"></v-card>
@@ -30,29 +30,25 @@
         <!-- 课程评价-->
         <v-evaluatecase v-if="isEvaluate&&courseList.is_study != 0 && courseList.is_evaluate==0&&privileMsg" :isClose="isClose" :courseList="courseList" @changeList="cbList" :config="config"></v-evaluatecase>
       </div>
-      <div class="smallBlock fr">
+      <v-nodata class="nodata" :pageType="pageType" v-else></v-nodata>
+      <div class="smallBlock fr" v-if="teacherInfo">
         <!-- 擅长方向 -->
-        <div class="good" v-loading="loadMsg">
+        <div class="good" v-loading="loadMsg" v-if="teacherInfo.questionLeft.length>0">
           <h4 class="title">擅长方向</h4>
-          <p>如何开好一家线下实体店？</p>
-          <p>如何开好一家线下实体店如何？</p>
-          <p>如何开好一家线下实体店家线下实体店如何？</p>
-          <p>如何开好一家实体店？</p>
-          <p>如何开好一家线下家线下实体店家线下实体店实体店？</p>
+          <p v-for="(item,index) in teacherInfo.questionLeft" :key="index">{{item.title}}</p>
         </div>
         <!-- 约聊方式 -->
         <div class="chatType" v-loading="loadMsg">
           <h4 class="title">选择约聊方式</h4>
           <div class="clearfix">
-            <div class="fl">
+            <div class="fl" @click="showCode">
               <h4>线上问答</h4>
               <h5>1对1在线交流</h5>
-              <h6>￥199</h6>
             </div>
-            <div class="fr">
+            <div :class="isOrder?'fr':'fr order'" @click="goMeet">
               <h4>线下约见</h4>
               <h5>1对1面谈</h5>
-              <h6>￥300</h6>
+              <h6>￥{{teacherInfo.price}}</h6>
             </div>
           </div>
         </div>
@@ -74,6 +70,13 @@
         </div>
       </div>
     </div>
+    <div class="miniProgramCode" v-if="showMiniProgramCode">
+      <div class="content">
+        <i class="el-icon-close" @click="closeMini"></i>
+        <img :src="teacherInfo.miniprogram_picture" alt="小程序二维码">
+        <p>立即扫码，开启一对一线上交流</p>
+      </div>
+    </div>
     <v-pay @closePay="closePayed" :config="config" @refreshData="refreshData"></v-pay>
     <v-backtop :data="showCheckedCourse"></v-backtop>
   </div>
@@ -91,11 +94,13 @@ import EvaluateContent from "@/components/common/EvaluateContent.vue";
 import EvaluateCase from "@/components/common/EvaluateCase.vue";
 import Collection from "@/components/common/Collection.vue";
 import CourseCatalog from "@/pages/curriculum/coursedetail/CourseCatalog.vue";
+import NoData from "@/components/common/NoData.vue";
 export default {
   computed: {
     ...mapGetters("auth", ["isAuthenticated"])
   },
   components: {
+    "v-nodata": NoData,
     "v-pay": Pay,
     "v-backtop": BackToTop,
     "v-card": CustomCard,
@@ -104,7 +109,13 @@ export default {
   },
   data () {
     return {
+      pageType: {
+        text: "找不到任何课程信息！",
+        imgUrl: "https://static-image.1911edu.com/noMsg.png"
+      },
+      showMiniProgramCode: false,
       numSrc: require("@/assets/images/home_num.png"),
+      isOrder: false,
       vipPopShow: false,
       isShowAlert: false,
       evaluateLoading: true,
@@ -162,7 +173,7 @@ export default {
         types: 1,
         tag: []
       },
-      teacherInfo: {},
+      teacherInfo: '',
       curriculumList: [],
       evaluate: {
         eltnum: null
@@ -185,6 +196,17 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setIsCollection"]),
+    goMeet () {
+      if (isOrder) {
+        this.$router.push("");
+      }
+    },
+    showCode () {
+      this.showMiniProgramCode = true
+    },
+    closeMini () {
+      this.showMiniProgramCode = false
+    },
     selectActiveTab (tab) {
       if (tab == "third") {
         this.isEvaluate = true
@@ -334,6 +356,7 @@ export default {
         .then(res => {
           if (res.status == 0) {
             this.loadMsg = false;
+            this.isOrder = res.data.teacherInfo.bespoke_offline_time
             this.idForm.kid = res.data.curriculumDetail.id;
             // 教师详情
             this.teacherInfo = res.data.teacherInfo
