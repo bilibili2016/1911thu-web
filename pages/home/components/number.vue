@@ -40,28 +40,28 @@ export default {
     methods: {
         computedNum() {
             this.timer1 = setInterval(() => {
-                this.teacherNum += 2
+                this.teacherNum += 4
                 if (this.teacherNum >= 1000) {
                     this.teacherNum = '1,000'
                     clearInterval(this.timer1)
                 }
             }, 1);
             this.timer2 = setInterval(() => {
-                this.registerNum += 150
+                this.registerNum += 300
                 if (this.registerNum >= 100000) {
                     this.registerNum = '100,000'
                     clearInterval(this.timer2)
                 }
             }, 1);
             this.timer3 = setInterval(() => {
-                this.courseNum += 10
+                this.courseNum += 20
                 if (this.courseNum >= 5000) {
                     this.courseNum = '5,000'
                     clearInterval(this.timer3)
                 }
             }, 1);
             this.timer4 = setInterval(() => {
-                this.serviceNum += 10
+                this.serviceNum += 25
                 if (this.serviceNum >= 6000) {
                     this.serviceNum = '6,000'
                     clearInterval(this.timer4)
