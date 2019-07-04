@@ -157,7 +157,7 @@ export default {
                 if (response.status === 0) {
                     this.collegeData = response.data.vipGoodsList;
                     this.$nextTick(() => {
-                        // this.init()
+                        this.init()
                     })
 
                 }
@@ -178,7 +178,6 @@ export default {
             }
         },
         addClass() {
-            // this.init()
             this.scrollTop =
                 document.documentElement.scrollTop ||
                 window.pageYOffset ||
@@ -190,35 +189,30 @@ export default {
 
             }
 
-
-            if (this.scrollTop >= this.obj.commercialCollegeTop && this.scrollTop < this.obj.commercialCollegeTop) {
+            if (this.scrollTop < this.obj.commercialCollegeTop) {
                 this.liChecked = 'cadreCollege'
             }
-            if (this.scrollTop > this.obj.commercialCollegeTop && this.scrollTop > this.obj.cadreCollegeTop) {
+            if (this.scrollTop >= this.obj.commercialCollegeTop && this.scrollTop < this.obj.sportsCollegeTop) {
                 this.liChecked = 'commercialCollege'
             }
-            if (this.scrollTop > this.obj.sportsCollegeTop) {
+            if (this.scrollTop > this.obj.sportsCollegeTop  && this.scrollTop <= this.obj.eduCollegeTop) {
                 this.liChecked = 'sportsCollege'
             }
-             if (this.scrollTop > this.obj.eduCollegeTop) {
+             if (this.scrollTop > this.obj.eduCollegeTop && this.scrollTop <= this.obj.smartCollegeTop) {
                 this.liChecked = 'eduCollege'
             }
-             if (this.scrollTop > this.obj.smartCollegeTop ) {
+             if (this.scrollTop > this.obj.smartCollegeTop  && this.scrollTop <= this.obj.healthCollegeTop) {
                 this.liChecked = 'smartCollege'
             }
-            if (this.scrollTop > this.obj.healthCollegeTop) {
+            if (this.scrollTop > this.obj.healthCollegeTop && this.scrollTop <= this.obj.chineseCollegeTop) {
                 this.liChecked = 'healthCollege'
             }
-            if (this.scrollTop > this.obj.chineseCollegeTop) {
+            if (this.scrollTop > this.obj.chineseCollegeTop && this.scrollTop <= this.obj.newsCollegeTop) {
                 this.liChecked = 'chineseCollege'
             }
-            if (this.scrollTop > this.obj.newsCollegeTop) {
+            if (this.scrollTop >= this.obj.newsCollegeTop ) {
                 this.liChecked = 'newsCollege'
             }
-
-
-            console.log(this.liChecked, 'after');
-
 
         }
     },
