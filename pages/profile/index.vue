@@ -2,59 +2,59 @@
     <div class="personalCenter">
         <v-banner :config="bconfig" :isShowUpAvtor="activeTab=='tab-sixth'" :userInfo="userInfo"></v-banner>
         <div class="center-tab center profile bigTab" style="min-height:900px;">
-            <el-tabs v-if="userInfo.is_teacher=='1'" :tab-position="tabPosition" v-model="activeTab" @tab-click="handleClick" class="profileContent">
+            <el-tabs v-if="userInfo.is_teacher==1" :tab-position="tabPosition" v-model="activeTab" @tab-click="handleClick" class="profileContent">
                 <!-- 预约咨询  -->
                 <el-tab-pane class="my-course my-teacher" name="tab-thirteenth">
                     <span slot="label" class="tabList">
-                                                <i class="icon-consult"></i>&nbsp;我的咨询
-                                              </span>
+                                                    <i class="icon-consult"></i>&nbsp;我的咨询
+                                                  </span>
                     <v-myteacher :data="teacherData" :teacherPagemsg="teacherPagemsg" @getTeacherData="getTeacherData"></v-myteacher>
                 </el-tab-pane>
                 <!-- 上传课程  -->
                 <el-tab-pane disabled class="my-course my-teacher" name="tab-fourteenth">
                     <span slot="label" class="tabList">
-                                                <i class="icon-upload"></i>&nbsp;上传课程
-                                              </span>
+                                                    <i class="icon-upload"></i>&nbsp;上传课程
+                                                  </span>
                     <!-- <v-myteacher :data="teacherData" :teacherPagemsg="teacherPagemsg" @getTeacherData="getTeacherData"></v-myteacher> -->
                 </el-tab-pane>
                 <!-- 我的钱包  -->
                 <el-tab-pane disabled class="my-course my-teacher" name="tab-fiveteenth">
                     <span slot="label" class="tabList">
-                                                <i class="icon-wallet"></i>&nbsp;我的钱包
-                                              </span>
+                                                    <i class="icon-wallet"></i>&nbsp;我的钱包
+                                                  </span>
                     <!-- <v-myteacher :data="teacherData" :teacherPagemsg="teacherPagemsg" @getTeacherData="getTeacherData"></v-myteacher> -->
                 </el-tab-pane>
                 <!-- 我的消息 -->
                 <el-tab-pane class="my-info" name="tab-fifth">
                     <span slot="label" class="tabList infoList">
-                                                <i class="redInfo" v-if="infoNum!=0"></i>
-                                                <i class="icon-message"></i> 我的消息
-                                              </span>
+                                                    <i class="redInfo" v-if="infoNum!=0"></i>
+                                                    <i class="icon-message"></i> 我的消息
+                                                  </span>
                     <v-myinfo :noMyMsg="noMyMsg" :noMsgEle="noMsgEle" @isNoMyMsg="isNoMyMsg"></v-myinfo>
                 </el-tab-pane>
                 <!-- 个人设置 -->
                 <el-tab-pane name="tab-sixth">
                     <span slot="label" class="tabList">
-                                                <i class="icon-set"></i> 个人设置
-                                              </span>
+                                                    <i class="icon-set"></i> 个人设置
+                                                  </span>
                     <v-person :userInfo="userInfo" @getUserData="getUserInfo"></v-person>
                 </el-tab-pane>
 
             </el-tabs>
-            <el-tabs v-else :tab-position="tabPosition" v-model="activeTab" @tab-click="handleClick" class="profileContent">
+            <el-tabs v-if="userInfo.is_teacher==0" :tab-position="tabPosition" v-model="activeTab" @tab-click="handleClick" class="profileContent">
                 <!-- 最近学习 -->
                 <el-tab-pane class="my-home" name="tab-first">
                     <span slot="label" class="tabList">
-                                                <i class="icon-study"></i> 最近学习
-                                              </span>
+                                                    <i class="icon-study"></i> 最近学习
+                                                  </span>
                     <v-myhome :allCourseLoad="allCourseLoad" :studyData="myCourseData3" :studyProjectData="myProjectData4" :configZero="configZero" :configFive="configFive" :pagemsg3="pagemsg3" :myProjectPage="myProjectPage4" :noMsgOne="noMsgOne" :noMsgOnes="noMsgOnes" @studyDataChange="handleMyCourseChange"
                         @studyProjectChange="handleMyProjectChange"></v-myhome>
                 </el-tab-pane>
                 <!-- 我的课程 -->
                 <el-tab-pane class="my-course" name="tab-second">
                     <span slot="label" class="tabList">
-                                                <i class="icon-course"></i> 我的课程
-                                              </span>
+                                                    <i class="icon-course"></i> 我的课程
+                                                  </span>
                     <v-mycourse :allCourseLoad="allCourseLoad" :noMsgCourse="noMsgCourse" :pagecltcourse="pagecltcourse" :newDataing="myCourseData1" :configOne="configOne" :pagemsg1="pagemsg1" :noMsgTwo="noMsgTwo" :newDataReady="myCourseData2" :configTwo="configTwo" :pagemsg2="pagemsg2"
                         :noMsgThree="noMsgThree" :overTimeData="myCourseData4" :configFour="configFour" :noMsgFour="noMsgFour" :collectionData="collectionData" :configZero="configZero" :noMsgFive="noMsgFive" @readyStudyPageChange="handleMyCourseChange" @overStudyPageChange="handleMyCourseChange"
                         @studyPageChange="handleMyCourseChange" @collectionPageChange="collectionPageChange" @handleActive="handleMyCourseChange" @handleActiveCollect="collectionPageChange"></v-mycourse>
@@ -62,8 +62,8 @@
                 <!-- 我的项目 -->
                 <el-tab-pane class="my-course" name="tab-third">
                     <span slot="label" class="tabList">
-                                                <i class="icon-project"></i> 我的项目
-                                              </span>
+                                                    <i class="icon-project"></i> 我的项目
+                                                  </span>
                     <v-myproject :allProjectLoad="allProjectLoad" @handleActive="handleMyProjectChange" @handleActiveCollect="collectProjectPageChange" @studyProjectPageChange="handleMyProjectChange" @expiredProjectPageChange="handleMyProjectChange" @alreadyProjectPageChange="handleMyProjectChange"
                         @collectProjectPageChange="collectProjectPageChange" :noMsgNine="noMsgNine" :projectPageCollect="projectPageCollect" :configZero="configFive" :collectProjectData="collectProjectData" :noMsgEight="noMsgEight" :projectPageExpired="myProjectPage3"
                         :configSeven="configSeven" :expiredProjectData="myProjectData3" :noMsgSeven="noMsgSeven" :projectPageReady="myProjectPage2" :configSix="configSix" :studyProjectData="myProjectData1" :configOne="configThree" :projectPageStudy="myProjectPage1"
@@ -72,51 +72,51 @@
                 <!-- 我的学院 -->
                 <el-tab-pane class="my-course my-examine" name="tab-eleventh">
                     <span slot="label" class="tabList">
-                                                <i class="icon-college"></i>&nbsp;我的学院
-                                              </span>
+                                                    <i class="icon-college"></i>&nbsp;我的学院
+                                                  </span>
                     <v-mycollege :collegeListData="collegeListData" :collegeLoading="collegeLoading" :collegePagemsg="collegePagemsg" @collegeListChange="collegeListChange"></v-mycollege>
                 </el-tab-pane>
                 <!-- 我的咨询 -->
                 <el-tab-pane class="my-course" name="tab-twelfth">
                     <span slot="label" class="tabList">
-                                                <i class="icon-consult"></i>&nbsp;我的咨询
-                                              </span>
+                                                    <i class="icon-consult"></i>&nbsp;我的咨询
+                                                  </span>
                     <v-mystudent :data="teacherData" :teacherPagemsg="teacherPagemsg" @getTeacherData="getTeacherData" :userInfo="userInfo"></v-mystudent>
                 </el-tab-pane>
                 <!-- 我的收藏 -->
                 <el-tab-pane class="my-course" name="tab-sixteenth">
                     <span slot="label" class="tabList">
-                                                <i class="icon-collect"></i>&nbsp;我的收藏
-                                              </span>
+                                                    <i class="icon-collect"></i>&nbsp;我的收藏
+                                                  </span>
                     <v-mycollect :pagecltcourse="pagecltcourse" :collectionData="collectionData" :configZero="configZero" :noMsgFive="noMsgFive" @collectionPageChange="collectionPageChange" @handleActiveCollect="collectionPageChange"></v-mycollect>
                 </el-tab-pane>
                 <!-- 课程码管理 -->
                 <el-tab-pane class="my-course my-invitation" name="tab-seventh">
                     <span slot="label" class="tabList">
-                                                <i class="icon-code"></i> 兑换码管理
-                                              </span>
+                                                    <i class="icon-code"></i> 兑换码管理
+                                                  </span>
                     <v-mycode @reGetCode="getUsedInvitationCodeList" @studyCourse="handleMyCourseChange" @studyProject="handleMyProjectChange" :codeData="codeData" :recordData="recordData" :allCode="allCode" :invitationCodeList="invitationCodeList" @handleCourseCode="handleCourseCode"
                         @recordList="recordList" @searchCodeList="searchCodeList"></v-mycode>
                 </el-tab-pane>
                 <!-- 自定制项目 -->
                 <el-tab-pane class="my-course my-customerProject" name="tab-ninth">
                     <span slot="label" class="tabList">
-                                                <i class="icon-cusProject"></i>&nbsp;自定制项目
-                                              </span>
+                                                    <i class="icon-cusProject"></i>&nbsp;自定制项目
+                                                  </span>
                     <v-myCustomerProject :customer="customer" :customerProjectListData="customerProjectListData" :customerPagemsg="customerPagemsg" @customerProjectChange="customerProjectChange" @deleteCustomerProject="deleteCustomerProject"></v-myCustomerProject>
                 </el-tab-pane>
                 <!-- 考试认证 -->
                 <el-tab-pane class="my-course my-examine" name="tab-tenth">
                     <span slot="label" class="tabList">
-                                                <i class="icon-examine"></i>&nbsp;申请证书
-                                              </span>
+                                                    <i class="icon-examine"></i>&nbsp;申请证书
+                                                  </span>
                     <v-myexamine :examineListData="examineListData" :examineLoading="examineLoading" :examinePagemsg="examinePagemsg" @examineListChange="examineListChange"></v-myexamine>
                 </el-tab-pane>
                 <!-- 我的订单 -->
                 <el-tab-pane class="my-course my-order" name="tab-fourth">
                     <span slot="label" class="tabList">
-                                                <i class="icon-order"></i> 我的订单
-                                              </span>
+                                                    <i class="icon-order"></i> 我的订单
+                                                  </span>
                     <v-myorder @goDelete="goDelete" @goBack="goBack" @goTicketBack="showTicketList = true" @handleUpdate="handleMyOrderChange" @updateAll="handleMyOrderChange" :allOrderLoadAll="allOrderLoadAll" :orderTotal="orderTotal" :detailMsg="detailMsg" :orderType="orderType"
                         :projectList="projectList" :courseList="courseList" :vipList="vipList" :bankInfo="bankInfo" :orderDetail="orderDetail" :teacherBespokeList="teacherBespokeList" :invalidOrderLoad="invalidOrderLoad" :invalidOrderData="allOrderData7" :readyOrderLoad="readyOrderLoad"
                         :readyOrderData="allOrderData6" :unfinishedOrderData="allOrderData5" :noMsgTen="noMsgTen" :allOrderLoad="allOrderLoad" :allOrderData="allOrderData4" :showOrderList="showOrderList" :showDelete="showDelete" :pagemsg4="pagemsg4" :pagemsg5="pagemsg5"
@@ -126,8 +126,8 @@
                 <!-- 发票管理 -->
                 <el-tab-pane class="my-course my-ticket" name="tab-eighth">
                     <span slot="label" class="tabList">
-                                                <i class="icon-ticket"></i> 发票管理
-                                              </span>
+                                                    <i class="icon-ticket"></i> 发票管理
+                                                  </span>
                     <v-myticket @handleTicket="handleTicketTabChange" :allTicket="allTicket" :showTicketList="showTicketList" :unTicketData="unTicketData" :readyOrderLoad="readyOrderLoad" :noMsgTwl="noMsgTwl" :historyOrderData="historyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad"
                         :noMsgThi="noMsgThi" :ticketType="ticketType" :courseList="courseList" :projectList="projectList" :teacherBespokeList="teacherBespokeList" :orderDetail="orderDetail" :pagemsg8="pagemsg8" :pagemsg9="pagemsg9" @unTicketDataChange="unTicketDataChange"
                         @historyOrderDataChange="historyOrderDataChange" @goTicketDetail="goTicketDetail" @goTicketBack="goTicketBack"></v-myticket>
@@ -136,16 +136,16 @@
                 <!-- 我的消息 -->
                 <el-tab-pane class="my-info" name="tab-fifth">
                     <span slot="label" class="tabList infoList">
-                                                <i class="redInfo" v-if="infoNum!=0"></i>
-                                                <i class="icon-message"></i> 我的消息
-                                              </span>
+                                                    <i class="redInfo" v-if="infoNum!=0"></i>
+                                                    <i class="icon-message"></i> 我的消息
+                                                  </span>
                     <v-myinfo :noMyMsg="noMyMsg" :noMsgEle="noMsgEle" @isNoMyMsg="isNoMyMsg"></v-myinfo>
                 </el-tab-pane>
                 <!-- 个人设置 -->
                 <el-tab-pane name="tab-sixth">
                     <span slot="label" class="tabList">
-                                                <i class="icon-set"></i> 个人设置
-                                              </span>
+                                                    <i class="icon-set"></i> 个人设置
+                                                  </span>
                     <v-person :userInfo="userInfo" @getUserData="getUserInfo"></v-person>
                 </el-tab-pane>
 
@@ -1195,6 +1195,7 @@ export default {
                         this.userInfo.head_img = this.userInfo.head_img;
                     }
                 }
+
             });
         }
     },

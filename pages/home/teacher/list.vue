@@ -6,7 +6,7 @@
         <div class="con">
             <div v-if="listData.length">
                 <div class="listItem clearfix">
-                    <div class="item" v-for="(item,index) in listData" :key="'list'+index">
+                    <div class="item" v-for="(item,index) in listData" :key="'list'+index" @click="handleItemClick(item)">
                         <div class="clearfix">
                             <div class="img">
                                 <img :src="item.head_img" alt="">
@@ -72,6 +72,10 @@ export default {
         }
     },
     methods: {
+        handleItemClick(item) {
+            this.$router.push('/curriculum/detail?kid=0&tid=' + item.id)
+
+        },
         handleTagClick(tag) {
             this.teacherForm.search_word = ''
             this.teacherForm.is_recommend = ''
