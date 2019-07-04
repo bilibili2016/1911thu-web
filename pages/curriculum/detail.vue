@@ -3,7 +3,7 @@
     <div class="teacherInfo clearfix">
       <div class="main clearfix" v-loading="loadMsg">
         <div class="fl">
-          <img :src="teacherInfo.head_img" alt="">
+          <img :src="teacherInfo.head_img?teacherInfo.head_img:'https://static-image.1911edu.com/blank.png'" alt="">
         </div>
         <div class="fr">
           <h4>{{teacherInfo.teacher_name}}
@@ -55,7 +55,7 @@
         <!-- 在教的课程 -->
         <div class="course" v-if="teacherInfo.curriculumList.length>0" v-loading="loadMsg">
           <h4 class="title">在教的课程</h4>
-          <div class="courseOne" v-for="(item,index) in teacherInfo.curriculumList" :key="index">
+          <div class="courseOne" v-for="(item,index) in teacherInfo.curriculumList" :key="index" @click="goInfo(item.id)">
             <img :src="item.picture" alt="">
             <h4>{{item.title}}</h4>
             <h5>{{item.deputy_title}}</h5>
@@ -90,7 +90,7 @@ import CustomCard from "@/pages/curriculum/components/Card.vue";
 import { coursedetail } from "~/lib/v1_sdk/index";
 import { mapState, mapGetters, mapActions } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
-import { uniqueArray, matchSplits, setTitle, Trim ,setPagesHeight} from "@/lib/util/helper";
+import { uniqueArray, matchSplits, setTitle, Trim, setPagesHeight, open } from "@/lib/util/helper";
 import BackToTop from "@/components/common/BackToTop.vue";
 import Pay from "@/components/common/Pay.vue";
 import EvaluateContent from "@/components/common/EvaluateContent.vue";
@@ -112,7 +112,6 @@ export default {
   },
   data () {
     return {
-
       pageType: {
         text: "找不到任何课程信息！",
         imgUrl: "https://static-image.1911edu.com/noMsg.png"
@@ -195,6 +194,11 @@ export default {
       changeImg: {
         img: "",
         id: ""
+      },
+      courseUrl: {
+        base: "/curriculum/detail",
+        kid: 0,
+        tid: 0,
       }
     };
   },
@@ -215,6 +219,10 @@ export default {
       if (this.isOrder) {
         this.showMiniProgramCode = true
       }
+    },
+    goInfo (id) {
+      this.courseUrl.kid = id
+      open(this.courseUrl)
     },
     closeMini () {
       this.showMiniProgramCode = false
@@ -345,7 +353,6 @@ export default {
     },
     // 课程-获取课程列表
     getCourseList () {
-      this.idForm.kid = this.idForm.kid;
       coursedetail.getCourseList(this.idForm).then(response => {
         if (response.status === 0) {
           this.catalogs = response.data.curriculumCatalogList;
@@ -378,7 +385,7 @@ export default {
             this.courseList = res.data.curriculumDetail;
             //   是否收藏
             this.collectMsg.isCollect = res.data.curriculumDetail.is_collection;
-            if (flag) {
+            if (!flag) {
               this.initAll()
             }
           }
@@ -412,7 +419,6 @@ export default {
   mounted () {
     setPagesHeight()
     this.initData();
-    this.initAll();
     this.$bus.$on("reCourseData", data => {
       this.initAll();
     });
