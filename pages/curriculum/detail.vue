@@ -207,12 +207,12 @@ export default {
       });
     },
     goMeet () {
-      if (isOrder) {
+      if (this.isOrder) {
         this.$router.push("");
       }
     },
     showCode () {
-      if (isOrder) {
+      if (this.isOrder) {
         this.showMiniProgramCode = true
       }
     },
