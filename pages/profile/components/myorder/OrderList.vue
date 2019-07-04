@@ -66,13 +66,13 @@
                             查看更多>
                         </div>
                     </div>
-                    <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length+courseList.orderTeacherBespokeList.length)}">
+                    <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length+courseList.orderTeacherBespokeList.length+courseList.orderOfflineBespokeList.length+courseList.orderConsultGoodsList.length)}">
                         <p>￥{{courseList.order_amount}}</p>
                         <!-- 订单 -->
                         <p v-if="config.type=='order'" class="detail" @click="selectPayApply(courseList,config.type)">订单详情</p>
                     </div>
                     <!-- 订单 -->
-                    <div v-show="config.type=='order'" class="status height" :style="{height: computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length+courseList.orderTeacherBespokeList.length)}">
+                    <div v-show="config.type=='order'" class="status height" :style="{height: computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length+courseList.orderTeacherBespokeList.length+courseList.orderOfflineBespokeList.length+courseList.orderConsultGoodsList.length)}">
                         <p class="cancelOrder" v-if="courseList.pay_status == '1'" @click="cancelOrder(courseList.id)">取消订单</p>
                         <p class="payReady payed" v-if="courseList.pay_status == '2' || courseList.pay_status == '6'">已支付</p>
                         <p class="cancelOrder" v-if="courseList.pay_status == '5'" style="cursor: inherit">审核中</p>

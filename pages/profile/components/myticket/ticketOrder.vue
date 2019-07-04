@@ -52,8 +52,6 @@
                                         <h4 @click="goTeacherInfo(teacher)">{{teacher.title}}（{{teacher.teacher_name}}）</h4>
                                     </div>
                                 </div>
-
-
                                 <!-- 咨询次数列表 -->
                                 <div class="courseOne" v-if="courseList.orderConsultGoodsList.length" v-for="(consult,index) in courseList.orderConsultGoodsList" :key="'consult'+index">
                                     <img class="fl" :src="consult.picture" alt="">

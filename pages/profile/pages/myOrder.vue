@@ -26,7 +26,7 @@
         </el-tab-pane>
       </el-tabs>
     </el-card>
-    <v-detail v-if="!showOrderList&&!showDelete" @goBack="goBack" @goTicketBack="goTicketBack" :orderDetail="orderDetail" :bankInfo="bankInfo" :courseList="courseList" :teacherBespokeList="teacherBespokeList" :projectList="projectList" :vipList="vipList" :config="orderType" v-loading="detailMsg"></v-detail>
+    <v-detail v-if="!showOrderList&&!showDelete" @goBack="goBack" @goTicketBack="goTicketBack" :orderInfo="orderDetail" :bankInfo="bankInfo"  :config="orderType" v-loading="detailMsg"></v-detail>
     <v-delete v-if="showDelete" :config="orderType" @goBack="goBack" :noMsg="noMsgTen"></v-delete>
   </div>
 </template>
@@ -65,10 +65,10 @@ export default {
     'invalidOrderLoad',
     'orderDetail',
     'bankInfo',
-    'courseList',
-    'projectList',
-    'teacherBespokeList',
-    'vipList',
+    // 'courseList',
+    // 'projectList',
+    // 'teacherBespokeList',
+    // 'vipList',
     'orderType',
     'detailMsg',
     'pagemsg4',

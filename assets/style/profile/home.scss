@@ -199,6 +199,8 @@
               width: 10%;
               text-align: right;
             }
+
+
           }
 
           .customerProject {
@@ -266,7 +268,7 @@
 
               .fl {
                 float: left;
-                width: 420px;
+                width: 60%;
               }
 
               h4 {
@@ -277,6 +279,7 @@
                 overflow: hidden;
                 padding: 9px 0 0;
                 margin-bottom: 15px;
+                // line-height: 32px;
               }
 
               h6 {
@@ -415,6 +418,39 @@
             .table_lr {
               width: 100px;
             }
+          }
+
+          .consult {
+            .top {
+              .lf {
+                width: 70%;
+              }
+
+              .lr {
+                text-align: center;
+              }
+            }
+
+            .bottom {
+              .courseInfo {
+                width: 70%
+              }
+
+              .courseOperation {
+                text-align: center;
+              }
+
+              .consultTime {
+                float: left;
+                width: 10%;
+                height: 140px;
+                line-height: 140px;
+                font-size: 16px;
+                color: #332a51;
+                text-align: center;
+              }
+            }
+
           }
         }
       }

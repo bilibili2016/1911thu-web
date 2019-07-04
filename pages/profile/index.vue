@@ -118,7 +118,7 @@
                                                     <i class="icon-order"></i> 我的订单
                                                   </span>
                     <v-myorder @goDelete="goDelete" @goBack="goBack" @goTicketBack="showTicketList = true" @handleUpdate="handleMyOrderChange" @updateAll="handleMyOrderChange" :allOrderLoadAll="allOrderLoadAll" :orderTotal="orderTotal" :detailMsg="detailMsg" :orderType="orderType"
-                        :projectList="projectList" :courseList="courseList" :vipList="vipList" :bankInfo="bankInfo" :orderDetail="orderDetail" :teacherBespokeList="teacherBespokeList" :invalidOrderLoad="invalidOrderLoad" :invalidOrderData="allOrderData7" :readyOrderLoad="readyOrderLoad"
+                        :bankInfo="bankInfo" :orderDetail="orderDetail" :invalidOrderLoad="invalidOrderLoad" :invalidOrderData="allOrderData7" :readyOrderLoad="readyOrderLoad"
                         :readyOrderData="allOrderData6" :unfinishedOrderData="allOrderData5" :noMsgTen="noMsgTen" :allOrderLoad="allOrderLoad" :allOrderData="allOrderData4" :showOrderList="showOrderList" :showDelete="showDelete" :pagemsg4="pagemsg4" :pagemsg5="pagemsg5"
                         :pagemsg6="pagemsg6" :pagemsg7="pagemsg7" @getUpdateMsg="handleInitMyOrderData(true)" @closedOrderDataChange="handleMyOrderChange" @getAllOrderDataChange="handleMyOrderChange" @unfinishedOrderDataChange="handleMyOrderChange" @getReadyOrderDataChange="handleMyOrderChange"
                         @invalidOrderDataChange="handleMyOrderChange"></v-myorder>
@@ -998,12 +998,13 @@ export default {
             profileHome.curriculumPayApply(this.orderForm).then(response => {
                 if (response.status === 0) {
                     this.detailMsg = false;
-                    this.courseList = response.data.orderCurriculumList;
-                    this.projectList = response.data.orderProjectList;
-                    this.teacherBespokeList = response.data.orderTeacherBespokeList;
-                    this.vipList = response.data.orderVipList;
+                    // this.courseList = response.data.orderCurriculumList;
+                    // this.projectList = response.data.orderProjectList;
+                    // this.teacherBespokeList = response.data.orderTeacherBespokeList;
+                    // this.vipList = response.data.orderVipList;
+                    // this.orderDetail = response.data.orderDetail;
+                    this.orderDetail = response.data;
 
-                    this.orderDetail = response.data.orderDetail;
                     if (response.data.orderDetail) {
                         this.bankInfo = response.data.bankInfo;
                     }

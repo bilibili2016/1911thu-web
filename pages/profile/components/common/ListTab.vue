@@ -14,14 +14,12 @@
 <script>
 import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 import Order from '@/pages/profile/components/myorder/OrderList'
-import Detail from '@/pages/profile/components/common/Detail'
 import DataPick from '@/pages/profile/components/myorder/DataPick'
 export default {
   props: ['order', 'data', 'orderType', 'pagemsg', 'noMsg', 'allOrderLoadAll'],
   components: {
     'v-nomsg': NoMsg,
     'v-order': Order,
-    'v-detail': Detail,
     'v-datapick': DataPick
   },
   methods: {
