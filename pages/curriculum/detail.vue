@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="main clearfix">
-      <div class="bigBlock fl" v-if="JSON.stringify(courseList.length)!='{}'">
+      <div class="bigBlock fl" v-if="JSON.stringify(courseList)!='{}'">
         <!-- 课程详情card -->
         <div class="main-header" v-loading="loadMsg">
           <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList"></v-card>
@@ -53,7 +53,7 @@
           </div>
         </div>
         <!-- 在教的课程 -->
-        <div class="course" v-loading="loadMsg">
+        <div class="course" v-if="teacherInfo.curriculumList.length>0" v-loading="loadMsg">
           <h4 class="title">在教的课程</h4>
           <div class="courseOne" v-for="(item,index) in teacherInfo.curriculumList" :key="index">
             <img :src="item.picture" alt="">
