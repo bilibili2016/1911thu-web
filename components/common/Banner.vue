@@ -24,7 +24,7 @@
 </template>
 
 <template v-if="config.banner_type === 'profile'">
-    <div class="profile-banner">
+    <div class="profile-banner" :class="{userBanner:userInfo.is_teacher=='0'}">
         <div class="center-box">
             <div class="headImg">
                 <img :class="{noImg :!userInfo.head_img,topImg:userInfo.head_img}" :src="userInfo.head_img">
