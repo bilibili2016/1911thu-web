@@ -2,10 +2,10 @@
     <div class="collegeIndex">
         <div class="vipBanner"></div>
         <div class="con">
-            <div class="collegeList" ref="collegeList">
+            <div class="" ref="collegeList">
                 <div :class="{fixed:isFixed,collegeList:true}">
                     <ul>
-                        <li :class="{checked:liChecked==item.id}" v-for="(item,index) in collegeData" :key="index" @click="handleLiClick(item)">{{item.title}}</li>
+                        <li :data-id="liChecked == item.en_title" :class="{checked:liChecked == item.en_title}" v-for="(item,index) in collegeData" :key="index" @click="handleLiClick(item)">{{item.title}}</li>
                     </ul>
                 </div>
             </div>
@@ -28,8 +28,8 @@
                         <div class="cadreItem">
                             <ul>
                                 <li style="cursor:pointer" @click.stop="handleLink('/home/core/pages/personEval',true)"><span class="itemLeft">学习与职业测评</span><span class="itemRight">进入测评> </span></li>
-                                <li style="cursor:default"  @click.stop="handleLink('',false)"><span class="itemLeft">线上精品大师课</span><span class="itemRight">查看全部> </span></li>
-                                <li style="cursor:default"  @click.stop="handleLink('',false)"><span class="itemLeft">国际认证系列项目</span><span class="itemRight">查看详情> </span></li>
+                                <li style="cursor:default" @click.stop="handleLink('',false)"><span class="itemLeft">线上精品大师课</span><span class="itemRight">查看全部> </span></li>
+                                <li style="cursor:default" @click.stop="handleLink('',false)"><span class="itemLeft">国际认证系列项目</span><span class="itemRight">查看详情> </span></li>
                                 <li style="cursor:pointer" @click.stop="handleLink('/other/activePages/Institutional',true)"><span class="itemLeft">单位定制内训项目</span><span class="itemRight">查看详情> </span></li>
                             </ul>
                         </div>
@@ -122,12 +122,13 @@ export default {
             scrollTop: '',
             isFixed: false,
             collegeData: [],
-            liChecked: 2
+            liChecked: 'cadreCollege',
+            obj: {}
         }
     },
     methods: {
-        handleLink(url,flag) {
-            if(!flag){
+        handleLink(url, flag) {
+            if (!flag) {
                 return false
             }
             this.$router.push(url)
@@ -143,11 +144,11 @@ export default {
             });
         },
         handleLiClick(item) {
-            this.liChecked = item.id
+            this.liChecked = item.en_title
             let top = 420 + document.getElementById('' + item.en_title).offsetTop
             window.scrollTo({
-                top:top,
-                 behavior: "smooth"
+                top: top,
+                behavior: "smooth"
             })
         },
         // 学院列表
@@ -155,11 +156,29 @@ export default {
             home.vipGoodsList().then(response => {
                 if (response.status === 0) {
                     this.collegeData = response.data.vipGoodsList;
+                    this.$nextTick(() => {
+                        // this.init()
+                    })
 
                 }
             });
         },
+        init() {
+            // console.log(document.querySelector('#cadreCollege'),'kkk');
+            if (document.querySelector('#cadreCollege')) {
+                this.obj.cadreCollegeTop = document.querySelector('#cadreCollege').offsetTop
+                this.obj.commercialCollegeTop = document.querySelector('#commercialCollege').offsetTop
+                this.obj.sportsCollegeTop = document.querySelector('#sportsCollege').offsetTop
+                this.obj.eduCollegeTop = document.querySelector('#eduCollege').offsetTop
+                this.obj.smartCollegeTop = document.querySelector('#smartCollege').offsetTop
+                this.obj.healthCollegeTop = document.querySelector('#healthCollege').offsetTop
+                this.obj.chineseCollegeTop = document.querySelector('#chineseCollege').offsetTop
+                this.obj.newsCollegeTop = document.querySelector('#newsCollege').offsetTop
+                console.log(this.obj);
+            }
+        },
         addClass() {
+            // this.init()
             this.scrollTop =
                 document.documentElement.scrollTop ||
                 window.pageYOffset ||
@@ -171,11 +190,44 @@ export default {
 
             }
 
+
+            if (this.scrollTop >= this.obj.commercialCollegeTop && this.scrollTop < this.obj.commercialCollegeTop) {
+                this.liChecked = 'cadreCollege'
+            }
+            if (this.scrollTop > this.obj.commercialCollegeTop && this.scrollTop > this.obj.cadreCollegeTop) {
+                this.liChecked = 'commercialCollege'
+            }
+            if (this.scrollTop > this.obj.sportsCollegeTop) {
+                this.liChecked = 'sportsCollege'
+            }
+             if (this.scrollTop > this.obj.eduCollegeTop) {
+                this.liChecked = 'eduCollege'
+            }
+             if (this.scrollTop > this.obj.smartCollegeTop ) {
+                this.liChecked = 'smartCollege'
+            }
+            if (this.scrollTop > this.obj.healthCollegeTop) {
+                this.liChecked = 'healthCollege'
+            }
+            if (this.scrollTop > this.obj.chineseCollegeTop) {
+                this.liChecked = 'chineseCollege'
+            }
+            if (this.scrollTop > this.obj.newsCollegeTop) {
+                this.liChecked = 'newsCollege'
+            }
+
+
+            console.log(this.liChecked, 'after');
+
+
         }
     },
     mounted() {
+
         window.addEventListener("scroll", this.addClass);
         this.vipGoodsList()
+
+
         // document.getElementById(..).scrollTop = 0;
 
 

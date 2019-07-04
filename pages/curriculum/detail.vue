@@ -21,7 +21,7 @@
       <div class="bigBlock fl" v-if="JSON.stringify(courseList)!='{}'" v-loading="loadMsg">
         <!-- 课程详情card -->
         <div class="main-header" v-loading="loadMsg">
-          <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList"></v-card>
+          <v-card :courseList="courseList" :teacherInfo="teacherInfo" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList"></v-card>
         </div>
         <!-- 简介、目录、评论和下载 -->
         <div class="content">
@@ -90,7 +90,7 @@ import CustomCard from "@/pages/curriculum/components/Card.vue";
 import { coursedetail } from "~/lib/v1_sdk/index";
 import { mapState, mapGetters, mapActions } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
-import { uniqueArray, matchSplits, setTitle, Trim } from "@/lib/util/helper";
+import { uniqueArray, matchSplits, setTitle, Trim ,setPagesHeight} from "@/lib/util/helper";
 import BackToTop from "@/components/common/BackToTop.vue";
 import Pay from "@/components/common/Pay.vue";
 import EvaluateContent from "@/components/common/EvaluateContent.vue";
@@ -408,6 +408,7 @@ export default {
     }
   },
   mounted () {
+    setPagesHeight()
     this.initData();
     this.initAll();
     this.$bus.$on("reCourseData", data => {
