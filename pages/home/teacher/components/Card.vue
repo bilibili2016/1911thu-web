@@ -7,7 +7,7 @@
         <p class="name">{{teacher.teacher_name}}</p>
         <p class="position" :class="{'ellipsis':teacher.graduate.length>25}">{{teacher.graduate}}</p>
         <p class="operate">
-          <span class="btn" @click="handleLinkTeacherInfo(teacher)">查看导师详情</span>
+          <span class="btn" @click="handleLinkTeacherInfo(teacher.id)">查看导师详情</span>
         </p>
       </div>
     </div>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { message } from "~/lib/util/helper";
+import { open } from "~/lib/util/helper";
 import { list } from "~/lib/v1_sdk/index";
 export default {
   props: ["famousList"],
@@ -28,9 +28,8 @@ export default {
   },
   methods: {
     handleLinkTeacherInfo (item) {
-      //   if (item.is_teachering) {
-      this.$router.push("/home/teacher/" + item.id);
-      //   }
+      this.courseUrl.tid = item;
+      open(this.courseUrl);
     }
   }
 };

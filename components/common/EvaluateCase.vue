@@ -1,60 +1,29 @@
 <template>
   <!-- 课程评价 -->
-  <div
-    class="evaluate-tag"
-    v-if="config.card_type!=='project'"
-  >
-    <div class="note">
-      <h4>课程评价
-        <i
-          v-show="isClose"
-          class="el-icon-close fr"
-          @click="closeEvaluate"
-        ></i>
-      </h4>
-      <div class="personal">
-        <!-- <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div> -->
-        <span class="rate">
-          <span style="color:#F45E61">*</span>课程评分:
-        </span>
-        <span class="ratem">
-          <el-rate
-            v-model="rateModel"
-            @change="changeRate"
-          ></el-rate>
-        </span>
-        <div class="bthgrop">
-          <!-- <span> -->
-          <div
-            v-for="(item,index) in btnData"
-            :key="index"
-            @click="getBtnContent(item,index)"
-            :class="{borderColor: item.isCheck}"
-            class="detail-btngrounp"
-          >
-            {{item.value}}
-          </div>
-          <!-- </span> -->
+  <div class="evaluate-tag" v-if="config.card_type!=='project'">
+    <h4>课程评价
+      <i v-show="isClose" class="el-icon-close fr" @click="closeEvaluate"></i>
+    </h4>
+    <div class="personal clearfix">
+      <!-- <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div> -->
+      <span class="rate">
+        <span style="color:#F45E61">*</span>课程评分:
+      </span>
+      <span class="ratem">
+        <el-rate v-model="rateModel" @change="changeRate"></el-rate>
+      </span>
+      <div class="bthgrop clearfix">
+        <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: item.isCheck}" class="detail-btngrounp">
+          {{item.value}}
         </div>
-        <div class="area">
-          <el-input
-            type="textarea"
-            resize="none"
-            :rows="3"
-            placeholder="其它想说的(最长不超过150字)"
-            v-model="textarea"
-            maxlength="150"
-          >
-          </el-input>
-          <p class="reminder">还可以输入{{overFonts}}字</p>
-        </div>
-        <div class="submit">
-          <el-button
-            :class="{canSubmit:textarea!='' || addEvaluateForm.tag.length!=0}"
-            type="primary"
-            @click="addEvaluate"
-          >提交</el-button>
-        </div>
+      </div>
+      <div class="area">
+        <el-input type="textarea" resize="none" :rows="3" placeholder="其它想说的(最长不超过150字)" v-model="textarea" maxlength="150">
+        </el-input>
+        <p class="reminder">还可以输入{{overFonts}}字</p>
+      </div>
+      <div class="submit">
+        <el-button :class="{canSubmit:textarea!='' || addEvaluateForm.tag.length!=0}" type="primary" @click="addEvaluate">提交</el-button>
       </div>
     </div>
   </div>
@@ -67,7 +36,7 @@ import { store as persistStore } from "~/lib/core/store";
 import { message } from "@/lib/util/helper";
 export default {
   props: ["courseList", "isClose", "config"],
-  data() {
+  data () {
     return {
       reTagBtn: [],
       textarea: "",
@@ -87,13 +56,13 @@ export default {
     };
   },
   computed: {
-    overFonts() {
+    overFonts () {
       return 150 - this.textarea.length;
     }
   },
   methods: {
     //标签-获取课程标签列表
-    getEvaluateTags() {
+    getEvaluateTags () {
       coursedetail.getEvaluateTags().then(response => {
         if (response.status === 0) {
           this.tagGroup = response.data.evaluateTags;
@@ -103,7 +72,7 @@ export default {
       });
     },
     // 标签-点击评价改变星级
-    changeRate(val) {
+    changeRate (val) {
       this.reTagBtn = [];
       this.tagGroup[val].map((item, i) => {
         let obj = new Object();
@@ -116,7 +85,7 @@ export default {
       this.addEvaluateForm.tag = [];
     },
     // 评论-提交评论接口
-    addEvaluate() {
+    addEvaluate () {
       this.addEvaluateForm.ids = this.courseList.id;
       this.addEvaluateForm.curriculumcatalogid = this.courseList.defaultCurriculumCatalog.id;
       this.flag = this.courseList.is_study;
@@ -155,7 +124,7 @@ export default {
       }
     },
     // 标签-点击获取标签内容
-    getBtnContent(val, index) {
+    getBtnContent (val, index) {
       if (val.isCheck === true) {
         this.$set(val, "isCheck", false);
         for (var i = 0; i < this.addEvaluateForm.tag.length; i++) {
@@ -170,14 +139,14 @@ export default {
       }
     },
     //关闭
-    closeEvaluate() {
+    closeEvaluate () {
       this.$emit("closeEvaluate");
       // this.showEvaluate = false
       // this.radioBtn = ''
       // this.word = ''
     }
   },
-  mounted() {
+  mounted () {
     this.getEvaluateTags();
   }
 };

@@ -1,66 +1,70 @@
 .footerBox {
   width: 100%;
-  height: 100px;
+  height: 150px;
   background-color: #050223;
   color: #fff;
+  box-sizing: border-box;
 
-  // position: fixed;
-  // bottom: 0;
-  // left: 0;
   .main {
+    position: relative;
     width: 1100px;
     margin: 0 auto;
 
-    .logo {
-      height: 100px;
-
-      i {
-        display: inline-block;
-        width: 128px;
-        height: 32px;
-        background: url('https://static-image.1911edu.com/logofooter.png') no-repeat center bottom;
-        background-size: contain;
-        margin-top: 34px;
-      }
-    }
-
-    .companyInfo {
-      margin-left: 43px;
-      line-height: 100px;
+    .footerItem {
+      padding-top: 38px;
 
       span {
+        width: 70px;
+        font-size: 14px;
+        color: #fff;
+        text-align: center;
         cursor: pointer;
         transition: all 300ms;
-
-        &.line {
-          margin: 0 15px;
-        }
 
         &:hover {
           color: #999;
         }
 
-        &.aboutSpan {
-          cursor: auto;
+        &:nth-child(2) {
+          border: 1px solid #fff;
+          border-top: none;
+          border-bottom: none;
 
-          &:hover {
-            color: #fff;
-          }
         }
       }
     }
 
-    .copyright {
+    .one,
+    .two {
       font-size: 14px;
       color: #fff;
-      line-height: 28px;
-      text-align: right;
-      margin-top: 22px;
+      // line-height: 28px;
+      text-align: left;
+    }
 
-      .two {
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 12px;
+    .one {
+      margin: 17px 0;
+    }
+
+    .two {
+      color: #ccc;
+      font-size: 12px;
+    }
+
+    .logo {
+      position: absolute;
+      right: 0;
+      top: 55px;
+
+      i {
+        display: inline-block;
+        width: 139px;
+        height: 40px;
+        background: url('https://static-image.1911edu.com/logofooter.png') no-repeat center bottom;
+        background-size: contain;
+        // margin-top: 34px;
       }
     }
+
   }
 }

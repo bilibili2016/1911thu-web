@@ -2,6 +2,12 @@
   h1 {
     color: #222;
     margin: 40px 0px;
+    font-weight: 500;
+
+    span {
+      display: inline-block;
+      vertical-align: middle;
+    }
 
     .moredata {
       line-height: 38px;
@@ -17,21 +23,31 @@
       }
     }
   }
-}
 
-.outNews {
-  .home-title {
-    h1 {
-      color: #fff;
+  .teacher {
 
-      .moredata {
-        font-size: 16px;
-        color: #bbb;
-
-        &:hover {
-          color: #fff;
-        }
-      }
-    }
+    padding: 7px 22px;
+    background-color: #FCAC00;
+    border-radius: 12px 0;
+    font-size: 14px;
+    color: #fff;
+    margin-left: 15px;
   }
 }
+
+// .outNews {
+//   .home-title {
+//     h1 {
+//       color: #222;
+
+//       .moredata {
+//         font-size: 16px;
+//         color: #bbb;
+
+//         &:hover {
+//           color: #fff;
+//         }
+//       }
+//     }
+//   }
+// }

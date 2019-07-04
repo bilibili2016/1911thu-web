@@ -31,7 +31,7 @@ export default {
   methods: {
     handleItem (item) {
       persistStore.set("cid", item.college_id);
-      this.$router.push("/home/teacher/list");
+      this.$router.push("/home/teacher/teacherIndex");
     }
   }
 }

@@ -32,7 +32,7 @@ import CustomCard from "@/pages/course/components/CardProject.vue";
 import { coursedetail } from "~/lib/v1_sdk/index";
 import { mapState, mapGetters, mapActions } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
-import { uniqueArray, message, matchSplits } from "@/lib/util/helper";
+import { uniqueArray, message, matchSplits, open } from "@/lib/util/helper";
 import BackToTop from "@/components/common/BackToTop.vue";
 import TeacherIntro from "@/pages/course/coursedetail/teacherIntro.vue";
 import CourseCatalog from "@/pages/course/coursedetail/CourseCatalog.vue";
@@ -46,7 +46,7 @@ export default {
     "v-teacherintro": TeacherIntro,
     "v-coursecatelog": CourseCatalog
   },
-  data() {
+  data () {
     return {
       changeImg: {
         img: "",
@@ -104,16 +104,17 @@ export default {
   methods: {
     ...mapActions("auth", ["setIsCollection"]),
     // 跳转老师详情
-    handleLinkTeacher(item) {
-      this.$router.push("/home/teacher/" + item);
+    handleLinkTeacher (item) {
+      this.courseUrl.tid = item;
+      open(this.courseUrl);
     },
     // 评论-点击评论查看更多
-    getMore() {
+    getMore () {
       this.dialogVisible = true;
       this.handleCurrentChange(1);
     },
     // 评论-评论查看更多-分页
-    handleCurrentChange(val) {
+    handleCurrentChange (val) {
       this.loadMsg = true;
       this.pagemsg.page = val;
       this.evaluateListForm.pages = val;
@@ -129,7 +130,7 @@ export default {
       });
     },
     // 评论-获取评论列表
-    getEvaluateList() {
+    getEvaluateList () {
       this.loadEvaluate = true;
       this.evaluateListForm.ids = matchSplits("kid");
       coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
@@ -144,11 +145,11 @@ export default {
       });
     },
     // 评论-关闭查看更多-评论弹框
-    handleClose(done) {
+    handleClose (done) {
       this.dialogVisible = false;
     },
     // 课程-获取课程详情
-    getCourseDetail() {
+    getCourseDetail () {
       this.loadTeacher = true;
       coursedetail.getCourseDetail(this.kidForm).then(response => {
         this.loadMsg = false;
@@ -161,7 +162,7 @@ export default {
       });
     },
     // 课程-获取课程列表
-    getCourseList() {
+    getCourseList () {
       coursedetail.getCourseList(this.kidForm).then(response => {
         this.catalogs = response.data.curriculumCatalogList;
         for (let item of this.catalogs) {
@@ -173,25 +174,25 @@ export default {
       });
     },
     // 初始化默认data
-    initData() {
+    initData () {
       this.kidForm.ids = matchSplits("kid");
       this.evaluateListForm.ids = matchSplits("kid");
       this.activeName = "second";
     },
     //拉取服务器数据 初始化所有方法
-    initAll() {
+    initAll () {
       this.initData();
       this.getCourseDetail();
       this.getEvaluateList();
       this.getCourseList();
     }
   },
-  mounted() {
+  mounted () {
     this.initAll();
   },
   watch: {
     //在当前页面进行登录操作更新状态
-    isAuthenticated(val) {
+    isAuthenticated (val) {
       this.getCourseDetail();
     }
   }

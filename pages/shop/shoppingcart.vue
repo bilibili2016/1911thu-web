@@ -2,7 +2,7 @@
   <div class="shopCart" ref="shopCart">
     <!-- 购物车列表 -->
     <div class="main" v-loading="loding">
-      <div class="table">
+      <div class="table"  v-if="!isNoMsg">
         <!-- 头部 -->
         <div class="tableHeader" v-if="!isNoMsg">
           <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>
@@ -10,7 +10,7 @@
           <span class="price">单价</span>
           <span class="operation">操作</span>
         </div>
-        <div style="min-height:500px;" v-if="!isNoMsg">
+        <div v-if="!isNoMsg">
           <div class="maintable">
             <!-- 课程全选 checkbox-->
             <!-- 无课程不显示全选 -->
@@ -125,8 +125,7 @@
         <!-- <img src="@/assets/images/sale.png" alt="">购买多人课程，价格更优惠，详情请咨询010-6217 1911 -->
         <!-- </div> -->
 
-        <!-- 无课程以及项目显示提示  -->
-        <v-nodata class="shopCartNoData" :pageType="pageType" v-if="isNoMsg"></v-nodata>
+
 
         <div id="computedHeight"></div>
         <div class="tableFooter" id="tableFooter" ref="tableFooter" :class="{tableFooterFixed:isFixed}" v-if="(courseList && courseList.length > 0) || (projectList&& projectList.length>0)">
@@ -160,6 +159,8 @@
             <i>{{Number(this.addArray.curriculumcartid.length) + Number(this.projectAddArray.projectcartid.length)}} </i> 项内容</span>
         </div>
       </div>
+        <!-- 无课程以及项目显示提示  -->
+        <v-nodata class="shopCartNoData" :pageType="pageType" v-if="isNoMsg"></v-nodata>
     </div>
     <!-- 超出限制提醒 -->
     <div class="alertMask" v-show="isShowAlert">
@@ -182,7 +183,7 @@ import { checkPhone, checkCode } from "~/lib/util/validatefn";
 import { store as persistStore } from "~/lib/core/store";
 import List from "@/pages/shop/components/List";
 import NoData from "@/components/common/NoData.vue";
-import { message, setTitle, open } from "@/lib/util/helper";
+import { message, setTitle, open,setPagesHeight } from "@/lib/util/helper";
 export default {
   components: {
     "v-list": List,
@@ -262,10 +263,9 @@ export default {
         curriculumcartid: []
       },
       courseUrl: {
-        base: "/course/coursedetail",
+        base: "/curriculum/detail",
         kid: 0,
-        bid: "",
-        page: 0
+        tid: 0
       }
     };
   },
@@ -922,6 +922,7 @@ export default {
     window.removeEventListener("scroll", this.addClass);
   },
   mounted () {
+    setPagesHeight()
     setTitle("购物车-1911学堂");
     if (persistStore.get("token")) {
       // 获取购车列表
@@ -936,8 +937,7 @@ export default {
 
     this.windowHeight = document.documentElement.clientHeight;
 
-    this.$refs.shopCart.style.minHeight =
-      this.windowHeight - this.headerHeight - footerHeight + 5 + "px";
+
 
     window.addEventListener("scroll", this.addClass);
   }

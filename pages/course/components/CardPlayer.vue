@@ -474,10 +474,10 @@ export default {
     //ie低版本的全屏，退出全屏都这个方法
     iefull () {
       if (window.navigator.userAgent.indexOf('compatible') != -1) {
-        console.log('360兼容模式');
+        // console.log('360兼容模式');
       }
       if (window.navigator.userAgent.indexOf('AppleWebKit') != -1) {
-        console.log('360极速模式');
+        // console.log('360极速模式');
       }
       if (typeof window.ActiveXObject != "undefined") {
         //这的方法 模拟f11键，使浏览器全屏

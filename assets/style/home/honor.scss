@@ -1,0 +1,43 @@
+.honor {
+  width: 1100px;
+  margin: 0 auto;
+  margin-bottom: 100px;
+
+  h1 {
+    font-size: 30px;
+    color: #222;
+    font-weight: 500;
+  }
+
+  .con {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 44px;
+
+    .item {
+      width: 470px;
+      height: 308px;
+      background-color: #fff;
+      text-align: center;
+      padding-top: 20px;
+      box-sizing: border-box;
+      transition: all 300ms;
+      // border: 1px solid #ccc;
+
+      &:hover {
+        box-shadow: 0px 3px 24px 0px rgba(0, 0, 0, 0.1);
+      }
+
+      img {
+        display: block;
+        width: 190px;
+        margin: 0 auto;
+      }
+
+      p {
+        font-size: 18px;
+        margin-top: 10px;
+      }
+    }
+  }
+}

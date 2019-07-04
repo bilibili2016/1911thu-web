@@ -4,8 +4,9 @@
     <div class="vipBanner"></div>
     <div class="container">
       <div class="intro">
-        <p>1911学堂与清华大学社会科学学院成立科研课题，并聘请清华大学社会科学学院院长、心理学系系主任彭凯平教授担任专家组组长，并邀请30多位社会科学及公共管理领域的专家教授组成1911学堂干部学院专家组，共同研发干部学院课程体系。</p>
-        <p>干部教育培训是干部队伍建设的先导性、基础性、战略性工程，在推进伟大事业、实现伟大梦想中具有不可替代的重要地位和作用。1911学堂干部学院，结合国家公共管理领域的发展方向，有针对性地研发系统化的课程体系，为各级党政机关与事业单位干部提供优质的课程资源，旨在培养新时代忠诚担当、底蕴深厚的高素质复合型干部人才，使之知识储备又博又专，既能科学决策又能统筹协调，既能把握大局又能勇于开拓。</p>
+        <p>干部教育培训是干部队伍建设的先导性、基础性、战略性工程，在推进伟大事业、实现伟大梦想进程中具有不可替代的重要地位和作用。</p>
+        <p>1911学堂干部学院聘请清华大学社会科学学院院长、心理学系系主任彭凯平教授担任专家组组长，并邀请清华大学30余位经济学、政治学、社会学、心理学及国际关系学等专业的专家教授成为干部学院导师。</p>
+        <p>1911学堂干部学院结合新时代对各级干部新的培养要求，借助专家导师资源并通过人工智能技术，为各级党政机关与事业单位干部精准匹配具有针对性、个性化的优质课程内容，提供线上线下相结合的教育培训与咨询服务，旨在培养新时代忠诚担当、底蕴深厚的高素质复合型干部人才，使之知识储备又博又专，既能科学决策又能统筹协调，既能把握大局又能勇于开拓。</p>
       </div>
 
       <div class="studyInfo">
@@ -29,9 +30,9 @@
                   <p>{{item.text}}</p>
                 </div>
               </div>
-              <div class="centerBar">
+              <!-- <div class="centerBar">
                 <p>1911学堂干部学院依据各单位提出的具体学习需求，形成定制式、个性化、针对性的党政系统单位内训项目。</p>
-              </div>
+              </div> -->
             </div>
           </div>
           <h2>培养目标</h2>
@@ -82,16 +83,20 @@ export default {
     return {
       productList: [
         {
-          src: "https://static-image.1911edu.com/production-cadre.png",
-          text: "在线干部学院"
+          src: "https://static-image.1911edu.com/cadre-proIcon1.png",
+          text: "学习与职业测评"
         },
         {
-          src: "https://static-image.1911edu.com/production-icon1.png",
-          text: "混合式标准项目"
+          src: "https://static-image.1911edu.com/cadre-proIcon2.png",
+          text: "线上精品课程与专题项目"
         },
         {
-          src: "https://static-image.1911edu.com/production-icon2.png",
-          text: "公共管理硕士(MPA)"
+          src: "https://static-image.1911edu.com/cadre-proIcon3.png",
+          text: "单位委托定制内训项目"
+        },
+        {
+          src: "https://static-image.1911edu.com/cadre-proIcon5.png",
+          text: "国际认证系列项目"
         }
       ],
       studyList: [

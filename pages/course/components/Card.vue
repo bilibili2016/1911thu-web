@@ -213,10 +213,9 @@ export default {
         autoplay: true
       },
       courseUrl: {
-        base: "/course/coursedetail",
+        base: "/curriculum/detail",
         kid: 0,
-        bid: "",
-        page: 0
+        tid: ""
       }
     };
   },
@@ -241,33 +240,17 @@ export default {
     // 免费试看
     freeStudy (item) {
       if (persistStore.get("token")) {
-        this.getDefaultCurriculumCatalogId(item);
+        this.$bus.$emit("reupdatecourse");
       } else {
         // 当用户未登录
         this.$bus.$emit("loginShow", true);
       }
     },
-    // 获取默认小节 跳转 章节id和小节id
-    getDefaultCurriculumCatalogId (item) {
-      this.courseUrl.kid = matchSplits("kid");
-      this.courseUrl.bid = item.defaultCurriculumCatalog.id;
-
-      //   this.$router.push(
-      //     "/course/coursedetail" +
-      //       "?kid=" +
-      //       matchSplits("kid") +
-      //       "&bid=" +
-      //       item.defaultCurriculumCatalog.id +
-      //       "&page=" +
-      //       matchSplits("page")
-      //   );
-      this.$bus.$emit("reupdatecourse");
-    },
     // 左侧播放按钮事件
     handleImgPlay (item) {
       // 用户已登录
       if (persistStore.get("token")) {
-        this.getDefaultCurriculumCatalogId(item);
+        this.$bus.$emit("reupdatecourse");
       } else {
         // 未登录直接弹出登录
         this.$bus.$emit("loginShow", true);
@@ -279,7 +262,7 @@ export default {
       if (persistStore.get("token")) {
         // // 用户已经购买 以及 课程为免费 获取默认播放id
         if (this.privileMsg === true) {
-          this.getDefaultCurriculumCatalogId(item);
+          this.$bus.$emit("reupdatecourse");
         } else {
           // 用户未购买 点击 加入购物车按钮
           this.handleAddShopCart(item, event);

@@ -3,6 +3,7 @@
   <div class="content">
     <div class="noCourse">
       <img v-if="config.type=='myCollege'" src="https://static-image.1911edu.com/VIP_null.png" alt="">
+      <img v-else-if="config.type=='myInfo'" src="https://static-image.1911edu.com/noMessage.png" alt="">
       <img v-else :src="noMsgImg" alt="">
       <h4>{{config.text}}</h4>
     </div>

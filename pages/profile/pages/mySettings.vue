@@ -15,7 +15,7 @@
           <v-password v-show="showPwd"></v-password>
         </el-tab-pane>
         <!-- 导师信息 -->
-        <el-tab-pane label="导师信息" name="third" v-if="userInfo.is_teacher_recruit">
+        <el-tab-pane label="导师信息" name="third" v-if="userInfo.is_teacher!=0 &&userInfo.is_teacher_recruit">
           <v-teacherInfo></v-teacherInfo>
         </el-tab-pane>
       </el-tabs>
@@ -180,9 +180,11 @@ export default {
     }
   },
   mounted () {
+
     this.$bus.$on('activeSet', () => {
       this.activeName = 'first'
     })
+     this.handleClick({name:'first'})
   }
 }
 </script>

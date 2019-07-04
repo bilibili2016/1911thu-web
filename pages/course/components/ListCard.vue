@@ -89,10 +89,9 @@ export default {
         type: 1
       },
       courseUrl: {
-        base: "/course/coursedetail",
+        base: "/curriculum/detail",
         kid: 0,
-        bid: "",
-        page: 0
+        tid: ""
       }
     };
   },
@@ -107,14 +106,6 @@ export default {
       }
       this.courseUrl.kid = item.id;
       open(this.courseUrl);
-      // this.$router.push({
-      //   path: '/course/coursedetail',
-      //   query: {
-      //     kid: item.id,
-      //     bid: '',
-      //     page: 0
-      //   }
-      // })
     },
     // 设置购物车中 is_cart 改变
     handleChangeIsCart (item) {
@@ -219,14 +210,6 @@ export default {
 
         this.courseUrl.kid = item.id;
         open(this.courseUrl);
-        // this.$router.push({
-        //   path: '/course/coursedetail',
-        //   query: {
-        //     kid: item.id,
-        //     bid: '',
-        //     page: 0
-        //   }
-        // })
       }
     },
     changeManey (money) {

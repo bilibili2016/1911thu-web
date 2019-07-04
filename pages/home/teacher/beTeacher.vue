@@ -611,7 +611,7 @@ export default {
       this.handleSubmit();
     },
     returnList () {
-      this.$router.push("/home/teacher/list");
+      this.$router.push("/home/teacher/teacherIndex");
     }
   },
   mounted () {

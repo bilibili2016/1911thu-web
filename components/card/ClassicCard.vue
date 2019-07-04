@@ -2,7 +2,7 @@
   <div class="goodCourse">
     <div class="courseLi clearfix" v-for="(course,index) in data" :key="index" @click="handleLink(course)">
       <div class="fl">
-        <img class="teacherImg" :src="course.teacher_picture" alt="">
+        <img class="teacherImg" :src="course.picture" alt="">
       </div>
       <div class="fr courseInfo">
         <h4 :title="course.title">{{course.title}}</h4>
@@ -31,19 +31,18 @@ import { store as persistStore } from '~/lib/core/store'
 import { open } from '~/lib/util/helper'
 export default {
   props: ['data'],
-  data() {
+  data () {
     return {
       stydyNum: require('@/assets/images/home_num.png'),
       coursedetail: {
-        base: '/course/coursedetail',
-        kid: null,
-        bid: '',
-        page: 1
+        base: '/curriculum/detail',
+        kid: 0,
+        tid: 0,
       }
     }
   },
   methods: {
-    handleLink(item) {
+    handleLink (item) {
       this.coursedetail.kid = item.id
       open(this.coursedetail)
     }

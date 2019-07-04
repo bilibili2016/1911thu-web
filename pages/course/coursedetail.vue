@@ -45,7 +45,7 @@ import CustomCard from "@/pages/course/components/Card.vue";
 import { coursedetail } from "~/lib/v1_sdk/index";
 import { mapState, mapGetters, mapActions } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
-import { uniqueArray, matchSplits, setTitle, Trim } from "@/lib/util/helper";
+import { uniqueArray, matchSplits, setTitle, Trim, open } from "@/lib/util/helper";
 import BackToTop from "@/components/common/BackToTop.vue";
 import Pay from "@/components/common/Pay.vue";
 import EvaluateContent from "@/components/common/EvaluateContent.vue";
@@ -158,7 +158,8 @@ export default {
     },
     // 跳转老师详情
     handleLinkTeacher (item) {
-      this.$router.push("/home/teacher/" + item);
+      this.courseUrl.tid = item;
+      open(this.courseUrl);
     },
     // 标签 - 点击评价改变星级
     handleChangeRate (val) {

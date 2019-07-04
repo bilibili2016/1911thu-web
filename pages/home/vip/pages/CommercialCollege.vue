@@ -7,10 +7,13 @@
         <div class="commerWidth">
           <div class=" one-top">
             <p class="pCss">
-              企业管理人员对于中国企业发展和中国经济发展起着至关重要的作用，对于企业的中高层管理者来说，接受商学院进阶教育的重要性不言而喻，因为如今的时代，需要既懂业务、又懂管理的复合型人才。
+              优秀的企业管理人员对于中国企业发展和经济发展起着至关重要的作用，面对新时代中国经济发展的新形势和新目标，1911学堂商学院以企业战略和人才开发为核心，聘请清华大学、北京大学、国家发改委、国资委等权威机构的专家学者及智囊团队担任学院导师，借助人工智能技术整合教育、科研、产业、资本及合作伙伴等多方优质资源，与经济、金融和企业管理等领域有深厚理论功底的专家教授，以及在各行业领域具有丰富实践经验的业界翘楚等共同研发学院课程。
             </p>
             <p class="pCss">
-              1911学堂携手数十位来自清华大学、北京大学、国家发改委、国资委等权威机构的专家学者及智囊团队，与经济、金融和企业管理等领域有深厚理论功底的专家教授，以及在各行业领域具有丰富实践经验的业界翘楚等，共同研发1911学堂商学院有针对性、实用性的课程体系，助力企业中高层管理人员实现个性化、阶梯式的成长，培养具备国际视野、擅于创新、能够适应客观环境变化的学习型企业经营管理者。
+              1911学堂商学院旨在培养具备国际视野、勇于创新、能够适应客观环境变化的学习型企业经营管理者，使之具备完善的知识结构和岗位胜任能力，具备解决企业实际经营管理问题的能力，能够经得起风浪考验，适应新时代中国特色社会主义市场经济，推进供给侧结构性改革，实现企业的高质量、高效益发展。
+            </p>
+            <p class="pCss">
+              1911学堂商学院通过“人才测评+混合培训+行为跟进+咨询服务+产业投资”完整的链条式解决方案，为全球企业中高层管理者及职场精英提供线上、线下相结合的教育培训与咨询服务，助力企业中高层管理人员实现个性化、阶梯式的成长，并打造“产学研资合” 一体的生态系统，致力于成为能够让企业家获得归属感和认同感的一流商学院。
             </p>
           </div>
           <div class="one-center">
@@ -27,9 +30,9 @@
                 <p>{{item.text}}</p>
               </div>
             </div>
-            <div class="centerBar">
+            <!-- <div class="centerBar">
               <p>1911学堂商学院依据各单位提出的具体学习需求，形成定制式、个性化、针对性的企业单位内训项目。</p>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -85,17 +88,29 @@ export default {
   data () {
     return {
       productList: [
-        {
-          src: "https://static-image.1911edu.com/production-commer.png",
-          text: "在线商学院"
+         {
+          src: "https://static-image.1911edu.com/cadre-proIcon1.png",
+          text: "学习与职业测评"
         },
         {
-          src: "https://static-image.1911edu.com/production-icon1.png",
-          text: "混合式标准项目"
+          src: "https://static-image.1911edu.com/cadre-proIcon2.png",
+          text: "线上精品课程与专题项目"
+        },
+         {
+          src: "https://static-image.1911edu.com/cadre-proIcon4.png",
+          text: "公开招生混合式项目"
         },
         {
-          src: "https://static-image.1911edu.com/production-icon2.png",
-          text: "工商管理硕士(MBA)"
+          src: "https://static-image.1911edu.com/cadre-proIcon3.png",
+          text: "单位委托定制内训项目"
+        },
+        {
+          src: "https://static-image.1911edu.com/cadre-proIcon5.png",
+          text: "国际认证系列项目"
+        },
+        {
+          src: "https://static-image.1911edu.com/cadre-proIcon6.png",
+          text: "线上或线下咨询项目"
         }
       ],
       studyList: [

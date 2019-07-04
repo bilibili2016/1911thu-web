@@ -127,8 +127,12 @@
           text-align: center;
 
           div {
-            width: 210px;
-            margin: 0 30px;
+            width: 175px;
+            margin: 0 20px;
+
+            &:nth-child(5) {
+              width: 195px;
+            }
           }
 
           img {

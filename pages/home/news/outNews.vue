@@ -10,7 +10,6 @@
         </div>
       </el-row>
     </div>
-
   </div>
 </template>
 

@@ -48,7 +48,7 @@ export default {
     selectActiveTab(tab) {
       if (tab.name == "four") {
         persistStore.set("cid", matchSplits("cid"));
-        this.$router.push("/home/teacher/list");
+        this.$router.push("/home/teacher/teacherIndex");
       } else {
         this.$emit("selectActiveTab", tab);
       }

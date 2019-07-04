@@ -25,8 +25,8 @@
       </el-tab-pane>
     </el-tabs>
     <div class="btns-con">
-      <div class="btns-Time" @click="handleGoTo('inputTime')"> <img :src="rightIcon" alt=""> <span class="right">录入可预约时间</span></div>
-      <div class="viewTimeTable" @click="handleGoTo('timeTable')">查看预约时间表 > </div>
+      <div class="btns-Time" @click="handleGoTo('inputTime')"> <img :src="rightIcon" alt=""> <span class="right">预约设置</span></div>
+      <div class="viewTimeTable" @click="handleGoTo('timeTable')">预约管理 > </div>
     </div>
   </el-card>
 </template>

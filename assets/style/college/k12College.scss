@@ -1,4 +1,7 @@
 .k12College {
+  background: url('https://static-image.1911edu.com/k12College-botomBG.png') no-repeat;
+  background-position: center bottom;
+
   .k12-banner {
     height: 660px;
     background: url('https://static-image.1911edu.com/k12-banner.png') no-repeat;
@@ -100,7 +103,7 @@
         vertical-align: middle;
         font-size: 24px;
         color: #222;
-        text-align: left;
+        text-align: center;
 
         .index {
           display: inline-block;
@@ -151,11 +154,11 @@
       height: 270px;
       margin-top: 80px;
       background: url('https://static-image.1911edu.com/k12-targetBg.png') no-repeat;
-      background-size: 1100px 270px;
+      background-size: 1100px 240px;
       padding-bottom: 30px;
 
       .k12-title {
-        padding: 50px 0 40px 0;
+        padding: 40px 0;
         margin-bottom: 0;
 
         .text {

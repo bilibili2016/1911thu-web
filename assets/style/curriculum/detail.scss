@@ -1,0 +1,284 @@
+.curriculumDetail {
+  background-color: #F7F9FB;
+  padding-bottom: 80px;
+
+  .teacherInfo {
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid #DDDDDD;
+    padding: 50px 0;
+    margin-bottom: 40px;
+
+    .fl {
+      width: 200px;
+      height: 200px;
+      overflow: hidden;
+
+      img {
+        width: 200px;
+        height: 200px;
+      }
+    }
+
+    .fr {
+      width: 870px;
+      overflow: hidden;
+
+      h4 {
+        font-size: 26px;
+        color: #222222;
+        font-weight: 500;
+
+        .el-icon-location-outline {
+          font-size: 15px;
+          color: #ccc;
+        }
+
+        span {
+          color: #ccc;
+          font-size: 14px;
+        }
+      }
+
+      h5 {
+        font-size: 14px;
+        color: #222;
+        margin: 15px 0 20px;
+
+        span {
+          color: #F01414;
+        }
+      }
+
+      h6 {
+        margin-bottom: 20px;
+        font-size: 12px;
+        color: #999;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      p {
+        font-size: 14px;
+        color: #222;
+        line-height: 24px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+      }
+    }
+  }
+
+  .main {
+    width: 1100px;
+    margin: 0 auto;
+  }
+
+  .bigBlock {
+    width: 720px;
+    overflow: hidden;
+  }
+
+  .nodata {
+    float: left;
+    width: 720px;
+    background-color: #fff;
+  }
+
+  .smallBlock {
+    width: 340px;
+    overflow: hidden;
+
+    &>div {
+      width: 100%;
+      padding: 0 20px 20px;
+      background-color: #fff;
+    }
+
+
+    .title {
+      height: 48px;
+      line-height: 48px;
+      font-size: 14px;
+      color: #999999;
+    }
+
+    .good {
+      color: #222;
+      font-size: 14px;
+      overflow: hidden;
+      margin-bottom: 20px;
+
+      p {
+        line-height: 28px;
+        padding-left: 10px;
+
+        &:before {
+          content: '';
+          display: inline-block;
+          width: 4px;
+          height: 4px;
+          background-color: #666666;
+          margin: 0 7px 3px 0;
+        }
+      }
+    }
+
+    .chatType {
+      margin-bottom: 20px;
+
+      .fl,
+      .fr {
+        width: 140px;
+        height: 80px;
+        padding: 10px;
+        cursor: pointer;
+        border: 1px solid #DDDDDD;
+
+        h4 {
+          color: #222;
+          font-size: 14px;
+        }
+
+        h5 {
+          color: #999;
+          font-size: 12px;
+          margin: 8px 0 12px;
+        }
+
+        h6 {
+          font-size: 14px;
+          color: #F01414;
+        }
+      }
+
+      .order {
+        background-color: #F6F6F6;
+        cursor: not-allowed;
+
+        h6 {
+          color: #AAAAAA;
+        }
+      }
+
+    }
+
+    .course {
+      max-height: 1012px;
+      margin-bottom: 50px;
+      overflow-y: auto;
+
+      .courseOne {
+        width: 250px;
+        margin: 0 auto;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #EEEEEE;
+
+        &:last-child {
+          border: none;
+        }
+
+        img {
+          width: 250px;
+          height: 160px;
+        }
+
+        h4 {
+          width: 100%;
+          margin-top: 20px;
+          font-size: 16px;
+          color: #222;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        h5 {
+          width: 100%;
+          margin-top: 10px;
+          font-size: 12px;
+          color: #93999F;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .icon {
+          margin-top: 12px;
+          font-size: 0;
+
+          span {
+            display: inline-block;
+            font-size: 12px;
+            color: #93999F;
+
+            &.conter {
+              margin-left: 20px;
+            }
+
+            img {
+              width: 12px;
+              height: 12px;
+              margin: 0 5px;
+            }
+          }
+
+          .rate {
+            font-size: 14px;
+          }
+        }
+
+        .price {
+          margin-top: 10px;
+          font-size: 14px;
+          color: #F01414;
+        }
+      }
+    }
+  }
+
+  .miniProgramCode {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, .4);
+    z-index: 1000;
+
+    .content {
+      width: 420px;
+      height: 260px;
+      background-color: #fff;
+      border-radius: 4px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -210px;
+      margin-top: -130px;
+      color: #000;
+      font-size: 18px;
+      padding-top: 45px;
+      text-align: center;
+
+      .el-icon-close {
+        font-size: 20px;
+        position: absolute;
+        top: 25px;
+        right: 25px;
+      }
+
+      img {
+        display: block;
+        margin: 0 auto;
+        width: 140px;
+        height: 140px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

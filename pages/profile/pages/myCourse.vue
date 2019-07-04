@@ -15,9 +15,9 @@
           <v-cardtab :data="overTimeData" :config="configFour" :pagemsg="pagemsg2" :noMsg="noMsgFour" @pageChange="overStudyPageChange"></v-cardtab>
         </el-tab-pane>
         <!-- 我的课程 我的收藏 -->
-        <el-tab-pane label="我的收藏" name="third" value="0">
+        <!-- <el-tab-pane label="我的收藏" name="third" value="0">
           <v-cardtab :data="collectionData" :config="configZero" :pagemsg="pagecltcourse" :noMsg="noMsgFive" @pageChange="collectionPageChange"></v-cardtab>
-        </el-tab-pane>
+        </el-tab-pane> -->
       </el-tabs>
     </el-card>
   </div>

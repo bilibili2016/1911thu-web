@@ -66,37 +66,42 @@ export default {
           id: "index",
           link: "/"
         },
+          {
+          title: "课程",
+          id: "courseCenter",
+          link: "/course/category?cid=0&cp=0&pids=0&xid=0&vid=-1"
+        },
+          {
+          title: "师资",
+          id: "teacher",
+          link: "/home/teacher/teacherIndex"
+        },
         {
-          title: "在线学院",
+          title: "学院",
           id: "onlineCollege",
-          link: "",
-          childList: []
+          link: "/home/vip/collegeIndex"
         },
-        {
-          title: "单位内训",
-          id: "unit",
-          link: "/other/activePages/Institutional"
-        },
-        {
-          title: "学位项目",
-          id: "project",
-          link: "/project/degreeProject"
-        },
+        // {
+        //   title: "单位内训",
+        //   id: "unit",
+        //   link: "/other/activePages/Institutional"
+        // },
+        // {
+        //   title: "学位项目",
+        //   id: "project",
+        //   link: "/project/degreeProject"
+        // },
         {
           title: "测评体系",
           id: "system",
           link: "/home/core/pages/personEval"
         },
-        {
-          title: "名师智库",
-          id: "teacher",
-          link: "/home/teacher/list"
-        },
-        {
-          title: "城市分校",
-          id: "school",
-          link: "/home/citySchool/schoolIntro"
-        },
+
+        // {
+        //   title: "城市分校",
+        //   id: "school",
+        //   link: "/home/citySchool/schoolIntro"
+        // },
         {
           title: "服务支持",
           id: "service",
@@ -118,12 +123,13 @@ export default {
               link: ""
             }
           ]
-        },
-        {
-          title: "关于我们",
-          id: "adoutUs",
-          link: "/other/pages/homeUs"
         }
+        // {
+        //   title: "关于我们",
+        //   id: "adoutUs",
+        //   link: "/other/pages/homeUs"
+        // },
+
       ],
       downloadAppURL: "",
       downloadAppURL_test:

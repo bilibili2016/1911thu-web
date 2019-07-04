@@ -57,9 +57,37 @@
       background-position: top;
       padding-top: 62px;
 
+      .object {
+        width: 1100px;
+        height: 90px;
+        line-height: 90px;
+        margin-top: 55px;
+        background: url("https://static-image.1911edu.com/healthCollege_object.png") no-repeat;
+        background-size: cover;
+        box-shadow: 0px 0px 20px 0px rgba(6, 146, 45, 0.25);
+
+        .left {
+          width: 365px;
+          text-align: center;
+          vertical-align: middle;
+          color: #fff;
+          font-size: 34px;
+          font-weight: bold;
+        }
+
+        .right {
+          width: 540px;
+          font-size: 24px;
+          vertical-align: middle;
+          margin-left: 80px;
+        }
+      }
+
       .main {
         width: 1100px;
         margin: 0 auto;
+
+
       }
 
       h2 {
@@ -120,7 +148,7 @@
           h4 {
             font-size: 36px;
             line-height: 36px;
-            padding: 66px 0 38px;
+            padding: 50px 0 38px;
           }
 
           p {
@@ -131,39 +159,39 @@
         }
       }
 
-      .object {
-        margin-top: 85px;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
+      // .object {
+      //   margin-top: 85px;
+      //   display: flex;
+      //   justify-content: space-between;
+      //   flex-wrap: wrap;
 
-        div.clearfix {
-          width: 50%;
-          margin-bottom: 32px;
+      //   div.clearfix {
+      //     width: 50%;
+      //     margin-bottom: 32px;
 
-          img {
-            width: 64px;
-            height: 64px;
-            margin-right: 28px;
-          }
+      //     img {
+      //       width: 64px;
+      //       height: 64px;
+      //       margin-right: 28px;
+      //     }
 
-          div {
-            h5 {
-              color: #04a749;
-              font-size: 26px;
-              line-height: 36px;
-              margin-top: 12px;
-            }
+      //     div {
+      //       h5 {
+      //         color: #04a749;
+      //         font-size: 26px;
+      //         line-height: 36px;
+      //         margin-top: 12px;
+      //       }
 
-            p {
-              width: 395px;
-              margin-top: 24px;
-              font-size: 18px;
-              line-height: 30px;
-            }
-          }
-        }
-      }
+      //       p {
+      //         width: 395px;
+      //         margin-top: 24px;
+      //         font-size: 18px;
+      //         line-height: 30px;
+      //       }
+      //     }
+      //   }
+      // }
 
       .centerBg {
         background: url("https://static-image.1911edu.com/healthCollege_bg2.png") no-repeat;
@@ -216,12 +244,12 @@
         justify-content: center;
         text-align: center;
         flex-wrap: wrap;
-        margin: 40px 0 30px 0;
+        margin: 40px 0 60px 0;
 
         .item {
-          width: 220px;
+          width: 180px;
           text-align: center;
-          margin: 0 30px;
+          margin: 0 20px;
 
           img {
             display: block;
