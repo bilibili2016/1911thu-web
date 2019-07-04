@@ -5,7 +5,7 @@
             <div class="" ref="collegeList">
                 <div :class="{fixed:isFixed,collegeList:true}">
                     <ul>
-                        <li :data-id="liChecked == item.en_title" :class="{checked:liChecked == item.en_title}" v-for="(item,index) in collegeData" :key="index" @click="handleLiClick(item)">{{item.title}}</li>
+                        <li :class="{checked:liChecked == item.en_title}" v-for="(item,index) in collegeData" :key="index" @click="handleLiClick(item)">{{item.title}}</li>
                     </ul>
                 </div>
             </div>
@@ -156,26 +156,8 @@ export default {
             home.vipGoodsList().then(response => {
                 if (response.status === 0) {
                     this.collegeData = response.data.vipGoodsList;
-                    this.$nextTick(() => {
-                        this.init()
-                    })
-
                 }
             });
-        },
-        init() {
-            // console.log(document.querySelector('#cadreCollege'),'kkk');
-            if (document.querySelector('#cadreCollege')) {
-                this.obj.cadreCollegeTop = document.querySelector('#cadreCollege').offsetTop
-                this.obj.commercialCollegeTop = document.querySelector('#commercialCollege').offsetTop
-                this.obj.sportsCollegeTop = document.querySelector('#sportsCollege').offsetTop
-                this.obj.eduCollegeTop = document.querySelector('#eduCollege').offsetTop
-                this.obj.smartCollegeTop = document.querySelector('#smartCollege').offsetTop
-                this.obj.healthCollegeTop = document.querySelector('#healthCollege').offsetTop
-                this.obj.chineseCollegeTop = document.querySelector('#chineseCollege').offsetTop
-                this.obj.newsCollegeTop = document.querySelector('#newsCollege').offsetTop
-                console.log(this.obj);
-            }
         },
         addClass() {
             this.scrollTop =
@@ -186,45 +168,60 @@ export default {
                 this.isFixed = true
             } else {
                 this.isFixed = false
+            }
+            let that = this
+            for (var i = 0; i < this.collegeData.length; i++) {
+                (function(i) {
+                    let offsetTop = document.querySelector('#' + that.collegeData[i].en_title).offsetTop
+                    let nextTop
+                    if (i == 0) {
+                        if (that.scrollTop < document.querySelector('#' + that.collegeData[i + 1].en_title).offsetTop) {
+                            that.liChecked = that.collegeData[i ].en_title
+                        }
+                    } else if (i == that.collegeData.length-1) {
+                        nextTop = document.body.clientHeight
+                        if (that.scrollTop >= offsetTop) {
+                            that.liChecked =  that.collegeData[i].en_title
+                        }
+                    } else {
+                        nextTop = document.querySelector('#' + that.collegeData[i + 1].en_title).offsetTop
+                        if (that.scrollTop >= offsetTop && that.scrollTop < nextTop) {
+                            that.liChecked = that.collegeData[i].en_title
+                        }
+                    }
 
+                })(i);
             }
-
-            if (this.scrollTop < this.obj.commercialCollegeTop) {
-                this.liChecked = 'cadreCollege'
-            }
-            if (this.scrollTop >= this.obj.commercialCollegeTop && this.scrollTop < this.obj.sportsCollegeTop) {
-                this.liChecked = 'commercialCollege'
-            }
-            if (this.scrollTop > this.obj.sportsCollegeTop  && this.scrollTop <= this.obj.eduCollegeTop) {
-                this.liChecked = 'sportsCollege'
-            }
-             if (this.scrollTop > this.obj.eduCollegeTop && this.scrollTop <= this.obj.smartCollegeTop) {
-                this.liChecked = 'eduCollege'
-            }
-             if (this.scrollTop > this.obj.smartCollegeTop  && this.scrollTop <= this.obj.healthCollegeTop) {
-                this.liChecked = 'smartCollege'
-            }
-            if (this.scrollTop > this.obj.healthCollegeTop && this.scrollTop <= this.obj.chineseCollegeTop) {
-                this.liChecked = 'healthCollege'
-            }
-            if (this.scrollTop > this.obj.chineseCollegeTop && this.scrollTop <= this.obj.newsCollegeTop) {
-                this.liChecked = 'chineseCollege'
-            }
-            if (this.scrollTop >= this.obj.newsCollegeTop ) {
-                this.liChecked = 'newsCollege'
-            }
+            // if (this.scrollTop < this.obj.commercialCollegeTop) {
+            //     this.liChecked = 'cadreCollege'
+            // }
+            // if (this.scrollTop >= this.obj.commercialCollegeTop && this.scrollTop < this.obj.sportsCollegeTop) {
+            //     this.liChecked = 'commercialCollege'
+            // }
+            // if (this.scrollTop > this.obj.sportsCollegeTop && this.scrollTop <= this.obj.eduCollegeTop) {
+            //     this.liChecked = 'sportsCollege'
+            // }
+            // if (this.scrollTop > this.obj.eduCollegeTop && this.scrollTop <= this.obj.smartCollegeTop) {
+            //     this.liChecked = 'eduCollege'
+            // }
+            // if (this.scrollTop > this.obj.smartCollegeTop && this.scrollTop <= this.obj.healthCollegeTop) {
+            //     this.liChecked = 'smartCollege'
+            // }
+            // if (this.scrollTop > this.obj.healthCollegeTop && this.scrollTop <= this.obj.chineseCollegeTop) {
+            //     this.liChecked = 'healthCollege'
+            // }
+            // if (this.scrollTop > this.obj.chineseCollegeTop && this.scrollTop <= this.obj.newsCollegeTop) {
+            //     this.liChecked = 'chineseCollege'
+            // }
+            // if (this.scrollTop >= this.obj.newsCollegeTop) {
+            //     this.liChecked = 'newsCollege'
+            // }
 
         }
     },
     mounted() {
-
         window.addEventListener("scroll", this.addClass);
         this.vipGoodsList()
-
-
-        // document.getElementById(..).scrollTop = 0;
-
-
     }
 }
 </script>
