@@ -21,7 +21,7 @@
       <div class="bigBlock fl" v-if="JSON.stringify(courseList)!='{}'" v-loading="loadMsg">
         <!-- 课程详情card -->
         <div class="main-header" v-loading="loadMsg">
-          <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList"></v-card>
+          <v-card :courseList="courseList" :teacherInfo="teacherInfo" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList" @changePlayImg="changePlayImg" @refreshData="refreshData"></v-card>
         </div>
         <!-- 简介、目录、评论和下载 -->
         <div class="content">
@@ -45,7 +45,7 @@
               <h4>线上问答</h4>
               <h5>1对1在线交流</h5>
             </div>
-            <div :class="isOrder?'fr':'fr order'" @click="goMeet">
+            <div :class="isOrder?'fr order':'fr order'" @click="goMeet">
               <h4>线下约见</h4>
               <h5>1对1面谈</h5>
               <h6>￥{{teacherInfo.price}}</h6>
@@ -195,7 +195,7 @@ export default {
       changeImg: {
         img: "",
         id: ""
-      },
+      }
     };
   },
   methods: {
@@ -360,10 +360,10 @@ export default {
     },
     // 再次回去课程详情数据和课程目录数据
     refreshData () {
-      this.curriculumTeacherInfo();
+      this.curriculumTeacherInfo(false);
     },
     // 获取--课程-教师--详情
-    curriculumTeacherInfo () {
+    curriculumTeacherInfo (flag) {
       coursedetail.curriculumTeacherInfo(this.idForm)
         .then(res => {
           if (res.status == 0) {
@@ -378,7 +378,9 @@ export default {
             this.courseList = res.data.curriculumDetail;
             //   是否收藏
             this.collectMsg.isCollect = res.data.curriculumDetail.is_collection;
-            this.initAll()
+            if (flag) {
+              this.initAll()
+            }
           }
         });
     },
