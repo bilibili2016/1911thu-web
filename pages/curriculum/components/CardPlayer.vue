@@ -134,7 +134,7 @@ export default {
     },
     // 课程-获取默认 的课程id 以及小节id
     getdefaultCurriculumCatalog () {
-      this.getdefaultForm.curriculumid = matchSplits("kid");
+      this.getdefaultForm.curriculumid = matchSplits("kid")==0?matchSplits("tid"):matchSplits("kid");
       coursedetail
         .getdefaultCurriculumCatalog(this.getdefaultForm)
         .then(res => {
