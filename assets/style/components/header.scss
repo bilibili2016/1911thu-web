@@ -331,6 +331,7 @@ body {
     }
 
     .searchInput {
+      position: relative;
       overflow: hidden;
       // box-shadow: 0px 3px 12px rgba(0, 0, 0, .1);
       color: #aaa;
@@ -340,8 +341,11 @@ body {
       box-sizing: border-box;
 
       .innerIcon {
+        position: absolute;
+        top: 0;
+        right: 0;
         width: 20%;
-        height: 38px;
+        height: 36px;
         text-align: center;
         color: #fff;
         background-color: #773084;
@@ -361,6 +365,9 @@ body {
       }
 
       input {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 80%;
         height: 36px;
         line-height: 36px;
@@ -906,13 +913,13 @@ body {
   line-height: 45px;
   overflow: hidden;
   // overflow: inherit
-  transition: all 400ms;
+  transition: all 600ms;
   background-color: #fff;
   border-top: 1px solid #F7F9FB;
   // position: absolute;
   // top: 72px;
   // left: 0;
-  // opacity: 1;
+  opacity: 1;
 
   .headerInner {
     position: relative;
@@ -980,7 +987,7 @@ body {
   height: 0;
   // top: 27px;
   // z-index: -1;
-  // opacity: 0;
+  opacity: 0;
 
   // display: none;
 }
