@@ -140,7 +140,7 @@ export default {
         this.playerForm.curriculumId = curriculum_id;
         this.playerForm.catalogId = catalog_id;
         this.$bus.$emit("updateCourse", this.playerForm);
-        document.body.scrollTop = document.documentElement.scrollTop = 0;
+        document.body.scrollTop = document.documentElement.scrollTop = 300;
       }
     },
     buyMask () {

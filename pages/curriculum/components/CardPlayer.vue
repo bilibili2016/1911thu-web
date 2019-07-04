@@ -199,7 +199,6 @@ export default {
           this.playAuthInfo = res.data.playAuthInfo;
           this.aliPlayer.vid = res.data.playAuthInfo.video_id;
           this.aliPlayer.playauth = res.data.playAuthInfo.playAuth;
-
           if (this.player) {
             this.player.dispose();
             this.$refs.playInner.insertBefore(this.node, this.$refs.playVideo);
@@ -472,41 +471,41 @@ export default {
       }
     },
     //ie低版本的全屏，退出全屏都这个方法
-    iefull () {
-      if (window.navigator.userAgent.indexOf('compatible') != -1) {
-        console.log('360兼容模式');
-      }
-      if (window.navigator.userAgent.indexOf('AppleWebKit') != -1) {
-        console.log('360极速模式');
-      }
-      if (typeof window.ActiveXObject != "undefined") {
-        //这的方法 模拟f11键，使浏览器全屏
-        // var wscript = new ActiveXObject("WScript.Shell");
-        // if (wscript != null) {
-        //   console.log('F11');
-        //   wscript.SendKeys("{F11}");
-        // }
+    // iefull () {
+    //   if (window.navigator.userAgent.indexOf('compatible') != -1) {
+    //     console.log('360兼容模式');
+    //   }
+    //   if (window.navigator.userAgent.indexOf('AppleWebKit') != -1) {
+    //     console.log('360极速模式');
+    //   }
+    //   if (typeof window.ActiveXObject != "undefined") {
+    //     //这的方法 模拟f11键，使浏览器全屏
+    //     // var wscript = new ActiveXObject("WScript.Shell");
+    //     // if (wscript != null) {
+    //     //   console.log('F11');
+    //     //   wscript.SendKeys("{F11}");
+    //     // }
 
-        // var WsShell = new ActiveXObject('WScript.Shell')
-        // WsShell.SendKeys('{F11}');
-        var el = document.getElementsByTagName('video')
-        var rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen,
-          wscript;
-        if (typeof rfs != "undefined" && rfs) {
-          rfs.call(el);
-          return;
-        }
-        if (typeof window.ActiveXObject != "undefined") {
-          wscript = new ActiveXObject("WScript.Shell");
-          if (wscript) {
-            wscript.SendKeys("{F11}");
-          }
-        }
-      }
-    },
+    //     // var WsShell = new ActiveXObject('WScript.Shell')
+    //     // WsShell.SendKeys('{F11}');
+    //     var el = document.getElementsByTagName('video')
+    //     var rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen,
+    //       wscript;
+    //     if (typeof rfs != "undefined" && rfs) {
+    //       rfs.call(el);
+    //       return;
+    //     }
+    //     if (typeof window.ActiveXObject != "undefined") {
+    //       wscript = new ActiveXObject("WScript.Shell");
+    //       if (wscript) {
+    //         wscript.SendKeys("{F11}");
+    //       }
+    //     }
+    //   }
+    // },
     //  播放器进入全屏事件
     fullScreenTrue () {
-      this.iefull()
+      //   this.iefull()
       document.getElementsByClassName(
         "prism-big-play-btn"
       )[0].style.visibility = "visible";
@@ -515,6 +514,8 @@ export default {
     },
     //  播放器退出全屏事件
     exitFullScreen () {
+      console.log(document);
+
       document.getElementsByClassName(
         "prism-big-play-btn"
       )[0].style.visibility = "hidden";
@@ -606,10 +607,10 @@ export default {
     });
     this.$bus.$on("reupdatecourse", () => {
       this.getdefaultCurriculumCatalog();
+      document.body.scrollTop = document.documentElement.scrollTop = 300;
     });
     this.node = this.$refs.mediaPlayer;
     this.beforeRoute = this.$route.path;
-
     //从个人中心-我的课程-继续学习跳转到课程详情页默认播放
     if (window.location.search.indexOf("paly") >= 0) {
       this.getdefaultCurriculumCatalog();
@@ -627,6 +628,7 @@ export default {
     next(vm => {
       if (vm.player) {
         vm.player.pause();
+        vm.player.dispose();
         clearInterval(that.interval);
       }
     });
@@ -634,6 +636,7 @@ export default {
   beforeRouteLeave (to, from, next) {
     if (this.player) {
       this.player.pause();
+      this.player.dispose();
       clearInterval(that.interval);
     }
     next();
