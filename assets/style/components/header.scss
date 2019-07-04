@@ -325,14 +325,18 @@ body {
       color: #aaa;
       background-color: #fff;
       border: 1px solid #773084;
+      height: 36px;
+      box-sizing: border-box;
 
       .innerIcon {
         width: 70px;
-        height: 36px;
+        height: 38px;
         text-align: center;
         color: #fff;
         background-color: #773084;
         cursor: pointer;
+        display: inline-block;
+        vertical-align: middle;
       }
 
       .inner-icon {
@@ -355,6 +359,8 @@ body {
         background-color: #fff;
         z-index: 10;
         padding-left: 10px;
+        display: inline-block;
+        vertical-align: middle;
       }
 
       input::-webkit-input-placeholder {

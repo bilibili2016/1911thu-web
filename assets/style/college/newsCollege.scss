@@ -29,14 +29,27 @@
       text-align: center;
       margin: 50px 0 40px 0;
 
+      &::before,
       &::after {
         content: "";
-        display: block;
-        width: 245px;
-        height: 15px;
-        margin: 0 auto;
-        margin-top: -10px;
-        background: url("https://static-image.1911edu.com/newsCo-icon1.png") no-repeat;
+        display: inline-block;
+        width: 174px;
+        height: 31px;
+        vertical-align: middle;
+        margin: 0 25px;
+        background: url("https://static-image.1911edu.com/newsTitle-icon.png") no-repeat;
+        margin-bottom: 3px;
+      }
+
+      &::before {
+        transform: rotateY(180deg);
+        // content: "";
+        // display: block;
+        // width: 174px;
+        // height: 15px;
+        // margin: 0 auto;
+        // margin-top: -10px;
+        // background: url("https://static-image.1911edu.com/newsTitle-icon.png") no-repeat;
       }
     }
 
