@@ -485,58 +485,68 @@
       height: 16px;
       margin-bottom: -2px;
 
+      &.icon-study {
+        background: url('https://static-image.1911edu.com/icon-study.png') no-repeat center;
+        background-size: contain;
+      }
+
+      &.icon-collect {
+        background: url('https://static-image.1911edu.com/icon-collect.png') no-repeat center;
+        background-size: contain;
+      }
+
       &.icon-home {
         background: url('~assets/images/icon_index1.png') no-repeat center;
         background-size: contain;
       }
 
       &.icon-course {
-        background: url('~assets/images/icon_course1.png') no-repeat center;
+        background: url('https://static-image.1911edu.com/icon-course.png') no-repeat center;
         background-size: contain;
       }
 
       &.icon-project {
-        background: url('~assets/images/icon_project1.png') no-repeat center;
+        background: url('https://static-image.1911edu.com/icon-program.png') no-repeat center;
         background-size: contain;
       }
 
       &.icon-order {
-        background: url('~assets/images/icon_order1.png') no-repeat center;
+        background: url('https://static-image.1911edu.com/icon-order.png') no-repeat center;
         background-size: contain;
       }
 
       &.icon-message {
-        background: url('~assets/images/icon_message1.png') no-repeat center;
+        background: url('https://static-image.1911edu.com/icon-message.png') no-repeat center;
         background-size: contain;
       }
 
       &.icon-set {
-        background: url('~assets/images/icon_set1.png') no-repeat center;
+        background: url('https://static-image.1911edu.com/icon-set.png') no-repeat center;
         background-size: contain;
       }
 
       &.icon-code {
-        background: url('~assets/images/icon_code1.png') no-repeat center;
+        background: url('https://static-image.1911edu.com/icon-code.png') no-repeat center;
         background-size: contain;
       }
 
       &.icon-ticket {
-        background: url('~assets/images/icon_ticket1.png') no-repeat center;
+        background: url('https://static-image.1911edu.com/icon-ticket.png') no-repeat center;
         background-size: contain;
       }
 
       &.icon-cusProject {
-        background: url('~assets/images/icon_cusProject1.png') no-repeat center;
+        background: url('https://static-image.1911edu.com/icon-self.png') no-repeat center;
         background-size: contain;
       }
 
       &.icon-examine {
-        background: url('~assets/images/icon_examine1.png') no-repeat center;
+        background: url('https://static-image.1911edu.com/icon-certification.png') no-repeat center;
         background-size: contain;
       }
 
       &.icon-college {
-        background: url('~assets/images/icon_college1.png') no-repeat center;
+        background: url('https://static-image.1911edu.com/icon-college.png') no-repeat center;
         background-size: contain;
       }
 
@@ -549,6 +559,21 @@
         background: url('~assets/images/icon_student1.png') no-repeat center;
         background-size: contain;
       }
+
+      &.icon-consult {
+        background: url('https://static-image.1911edu.com/icon-consult.png') no-repeat center;
+        background-size: contain;
+      }
+
+      &.icon-upload {
+        background: url('https://static-image.1911edu.com/icon-upload.png') no-repeat center;
+        background-size: contain;
+      }
+
+      &.icon-wallet {
+        background: url('https://static-image.1911edu.com/icon-wallet.png') no-repeat center;
+        background-size: contain;
+      }
     }
   }
 
@@ -557,59 +582,68 @@
   }
 
   .el-tabs__item.is-active i {
+    &.icon-study {
+      background: url('https://static-image.1911edu.com/icon-studyChecked.png') no-repeat center;
+      background-size: contain;
+    }
+
+    &.icon-collect {
+      background: url('https://static-image.1911edu.com/icon-collectChecked.png') no-repeat center;
+      background-size: contain;
+    }
 
     &.icon-home {
-      background: url('~assets/images/icon_index2.png') no-repeat center;
+      background: url('https://static-image.1911edu.com/icon-studyChecked.png') no-repeat center;
       background-size: contain;
     }
 
     &.icon-course {
-      background: url('~assets/images/icon_course2.png') no-repeat center;
+      background: url('https://static-image.1911edu.com/icon-courseChecked.png') no-repeat center;
       background-size: contain;
     }
 
     &.icon-project {
-      background: url('~assets/images/icon_project2.png') no-repeat center;
+      background: url('https://static-image.1911edu.com/icon-programChecked.png') no-repeat center;
       background-size: contain;
     }
 
     &.icon-order {
-      background: url('~assets/images/icon_order2.png') no-repeat center;
+      background: url('https://static-image.1911edu.com/icon-orderChecked.png') no-repeat center;
       background-size: contain;
     }
 
     &.icon-message {
-      background: url('~assets/images/icon_message2.png') no-repeat center;
+      background: url('https://static-image.1911edu.com/icon-messageChecked.png') no-repeat center;
       background-size: contain;
     }
 
     &.icon-set {
-      background: url('~assets/images/icon_set2.png') no-repeat center;
+      background: url('https://static-image.1911edu.com/icon-setChecked.png') no-repeat center;
       background-size: contain;
     }
 
     &.icon-code {
-      background: url('~assets/images/icon_code2.png') no-repeat center;
+      background: url('https://static-image.1911edu.com/icon-codeChecked.png') no-repeat center;
       background-size: contain;
     }
 
     &.icon-ticket {
-      background: url('~assets/images/icon_ticket2.png') no-repeat center;
+      background: url('https://static-image.1911edu.com/icon-ticketChecked.png') no-repeat center;
       background-size: contain;
     }
 
     &.icon-cusProject {
-      background: url('~assets/images/icon_cusProject2.png') no-repeat center;
+      background: url('https://static-image.1911edu.com/icon-selfChecked.png') no-repeat center;
       background-size: contain;
     }
 
     &.icon-examine {
-      background: url('~assets/images/icon_examine2.png') no-repeat center;
+      background: url('https://static-image.1911edu.com/icon-certificationChecked.png') no-repeat center;
       background-size: contain;
     }
 
     &.icon-college {
-      background: url('~assets/images/icon_college2.png') no-repeat center;
+      background: url('https://static-image.1911edu.com/icon-collegeChecked.png') no-repeat center;
       background-size: contain;
     }
 
@@ -620,6 +654,21 @@
 
     &.icon-student {
       background: url('~assets/images/icon_student2.png') no-repeat center;
+      background-size: contain;
+    }
+
+    &.icon-consult {
+      background: url('https://static-image.1911edu.com/icon-consultChecked.png') no-repeat center;
+      background-size: contain;
+    }
+
+    &.icon-upload {
+      background: url('https://static-image.1911edu.com/icon-uploadChecked.png') no-repeat center;
+      background-size: contain;
+    }
+
+    &.icon-wallet {
+      background: url('https://static-image.1911edu.com/icon-walletChecked.png') no-repeat center;
       background-size: contain;
     }
   }
@@ -657,4 +706,27 @@
   position: absolute;
   left: 27px;
   top: 17px;
+}
+
+.personalCenter {
+  padding-top: 80px;
+  background: url('https://static-image.1911edu.com/profile-bg.jpg') repeat;
+  background-size: 60px auto;
+}
+
+.el-tab-pane.my-invitation,
+.el-tab-pane.my-order,
+.el-tab-pane.my-ticket {
+  background-color: #fff;
+}
+
+.el-tab-pane.my-ticket {
+  .orderCard {
+    box-shadow: none !important;
+  }
+}
+
+
+.bigTab.profile .my-course#pane-tab-fourth .el-tabs__content {
+  padding-bottom: 50px;
 }

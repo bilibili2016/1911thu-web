@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="main clearfix">
-      <div class="bigBlock fl" v-if="JSON.stringify(courseList)!='{}'">
+      <div class="bigBlock fl" v-if="JSON.stringify(courseList)!='{}'" v-loading="loadMsg">
         <!-- 课程详情card -->
         <div class="main-header" v-loading="loadMsg">
           <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList"></v-card>
@@ -30,7 +30,7 @@
         <!-- 课程评价-->
         <v-evaluatecase v-if="isEvaluate&&courseList.is_study != 0 && courseList.is_evaluate==0&&privileMsg" :isClose="isClose" :courseList="courseList" @changeList="cbList" :config="config"></v-evaluatecase>
       </div>
-      <v-nodata class="nodata" :pageType="pageType" v-else></v-nodata>
+      <v-nodata class="nodata" v-if="!loadMsg&&JSON.stringify(courseList)=='{}'" :pageType="pageType"></v-nodata>
       <div class="smallBlock fr" v-if="teacherInfo">
         <!-- 擅长方向 -->
         <div class="good" v-loading="loadMsg" v-if="teacherInfo.questionLeft.length>0">
@@ -79,6 +79,9 @@
     </div>
     <v-pay @closePay="closePayed" :config="config" @refreshData="refreshData"></v-pay>
     <v-backtop :data="showCheckedCourse"></v-backtop>
+    <div class="join" @click="joinCollege">
+      <img src="https://static-image.1911edu.com/joinStudy.gif" alt>
+    </div>
   </div>
 </template>
 
@@ -109,6 +112,7 @@ export default {
   },
   data () {
     return {
+
       pageType: {
         text: "找不到任何课程信息！",
         imgUrl: "https://static-image.1911edu.com/noMsg.png"
@@ -196,13 +200,21 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setIsCollection"]),
+    //加入学院
+    joinCollege () {
+      this.$router.push({
+        path: "/home/vip/collegeIndex",
+      });
+    },
     goMeet () {
       if (isOrder) {
         this.$router.push("");
       }
     },
     showCode () {
-      this.showMiniProgramCode = true
+      if (isOrder) {
+        this.showMiniProgramCode = true
+      }
     },
     closeMini () {
       this.showMiniProgramCode = false

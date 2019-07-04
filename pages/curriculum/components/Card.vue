@@ -4,7 +4,7 @@
       <div class="topCard">
         <div class="goodplay" v-if="isShowCover">
           <div class="img-con">
-            <img :src="blankImg" alt="" class="image courseImg">
+            <img :src="courseList.picture" alt="" class="image courseImg">
             <!-- <img v-else :src="courseList.teacher_picture" alt="" class="image courseImg"> -->
           </div>
           <!-- project 页面的课程详情 不显示一些东西 -->

@@ -566,21 +566,26 @@ export default {
       document.body.classList.remove("englishMobile");
     },
     scroll () {
+      let pathName = window.location.pathname;
+      if(pathName.indexOf('english')>=0){
+         document.body.style.paddingTop = '0px'
+        return false
+      }
       this.scrollBottom =
         document.documentElement.scrollTop || document.body.scrollTop;
       if (this.scrollTop <= this.scrollBottom) {
         //下滑
         if (this.scrollTop > 80) {
           this.isHidden = true;
-          document.body.style.paddingTop = '80px'
+          document.body.style.paddingTop = '72px'
         } else {
           this.isHidden = false;
-          document.body.style.paddingTop = '130px'
+          document.body.style.paddingTop = '117px'
         }
       } else {
         //上滑
         this.isHidden = false;
-        document.body.style.paddingTop = '130px'
+        document.body.style.paddingTop = '117px'
       }
 
       setTimeout(() => {
@@ -592,7 +597,7 @@ export default {
     this.$bus.$off("getUserInfo");
   },
   mounted () {
-    document.body.style.paddingTop = '130px'
+    document.body.style.paddingTop = '117px'
 
     let pathName = window.location.pathname;
     if (

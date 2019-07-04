@@ -67,6 +67,6 @@ export default {
   background-color: #fff;
 }
 .bgf8f8fd {
-  background-color: #f8f8fd;
+  background-color: #F7F9FB;
 }
 </style>
