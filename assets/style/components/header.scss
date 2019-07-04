@@ -10,6 +10,14 @@ body {
   }
 }
 
+.headerOut {
+  width: 100%;
+  height: 72px;
+  background-color: #fff;
+  z-index: 100;
+
+}
+
 .headerBox {
   position: fixed;
   top: 0;
@@ -42,6 +50,7 @@ body {
     align-items: center;
     white-space: nowrap;
     position: relative;
+    z-index: 100;
 
     // transition: all 500ms;
     &.widthMain {
@@ -895,10 +904,15 @@ body {
   width: 100%;
   height: 45px;
   line-height: 45px;
-  // overflow: hidden;
+  overflow: hidden;
+  // overflow: inherit
   transition: all 400ms;
   background-color: #fff;
   border-top: 1px solid #F7F9FB;
+  // position: absolute;
+  // top: 72px;
+  // left: 0;
+  // opacity: 1;
 
   .headerInner {
     position: relative;
@@ -963,8 +977,12 @@ body {
 }
 
 .headerBoxHidden {
-  // height: 0;
-  display: none;
+  height: 0;
+  // top: 27px;
+  // z-index: -1;
+  // opacity: 0;
+
+  // display: none;
 }
 
 .mobile .headerBox .main .headerPage .nav {

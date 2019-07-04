@@ -16,6 +16,10 @@ html {
   font-family: Arial, '微软雅黑';
 }
 
+body {
+  transition: all 300ms;
+}
+
 .el-button--large {
   padding: $--button-large-padding-vertical $--button-large-padding-horizontal;
   font-size: $--button-large-font-size;

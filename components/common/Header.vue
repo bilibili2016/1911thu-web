@@ -5,7 +5,8 @@
             <!-- 测试 123 -->
             <!-- 优惠主题入口 -->
             <v-discount v-if="bannerMsg" @closeBanner="closeBanner"></v-discount>
-            <div class="main" :class="{widthMain:isHidden}">
+            <div class="headerOut">
+              <div class="main" :class="{widthMain:isHidden}">
                 <div class="header-fl clearfix">
                     <!-- logo -->
                     <v-logo @handleLink="handleLink"></v-logo>
@@ -38,6 +39,7 @@
                 </div>
                 <v-code v-show="bindForm.isBind" :bindForm="bindForm" @detection="handleDetection" @closeEcg="handleCloseEcg"></v-code>
                 <v-login></v-login>
+            </div>
             </div>
             <div class="headerBottom" :class="{headerBoxHidden:isHidden}">
                 <div class="headerInner">
@@ -576,9 +578,12 @@ export default {
             if (this.scrollTop > 60) {
                 this.isHidden = true;
                 document.body.style.paddingTop = '72px'
+                document.getElementsByClassName('headerBottom')[0].style.overflow='hidden'
             } else {
                 this.isHidden = false;
                 document.body.style.paddingTop = '117px'
+                document.getElementsByClassName('headerBottom')[0].style.overflow='inherit'
+
             }
             if (this.scrollTop <= this.scrollBottom) {
                 //下滑
