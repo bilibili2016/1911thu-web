@@ -47,7 +47,7 @@ export default {
     },
     data() {
         return {
-            loading:false,
+            loading: false,
             selectTag: 0,
             loading: false,
             tagList: [],
@@ -119,8 +119,10 @@ export default {
         }
     },
     mounted() {
-        if (window.location.href.indexOf('word') >= 0) {
-            this.teacherForm.search_word = decodeURI(matchSplits('word'))
+        let pathName = window.location.href
+        if (pathName.indexOf('word') >= 0) {
+            let wordText = decodeURI(pathName.split('=')[1])
+            this.teacherForm.search_word = wordText
             this.teacherForm.is_recommend = 1
         } else {
             this.teacherForm.search_word = ''

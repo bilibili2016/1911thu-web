@@ -10,7 +10,7 @@
                 </div>
                 <div class="btn" @click="beTeacher">成为导师</div>
                 <div class="search clearfix">
-                    <div class="inputDiv"> <input type="text" v-model="searchWord" placeholder="请输入导师名、话题"></div>
+                    <div class="inputDiv"> <input type="text" v-model="searchWord" placeholder="请输入导师名、话题"  @keyup.enter="search"></div>
                     <div class="fontIcon" @click="search">搜索</div>
                 </div>
             </div>

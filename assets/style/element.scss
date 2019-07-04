@@ -1206,8 +1206,16 @@ html {
     background: #fff;
   }
 
+  .el-tabs__nav-scroll {
+    border-radius: 6px;
+  }
+
+  .el-tabs__header.is-left {
+    border-radius: 6px;
+  }
+
   .el-tabs--left .el-tabs__nav-wrap.is-left {
-    border-radius: 0 0 6px 6px;
+    border-radius: 6px 6px 0 0;
   }
 
   .el-tabs--left .el-tabs__nav-wrap.is-left::after {

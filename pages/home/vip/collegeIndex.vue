@@ -17,20 +17,20 @@
                     <div class="rightInner" v-if="item.en_title=='cadreCollege'">
                         <div class="cadreItem">
                             <ul>
-                                <li style="cursor:pointer" @click.stop="handleLink('/home/core/pages/personEval')"><span class="itemLeft">学习与职业测评</span><span class="itemRight">进入测评> </span></li>
-                                <li > <span class="itemLeft">线上精品大师课</span><span class="itemRight">查看全部> </span></li>
-                                <li style="cursor:pointer" @click.stop="handleLink('/other/activePages/Institutional')"><span class="itemLeft">单位定制内训项目</span><span class="itemRight">查看详情> </span></li>
-                                <li style="cursor:inherit"><span class="itemLeft">国际认证系列项目</span><span class="itemRight">查看详情> </span></li>
+                                <li style="cursor:pointer" @click.stop="handleLink('/home/core/pages/personEval',true)"><span class="itemLeft">学习与职业测评</span><span class="itemRight">进入测评> </span></li>
+                                <li style="cursor:default" @click.stop="handleLink('',false)"> <span class="itemLeft">线上精品大师课</span><span class="itemRight">查看全部> </span></li>
+                                <li style="cursor:pointer" @click.stop="handleLink('/other/activePages/Institutional',true)"><span class="itemLeft">单位定制内训项目</span><span class="itemRight">查看详情> </span></li>
+                                <li style="cursor:default" @click.stop="handleLink('',false)"><span class="itemLeft">国际认证系列项目</span><span class="itemRight">查看详情> </span></li>
                             </ul>
                         </div>
                     </div>
                     <div class="rightInner" v-if="item.en_title=='commercialCollege'">
                         <div class="cadreItem">
                             <ul>
-                                <li style="cursor:pointer" @click.stop="handleLink('/home/core/pages/personEval')"><span class="itemLeft">学习与职业测评</span><span class="itemRight">进入测评> </span></li>
-                                <li><span class="itemLeft">线上精品大师课</span><span class="itemRight">查看全部> </span></li>
-                                <li style="cursor:inherit"><span class="itemLeft">国际认证系列项目</span><span class="itemRight">查看详情> </span></li>
-                                <li style="cursor:pointer" @click.stop="handleLink('/other/activePages/Institutional')"><span class="itemLeft">单位定制内训项目</span><span class="itemRight">查看详情> </span></li>
+                                <li style="cursor:pointer" @click.stop="handleLink('/home/core/pages/personEval',true)"><span class="itemLeft">学习与职业测评</span><span class="itemRight">进入测评> </span></li>
+                                <li style="cursor:default"  @click.stop="handleLink('',false)"><span class="itemLeft">线上精品大师课</span><span class="itemRight">查看全部> </span></li>
+                                <li style="cursor:default"  @click.stop="handleLink('',false)"><span class="itemLeft">国际认证系列项目</span><span class="itemRight">查看详情> </span></li>
+                                <li style="cursor:pointer" @click.stop="handleLink('/other/activePages/Institutional',true)"><span class="itemLeft">单位定制内训项目</span><span class="itemRight">查看详情> </span></li>
                             </ul>
                         </div>
                     </div>
@@ -126,7 +126,10 @@ export default {
         }
     },
     methods: {
-        handleLink(url) {
+        handleLink(url,flag) {
+            if(!flag){
+                return false
+            }
             this.$router.push(url)
         },
         linkTo(item) {

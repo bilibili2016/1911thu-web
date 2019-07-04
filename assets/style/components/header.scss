@@ -86,8 +86,8 @@ body {
   }
 
   .headerLogo {
-    width: 146px;
-    height: 56px;
+    width: 154px;
+    // height: 56px;
     cursor: pointer;
     margin-top: 16px;
 
@@ -126,7 +126,7 @@ body {
       margin-right: 35px;
 
       &:first-child {
-        margin-left: 25px;
+        margin-left: 35px;
       }
 
       &:last-child {
@@ -286,10 +286,12 @@ body {
     }
   }
 
+
+
   .search {
     position: relative;
     float: right;
-    width: 290px;
+    width: 46%;
     height: 36px;
     margin-top: 18px;
     line-height: 36px;
@@ -329,7 +331,7 @@ body {
       box-sizing: border-box;
 
       .innerIcon {
-        width: 70px;
+        width: 20%;
         height: 38px;
         text-align: center;
         color: #fff;
@@ -350,7 +352,7 @@ body {
       }
 
       input {
-        width: 220px;
+        width: 80%;
         height: 36px;
         line-height: 36px;
         font-size: 14px;
@@ -378,6 +380,12 @@ body {
       input:-ms-input-placeholder {
         color: #aaa;
       }
+    }
+  }
+
+  @media only screen and (max-device-width: 375px) {
+    .search {
+      width: 35% !important;
     }
   }
 

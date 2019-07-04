@@ -1,8 +1,8 @@
 <template>
     <div :class="['collegeDetail',vipInfo.en_title]">
-        <div class="project">
+        <div class="project" v-if="recommendProjectData.length">
             <div class="title">推荐项目</div>
-            <div class="projectItem clearfix"  v-if="recommendProjectData.length">
+            <div class="projectItem clearfix"  >
                 <div class="item" v-for="(item,index) in recommendProjectData" :key="'reco'+index">
                     <div class="img">
                         <img :src="item.picture" alt="">
@@ -11,8 +11,7 @@
                     <p class="desc">{{item.deputy_title}}</p>
                 </div>
             </div>
-            <v-nodata v-else :pageType="pageType"></v-nodata>
-
+            <!-- <v-nodata v-else :pageType="pageType"></v-nodata> -->
         </div>
         <div class="courseList">
             <div class="title" v-if="vipInfo.en_title!='chineseCollege'">{{vipInfo.category_name}}</div>
