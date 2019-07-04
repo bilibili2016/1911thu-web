@@ -6,40 +6,40 @@
             <!-- 优惠主题入口 -->
             <v-discount v-if="bannerMsg" @closeBanner="closeBanner"></v-discount>
             <div class="headerOut">
-              <div class="main" :class="{widthMain:isHidden}">
-                <div class="header-fl clearfix">
-                    <!-- logo -->
-                    <v-logo @handleLink="handleLink"></v-logo>
-                    <!-- 头部导航 -->
-                    <v-homeselect :class="{noWidth:!isHidden}" :projectArr="projectArr" :categoryArr="categoryArr" @addEcg="handleAddEcg"></v-homeselect>
-                </div>
-                <div class="header-fr clearfix">
-                    <!-- 登录、注册 未登录状态-->
-                    <v-lrbtn v-if="!isShowLRBtn" @login="login" @register="register"></v-lrbtn>
-                    <!-- 头像 已登录状态 -->
-                    <v-headerimg v-else :data="user" :subPagesData="subPagesData" :isShowLRBtn="isShowLRBtn" @handleLink="handleLink" @handleLinkProfile="handleLinkProfile" @handleSignOut="handleSignOut"></v-headerimg>
-                    <div :class="{noWidth:!isHidden}" class="fr-con">
-                        <div class="fuli">
-                            <img src="https://static-image.1911edu.com/fuliIcon.png" alt="" class="icon">关注领福利
-                            <div class="welf">
-                                <img src="https://static-image.1911edu.com/attentionWechat2.png" alt="">
-                                <p class="text">关注1911学堂官方微信号</p>
-                                <p class="desc">领取免费福利，超值学习经验分享</p>
+                <div class="main" :class="{widthMain:isHidden}">
+                    <div class="header-fl clearfix">
+                        <!-- logo -->
+                        <v-logo @handleLink="handleLink"></v-logo>
+                        <!-- 头部导航 -->
+                        <v-homeselect :class="{noWidth:!isHidden}" :projectArr="projectArr" :categoryArr="categoryArr" @addEcg="handleAddEcg"></v-homeselect>
+                    </div>
+                    <div class="header-fr clearfix">
+                        <!-- 登录、注册 未登录状态-->
+                        <v-lrbtn v-if="!isShowLRBtn" @login="login" @register="register"></v-lrbtn>
+                        <!-- 头像 已登录状态 -->
+                        <v-headerimg v-else :data="user" :subPagesData="subPagesData" :isShowLRBtn="isShowLRBtn" @handleLink="handleLink" @handleLinkProfile="handleLinkProfile" @handleSignOut="handleSignOut"></v-headerimg>
+                        <div :class="{noWidth:!isHidden}" class="fr-con">
+                            <div class="fuli">
+                                <img src="https://static-image.1911edu.com/fuliIcon.png" alt="" class="icon">关注领福利
+                                <div class="welf">
+                                    <img src="https://static-image.1911edu.com/attentionWechat2.png" alt="">
+                                    <p class="text">关注1911学堂官方微信号</p>
+                                    <p class="desc">领取免费福利，超值学习经验分享</p>
+                                </div>
+                            </div>
+                            <div class="english" @click="handleToggle">
+                                <span class="globe"></span>
+                                <span class="eng">English</span>
                             </div>
                         </div>
-                        <div class="english" @click="handleToggle">
-                            <span class="globe"></span>
-                            <span class="eng">English</span>
-                        </div>
+                        <!-- 搜索 -->
+                        <v-search class="searchDiv" @handleSearch="handleSearch"></v-search>
+                        <!-- 兑换码、单位入口 -->
+                        <!-- <v-enter class="HREntry" :isShowLRBtn="isShowLRBtn" @handleLink="handleLink" @addEcg="handleAddEcg"></v-enter> -->
                     </div>
-                    <!-- 搜索 -->
-                    <v-search class="searchDiv" @handleSearch="handleSearch"></v-search>
-                    <!-- 兑换码、单位入口 -->
-                    <!-- <v-enter class="HREntry" :isShowLRBtn="isShowLRBtn" @handleLink="handleLink" @addEcg="handleAddEcg"></v-enter> -->
+                    <v-code v-show="bindForm.isBind" :bindForm="bindForm" @detection="handleDetection" @closeEcg="handleCloseEcg"></v-code>
+                    <v-login></v-login>
                 </div>
-                <v-code v-show="bindForm.isBind" :bindForm="bindForm" @detection="handleDetection" @closeEcg="handleCloseEcg"></v-code>
-                <v-login></v-login>
-            </div>
             </div>
             <div class="headerBottom" :class="{headerBoxHidden:isHidden}">
                 <div class="headerInner">
@@ -573,21 +573,30 @@ export default {
                 document.body.style.paddingTop = '0px'
                 return false
             }
+            // console.log(this.scrollTop,'scrollTops');
+
             this.scrollBottom =
                 document.documentElement.scrollTop || document.body.scrollTop;
             if (this.scrollTop > 60) {
                 this.isHidden = true;
                 document.body.style.paddingTop = '72px'
-                document.getElementsByClassName('headerBottom')[0].style.overflow='hidden'
             } else {
                 this.isHidden = false;
                 document.body.style.paddingTop = '117px'
-                document.getElementsByClassName('headerBottom')[0].style.overflow='inherit'
 
+            }
+            if (this.scrollTop > 70) {
+                document.getElementsByClassName('headerBottom')[0].style.overflow = 'hidden'
+            } else {
+                document.getElementsByClassName('headerBottom')[0].style.overflow = 'inherit'
             }
             if (this.scrollTop <= this.scrollBottom) {
                 //下滑
-
+                if (this.scrollTop > 70) {
+                    document.getElementsByClassName('headerBottom')[0].style.overflow = 'hidden'
+                } else {
+                    document.getElementsByClassName('headerBottom')[0].style.overflow = 'inherit'
+                }
             }
             //  else {
             //   //上滑
@@ -598,12 +607,19 @@ export default {
             setTimeout(() => {
                 this.scrollTop = this.scrollBottom;
             }, 0);
+        },
+        toggleUrl() {
+            setTimeout(() => {
+                document.body.scrollTop = document.documentElement.scrollTop = 0;
+                this.scroll()
+            }, 0);
         }
     },
     beforeDestroy() {
         this.$bus.$off("getUserInfo");
     },
     mounted() {
+
         document.body.style.paddingTop = '117px'
 
         let pathName = window.location.pathname;
@@ -630,6 +646,9 @@ export default {
             this.notLogIn(data.type, data.res);
         });
         window.addEventListener("scroll", this.scroll);
+    },
+    watch: {
+        $route: "toggleUrl"
     }
 };
 </script>
