@@ -1,6 +1,6 @@
 <template>
     <div class="teacher-list" v-loading="loading">
-        <div class="topCon">
+        <div class="topCon" v-if="teacherForm.search_word==''">
             <span :class="{checked:selectTag==tag.id}" v-for="(tag,index) in tagList" :key="'tag'+index" @click="handleTagClick(tag)">{{tag.tag_name}}</span>
         </div>
         <div class="con">

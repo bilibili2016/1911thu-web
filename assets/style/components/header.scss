@@ -135,7 +135,7 @@ body {
 
       .navInner {
         line-height: 56px;
-        margin-top: 12px;
+        margin-top: 8px;
         position: relative;
       }
 
@@ -453,7 +453,7 @@ body {
   .lrBtn {
     float: right;
     margin-left: 20px;
-    margin-top: 31px;
+    margin-top: 27px;
 
     span {
       font-size: 16px;
@@ -574,7 +574,7 @@ body {
       width: 20px;
       position: relative;
       cursor: pointer;
-      margin: 30px 20px 0 20px;
+      margin: 28px 20px 0 20px;
 
       span {
         width: 20px;
@@ -630,6 +630,7 @@ body {
         height: 34px;
         border-radius: 20px;
         vertical-align: middle;
+        margin-bottom: 3px;
       }
     }
   }
@@ -897,6 +898,10 @@ body {
       line-height: 45px;
 
       .headerPage {
+        .subPages {
+          top: 50px;
+        }
+
         .nav {
           height: 45px;
           line-height: 45px;
@@ -921,6 +926,11 @@ body {
         float: right;
         height: 45px;
         line-height: 45px;
+      }
+
+      .welf {
+
+        top: 50px;
       }
 
       .english {

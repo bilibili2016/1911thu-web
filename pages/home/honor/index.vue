@@ -8,7 +8,7 @@
             </div>
             <div class="item">
                 <img src="https://static-image.1911edu.com/invest-honor.png" alt="">
-                <p>2019年度教育最具成长性品牌奖</p>
+                <p>2019年度教育行业最具投资价值奖</p>
             </div>
         </div>
     </div>

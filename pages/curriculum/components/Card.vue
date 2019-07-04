@@ -254,7 +254,7 @@ export default {
         // 第一次点击 没有 在购物车
         if (item.is_cart === 0) {
           if (this.two_is_cart === 0) {
-            this.flyAnimation(event, item.picture);
+            // this.flyAnimation(event, item.picture);
             this.goodsNmber(item);
           } else {
             message(this, "success", "您的课程已经在购物车里面");

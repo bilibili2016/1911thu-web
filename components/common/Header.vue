@@ -575,7 +575,7 @@ export default {
         document.documentElement.scrollTop || document.body.scrollTop;
       if (this.scrollTop <= this.scrollBottom) {
         //下滑
-        if (this.scrollTop > 80) {
+        if (this.scrollTop > 60) {
           this.isHidden = true;
           document.body.style.paddingTop = '72px'
         } else {
