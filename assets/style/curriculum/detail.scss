@@ -116,9 +116,11 @@
 
         &:before {
           content: '';
+          display: inline-block;
           width: 4px;
           height: 4px;
           background-color: #666666;
+          margin: 0 7px 3px 0;
         }
       }
     }

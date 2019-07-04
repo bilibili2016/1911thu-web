@@ -65,7 +65,7 @@
                     </div>
                     <div class="rightInner" v-if="item.en_title=='smartCollege'">
                         <div class="cadreItem">
-                            <div class="top">AI培训解决方案 |助力领跑智能时代</div>
+                            <div class="top">AI培训解决方案 | 助力领跑智能时代</div>
                             <ul>
                                 <li>
                                     <p class="text">
@@ -142,7 +142,10 @@ export default {
         handleLiClick(item) {
             this.liChecked = item.id
             let top = 420 + document.getElementById('' + item.en_title).offsetTop
-            window.scrollTo(0, top)
+            window.scrollTo({
+                top:top,
+                 behavior: "smooth"
+            })
         },
         // 学院列表
         vipGoodsList() {

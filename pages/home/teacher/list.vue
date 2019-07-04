@@ -5,7 +5,7 @@
         </div>
         <div class="con">
             <div v-if="listData.length">
-                <div class="listItem clearfix" v-loading="loading">
+                <div class="listItem clearfix">
                     <div class="item" v-for="(item,index) in listData" :key="'list'+index" @click="handleItemClick(item)">
                         <div class="clearfix">
                             <div class="img">

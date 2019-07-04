@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div class="main clearfix">
+    <div class="main  clearfix" id="playerDetail">
       <div class="bigBlock fl" v-if="JSON.stringify(courseList)!='{}'" v-loading="loadMsg">
         <!-- 课程详情card -->
         <div class="main-header" v-loading="loadMsg">

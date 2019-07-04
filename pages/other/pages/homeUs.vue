@@ -6,7 +6,7 @@
         <span class="top-desc">About Us</span>
       </div>
     </div>
-    <div class="content" id="content">
+    <div class="content usCon" id="content">
       <el-tabs type="card" tab-position="left" @tab-click="handleClick">
 
         <el-tab-pane v-for="item in titleListData" :label="item.title" :key="item.id">

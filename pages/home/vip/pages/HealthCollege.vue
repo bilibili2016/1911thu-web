@@ -19,7 +19,7 @@
                     </div>
                     <div class="object">
                         <span class="left">面向人群</span>
-                        <span class="right">全国普通高等学校的行政管理干部和专业骨干教师</span>
+                        <span class="right">大健康产业及相关产业从业人员</span>
                     </div>
 
                     <!-- <h2>面向人群</h2>
