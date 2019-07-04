@@ -85,6 +85,27 @@
           margin-top: 55px;
           cursor: pointer;
           z-index: 1;
+
+          .cadreItem {
+
+            ul {
+              li {
+
+                .itemLeft {
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                }
+
+                .itemRight {
+                  display: inline-block;
+                  vertical-align: middle;
+                  margin-left: 30px
+                }
+              }
+            }
+
+          }
         }
       }
 

@@ -422,6 +422,15 @@ html {
   .el-form-item.is-success .el-textarea__inner:focus {
     border-color: #bbb;
   }
+
+  input:-webkit-autofill {
+    background-color: #fff !important;
+    background-image: none !important;
+    color: #000 !important;
+    // box-shadow: 0 0 0px 1000px #fff inset !important;
+    // -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
+    border-radius: 0 !important;
+  }
 }
 
 // forgotpassword 页

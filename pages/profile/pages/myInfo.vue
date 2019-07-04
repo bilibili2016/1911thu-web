@@ -3,7 +3,7 @@
     <el-card class="card-style">
       <div slot="header" class="clearfix">
         <div v-if="!isShowDetail">
-          <span>我的消息</span>
+          <span style="color:#773084">我的消息</span>
         </div>
         <div v-else>
           <span class="firstText" @click="returnPage">我的消息 </span>

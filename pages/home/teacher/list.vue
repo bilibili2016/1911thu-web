@@ -1,11 +1,11 @@
 <template>
-    <div class="teacher-list" v-loading="loading">
+    <div class="teacher-list">
         <div class="topCon" v-if="teacherForm.search_word==''">
             <span :class="{checked:selectTag==tag.id}" v-for="(tag,index) in tagList" :key="'tag'+index" @click="handleTagClick(tag)">{{tag.tag_name}}</span>
         </div>
         <div class="con">
             <div v-if="listData.length">
-                <div class="listItem clearfix">
+                <div class="listItem clearfix" v-loading="loading">
                     <div class="item" v-for="(item,index) in listData" :key="'list'+index" @click="handleItemClick(item)">
                         <div class="clearfix">
                             <div class="img">
@@ -47,6 +47,7 @@ export default {
     },
     data() {
         return {
+            loading:false,
             selectTag: 0,
             loading: false,
             tagList: [],
@@ -77,6 +78,8 @@ export default {
 
         },
         handleTagClick(tag) {
+            this.teacherForm.pages = 1
+            this.teacherForm.limits = 15
             this.teacherForm.search_word = ''
             this.teacherForm.is_recommend = ''
             this.selectTag = tag.id

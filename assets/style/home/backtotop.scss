@@ -22,6 +22,7 @@
     padding-top: 13px;
     box-sizing: border-box;
     overflow: hidden;
+    cursor: pointer;
 
     img {
       display: block;
@@ -167,6 +168,42 @@
     &.arrow {
       padding-top: 25px;
       margin-top: 10px;
+    }
+  }
+}
+
+.chatDialog {
+  .el-dialog {
+    height: 620px;
+    border-radius: 5px;
+    width: 960px;
+    margin-bottom: 0;
+  }
+
+  .el-dialog__header {
+    height: 0;
+    padding: 0;
+
+    .el-dialog__headerbtn {
+      top: -5px;
+      right: -32px;
+
+      .el-dialog__close {
+        color: #fff;
+        font-size: 30px;
+      }
+    }
+  }
+
+  .el-dialog__body {
+    padding: 0;
+
+    iframe {
+      border: none;
+
+      .close___1JK_r {
+        margin-right: 60px;
+      }
     }
   }
 }

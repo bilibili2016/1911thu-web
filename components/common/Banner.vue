@@ -37,14 +37,13 @@
                     </div>
                 </div>
             </div>
-
             <!-- <div class="avator">
                 <div class="img"></div>
               </div> -->
             <div class="name">
                 <p class="nickName">{{userInfo.nick_name}}<span>{{userInfo.is_teacher=='1'?"导师":"学生"}}</span></p>
                 <!-- <p class="companyName">{{userInfo.company_name}}</p> -->
-                <p class="studyTime">已学{{userInfo.study_time}}学时 <span class="line">|</span> {{time.hour}}小时{{time.minutes}}分钟</p>
+                <p class="studyTime" v-if="userInfo.is_teacher==0">已学{{userInfo.study_time}}学时 <span class="line">|</span> {{time.hour}}小时{{time.minutes}}分钟</p>
                 <!-- <p class="vipCard">
                     <span v-for="(vip,index) in userInfo.vipPrivateList" :key="index">
                     <el-popover placement="bottom-start" :title="vip.title" width="180" trigger="hover" :content="'剩余'+(vip.expire_days)+'天'">

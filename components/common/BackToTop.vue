@@ -1,7 +1,7 @@
 <template>
     <div class="infoItem">
         <div class="rightBack" v-if="visible">
-            <div class="backItem online">
+            <div class="backItem online" @click="handleopen">
                 <img src="https://static-image.1911edu.com/index-lineIcon.png" alt="">
                 <p>在线咨询</p>
                 <div class="onlineShow">
@@ -30,6 +30,13 @@
                 <img :src="topSrc" alt="">
             </div>
         </div>
+        <!-- 客服 -->
+        <el-dialog class="chatDialog" title :visible.sync="dialogVisible" top="20px">
+            <div>
+                <iframe id="service" name="myframe" :src="completeTask" height="620" width="100%"></iframe>
+            </div>
+        </el-dialog>
+
     </div>
 </template>
 

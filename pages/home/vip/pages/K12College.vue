@@ -37,14 +37,14 @@
             <div class="k12-three">
                 <div class="bar">
                     <span class="left">面向人群</span>
-                    <span class="right">全国各地各类中学、小学及国际学校的在校学生</span>
+                    <span class="right">全国各地中学、小学及国际学校在校学生</span>
                 </div>
                 <div class="target k12Width">
                     <div class="k12-title">
                         <div class="text">培养目标</div>
                         <div class="decorate"><span class="line"></span><span class="dot"></span><span class="line"></span></div>
                     </div>
-                    <p class="pCss">1911学堂K12学院的培养目标是培养努力践行社会主义核心价值观，视野开阔、素养全面，具备较强实践能力和适应能力的中小学生。</p>
+                    <p class="pCss">培养视野开阔、素养全面，具备较强实践能力和适应能力，符合国家战略和社会发展的新时代优秀人才。</p>
                 </div>
                 <!-- 师资来源 -->
                 <div class="k12-title">
