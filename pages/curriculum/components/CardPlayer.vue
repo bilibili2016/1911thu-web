@@ -30,6 +30,7 @@ import playerNextComponent from "~/lib/core/next.js";
 import playerPreviousComponent from "~/lib/core/previous.js";
 import PlayerError from "@/components/common/PlayerError.vue";
 export default {
+  props:['courseList'],
   components: {
     "v-error": PlayerError
   },
@@ -134,7 +135,9 @@ export default {
     },
     // 课程-获取默认 的课程id 以及小节id
     getdefaultCurriculumCatalog () {
-      this.getdefaultForm.curriculumid = matchSplits("kid");
+      // this.getdefaultForm.curriculumid = matchSplits("kid");
+      this.getdefaultForm.curriculumid = this.courseList.id;
+
       coursedetail
         .getdefaultCurriculumCatalog(this.getdefaultForm)
         .then(res => {

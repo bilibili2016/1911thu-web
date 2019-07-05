@@ -16,7 +16,7 @@
             </div>
           </div>
         </div>
-        <v-player @changePlayImg="changePlayImg" @gobuy="handleAddShopCart(courseList,$event)" @refreshData="refreshData" @showCover="showCover"></v-player>
+        <v-player :courseList="courseList" @changePlayImg="changePlayImg" @gobuy="handleAddShopCart(courseList,$event)" @refreshData="refreshData" @showCover="showCover"></v-player>
       </div>
       <div class="particularss">
         <div class="currentclum">
