@@ -35,12 +35,12 @@ export default {
           id: "index",
           link: "/"
         },
-          {
+        {
           title: "课程",
           id: "courseCenter",
           link: "/course/category?cid=0&cp=0&pids=0&xid=0&vid=-1"
         },
-          {
+        {
           title: "师资",
           id: "teacher",
           link: "/home/teacher/teacherIndex"
@@ -136,6 +136,7 @@ export default {
       if (item.id == "service") {
         //服务支持
         if (child.id == "code") {
+          this.isHidden = true;
           //兑换码
           this.$emit("addEcg");
         } else {

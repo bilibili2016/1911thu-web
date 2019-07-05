@@ -8,8 +8,8 @@
           <div class="code-icon"> <img src="https://static-image.1911edu.com/code-icon.png" alt=""></div>
           <p class="code-text">绑定兑换码</p>
           <div class="code-input">
-            <input v-model="bindForm.courseId" placeholder="请输入您的兑换码，注意区分大小写">
-            <span class="bindCode input" v-if="bindForm.isInput" @click="detection">绑定</span>
+            <input v-model="bindForm.courseId" autofocus="true" placeholder="请输入您的兑换码，注意区分大小写">
+            <span class="bindCode input" v-if="isBind" @click="detection">绑定</span>
             <span class="bindCode" v-else>立即绑定</span>
           </div>
           <p class="code-desc">兑换码是用户为多人办理学籍或购买多门课程生成的6位代码。</p>
@@ -34,6 +34,23 @@
 <script>
 export default {
   props: ["bindForm"],
+  data () {
+    return {
+      isBind: false
+    }
+  },
+  watch: {
+    // 绑定兑换码
+    "bindForm.courseId" (val, oldval) {
+      if (val == "") {
+        this.isBind = false;
+      } else {
+        if (/^[A-Za-z0-9]+$/.test(val)) {
+          this.isBind = true;
+        }
+      }
+    }
+  },
   methods: {
     closeEcg () {
       this.$emit("closeEcg");
