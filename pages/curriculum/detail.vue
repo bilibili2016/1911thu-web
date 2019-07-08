@@ -10,7 +10,7 @@
             <!-- <i class="el-icon-location-outline"></i><span>北京</span> -->
           </h4>
           <h5>
-            <span>{{teacherInfo.consultation_num}}</span>人约聊过
+            指导过<span>{{teacherInfo.consultation_num}}</span>人
           </h5>
           <h6>{{teacherInfo.graduate}}</h6>
           <p>{{teacherInfo.content}}</p>
@@ -65,7 +65,7 @@
               <el-rate disabled v-model="item.score" class="rate fr"></el-rate>
             </div>
             <p class="price" v-if="item.is_free=='2'">免费</p>
-            <p class="price" v-else>{{item.present_price}}</p>
+            <p class="price" v-else>￥{{item.present_price}}</p>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-main class="home" >
+    <el-main class="home">
       <!-- 头部导航 -->
       <v-carousel class="topCarousel" :items="bannerData" v-loading="bannerLoading" :config="configCarousel"></v-carousel>
       <!-- 数字信息 -->
@@ -66,9 +66,9 @@ export default {
     "v-outnews": outNews,
     "v-core": Core,
     "v-leader": Leader,
-    "v-num":Num,
-    "v-teacher":Teacher,
-    "v-honor":Honor
+    "v-num": Num,
+    "v-teacher": Teacher,
+    "v-honor": Honor
   },
   data () {
     return {
@@ -98,8 +98,8 @@ export default {
       linkinfo: "/home/news/list",
       outNewsTitle: "媒体报道",
       outNewsLink: "/home/news/outNewsList",
-      teacherTitle:"30位导师等你来约",
-      teacherLink:'/home/teacher/list',
+      teacherTitle: "百名导师等你来约",
+      teacherLink: '/home/teacher/list',
       freeData: [],
       newData: [],
       classicData: [],
@@ -212,9 +212,9 @@ export default {
         type: 2,
         isRecommend: 1
       },
-      teacherForm:{
-        page:1,
-        limit:8
+      teacherForm: {
+        page: 1,
+        limit: 8
       }
     };
   },
@@ -358,15 +358,13 @@ export default {
       });
     },
     //导师列表
-    getTeacherData(){
-       home.getTeacherData(this.teacherForm).then(res => {
+    getTeacherData () {
+      home.getTeacherData(this.teacherForm).then(res => {
         this.teacherData = res.data.teacherList;
       });
     }
   },
   mounted () {
-    document.getElementsByTagName("title")[0].innerText =
-      "1911学堂-混合式终身教育提供者";
     this.windowWidth = document.documentElement.clientWidth;
     this.$bus.$on("loginMsg", data => {
       if (data === true) {
@@ -380,12 +378,20 @@ export default {
     });
 
     // this.$bus.$emit('bannerShow', false)
+  },
+  head () {
+    return {
+      meta: [
+        { hid: 'keywords', name: 'keywords', content: '终身教育，人工智能，商学院，干部培训，k12，大健康，新闻传播，体育培训，互联网学校' },
+        { hid: 'description', name: 'description', content: '1911学堂是一所致力于终身教育的互联网学校，由1911集团联合清华大学、北京大学等国内外知名高校的近百位资深专家发起创立的终身教育平台。包含K12学院、商学院、新闻传播学院、大健康学院、人工智能学院、教育学院、体育学院、干部学院。为中小学师生、大学生、职场精英、企业高管、政府官员提供咨询、线上线下课程等教育服务近万人次。' }
+      ]
+    }
   }
 };
 </script>
 <style scoped lang="scss">
-.home{
-  background: url('https://static-image.1911edu.com/home-bottom.png') no-repeat;
+.home {
+  background: url("https://static-image.1911edu.com/home-bottom.png") no-repeat;
   background-size: 100% 564px;
   background-position: center bottom;
 }

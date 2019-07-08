@@ -73,8 +73,16 @@
 <script>
 import { setTitle } from "~/lib/util/helper";
 export default {
+  head () {
+    return {
+      title: "人才测评_测评报告_测评入口-1911学堂",
+      meta: [
+        { hid: 'keywords', name: 'keywords', content: '学习效果评估，职业成长建议，提升职场竞争力，定位能力短板' }
+      ]
+    }
+  },
   mounted () {
-    setTitle("核心优势-人才测评-1911学堂");
+    setTitle("人才测评_测评报告_测评入口-1911学堂");
   }
 };
 </script>
