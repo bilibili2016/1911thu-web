@@ -418,8 +418,8 @@ export default {
     teacherRecruitDetail () {
       profileHome.teacherRecruitDetail().then(res => {
         if (res.status == 0) {
-          if (res.data.teacherRecruitDetail == []) {
-            this.noData = true
+          if (JSON.stringify(res.data.teacherRecruitDetail) == "{}") {
+            this.noData = false
           } else {
             this.teacherForm.name = res.data.teacherRecruitDetail.teacher_name ? res.data.teacherRecruitDetail.teacher_name : ''
             this.isName = res.data.teacherRecruitDetail.teacher_name ? true : false
@@ -458,7 +458,7 @@ export default {
               this.teacherForm.service.push('-1')
               this.isShowOtherService = true
             }
-            this.noData = false
+            this.noData = true
 
           }
 
