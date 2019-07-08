@@ -14,7 +14,7 @@
               <div class="info">
                 <div class="name">{{item.teacher_name}}</div>
                 <div class="desc">{{item.graduate}}</div>
-                <div class="text"><span class="num">{{item.bookingNum}}</span>人聊过</div>
+                <div class="text">学习人数{{item}}<span class="num">{{item.bookingNum*1+item.bespokeNum*1+item.study_number*1}}</span>人</div>
               </div>
             </div>
             <div class="topic">
@@ -130,7 +130,7 @@ export default {
     } else {
       this.teacherForm.search_word = ''
     }
-    console.log(this.teacherForm);
+    // console.log(this.teacherForm);
 
     this.childCategoryList()
     this.getNewInfoList()
