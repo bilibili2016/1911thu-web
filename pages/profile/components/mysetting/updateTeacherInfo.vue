@@ -1,11 +1,11 @@
 <template>
-  <div class="updateTeacherInfo" v-loading="!isClick">
+  <div class="updateTeacherInfo" v-loading="!isClick" v-if="noData">
     <el-form :model="teacherForm" :rules="rules" ref="teacherForm" label-width="165px" class="teacherForm">
       <el-form-item label="姓名" prop="name">
-        <el-input v-model="teacherForm.name" maxlength="20" disabled></el-input>
+        <el-input v-model="teacherForm.name" maxlength="20" :disabled="isName"></el-input>
       </el-form-item>
       <el-form-item label="学校" prop="school">
-        <el-input v-model="teacherForm.school" v-if="hasSchool" disabled></el-input>
+        <el-input v-model="teacherForm.school" v-if="hasSchool" :disabled="isSchool" maxlength="50"></el-input>
         <el-select v-model="teacherForm.school" filterable placeholder="请选择学校" @change="handleSelectChange" v-else>
           <el-option v-for="item in school" :key="item.name" :label="item.name" :value="item.id"></el-option>
         </el-select>
@@ -134,13 +134,18 @@
       </el-form-item>
     </el-form>
   </div>
+  <v-nomsg v-else :config="noMsg"></v-nomsg>
 </template>
 
 <script>
+import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 import { checkPhone, checkCode } from "~/lib/util/validatefn";
 import { message } from "@/lib/util/helper";
 import { auth, list, profileHome } from "~/lib/v1_sdk/index";
 export default {
+  components: {
+    'v-nomsg': NoMsg
+  },
   data () {
     var bankCard = (rule, value, callback) => {
       if (this.oldCard != this.psnForm.bank_card && this.psnForm.bank_card != '') {
@@ -164,6 +169,11 @@ export default {
       callback();
     };
     return {
+      noMsg: {
+        type: "myOrder",
+        text: "抱歉，没有导师的信息~"
+      },
+      noData: true,
       isClick: true,
       options: [],
       school: [],
@@ -183,6 +193,8 @@ export default {
         FILESS: [],
         fileName: ""
       },
+      isName: false,
+      isSchool: false,
       teacherForm: {
         id: "",
         name: "", //姓名
@@ -205,6 +217,18 @@ export default {
         teacherRemark: ''
       },
       rules: {
+        name: [{
+          required: true,
+          message: "请选择您的姓名",
+          trigger: "blur"
+        }],
+        school: [
+          {
+            required: true,
+            message: "请选择您的学校名称",
+            trigger: "blur"
+          }
+        ],
         dutyName: [
           {
             required: true,
@@ -394,41 +418,50 @@ export default {
     teacherRecruitDetail () {
       profileHome.teacherRecruitDetail().then(res => {
         if (res.status == 0) {
-          this.teacherForm.name = res.data.teacherRecruitDetail.teacher_name
-          this.teacherForm.school = res.data.teacherRecruitDetail.school
-          this.teacherForm.identity = res.data.teacherRecruitDetail.identity
-          this.teacherForm.dutyName = res.data.teacherRecruitDetail.title
-          this.teacherForm.email = res.data.teacherRecruitDetail.email
-          this.teacherForm.directionArr = res.data.teacherRecruitDetail.study_direction
-          this.direction = res.data.teacherRecruitDetail.study_direction
-          this.teacherForm.otherArea = res.data.teacherRecruitDetail.other_study_direction
-          this.teacherForm.service = res.data.teacherRecruitDetail.offer_service
-          this.teacherForm.otherService = res.data.teacherRecruitDetail.other_offer_service
-          this.teacherForm.consult = res.data.teacherRecruitDetail.is_meet
-          this.teacherForm.courseName = res.data.teacherRecruitDetail.curriculum_name
-          this.teacherForm.otherInfo = res.data.teacherRecruitDetail.remark
-          this.teacherForm.academic = res.data.teacherRecruitDetail.education
-          this.teacherForm.studentCard = res.data.teacherRecruitDetail.student_card
-          this.teacherForm.photo = res.data.teacherRecruitDetail.photo
-          this.teacherForm.teacherRemark = res.data.teacherRecruitDetail.teacher_remark
-          this.teacherForm.id = res.data.teacherRecruitDetail.id
-          if (this.teacherForm.school != "") {
-            this.hasSchool = true
+          if (res.data.teacherRecruitDetail == []) {
+            this.noData = true
+          } else {
+            this.teacherForm.name = res.data.teacherRecruitDetail.teacher_name ? res.data.teacherRecruitDetail.teacher_name : ''
+            this.isName = res.data.teacherRecruitDetail.teacher_name ? true : false
+            this.teacherForm.school = res.data.teacherRecruitDetail.school
+            this.isSchool = res.data.teacherRecruitDetail.school ? true : false
+            this.teacherForm.identity = res.data.teacherRecruitDetail.identity ? res.data.teacherRecruitDetail.identity : '1'
+            this.teacherForm.dutyName = res.data.teacherRecruitDetail.title
+            this.teacherForm.email = res.data.teacherRecruitDetail.email
+            this.teacherForm.directionArr = res.data.teacherRecruitDetail.study_direction
+            this.direction = res.data.teacherRecruitDetail.study_direction ? res.data.teacherRecruitDetail.study_direction : []
+            this.teacherForm.otherArea = res.data.teacherRecruitDetail.other_study_direction
+            this.teacherForm.service = res.data.teacherRecruitDetail.offer_service ? res.data.teacherRecruitDetail.offer_service : []
+            this.teacherForm.otherService = res.data.teacherRecruitDetail.other_offer_service
+            this.teacherForm.consult = res.data.teacherRecruitDetail.is_meet
+            this.teacherForm.courseName = res.data.teacherRecruitDetail.curriculum_name
+            this.teacherForm.otherInfo = res.data.teacherRecruitDetail.remark ? res.data.teacherRecruitDetail.remark : ''
+            this.teacherForm.academic = res.data.teacherRecruitDetail.education
+            this.teacherForm.studentCard = res.data.teacherRecruitDetail.student_card
+            this.teacherForm.photo = res.data.teacherRecruitDetail.photo
+            this.teacherForm.teacherRemark = res.data.teacherRecruitDetail.teacher_remark
+            this.teacherForm.id = res.data.teacherRecruitDetail.id
+            if (this.teacherForm.school != "") {
+              this.hasSchool = true
+            }
+            if (this.teacherForm.studentCard) {
+              this.isShowCardImg = false
+            }
+            if (this.teacherForm.photo) {
+              this.isShowImg = false
+            }
+            if (this.teacherForm.otherArea != "") {
+              this.direction.push('-1')
+              this.isShowOther = true
+            }
+            if (this.teacherForm.otherService != "") {
+              this.teacherForm.service.push('-1')
+              this.isShowOtherService = true
+            }
+            this.noData = false
+
           }
-          if (this.teacherForm.studentCard) {
-            this.isShowCardImg = false
-          }
-          if (this.teacherForm.photo) {
-            this.isShowImg = false
-          }
-          if (this.teacherForm.otherArea != "") {
-            this.direction.push('-1')
-            this.isShowOther = true
-          }
-          if (this.teacherForm.otherService != "") {
-            this.teacherForm.service.push('-1')
-            this.isShowOtherService = true
-          }
+
         } else {
           message(this, "error", res.msg);
         }

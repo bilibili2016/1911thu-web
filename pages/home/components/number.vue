@@ -1,6 +1,6 @@
 <template>
   <div class="number">
-    <div class="title">1911学堂，让努力奋进的人享受到最优质的教育！</div>
+    <div class="title">1911学堂，让努力奋进的人享受到全球最优质的教育！</div>
     <div class="con">
       <div class="item">
         <div class="num">{{teacherNum}}+</div>
