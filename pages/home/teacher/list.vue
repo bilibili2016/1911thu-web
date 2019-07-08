@@ -54,7 +54,8 @@ export default {
       teacherForm: {
         pages: 1,
         limits: 15,
-        categoryIdA:''
+        search_word: '',
+        categoryIdA: ''
       },
       pagemsg: {
         page: 1,
@@ -126,11 +127,11 @@ export default {
     if (pathName.indexOf('word') >= 0) {
       let wordText = decodeURI(pathName.split('=')[1])
       this.teacherForm.search_word = wordText
-      this.teacherForm.is_recommend = 1
     } else {
       this.teacherForm.search_word = ''
-      this.teacherForm.is_recommend = ''
     }
+    console.log(this.teacherForm);
+
     this.childCategoryList()
     this.getNewInfoList()
   }
