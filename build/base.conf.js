@@ -43,7 +43,7 @@ const config = {
     app: './src/main.js'
   },
   head: {
-    title: '1911学堂-混合式终身教育提供者',
+    title: '1911学堂-致力于终身教育的互联网学校',
     meta: [{
         charset: 'utf-8'
       },
@@ -61,9 +61,12 @@ const config = {
       //     'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
       // },
       {
-        hid: 'description',
         name: 'description',
-        content: '1911学堂-混合式终身教育提供者'
+        content: '1911学堂是一所致力于终身教育的互联网学校，由1911集团联合清华大学、北京大学等国内外知名高校的近百位资深专家发起创立的终身教育平台。包含K12学院、商学院、新闻传播学院、大健康学院、人工智能学院、教育学院、体育学院、干部学院。为中小学师生、大学生、职场精英、企业高管、政府官员提供咨询、线上线下课程等教育服务近万人次。'
+      },
+      {
+        name: 'keywords',
+        content: '终身教育，人工智能，商学院，干部培训，k12，大健康，新闻传播，体育培训，互联网学校'
       }
     ],
     link: [

@@ -11,7 +11,7 @@
       <div class="info">
         <div class="name">{{item.teacher_name}}</div>
         <div class="desc">{{item.graduate}}</div>
-        <div class="bottom"><span class="num">{{item.bookingNum}}</span>人约聊过</div>
+        <div class="bottom">学习人数<span class="num">{{item.bookingNum*1+item.bespokeNum*1+item.study_number*1}}</span>人</div>
       </div>
     </div>
   </div>

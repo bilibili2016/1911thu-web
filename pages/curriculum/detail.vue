@@ -10,7 +10,7 @@
             <!-- <i class="el-icon-location-outline"></i><span>北京</span> -->
           </h4>
           <h5>
-            <span>{{teacherInfo.consultation_num}}</span>人约聊过
+            学习人数<span>{{studyNumber}}</span>人
           </h5>
           <h6>{{teacherInfo.graduate}}</h6>
           <p>{{teacherInfo.content}}</p>
@@ -65,7 +65,7 @@
               <el-rate disabled v-model="item.score" class="rate fr"></el-rate>
             </div>
             <p class="price" v-if="item.is_free=='2'">免费</p>
-            <p class="price" v-else>{{item.present_price}}</p>
+            <p class="price" v-else>￥{{item.present_price}}</p>
           </div>
         </div>
       </div>
@@ -112,6 +112,7 @@ export default {
   },
   data () {
     return {
+      studyNumber: 0,
       pageType: {
         text: "找不到任何课程信息！",
         imgUrl: "https://static-image.1911edu.com/noMsg.png"
@@ -385,6 +386,8 @@ export default {
             this.courseList = res.data.curriculumDetail;
             //   是否收藏
             this.collectMsg.isCollect = res.data.curriculumDetail.is_collection;
+            // 学习人数
+            this.studyNumber = this.teacherInfo.consultation_num * 1 + this.teacherInfo.bookingNum * 1 + this.teacherInfo.study_number * 1
             if (!flag) {
               this.initAll()
             }

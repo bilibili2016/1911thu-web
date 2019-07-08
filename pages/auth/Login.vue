@@ -135,6 +135,7 @@ export default {
         types: 1,
         openid: null,
         companyCodes: "",
+        identity: '',
         captchaDisable: false,
         exist: false,
         checked: false,
@@ -171,6 +172,7 @@ export default {
         ectpwd: "",
         types: 1,
         codes: "",
+        identity: '',
         checked: false,
         companyCodes: ""
       },
@@ -232,6 +234,12 @@ export default {
             required: true,
             message: "请输入短信验证码",
             trigger: "blur"
+          }
+        ],
+        identity: [
+          {
+            required: true,
+            message: "请选择您的身份",
           }
         ],
         companyCodes: [
@@ -698,6 +706,9 @@ export default {
         if (this.bindTelData.codes === "") {
           throw "请输入验证码";
         }
+        if (this.bindTelData.identity === "") {
+          throw "请选择您的身份";
+        }
       } catch (error) {
         message(this, "error", error);
         return false;
@@ -831,6 +842,7 @@ export default {
       // this.registerData.checked = [false]
       this.registerData.checked = false;
       this.registerData.companyCodes = "";
+      this.registerData.identity = "";
       // 手机验证码登陆
       // this.registerMobileData.phones = "";
       this.registerMobileData.passwords = "";
