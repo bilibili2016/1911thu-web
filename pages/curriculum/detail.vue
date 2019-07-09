@@ -9,7 +9,7 @@
           <h4>{{teacherInfo.teacher_name}}
             <!-- <i class="el-icon-location-outline"></i><span>北京</span> -->
           </h4>
-          <h5>
+          <h5 v-if="teacherInfo.teacher_name">
             学习人数<span>{{studyNumber}}</span>人
           </h5>
           <h6>{{teacherInfo.graduate}}</h6>
