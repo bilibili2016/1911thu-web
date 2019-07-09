@@ -11,7 +11,8 @@
         <div class="btn" @click="beTeacher">成为导师</div>
         <div class="search clearfix">
           <div class="inputDiv"> <input type="text" v-model="searchWord" placeholder="请输入导师名、话题" @keyup.enter="search"></div>
-          <div class="fontIcon" @click="search">搜索</div>
+          <div v-if="loadSearch" class="fontIcon"><i class="el-icon-loading"></i></div>
+          <div v-else class="fontIcon" @click="search">搜索</div>
         </div>
       </div>
     </div>
@@ -80,7 +81,7 @@
 import { list, banner } from "~/lib/v1_sdk/index";
 import TCard from "@/components/card/teacherCard.vue";
 
-import { setTitle, matchSplits, Trim } from "@/lib/util/helper";
+import { setTitle, matchSplits, Trim, open } from "@/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
 
 export default {
@@ -92,6 +93,12 @@ export default {
       loading: false,
       teacherData: [],
       searchWord: '',
+      courseUrl: {
+        base: "/curriculum/detail",
+        kid: 0,
+        tid: 0,
+      },
+      loadSearch: false,
       teacherForm: {
         pages: 1,
         limits: 12,
@@ -102,10 +109,13 @@ export default {
   },
   methods: {
     search () {
-      if (Trim(this.searchWord) == '') {
+      this.searchWord = Trim(this.searchWord)
+      if (this.searchWord == '') {
         return false
       }
-      this.$router.push('/home/teacher/list?word=' + encodeURI(Trim(this.searchWord)))
+      this.loadSearch = true;
+      this.teacherForm.search_word = this.searchWord
+      this.getNewInfoList(true)
     },
     beTeacher () {
       this.$router.push('beTeacher')
@@ -114,15 +124,28 @@ export default {
       this.$router.push('/home/teacher/list')
     },
     //获取导师数据
-    getNewInfoList () {
+    getNewInfoList (search) {
       this.loading = true;
-      list.getTeacherList(this.teacherForm).then(response => {
+      list.getTeacherList(this.teacherForm).then(res => {
         this.loading = false;
-        if (response.status === 100008) {
-          let data = { type: true, res: response };
+        this.loadSearch = false;
+        if (res.status == 0) {
+          // 获取[搜索]数据
+          if (search) {
+            if (res.data.pageCount == 1) {
+              this.courseUrl.tid = res.data.teacherList[0].id;
+              open(this.courseUrl);
+            } else {
+              this.$router.push('/home/teacher/list?word=' + encodeURI(this.searchWord))
+            }
+          } else {
+            this.teacherData = res.data.teacherList;
+          }
+          this.teacherForm.search_word = ''
+          this.searchWord = ''
+        } else if (res.status == 100008) {
+          let data = { type: true, res: res };
           this.$bus.$emit("reLoginAlertPop", data);
-        } else if (response.status === 0) {
-          this.teacherData = response.data.teacherList;
         }
         // this.$nextTick(() => {
         //   if (document.getElementById("leftCon")) {
