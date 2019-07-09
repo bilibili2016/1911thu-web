@@ -33,7 +33,7 @@
               </div>
             </div>
             <!-- 搜索 -->
-            <v-search class="searchDiv" :loadSearch="loadSearch" @handleSearch="handleSearch"></v-search>
+            <v-search class="searchDiv" @handleSearch="handleSearch"></v-search>
             <!-- 兑换码、单位入口 -->
             <!-- <v-enter class="HREntry" :isShowLRBtn="isShowLRBtn" @handleLink="handleLink" @addEcg="handleAddEcg"></v-enter> -->
           </div>
@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { setPagesHeight, matchSplits, open } from "~/lib/util/helper";
+import { setPagesHeight, matchSplits } from "~/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
 import { isMobileTerminal } from "@/lib/util/helper";
 import { auth, header, home, search } from "~/lib/v1_sdk/index";
@@ -174,19 +174,6 @@ export default {
         text: "我的钱包"
       }
       ],
-      searchForm: {
-        pages: 1,
-        limits: 8,
-        searchword: null,
-        categoryid: null,
-        sortby: 2
-      },
-      courseUrl: {
-        base: "/curriculum/detail",
-        kid: 0,
-        tid: 0,
-      },
-      loadSearch: false,
       pass: false,
       skip: "" //兑换码类型
     };
@@ -237,26 +224,7 @@ export default {
     },
     handleSearchData (item) {
       persistStore.set("key", item);
-      this.loadSearch = true;
-      this.searchForm.searchword = item;
-      search.searchCurriculumList(this.searchForm).then(res => {
-        this.loadSearch = false;
-        if (res.status == 0) {
-          if (res.data.pageCount == 1) {
-            this.courseUrl.kid = res.data.curriculumList[0].id;
-            open(this.courseUrl);
-          } else {
-            this.handleLink("/other/pages/search");
-          }
-        } else if (res.status == 100008) {
-          this.responseData.res = res;
-          this.$router.push("/");
-          return false;
-        } else {
-          message()
-          message(this, "error", res.msg);
-        }
-      });
+      this.handleLink("/other/pages/search");
     },
     // 搜索
     handleSearch (item) {

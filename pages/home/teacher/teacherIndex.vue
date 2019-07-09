@@ -11,8 +11,7 @@
         <div class="btn" @click="beTeacher">成为导师</div>
         <div class="search clearfix">
           <div class="inputDiv"> <input type="text" v-model="searchWord" placeholder="请输入导师名、话题" @keyup.enter="search"></div>
-          <div v-if="loadSearch" class="fontIcon"><i class="el-icon-loading"></i></div>
-          <div v-else class="fontIcon" @click="search">搜索</div>
+          <div class="fontIcon" @click="search">搜索</div>
         </div>
       </div>
     </div>
@@ -98,7 +97,6 @@ export default {
         kid: 0,
         tid: 0,
       },
-      loadSearch: false,
       teacherForm: {
         pages: 1,
         limits: 12,
@@ -113,9 +111,7 @@ export default {
       if (this.searchWord == '') {
         return false
       }
-      this.loadSearch = true;
-      this.teacherForm.search_word = this.searchWord
-      this.getNewInfoList(true)
+      this.$router.push('/home/teacher/list?word=' + encodeURI(this.searchWord))
     },
     beTeacher () {
       this.$router.push('beTeacher')
@@ -124,25 +120,12 @@ export default {
       this.$router.push('/home/teacher/list')
     },
     //获取导师数据
-    getNewInfoList (search) {
+    getNewInfoList () {
       this.loading = true;
       list.getTeacherList(this.teacherForm).then(res => {
         this.loading = false;
-        this.loadSearch = false;
         if (res.status == 0) {
-          // 获取[搜索]数据
-          if (search) {
-            if (res.data.pageCount == 1) {
-              this.courseUrl.tid = res.data.teacherList[0].id;
-              open(this.courseUrl);
-            } else {
-              this.$router.push('/home/teacher/list?word=' + encodeURI(this.searchWord))
-            }
-          } else {
-            this.teacherData = res.data.teacherList;
-          }
-          this.teacherForm.search_word = ''
-          this.searchWord = ''
+          this.teacherData = res.data.teacherList;
         } else if (res.status == 100008) {
           let data = { type: true, res: res };
           this.$bus.$emit("reLoginAlertPop", data);

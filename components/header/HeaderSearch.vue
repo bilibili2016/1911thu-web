@@ -4,8 +4,7 @@
     <!-- <i v-else class="el-icon-close out-icon" @click="showInput"></i> -->
     <div ref="searchInput" class="searchInput">
       <input type="text" placeholder="请输入课程、导师" v-model="search" @keyup.enter="handleSearch">
-      <span v-if="loadSearch" class="innerIcon"><i class="el-icon-loading"></i></span>
-      <span v-else class="innerIcon" @click="handleSearch"> 搜索</span>
+      <span class="innerIcon" @click="handleSearch"> 搜索</span>
     </div>
   </div>
 </template>
@@ -13,7 +12,6 @@
 <script>
 import { message } from "@/lib/util/helper";
 export default {
-  props: ['loadSearch'],
   data () {
     return {
       search: "",
