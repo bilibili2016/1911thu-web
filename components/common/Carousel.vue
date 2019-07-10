@@ -47,6 +47,20 @@
         </el-carousel>
       </div>
     </div>
+    <!-- 首页  往期风采 -->
+    <div class="banner eleganceSwiper" v-if="config.carousel==='elegance'">
+      <el-carousel :interval="5000" class="lbt indexBanner" ref="elCarousel" indicator-position="outside">
+        <el-carousel-item class="teacherElCarouselItem" v-for="(item,index) in eleganceList" :key="index">
+          <div class="swiperBox">
+            <img class="eleganceImg" style="cursor:inherit" id="innerImg" :src="item.picture" alt="">
+            <div class="word">
+              <h4>{{item.title}}</h4>
+              <p>{{item.introduce}}</p>
+            </div>
+          </div>
+        </el-carousel-item>
+      </el-carousel>
+    </div>
   </div>
 </template>
 
@@ -57,7 +71,7 @@ import { isMobileTerminal } from "@/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
 import { open, checkURL } from "@/lib/util/helper";
 export default {
-  props: ["items", "config", "swiperData", "coreData", "teacherBanner"],
+  props: ["items", "config", "swiperData", "coreData", "teacherBanner", "eleganceList"],
   data () {
     return {
       timer: null,
