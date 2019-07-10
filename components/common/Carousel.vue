@@ -51,7 +51,7 @@
     <div class="banner eleganceSwiper" v-if="config.carousel==='elegance'">
       <el-carousel :interval="5000" class="lbt indexBanner" ref="elCarousel" indicator-position="outside">
         <el-carousel-item class="teacherElCarouselItem" v-for="(item,index) in eleganceList" :key="index">
-          <div class="swiperBox">
+          <div class="swiperBox" @click="goInfo(item)">
             <img class="eleganceImg" style="cursor:inherit" id="innerImg" :src="item.picture" alt="">
             <div class="word">
               <h4>{{item.title}}</h4>
@@ -126,6 +126,9 @@ export default {
     },
     goDetail (news) {
       this.$router.push("/home/news/" + news.id);
+    },
+    goInfo (item) {
+      this.$router.push("/home/elegance/detail?id=" + item.id);
     },
     setWidth () {
       let Dwidth = document.body.clientWidth;

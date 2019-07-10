@@ -8,7 +8,7 @@
       <span>当前位置：</span>
       <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>新闻资讯</el-breadcrumb-item>
+        <el-breadcrumb-item>往期风采</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <!-- 新闻内容 -->
@@ -43,7 +43,7 @@
 <script>
 import CustomBanner from "@/components/common/Banner.vue";
 import { news } from "~/lib/v1_sdk/index";
-import { timestampToTime, message } from "~/lib/util/helper";
+import { timestampToTime, message, matchSplits } from "~/lib/util/helper";
 import newsPay from "@/pages/home/news/components/newsPay.vue";
 import { store as persistStore } from "~/lib/core/store";
 
@@ -58,7 +58,7 @@ export default {
       isShowpayPopup: false,
       // isShowpayBar: false,
       payNewsDetail: "",
-      bannerImg: "https://static-image.1911edu.com/profile_banner03.png",
+      bannerImg: "https://static-image.1911edu.com/eleganceDetail.png",
       newsDetail: {},
       loading: true,
       afterNews: {
@@ -129,7 +129,7 @@ export default {
           document.body.scrollTop = document.documentElement.scrollTop = 0;
         } else {
           message(this, "error", response.msg);
-          this.$router.push("/home/news/list");
+          this.$router.push("/home/elegance/list");
         }
       });
     },
@@ -148,7 +148,7 @@ export default {
     }
   },
   mounted () {
-    this.nid = window.location.pathname.split("/")[3];
+    this.nid = matchSplits("id");
     this.getNewInfoDetail(this.nid);
     this.$bus.$on("renewsDetailData", data => {
       this.getNewInfoDetail(this.nid, 1);

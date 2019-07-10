@@ -1,19 +1,25 @@
 <template>
   <div>
-    <template v-if="config.banner_type === 'news' || config.banner_type === 'outNews'">
+    <template v-if="config.banner_type === 'news' || config.banner_type === 'outNews'||config.banner_type == 'elegance'">
       <div class="news-banner">
         <img :src="bannerImg" alt>
-        <div v-if="config.banner_type === 'news'" class="newLsit-desc">
+        <div v-if="config.banner_type == 'news'" class="newLsit-desc">
           <p class="title">NEWS</p>
           <span class="line"></span>
           <p class="small-title">学堂资讯</p>
           <p class="desc">School Information</p>
         </div>
-        <div v-if="config.banner_type === 'outNews'" class="newLsit-desc">
+        <div v-if="config.banner_type == 'outNews'" class="newLsit-desc">
           <p class="title">NEWS</p>
           <span class="line"></span>
           <p class="small-title">媒体报道</p>
           <p class="desc">Media Coverage</p>
+        </div>
+        <div v-if="config.banner_type == 'elegance'" class="newLsit-desc">
+          <p class="title">Elegance</p>
+          <span class="line"></span>
+          <p class="small-title">往期风采</p>
+          <p class="desc">Previous Elegance</p>
         </div>
       </div>
     </template>

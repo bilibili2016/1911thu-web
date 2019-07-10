@@ -103,7 +103,7 @@ export default {
       outNewsTitle: "媒体报道",
       eleganceTitle: "往期风采",
       outNewsLink: "/home/news/outNewsList",
-      eleganceLink: "/home/news/outNewsList",
+      eleganceLink: "/home/elegance/list",
       teacherTitle: "百名导师等你来约",
       teacherLink: '/home/teacher/list',
       freeData: [],

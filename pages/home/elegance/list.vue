@@ -6,11 +6,11 @@
       <span>当前位置：</span>
       <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>学堂资讯</el-breadcrumb-item>
+        <el-breadcrumb-item>往期风采</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div @click="getNewInfoList"></div>
-    <v-card :newsList="newsList" :config="config" :linksix='linksix'></v-card>
+    <v-card :newsList="newsList" :config="config"></v-card>
     <div class="pagination" v-show="!load">
       <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
     </div>
@@ -19,7 +19,7 @@
 
 <script>
 import CustomBanner from "@/components/common/Banner.vue";
-import CustomCard from "@/pages/home/news/components/List.vue";
+import CustomCard from "@/pages/home/elegance/components/Card.vue";
 import { news } from "~/lib/v1_sdk/index";
 import { setTitle } from "~/lib/util/helper";
 
@@ -31,10 +31,9 @@ export default {
   data () {
     return {
       load: true,
-      bannerImg: "https://static-image.1911edu.com/newList-bg.png",
-      linksix: "/news/detail",
+      bannerImg: "https://static-image.1911edu.com/eleganceBanner.png",
       configs: {
-        banner_type: "news"
+        banner_type: "elegance"
       },
       config: {
         card_type: "newLists"
@@ -53,7 +52,7 @@ export default {
   },
   mounted () {
     this.getNewInfoList();
-    setTitle("学堂资讯-1911学堂");
+    setTitle("往期风采-1911学堂");
   },
   methods: {
     getNewInfoList () {
