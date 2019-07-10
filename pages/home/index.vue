@@ -24,6 +24,8 @@
       <!-- <v-famous :teachers="teachers" :title="famoustitle" :link="linkfamouscourse"></v-famous> -->
       <!-- 名师大咖秀 -->
       <!-- <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous> -->
+      <!-- 往期风采 eleganceData-->
+      <v-elegance :data="newsListData" :title="eleganceTitle" :link="eleganceLink"></v-elegance>
       <!-- 学堂资讯 -->
       <v-info v-if="newsListData.length" v-loading="infoLoading" :newsListData="newsListData" :outNewData="outNewData" :infoTwo="infoTwo" :infoOne="infoOne" :title="infotitle" :link="linkinfo" class="index-new bgf8f8fd"></v-info>
       <!-- 核心优势 -->
@@ -51,6 +53,7 @@ import Leader from "@/pages/home/teacher/components/GroupLeader.vue";
 import BackToTop from "@/components/common/BackToTop.vue";
 import HomeCourse from "@/pages/home/components/homecourse.vue";
 import Num from "@/pages/home/components/number.vue";
+import Elegance from "@/pages/home/elegance/info.vue";
 import Teacher from "@/pages/home/teacher/homeList.vue";
 import Honor from "@/pages/home/honor/index.vue";
 
@@ -68,6 +71,7 @@ export default {
     "v-leader": Leader,
     "v-num": Num,
     "v-teacher": Teacher,
+    "v-elegance": Elegance,
     "v-honor": Honor
   },
   data () {
@@ -97,7 +101,9 @@ export default {
       groupLink: '/home/teacher/teacherIndex',
       linkinfo: "/home/news/list",
       outNewsTitle: "媒体报道",
+      eleganceTitle: "往期风采",
       outNewsLink: "/home/news/outNewsList",
+      eleganceLink: "/home/news/outNewsList",
       teacherTitle: "百名导师等你来约",
       teacherLink: '/home/teacher/list',
       freeData: [],
@@ -107,6 +113,7 @@ export default {
       cadreCourseList: [],
       commercialCourseList: [],
       groupLeader: [],
+      eleganceData: [],
       showCheckedCourse: false,
       configCarousel: {
         carousel: "home"

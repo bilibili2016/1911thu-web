@@ -30,7 +30,7 @@ import playerNextComponent from "~/lib/core/next.js";
 import playerPreviousComponent from "~/lib/core/previous.js";
 import PlayerError from "@/components/common/PlayerError.vue";
 export default {
-  props:['courseList'],
+  props: ['courseList'],
   components: {
     "v-error": PlayerError
   },
@@ -517,8 +517,6 @@ export default {
     },
     //  播放器退出全屏事件
     exitFullScreen () {
-      console.log(document);
-
       document.getElementsByClassName(
         "prism-big-play-btn"
       )[0].style.visibility = "hidden";
